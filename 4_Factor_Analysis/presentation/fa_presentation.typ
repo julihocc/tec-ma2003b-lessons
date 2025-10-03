@@ -164,7 +164,7 @@ Factor rotation is a technique applied after factor extraction to make factors e
   [Varimax], [Orthogonal rotation], [Uncorrelated factors], [Simple structure],
   [Promax], [Oblique rotation], [Factors may correlate], [Realistic models],
   [Quartimax], [Simplify variables], [Balance factors], [General use],
-  [Oblimin], [Oblique rotation], [Flexible correlation], [Complex data]
+  [Oblimin], [Oblique rotation], [Flexible correlation], [Complex data],
 )
 
 == Why Rotate?
@@ -187,7 +187,7 @@ Factor rotation is a technique applied after factor extraction to make factors e
   [Rotation], [Not typically used], [Essential for interpretation],
   [Assumptions], [Minimal], [Multivariate normality],
   [Estimation], [Eigenvalue decomposition], [Maximum likelihood/PAF],
-  [Output], [Principal components], [Factor loadings]
+  [Output], [Principal components], [Factor loadings],
 )
 
 == When to Use Each Method
