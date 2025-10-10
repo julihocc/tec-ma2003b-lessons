@@ -2,14 +2,15 @@
 
 ## Overview
 
-This synthetic dataset contains educational assessment data for 100 students with 6 variables designed to demonstrate PCA vs Factor Analysis comparison. The data has known underlying factor structure for pedagogical purposes.
+This synthetic dataset contains realistic educational assessment data for 200 students across 9 educational measures. The data demonstrates three underlying latent factors with pedagogically realistic correlations, designed for Factor Analysis instruction.
 
 ## Data Structure
 
 - **Format**: CSV file (`educational.csv`)
-- **Observations**: 100 students
-- **Variables**: 6 assessment metrics + 1 identifier
-- **Source**: Synthetic data with controlled factor structure
+- **Observations**: 200 students
+- **Variables**: 9 assessment scores + 1 identifier
+- **Source**: Synthetic data with realistic factor structure
+- **KMO Measure**: 0.799 (Good - suitable for Factor Analysis)
 
 ## Variables
 
@@ -19,112 +20,188 @@ This synthetic dataset contains educational assessment data for 100 students wit
 
 ### Assessment Variables
 
-#### Cognitive Domain (Intelligence Factor)
+All assessment variables are scaled 0-100 (typical educational score range).
 
-- **MathTest**: Mathematics assessment score
-  - **Scale**: Continuous numeric
-  - **Range**: Approximately -2.5 to +2.5 (standardized units)
-  - **Interpretation**: Higher scores indicate better mathematical ability
-  - **Factor Loading**: Strong positive loading on Intelligence factor
+#### Quantitative Reasoning Domain
 
-- **VerbalTest**: Verbal/language assessment score
-  - **Scale**: Continuous numeric
-  - **Range**: Approximately -2.5 to +2.5 (standardized units)
-  - **Interpretation**: Higher scores indicate better verbal/language ability
-  - **Factor Loading**: Moderate positive loading on Intelligence factor
+- **MathScore**: General mathematics assessment
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~72, **SD**: ~13
+  - **Interpretation**: Measures general mathematical reasoning and problem-solving
+  - **Primary Factor**: Quantitative Reasoning (loading ~0.80)
+  - **MSA**: 0.793
 
-#### Social-Emotional Domain (Personality Factor)
+- **AlgebraScore**: Algebraic reasoning and equation solving
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~68, **SD**: ~14
+  - **Interpretation**: Measures abstract symbolic reasoning
+  - **Primary Factor**: Quantitative Reasoning (loading ~0.85)
+  - **MSA**: 0.728
 
-- **SocialSkills**: Social interaction and communication assessment
-  - **Scale**: Continuous numeric
-  - **Range**: Approximately -2.5 to +2.5 (standardized units)
-  - **Interpretation**: Higher scores indicate better social skills
-  - **Factor Loading**: Strong positive loading on Personality factor
+- **GeometryScore**: Spatial reasoning and geometric concepts
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~70, **SD**: ~12
+  - **Interpretation**: Measures visual-spatial mathematical ability
+  - **Primary Factor**: Quantitative Reasoning (loading ~0.75)
+  - **MSA**: 0.850
 
-- **Leadership**: Leadership and initiative assessment
-  - **Scale**: Continuous numeric
-  - **Range**: Approximately -2.5 to +2.5 (standardized units)
-  - **Interpretation**: Higher scores indicate stronger leadership qualities
-  - **Factor Loading**: Moderate positive loading on Personality factor
+#### Verbal Ability Domain
 
-#### Control Variables (Noise)
+- **ReadingComp**: Reading comprehension assessment
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~73, **SD**: ~11
+  - **Interpretation**: Measures understanding of written text
+  - **Primary Factor**: Verbal Ability (loading ~0.82)
+  - **MSA**: 0.816
 
-- **RandomVar1**: Random noise variable (no latent structure)
-  - **Scale**: Continuous numeric
-  - **Range**: Approximately -2.5 to +2.5 (standardized units)
-  - **Interpretation**: Pure noise, should not load on any meaningful factors
-  - **Factor Loading**: Near zero on all factors
+- **Vocabulary**: Vocabulary knowledge assessment
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~75, **SD**: ~13
+  - **Interpretation**: Measures breadth and depth of word knowledge
+  - **Primary Factor**: Verbal Ability (loading ~0.78)
+  - **MSA**: 0.818
 
-- **RandomVar2**: Random noise variable (no latent structure)
-  - **Scale**: Continuous numeric
-  - **Range**: Approximately -2.5 to +2.5 (standardized units)
-  - **Interpretation**: Pure noise, should not load on any meaningful factors
-  - **Factor Loading**: Near zero on all factors
+- **Writing**: Written expression and composition
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~71, **SD**: ~12
+  - **Interpretation**: Measures ability to communicate in writing
+  - **Primary Factor**: Verbal Ability (loading ~0.80)
+  - **MSA**: 0.815
+
+#### Interpersonal Skills Domain
+
+- **Collaboration**: Teamwork and collaborative skills
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~76, **SD**: ~10
+  - **Interpretation**: Measures ability to work effectively with others
+  - **Primary Factor**: Interpersonal Skills (loading ~0.83)
+  - **MSA**: 0.784
+
+- **Leadership**: Leadership and initiative
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~69, **SD**: ~13
+  - **Interpretation**: Measures ability to guide and motivate others
+  - **Primary Factor**: Interpersonal Skills (loading ~0.77)
+  - **MSA**: 0.790
+
+- **Communication**: Oral communication and presentation
+  - **Scale**: 0-100 continuous
+  - **Mean**: ~74, **SD**: ~10
+  - **Interpretation**: Measures verbal expression and listening skills
+  - **Primary Factor**: Interpersonal Skills (loading ~0.75)
+  - **MSA**: 0.797
 
 ## Known Factor Structure
 
-This synthetic dataset was generated with two orthogonal latent factors:
+This synthetic dataset was generated with three correlated latent factors, reflecting realistic educational psychology patterns.
 
-### Intelligence Factor
+### Factor 1: Quantitative Reasoning
 
-- **Theoretical Construct**: General cognitive ability
-- **Manifest Variables**: MathTest (strong), VerbalTest (moderate)
-- **Expected Communality**: High for MathTest and VerbalTest
-- **Expected Uniqueness**: Low to moderate measurement error
+- **Theoretical Construct**: Mathematical and quantitative problem-solving ability
+- **Manifest Variables**: MathScore (0.80), AlgebraScore (0.85), GeometryScore (0.75)
+- **Expected Communality**: High (h² > 0.70)
+- **Within-Cluster Correlation**: ~0.80 (strong)
 
-### Personality Factor
+### Factor 2: Verbal Ability
 
-- **Theoretical Construct**: Social-emotional development
-- **Manifest Variables**: SocialSkills (strong), Leadership (moderate)
-- **Expected Communality**: High for SocialSkills and Leadership
-- **Expected Uniqueness**: Low to moderate measurement error
+- **Theoretical Construct**: Language comprehension and expression
+- **Manifest Variables**: ReadingComp (0.82), Vocabulary (0.78), Writing (0.80)
+- **Expected Communality**: High (h² > 0.70)
+- **Within-Cluster Correlation**: ~0.77 (strong)
 
-### Noise Variables
+### Factor 3: Interpersonal Skills
 
-- **Theoretical Construct**: None (pure error)
-- **Manifest Variables**: RandomVar1, RandomVar2
-- **Expected Communality**: Very low (near zero)
-- **Expected Uniqueness**: High (near 1.0)
+- **Theoretical Construct**: Social-emotional competence
+- **Manifest Variables**: Collaboration (0.83), Leadership (0.77), Communication (0.75)
+- **Expected Communality**: High (h² > 0.70)
+- **Within-Cluster Correlation**: ~0.81 (strong)
+
+### Inter-Factor Correlations
+
+The latent factors are **correlated** (not orthogonal), reflecting realistic patterns:
+
+- **Quantitative ↔ Verbal**: r = 0.30 (moderate positive)
+- **Quantitative ↔ Interpersonal**: r = 0.20 (weak positive)
+- **Verbal ↔ Interpersonal**: r = 0.25 (weak-moderate positive)
+
+This correlation structure reflects research showing that cognitive and social-emotional abilities are related but distinct.
 
 ## Data Generation Parameters
 
 - **Random Seed**: 42 (for reproducibility)
-- **Latent Factors**: Two orthogonal standard normal variables
-- **Factor Loadings**:
-  - Strong: 0.85 (MathTest, SocialSkills)
-  - Moderate: 0.80 (VerbalTest, Leadership)
-- **Measurement Error**:
-  - Low noise: σ = 0.2 (MathTest, SocialSkills)
-  - Medium noise: σ = 0.25 (VerbalTest, Leadership)
-- **Pure Noise**: σ = 0.6 and 0.5 for RandomVar1 and RandomVar2
+- **Sample Size**: 200 students
+- **Latent Factors**: Three correlated factors (multivariate normal)
+- **Factor Loadings**: Range 0.75-0.85 (strong primary loadings)
+- **Cross-Loadings**: Range 0.05-0.20 (realistic weak secondary loadings)
+- **Measurement Error**: σ = 0.4 per variable (unique error variance)
+- **Score Scale**: Transformed to 0-100 range with realistic means (~70) and SDs (~12)
 
 ## Expected Analysis Results
 
-### PCA Results
+### Factor Analysis Suitability
 
-- **PC1**: Should capture general ability (cognitive + social measures)
-- **PC2**: Should separate cognitive vs social measures
-- **PC3-PC4**: Additional structure and measurement error
-- **PC5-PC6**: Pure noise components
+- **Bartlett's Test**: χ² = 1393.9, p < 0.001 (significant - suitable for FA)
+- **Overall KMO**: 0.799 (Good)
+- **Individual MSA**: All variables > 0.72 (all adequate)
 
-### Factor Analysis Results
+### Expected Factor Solution
 
-- **Factor 1**: Intelligence factor (MathTest, VerbalTest)
-- **Factor 2**: Personality factor (SocialSkills, Leadership)
-- **Communalities**: High for meaningful variables, low for noise
-- **Simple Structure**: Clear separation after rotation
+- **Number of Factors**: 3 (eigenvalues > 1.0, clear theoretical structure)
+- **Variance Explained**: ~70-75% of common variance
+- **Rotation Benefit**: Varimax or Promax rotation will reveal simple structure
+- **Communalities**: High for all variables (h² > 0.65)
+- **Simple Structure**: Each variable loads primarily on one factor
+
+### PCA Comparison
+
+- **Components vs Factors**: PCA will also suggest 3 components
+- **Loadings**: Similar pattern but PCA includes unique variance
+- **Variance Explained**: PCA will explain slightly more total variance
+- **Interpretation**: FA focuses on shared variance (better for construct validation)
+
+## Correlation Structure
+
+### Within-Domain Correlations (Strong)
+
+- Quantitative tests: r ≈ 0.78-0.84
+- Verbal tests: r ≈ 0.74-0.78
+- Interpersonal measures: r ≈ 0.80-0.81
+
+### Cross-Domain Correlations (Weak to Moderate)
+
+- Quantitative ↔ Verbal: r ≈ 0.20-0.38
+- Quantitative ↔ Interpersonal: r ≈ 0.14-0.23
+- Verbal ↔ Interpersonal: r ≈ 0.17-0.35
+
+This pattern makes the data suitable for demonstrating:
+- Factor retention decisions (clear 3-factor structure)
+- Rotation benefits (moving from general to simple structure)
+- Communality interpretation (distinguishing shared vs unique variance)
+- Construct validation (testing theoretical models)
 
 ## Usage in Education
 
-This dataset is designed for:
+This dataset is designed for teaching:
 
-- **Method Comparison**: Direct PCA vs Factor Analysis comparison
-- **Factor Recovery**: Testing how well methods identify known structure
-- **Interpretation Practice**: Understanding loadings, communalities, uniqueness
-- **Validation**: Ground truth available for assessing analysis quality
+- **Factor Analysis Fundamentals**: Assumptions testing (KMO, Bartlett's)
+- **Factor Extraction**: Principal axis factoring, maximum likelihood
+- **Factor Rotation**: Comparing orthogonal (Varimax) vs oblique (Promax) rotation
+- **Interpretation**: Loading patterns, communalities, factor scores
+- **Method Comparison**: PCA vs FA on same data
+- **Validation**: Assessing simple structure and construct validity
+
+## Pedagogical Advantages
+
+1. **Realistic Structure**: No artificial "noise variables" - all measures are educationally meaningful
+2. **Good Psychometric Properties**: KMO = 0.799, all MSA > 0.70
+3. **Clear Factor Structure**: Three distinct but correlated domains
+4. **Appropriate Complexity**: Not too simple (more than 2 factors), not overwhelming
+5. **Educational Context**: Students can relate to the assessment types
+6. **Realistic Correlations**: Factors correlate as they would in real educational data
 
 ## References
 
-- Generated using controlled synthetic data for pedagogical purposes
-- Factor structure based on educational psychology literature
-- Designed to demonstrate key differences between PCA and factor analysis
+- Generated using multivariate normal distribution with realistic covariance structure
+- Factor correlations based on educational psychology research (cognitive-social ability relationships)
+- Loading patterns designed to demonstrate simple structure after rotation
+- Score distributions reflect typical educational assessment ranges
