@@ -21,16 +21,16 @@ This data dictionary describes the synthetic customer behavior dataset used for 
 
 ### Feature Variables
 
-| Variable | Type | Description | Range | Units |
-|----------|------|-------------|-------|-------|
-| `purchase_freq` | Numeric | Average number of purchases per month | 0.5 - 35.0 | purchases/month |
-| `avg_order_value` | Numeric | Average dollar amount spent per order | $10.0 - $250.0 | USD |
-| `browsing_time` | Numeric | Average time spent browsing per session | 1.0 - 70.0 | minutes |
-| `cart_abandonment` | Numeric | Proportion of shopping carts abandoned | 0.0 - 1.0 | rate (0-1) |
-| `email_open_rate` | Numeric | Proportion of marketing emails opened | 0.0 - 1.0 | rate (0-1) |
-| `loyalty_points` | Numeric | Accumulated loyalty program points | 0.0 - 750.0 | points |
-| `support_tickets` | Numeric | Average customer support interactions per month | 0.0 - 5.0 | tickets/month |
-| `social_engagement` | Numeric | Social media interactions per month | 0.0 - 15.0 | interactions/month |
+| Variable | Type | Description | Range | Units | Precision |
+|----------|------|-------------|-------|-------|-----------|
+| `purchase_freq` | Numeric | Average number of purchases per month | 0.5 - 30.0 | purchases/month | 1 decimal |
+| `avg_order_value` | Numeric | Average dollar amount spent per order | $10.0 - $200.0 | USD | 2 decimals |
+| `browsing_time` | Numeric | Average time spent browsing per session | 1.0 - 55.0 | minutes | 1 decimal |
+| `cart_abandonment` | Numeric | Proportion of shopping carts abandoned | 0.0 - 1.0 | rate (0-1) | 3 decimals |
+| `email_open_rate` | Numeric | Proportion of marketing emails opened | 0.0 - 1.0 | rate (0-1) | 3 decimals |
+| `loyalty_points` | Integer | Accumulated loyalty program points | 0 - 650 | points | whole number |
+| `support_tickets` | Numeric | Average customer support interactions per month | 0.0 - 5.5 | tickets/month | 1 decimal |
+| `social_engagement` | Numeric | Social media interactions per month | 0.0 - 15.0 | interactions/month | 1 decimal |
 
 ## Segment Definitions
 
@@ -111,6 +111,14 @@ Infrequent buyers who require re-engagement efforts to increase purchase activit
 - All rates (cart_abandonment, email_open_rate) constrained to [0,1]
 - Time and frequency variables constrained to realistic positive values
 - Monetary values reflect typical e-commerce ranges
+
+### Precision and Realism
+
+- **Currency values**: Rounded to 2 decimals (e.g., $149.99) for realistic transaction amounts
+- **Rates**: Rounded to 3 decimals (e.g., 0.842 = 84.2%) for percentage display
+- **Frequencies/Counts**: Rounded to 1 decimal for monthly averages (e.g., 15.3 purchases/month)
+- **Loyalty points**: Whole numbers only (e.g., 487 points) as points cannot be fractional
+- **Engagement metrics**: Rounded to 1 decimal for intuitive interpretation
 
 ### Random Seed
 

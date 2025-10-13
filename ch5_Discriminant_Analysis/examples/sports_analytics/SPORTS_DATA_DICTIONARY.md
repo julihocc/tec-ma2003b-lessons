@@ -21,15 +21,15 @@ This data dictionary describes the synthetic athlete performance dataset used fo
 
 ### Feature Variables
 
-| Variable | Type | Description | Range | Units |
-|----------|------|-------------|-------|-------|
-| `speed` | Numeric | 100m sprint time | 85.0 - 140.0 | seconds (lower is better) |
-| `endurance` | Numeric | VO2 max aerobic capacity | 30.0 - 100.0 | ml/kg/min |
-| `strength` | Numeric | Relative strength | 40.0 - 120.0 | % bodyweight |
-| `technique` | Numeric | Composite skill execution | 30.0 - 100.0 | score (0-100) |
-| `agility` | Numeric | T-test agility time | 80.0 - 130.0 | seconds (lower is better) |
-| `power` | Numeric | Vertical jump height | 30.0 - 110.0 | cm |
-| `consistency` | Numeric | Performance stability | 20.0 - 100.0 | score (0-100) |
+| Variable | Type | Description | Range | Units | Precision |
+|----------|------|-------------|-------|-------|-----------|
+| `speed` | Numeric | Speed score (composite metric) | 92.0 - 121.0 | score | 1 decimal |
+| `endurance` | Numeric | VO2 max aerobic capacity | 39.9 - 90.0 | ml/kg/min | 1 decimal |
+| `strength` | Numeric | Relative strength | 51.9 - 98.5 | % bodyweight | 1 decimal |
+| `technique` | Numeric | Composite skill execution | 49.9 - 94.1 | score (0-100) | 1 decimal |
+| `agility` | Numeric | Agility score (composite metric) | 86.8 - 107.9 | score | 1 decimal |
+| `power` | Numeric | Vertical jump height | 41.3 - 100.1 | cm | 1 decimal |
+| `consistency` | Numeric | Performance stability | 46.5 - 89.7 | score (0-100) | 1 decimal |
 
 ## Performance Category Definitions
 
@@ -96,11 +96,17 @@ Young or inexperienced athletes building foundational athletic abilities. These 
 ## Data Quality Notes
 
 ### Performance Bounds and Constraints
-- All speed and agility times constrained to realistic athletic ranges
+- All performance metrics constrained to realistic athletic ranges
 - Endurance values reflect published VO2 max norms
 - Strength percentages based on bodyweight performance standards
 - Technique and consistency scores reflect coaching assessment scales
 - Power measurements based on vertical jump performance standards
+
+### Measurement Precision
+- **All metrics**: 1 decimal place (e.g., 95.3) matching typical sports testing equipment precision
+- **Endurance**: 1 decimal for VO2 max (e.g., 85.2 ml/kg/min) from metabolic testing
+- **Power**: 1 decimal for vertical jump (e.g., 92.3 cm) from force plate or jump mat measurements
+- **Scores**: 1 decimal for composite performance scores (e.g., 88.6) from standardized assessments
 
 ### Random Seed
 - **Seed**: 42 (for reproducibility)

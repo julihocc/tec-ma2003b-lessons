@@ -152,13 +152,13 @@ for quality_class, size in class_sizes.items():
 # Combine all classes
 df = pd.concat(data_frames, ignore_index=True)
 
-# Ensure realistic bounds
-df["dimension1"] = df["dimension1"].clip(8.5, 12.0)
-df["dimension2"] = df["dimension2"].clip(3.5, 6.5)
-df["thickness"] = df["thickness"].clip(1.8, 3.2)
-df["surface_roughness"] = df["surface_roughness"].clip(0.005, 0.2)
-df["material_hardness"] = df["material_hardness"].clip(70, 120)
-df["defect_density"] = df["defect_density"].clip(0, 2.0)
+# Ensure realistic bounds and precision (manufacturing measurements)
+df["dimension1"] = df["dimension1"].clip(8.5, 12.0).round(3)  # 3 decimals for mm (e.g., 10.234 mm)
+df["dimension2"] = df["dimension2"].clip(3.5, 6.5).round(3)  # 3 decimals for mm (e.g., 4.987 mm)
+df["thickness"] = df["thickness"].clip(1.8, 3.2).round(3)  # 3 decimals for mm (e.g., 2.456 mm)
+df["surface_roughness"] = df["surface_roughness"].clip(0.005, 0.2).round(4)  # 4 decimals for μm precision (e.g., 0.0234 μm)
+df["material_hardness"] = df["material_hardness"].clip(70, 120).round(1)  # 1 decimal for HV (e.g., 98.5 HV)
+df["defect_density"] = df["defect_density"].clip(0, 2.0).round(2)  # 2 decimals for defects/cm² (e.g., 0.35 defects/cm²)
 
 # Shuffle the data
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)

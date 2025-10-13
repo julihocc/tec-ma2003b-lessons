@@ -159,14 +159,14 @@ for category, size in category_sizes.items():
 # Combine all categories
 df = pd.concat(data_frames, ignore_index=True)
 
-# Ensure realistic bounds (performance metrics have natural limits)
-df["speed"] = df["speed"].clip(85, 140)  # 100m time range
-df["endurance"] = df["endurance"].clip(30, 100)  # VO2 max range
-df["strength"] = df["strength"].clip(40, 120)  # Strength % bodyweight
-df["technique"] = df["technique"].clip(30, 100)  # Skill score
-df["agility"] = df["agility"].clip(80, 130)  # T-test time
-df["power"] = df["power"].clip(30, 110)  # Vertical jump
-df["consistency"] = df["consistency"].clip(20, 100)  # Stability score
+# Ensure realistic bounds and precision (performance metrics have natural limits)
+df["speed"] = df["speed"].clip(85, 140).round(1)  # 1 decimal for speed score (e.g., 95.3)
+df["endurance"] = df["endurance"].clip(30, 100).round(1)  # 1 decimal for VO2 max (e.g., 85.2 ml/kg/min)
+df["strength"] = df["strength"].clip(40, 120).round(1)  # 1 decimal for strength % (e.g., 95.7%)
+df["technique"] = df["technique"].clip(30, 100).round(1)  # 1 decimal for skill score (e.g., 90.4)
+df["agility"] = df["agility"].clip(80, 130).round(1)  # 1 decimal for agility score (e.g., 88.6)
+df["power"] = df["power"].clip(30, 110).round(1)  # 1 decimal for vertical jump cm (e.g., 92.3 cm)
+df["consistency"] = df["consistency"].clip(20, 100).round(1)  # 1 decimal for stability score (e.g., 85.8)
 
 # Shuffle the data
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)

@@ -162,15 +162,15 @@ for segment, size in segment_sizes.items():
 # Combine all segments
 df = pd.concat(data_frames, ignore_index=True)
 
-# Ensure realistic bounds (clip negative values, etc.)
-df["purchase_freq"] = df["purchase_freq"].clip(lower=0.5)
-df["avg_order_value"] = df["avg_order_value"].clip(lower=10)
-df["browsing_time"] = df["browsing_time"].clip(lower=1)
-df["cart_abandonment"] = df["cart_abandonment"].clip(0, 1)
-df["email_open_rate"] = df["email_open_rate"].clip(0, 1)
-df["loyalty_points"] = df["loyalty_points"].clip(lower=0)
-df["support_tickets"] = df["support_tickets"].clip(lower=0)
-df["social_engagement"] = df["social_engagement"].clip(lower=0)
+# Ensure realistic bounds and precision (clip negative values, round to realistic decimals)
+df["purchase_freq"] = df["purchase_freq"].clip(lower=0.5).round(1)  # 1 decimal (e.g., 15.3 purchases/month)
+df["avg_order_value"] = df["avg_order_value"].clip(lower=10).round(2)  # 2 decimals for currency (e.g., $149.99)
+df["browsing_time"] = df["browsing_time"].clip(lower=1).round(1)  # 1 decimal for minutes (e.g., 32.5 min)
+df["cart_abandonment"] = df["cart_abandonment"].clip(0, 1).round(3)  # 3 decimals for rates (e.g., 0.156 = 15.6%)
+df["email_open_rate"] = df["email_open_rate"].clip(0, 1).round(3)  # 3 decimals for rates (e.g., 0.842 = 84.2%)
+df["loyalty_points"] = df["loyalty_points"].clip(lower=0).round(0).astype(int)  # Whole numbers (e.g., 487 points)
+df["support_tickets"] = df["support_tickets"].clip(lower=0).round(1)  # 1 decimal (e.g., 0.8 tickets/month)
+df["social_engagement"] = df["social_engagement"].clip(lower=0).round(1)  # 1 decimal (e.g., 7.2 interactions/month)
 
 # Shuffle the data
 df = df.sample(frac=1, random_state=42).reset_index(drop=True)

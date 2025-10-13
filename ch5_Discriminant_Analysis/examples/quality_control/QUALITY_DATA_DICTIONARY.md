@@ -21,14 +21,14 @@ This data dictionary describes the synthetic manufacturing quality control datas
 
 ### Feature Variables
 
-| Variable | Type | Description | Range | Units |
-|----------|------|-------------|-------|-------|
-| `dimension1` | Numeric | Primary dimension measurement | 8.5 - 12.0 | mm |
-| `dimension2` | Numeric | Secondary dimension measurement | 3.5 - 6.5 | mm |
-| `thickness` | Numeric | Material thickness | 1.8 - 3.2 | mm |
-| `surface_roughness` | Numeric | Surface finish quality | 0.005 - 0.2 | μm |
-| `material_hardness` | Numeric | Material hardness | 70 - 120 | HV |
-| `defect_density` | Numeric | Surface defect density | 0 - 2.0 | defects/cm² |
+| Variable | Type | Description | Range | Units | Precision |
+|----------|------|-------------|-------|-------|-----------|
+| `dimension1` | Numeric | Primary dimension measurement | 8.5 - 12.0 | mm | 3 decimals |
+| `dimension2` | Numeric | Secondary dimension measurement | 3.5 - 6.5 | mm | 3 decimals |
+| `thickness` | Numeric | Material thickness | 1.8 - 3.2 | mm | 3 decimals |
+| `surface_roughness` | Numeric | Surface finish quality | 0.005 - 0.2 | μm | 4 decimals |
+| `material_hardness` | Numeric | Material hardness | 70 - 107 | HV | 1 decimal |
+| `defect_density` | Numeric | Surface defect density | 0 - 1.85 | defects/cm² | 2 decimals |
 
 ## Quality Class Definitions
 
@@ -99,6 +99,12 @@ Products that fail to meet minimum quality standards and require repair, scrap, 
 - Material properties reflect typical engineering specifications
 - Surface quality metrics based on standard manufacturing tolerances
 - Defect density represents practical inspection capabilities
+
+### Measurement Precision
+- **Dimensional measurements**: 3 decimals (e.g., 10.234 mm) matching typical CNC machining precision
+- **Surface roughness**: 4 decimals (e.g., 0.0234 μm) for high-precision profilometer measurements
+- **Material hardness**: 1 decimal (e.g., 98.5 HV) matching Vickers hardness tester resolution
+- **Defect density**: 2 decimals (e.g., 0.35 defects/cm²) for visual inspection count data
 
 ### Random Seed
 - **Seed**: 42 (for reproducibility)
