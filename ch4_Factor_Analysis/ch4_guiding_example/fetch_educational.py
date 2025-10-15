@@ -27,11 +27,16 @@ This creates pedagogically realistic data suitable for demonstrating:
 """
 
 # %%
+import csv
 import os
+import warnings
+
+# Suppress numpy MINGW-W64 warnings on Windows
+warnings.filterwarnings('ignore', category=RuntimeWarning, module='numpy')
+warnings.filterwarnings('ignore', message='.*MINGW-W64.*')
 
 # %%
 import numpy as np
-import pandas as pd
 
 
 # %%
@@ -89,30 +94,53 @@ def main():
         scaled = arr * target_sd + target_mean
         return np.clip(scaled, 0, 100)  # Ensure within 0-100 range
 
-    # Create DataFrame with realistic educational score ranges
-    data = {
-        "Student": student_ids,
-        "MathScore": np.round(scale_to_100(math_score.flatten(), 72, 13), 1),
-        "AlgebraScore": np.round(scale_to_100(algebra_score.flatten(), 68, 14), 1),
-        "GeometryScore": np.round(scale_to_100(geometry_score.flatten(), 70, 12), 1),
-        "ReadingComp": np.round(scale_to_100(reading_comp.flatten(), 73, 11), 1),
-        "Vocabulary": np.round(scale_to_100(vocabulary.flatten(), 75, 13), 1),
-        "Writing": np.round(scale_to_100(writing.flatten(), 71, 12), 1),
-        "Collaboration": np.round(scale_to_100(collaboration.flatten(), 76, 10), 1),
-        "Leadership": np.round(scale_to_100(leadership.flatten(), 69, 13), 1),
-        "Communication": np.round(scale_to_100(communication.flatten(), 74, 11), 1),
-    }
-
-    df = pd.DataFrame(data)
+    # Create data arrays with realistic educational score ranges
+    math_scores = np.round(scale_to_100(math_score.flatten(), 72, 13), 1)
+    algebra_scores = np.round(scale_to_100(algebra_score.flatten(), 68, 14), 1)
+    geometry_scores = np.round(scale_to_100(geometry_score.flatten(), 70, 12), 1)
+    reading_comp_scores = np.round(scale_to_100(reading_comp.flatten(), 73, 11), 1)
+    vocabulary_scores = np.round(scale_to_100(vocabulary.flatten(), 75, 13), 1)
+    writing_scores = np.round(scale_to_100(writing.flatten(), 71, 12), 1)
+    collaboration_scores = np.round(scale_to_100(collaboration.flatten(), 76, 10), 1)
+    leadership_scores = np.round(scale_to_100(leadership.flatten(), 69, 13), 1)
+    communication_scores = np.round(scale_to_100(communication.flatten(), 74, 11), 1)
 
     # Save to CSV
-    df.to_csv(dst, index=False)
-    print(f"Generated {len(df)} student records")
+    with open(dst, 'w', newline='') as f:
+        writer = csv.writer(f)
+        # Write header
+        writer.writerow(['Student', 'MathScore', 'AlgebraScore', 'GeometryScore',
+                        'ReadingComp', 'Vocabulary', 'Writing',
+                        'Collaboration', 'Leadership', 'Communication'])
+        # Write data rows
+        for i in range(n_students):
+            writer.writerow([
+                student_ids[i],
+                math_scores[i],
+                algebra_scores[i],
+                geometry_scores[i],
+                reading_comp_scores[i],
+                vocabulary_scores[i],
+                writing_scores[i],
+                collaboration_scores[i],
+                leadership_scores[i],
+                communication_scores[i]
+            ])
+
+    print(f"Generated {n_students} student records")
     print(f"Saved to {dst}")
 
     # Print summary statistics
     print("\nSummary statistics:")
-    print(df.describe().round(2))
+    all_scores = np.column_stack([
+        math_scores, algebra_scores, geometry_scores,
+        reading_comp_scores, vocabulary_scores, writing_scores,
+        collaboration_scores, leadership_scores, communication_scores
+    ])
+    print(f"  Mean: {np.mean(all_scores, axis=0).round(2)}")
+    print(f"  Std:  {np.std(all_scores, axis=0).round(2)}")
+    print(f"  Min:  {np.min(all_scores, axis=0).round(2)}")
+    print(f"  Max:  {np.max(all_scores, axis=0).round(2)}")
 
     return 0
 
