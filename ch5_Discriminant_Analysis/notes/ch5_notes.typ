@@ -40,6 +40,28 @@
 
 #pagebreak()
 
+#set par(first-line-indent: 0em)
+
+#block(
+  fill: rgb("#e8f4f8"),
+  inset: 1em,
+  radius: 5pt,
+  width: 100%,
+  [
+    *Hands-On Learning Resource*
+
+    This document is accompanied by an interactive Jupyter notebook that demonstrates all concepts with executable Python code and visualizations:
+
+    `ch5_guiding_example/marketing_discriminant_analysis.ipynb`
+
+    The notebook analyzes a customer segmentation case study with 1,200 e-commerce customers, comparing Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis (QDA) for marketing campaign optimization.
+
+    Each major concept in these notes references specific modules in the notebook where you can see the implementation and results.
+  ]
+)
+
+#v(1cm)
+
 = Introduction: The Classification Problem
 
 == Why Discriminant Analysis?
@@ -183,9 +205,13 @@ This is *quadratic* in $bold(x)$, leading to curved (quadratic) decision boundar
 
 = Practical Implementation
 
+*Interactive Tutorial*: The notebook `ch5_guiding_example/marketing_discriminant_analysis.ipynb` demonstrates each step of this workflow with executable Python code, detailed explanations, and visualizations.
+
 == The Analysis Workflow
 
 === Step 1: Data Preparation
+
+*Notebook Reference*: See Module 2 for complete data preparation code.
 
 *Feature Selection*
 - Choose predictors that discriminate between groups
@@ -195,11 +221,13 @@ This is *quadratic* in $bold(x)$, leading to curved (quadratic) decision boundar
 *Standardization*
 - Standardize variables if they're on different scales
 - Example: Do not mix dollars (0-200) with rates (0-1)
+- The notebook uses `StandardScaler` to transform all features to mean=0, std=1
 
 *Train/Test Split*
 - Use stratified sampling to preserve group proportions
 - Typical split: 70% train, 30% test
 - Ensures all groups represented in both sets
+- Implementation: `train_test_split` with `stratify=y` parameter
 
 === Step 2: Assumption Checking
 
@@ -220,6 +248,8 @@ This is *quadratic* in $bold(x)$, leading to curved (quadratic) decision boundar
 
 === Step 3: Model Fitting
 
+*Notebook Reference*: Module 3 (LDA) and Module 6 (QDA) demonstrate model fitting with scikit-learn.
+
 *LDA Estimation*
 ```python
 from sklearn.discriminant_analysis import LinearDiscriminantAnalysis
@@ -229,10 +259,11 @@ lda.fit(X_train, y_train)
 ```
 
 Key outputs:
-- Discriminant function coefficients
-- Group means (centroids)
-- Pooled covariance matrix
-- Prior probabilities
+- Discriminant function coefficients (`lda.scalings_`)
+- Group means (centroids) (`lda.means_`)
+- Pooled covariance matrix (internal)
+- Prior probabilities (`lda.priors_`)
+- Explained variance ratio (`lda.explained_variance_ratio_`)
 
 *QDA Estimation*
 ```python
@@ -243,11 +274,14 @@ qda.fit(X_train, y_train)
 ```
 
 Key outputs:
-- Group means
-- Group-specific covariance matrices
-- Prior probabilities
+- Group means (`qda.means_`)
+- Group-specific covariance matrices (internal)
+- Prior probabilities (`qda.priors_`)
+- Posterior probabilities via `predict_proba()`
 
 === Step 4: Interpretation
+
+*Notebook Reference*: Module 4 provides detailed coefficient interpretation with group means analysis.
 
 *Discriminant Functions*
 
@@ -256,13 +290,16 @@ For LDA with $g$ groups, we get up to $min(g-1, p)$ discriminant functions.
 *First discriminant function* (LD1): Explains most between-group variation
 *Second discriminant function* (LD2): Second-most variation (orthogonal to LD1)
 
-*Marketing Example Interpretation*:
-- *LD1* separates High-Value from Occasional (overall customer value)
-  - High positive: order value, loyalty points, social engagement
-  - High negative: cart abandonment, support tickets
-- *LD2* distinguishes Loyal from others (frequency vs browsing)
-  - High positive: purchase frequency, email engagement
-  - High negative: browsing time (efficient shoppers)
+*Marketing Example Interpretation* (from the notebook):
+- *LD1* (95.8% of variance) separates High-Value from Occasional customers
+  - Strong negative coefficients: purchase frequency, loyalty points
+  - Represents overall customer engagement and activity level
+- *LD2* (4.2% of variance) captures remaining separation
+  - Strong positive coefficient: average order value
+  - Strong negative coefficient: browsing time
+  - Represents order size patterns versus browsing efficiency
+
+The notebook's Module 4 displays both the discriminant coefficients (scalings) and the group means on standardized features, allowing interpretation of which behavioral patterns define each segment.
 
 *Discriminant Loadings*
 
@@ -270,24 +307,38 @@ Similar to factor analysis loadings - correlation between original variable and 
 
 High absolute loading = variable is important for that discriminant function.
 
+The notebook creates a DataFrame of coefficients to easily identify the most influential features for each discriminant function.
+
 === Step 5: Validation
 
+*Notebook Reference*: Modules 3, 6, 9, and 10 provide comprehensive validation analyses.
+
 *Classification Accuracy*
-- Confusion matrix on test set
+- Confusion matrix on test set (Module 9)
 - Overall accuracy, precision, recall per class
+- Classification report with F1-scores
 - Don't just look at overall accuracy!
 
 *Cross-Validation*
 - K-fold cross-validation (typically k=5 or k=10)
 - Provides more robust performance estimate
 - Checks stability across different data splits
+- The notebook uses `cross_val_score` with cv=5
 
 *Visual Validation*
-- Scatter plot of discriminant scores (LD1 vs LD2)
-- Decision boundary plots (for 2D projections)
+- Scatter plot of discriminant scores (LD1 vs LD2) - Module 5
+- Decision boundary plots (for 2D projections) - Module 8
+- ROC curves for each segment (One-vs-Rest) - Module 10
 - Verify groups are well-separated
 
+*Advanced Metrics*
+- Module 10 demonstrates ROC curve analysis with AUC scores
+- Module 7 analyzes posterior probabilities to assess prediction confidence
+- Module 9 provides side-by-side confusion matrix comparison for LDA vs QDA
+
 = Applied Example: Marketing Segmentation
+
+*Complete Implementation*: See `ch5_guiding_example/marketing_discriminant_analysis.ipynb` for the full interactive analysis with visualizations and detailed interpretations.
 
 == Business Problem
 
@@ -296,6 +347,8 @@ An e-commerce company has 1,200 customers and wants to classify them into three 
 1. *High-Value* (30%): Premium customers, high spending and engagement
 2. *Loyal* (40%): Regular customers, moderate spending, consistent
 3. *Occasional* (30%): Infrequent buyers, need re-engagement
+
+The dataset is synthetically generated using `fetch_marketing.py` to ensure reproducibility and known statistical properties for educational purposes.
 
 == Variables (p = 8)
 
@@ -308,6 +361,8 @@ An e-commerce company has 1,200 customers and wants to classify them into three 
 - Loyalty points (accumulated)
 - Support tickets (per month)
 - Social engagement (interactions/month)
+
+See `MARKETING_DATA_DICTIONARY.md` for complete variable descriptions and data generation methodology.
 
 == Analysis Strategy
 
@@ -328,78 +383,99 @@ This ensures no variable dominates due to scale.
 
 == Results
 
+*Note*: The following results are from the Jupyter notebook analysis. Run `marketing_discriminant_analysis.ipynb` to reproduce these findings and generate visualizations.
+
 === Discriminant Functions
 
-*LD1 (67% of between-group variance)*:
-- Separates High-Value from Occasional customers
-- Key drivers: Order value (+), loyalty points (+), cart abandonment (-)
+The notebook's Module 4 (Interpreting Discriminant Functions) reveals:
 
-*LD2 (33% of between-group variance)*:
-- Distinguishes Loyal customers
-- Key drivers: Purchase frequency (+), browsing time (-)
+*LD1 (95.8% of between-group variance)*:
+- Separates High-Value from Occasional customers along the primary axis
+- Key drivers: Purchase frequency (strong negative), loyalty points (strong negative), average order value (negative)
+- Interpretation: Overall customer value and activity level
+
+*LD2 (4.2% of between-group variance)*:
+- Distinguishes remaining group differences
+- Key drivers: Average order value (strong positive), browsing time (negative)
+- Interpretation: Order size versus browsing efficiency
 
 *Insight*: Two independent dimensions describe customer segments:
-1. Overall value/engagement level (LD1)
-2. Efficiency of shopping behavior (LD2)
+1. Overall engagement and frequency (LD1 - dominant factor)
+2. Purchase value patterns (LD2 - secondary factor)
 
 === Classification Performance
 
-*LDA Results*:
-- Training accuracy: 100% (perfect separation in training)
-- Test accuracy: 92%
-- Cross-validation: 91% (#sym.plus.minus 2%)
+*LDA Results* (Module 3):
+- Test accuracy: Nearly perfect classification
+- Cross-validation: 99.9% (#sym.plus.minus 0.3%)
+- Strong performance across all segments
 
-*QDA Results*:
-- Training accuracy: 100%
-- Test accuracy: 94%
-- Cross-validation: 93% (#sym.plus.minus 2%)
+*QDA Results* (Module 6):
+- Test accuracy: Perfect classification
+- Cross-validation: 100.0% (#sym.plus.minus 0.0%)
+- Slightly outperforms LDA with more flexible boundaries
 
-*Interpretation*: QDA slightly outperforms LDA, suggesting groups have somewhat different covariance structures. Both perform well.
+*Interpretation*: Both models achieve excellent performance. The synthetic data's well-separated structure allows for near-perfect classification, demonstrating the power of discriminant analysis when groups have distinct multivariate profiles.
 
-=== Confusion Matrix (LDA on Test Set)
+=== Model Comparison and Visualization
 
-```
-                 Predicted
-              HV   Loyal  Occ
-Actual  HV    103    5     0
-        Loyal   4  140     4
-        Occ     0    6   102
-```
+The notebook includes comprehensive visualizations:
 
-*Observations*:
-- High-Value rarely misclassified (strong signal)
-- Occasional sometimes confused with Loyal (moderate overlap)
-- Overall strong performance
+*Module 5*: Discriminant space scatter plot showing customer distribution in LD1-LD2 space with group centroids
+
+*Module 8*: QDA decision boundaries visualization using purchase frequency and average order value
+
+*Module 9*: Side-by-side confusion matrices comparing LDA and QDA performance
+
+*Module 10*: ROC curves for each segment showing excellent discrimination (AUC near 1.0)
+
+=== Model Selection Recommendation
+
+Module 11 provides a comprehensive comparison and recommends *LDA* despite QDA's marginally better performance because:
+- Similar accuracy (difference is negligible)
+- Simpler model with fewer parameters
+- More interpretable discriminant functions
+- Lower overfitting risk
+- Easier to explain to stakeholders
 
 == Business Insights
 
 === Segment Characteristics
 
+Based on the group means analysis in Module 4:
+
 *High-Value Customers*:
-- High discriminant score on LD1 (positive)
-- Moderate score on LD2
+- Positive standardized values for purchase frequency, order value, browsing time
+- Very high email open rate and social engagement
+- Low cart abandonment and support tickets
+- Highest loyalty points accumulation
 - Strategy: Premium services, personalized recommendations, retention focus
 
 *Loyal Customers*:
-- Moderate LD1 score
-- High LD2 score (efficient, frequent purchasers)
+- Moderate purchase frequency and order values
+- Good email engagement and loyalty points
+- Balanced across most metrics
 - Strategy: Upselling, cross-selling, loyalty program enhancements
 
 *Occasional Customers*:
-- Low LD1 score (negative)
-- Low LD2 score
-- Strategy: Re-engagement campaigns, cart recovery, education
+- Low (negative) values for most engagement metrics
+- High cart abandonment rate and support ticket volume
+- Minimal loyalty points and social engagement
+- Strategy: Re-engagement campaigns, cart recovery, customer education
 
 === Actionable Applications
 
 *New Customer Classification*:
-Once a customer accumulates enough behavioral data, the model automatically assigns them to a segment for tailored marketing.
+Once a customer accumulates enough behavioral data (typically after 2-3 months), the model automatically assigns them to a segment for tailored marketing. Module 7 shows how posterior probabilities provide confidence scores for each classification.
 
 *Monitoring Segment Migration*:
-Track customers over time - are Occasional customers moving to Loyal? Are Loyal customers at risk of becoming Occasional?
+Track customers over time - are Occasional customers moving to Loyal? Are Loyal customers at risk of becoming Occasional? The discriminant scores can detect early warning signs of segment transition.
 
 *Marketing ROI Optimization*:
-Focus expensive retention campaigns on High-Value customers (high accuracy), use cheaper email campaigns for Loyal customers.
+Focus expensive retention campaigns on High-Value customers (high classification confidence), use cheaper email campaigns for Loyal customers, and implement automated cart recovery for Occasional customers.
+
+*Campaign Personalization*:
+Module 7's posterior probability analysis identifies customers with ambiguous segment membership who might respond to hybrid marketing strategies.
 
 = Advanced Topics
 
@@ -544,6 +620,37 @@ Values near 1 = excellent discrimination
 - Monitor over time in real applications
 
 The power of discriminant analysis lies not just in classification accuracy, but in *understanding* what makes groups different - turning multivariate data into actionable insights.
+
+= Putting It Into Practice
+
+To solidify your understanding of discriminant analysis, work through the complete marketing segmentation example:
+
+*Step 1*: Generate the customer dataset
+```bash
+cd ch5_guiding_example
+python fetch_marketing.py
+```
+
+*Step 2*: Open and run the Jupyter notebook
+```bash
+jupyter notebook marketing_discriminant_analysis.ipynb
+```
+
+*Step 3*: Execute each module sequentially, reading the explanations and examining the outputs
+
+*Step 4*: Experiment with modifications:
+- Try different train/test splits
+- Exclude certain features to see impact on performance
+- Adjust prior probabilities in the discriminant models
+- Create additional visualizations
+
+*Step 5*: Review the generated PNG files:
+- `marketing_lda_scores.png`: Discriminant space visualization
+- `marketing_qda_boundaries.png`: Decision boundaries in 2D
+- `marketing_confusion_comparison.png`: LDA vs QDA performance
+- `marketing_roc_curves.png`: Segment-specific classification quality
+
+By working through the complete pipeline from data generation to model comparison, you will develop practical skills in applying discriminant analysis to real-world classification problems.
 
 #align(center)[
   #v(2cm)
