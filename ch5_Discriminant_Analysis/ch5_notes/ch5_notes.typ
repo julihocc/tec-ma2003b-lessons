@@ -96,13 +96,116 @@ The mathematical notation employed throughout discriminant analysis includes sev
 
 == Classification Rules: Bayes Theorem
 
-The foundation of discriminant analysis is Bayes theorem. Given observation $bold(x)$, the posterior probability of belonging to group $k$ is:
+The foundation of discriminant analysis is Bayes theorem, which provides the optimal classification framework when distributional assumptions hold. Understanding this theorem in depth clarifies how discriminant analysis achieves its classification decisions and why these decisions are optimal under certain conditions.
+
+=== Understanding the Notation
+
+Before examining the theorem itself, we must clarify the mathematical notation employed throughout discriminant analysis:
+
+*Group Membership Variable G*: The random variable $G$ represents the group or class to which an observation belongs. This categorical variable can take values $1, 2, ..., g$, where $g$ denotes the total number of groups in the classification problem. For example, in a credit risk application, $G$ might take values from the set {0, 1}, where 0 indicates "no default" and 1 indicates "default". In the marketing segmentation example, $G$ takes values from {1, 2, 3}, corresponding to High-Value, Loyal, and Occasional customer segments respectively.
+
+*Predictor Vector x*: The vector $bold(x) = (x_1, x_2, ..., x_p)^top$ contains the values of $p$ predictor variables measured on a specific observation. In the marketing context, this might be $bold(x) = ("purchase frequency", "order value", "browsing time", ...)^top$. Each component $x_j$ represents a measured characteristic that potentially helps discriminate between groups.
+
+*Prior Probability pi_k*: The quantity $pi_k$ denotes the prior probability that a randomly selected observation belongs to group $k$, calculated before observing the predictor values. This probability reflects either population frequencies or domain knowledge about group prevalence. The prior probabilities must satisfy $pi_k > 0$ for all groups and $sum_(k=1)^g pi_k = 1$.
+
+*Class-Conditional Density f_k(x)*: The function $f_k (bold(x))$ represents the probability density of observing predictor values $bold(x)$ given that the observation belongs to group $k$. In discriminant analysis, we typically assume $f_k (bold(x))$ follows a multivariate normal distribution with mean vector $bold(mu)_k$ and covariance matrix $bold(Sigma)_k$. This density quantifies how typical or likely the observed predictor values are for members of group $k$.
+
+=== The Bayes Theorem Formula
+
+Given observation $bold(x)$, the posterior probability of belonging to group $k$ is:
 
 $ P(G = k | bold(x)) = frac(f_k (bold(x)) pi_k, sum_(j=1)^g f_j (bold(x)) pi_j) $
 
-*Bayes Classification Rule*: Assign observation $bold(x)$ to the group with the highest posterior probability.
+This equation decomposes into several interpretable components:
 
-This is optimal in the sense that it minimizes the total probability of misclassification (if priors and densities are known).
+*Left Side - Posterior Probability*: The quantity $P(G = k | bold(x))$ represents the probability that an observation with observed predictor values $bold(x)$ belongs to group $k$. This is precisely what we want to calculate for classification purposes. The vertical bar notation $|$ reads as "given" or "conditional on", so we interpret this as "the probability of group membership $k$ given that we have observed predictor values $bold(x)$".
+
+*Numerator Components*:
+- $f_k (bold(x))$: The likelihood of observing these predictor values if the observation belongs to group $k$
+- $pi_k$: The prior probability of group $k$ before observing any predictor values
+- Product $f_k (bold(x)) pi_k$: The joint probability of both belonging to group $k$ and having predictor values $bold(x)$
+
+*Denominator*: The sum $sum_(j=1)^g f_j (bold(x)) pi_j$ aggregates the joint probabilities across all $g$ groups. This normalization constant ensures that the posterior probabilities sum to unity across all possible group assignments: $sum_(k=1)^g P(G = k | bold(x)) = 1$.
+
+=== Intuitive Interpretation
+
+Bayes theorem combines two distinct sources of information to produce classification decisions:
+
+*Prior Knowledge*: The prior probabilities $pi_k$ encode what we know about group frequencies before examining any specific observation. If historical data shows that 5 percent of loan applicants default, we set $pi_1 = 0.05$ for the default group. This prior information prevents the classifier from ignoring base rates and making unrealistic predictions.
+
+*Evidence from Data*: The class-conditional density $f_k (bold(x))$ quantifies how typical the observed predictor values are for group $k$. If a loan applicant has income equal to 50,000 dollars, debt ratio equal to 0.4, and credit score equal to 650, the density $f_1 (bold(x))$ tells us how likely these values are among customers who ultimately default, while $f_0 (bold(x))$ tells us how likely they are among customers who do not default.
+
+The posterior probability is proportional to the product of these two components: "how likely this data is for group $k$" multiplied by "how common group $k$ is". Groups that are both common (high $pi_k$) and compatible with the observed data (high $f_k (bold(x))$) receive high posterior probabilities.
+
+=== Detailed Example: Credit Risk Assessment
+
+Consider a credit risk classification problem with the following characteristics:
+
+*Groups*: $k = 0$ (no default), $k = 1$ (default)
+
+*Prior Probabilities*: Based on historical data, $pi_0 = 0.95$ (95 percent of customers do not default) and $pi_1 = 0.05$ (5 percent default)
+
+*Observation*: A loan applicant with $bold(x) = ["income" = 50000, "debt ratio" = 0.4, "credit score" = 650]^top$
+
+*Class-Conditional Densities*: Suppose our fitted discriminant analysis model produces:
+- $f_0 (bold(x)) = 0.0008$ (this financial profile is somewhat typical for non-defaulters)
+- $f_1 (bold(x)) = 0.0030$ (this financial profile is more typical for defaulters)
+
+The posterior probabilities calculate as:
+
+Numerator for group 0: $f_0 (bold(x)) pi_0 = 0.0008 times 0.95 = 0.00076$
+
+Numerator for group 1: $f_1 (bold(x)) pi_1 = 0.0030 times 0.05 = 0.00015$
+
+Denominator: $sum_(j=0)^1 f_j (bold(x)) pi_j = 0.00076 + 0.00015 = 0.00091$
+
+Posterior probabilities:
+- $P(G = 0 | bold(x)) = 0.00076 / 0.00091 approx 0.835$ (83.5 percent probability of no default)
+- $P(G = 1 | bold(x)) = 0.00015 / 0.00091 approx 0.165$ (16.5 percent probability of default)
+
+Despite the financial profile being more typical of defaulters (density ratio $f_1 / f_0 = 3.75$), the strong prior probability favoring non-default prevents the classifier from predicting default. The model balances the evidence from the data against the base rate information.
+
+=== The Bayes Classification Rule
+
+*Bayes Classification Rule*: Assign observation $bold(x)$ to the group $k^*$ that maximizes the posterior probability:
+
+$ k^* = arg max_k P(G = k | bold(x)) = arg max_k f_k (bold(x)) pi_k $
+
+The second equality follows because the denominator $sum_(j=1)^g f_j (bold(x)) pi_j$ is identical across all groups and therefore does not affect which group achieves the maximum. Consequently, we need only compare the numerators $f_k (bold(x)) pi_k$ across groups.
+
+In the credit risk example above, we would classify the applicant as non-default (group 0) because $P(G = 0 | bold(x)) = 0.835 > P(G = 1 | bold(x)) = 0.165$.
+
+=== Optimality of the Bayes Rule
+
+The Bayes classification rule is optimal in a precise mathematical sense: it minimizes the total probability of misclassification. This result, known as the Bayes risk minimization theorem, states that among all possible classification rules, assigning observations to the group with the highest posterior probability achieves the lowest possible error rate.
+
+This optimality holds under two critical conditions:
+
+*Condition 1 - Correct Prior Probabilities*: The specified prior probabilities $pi_k$ accurately reflect the true prevalence of groups in the population or appropriately weight the relative importance of different groups.
+
+*Condition 2 - Correct Density Specification*: The assumed class-conditional densities $f_k (bold(x))$ correctly specify the distribution of predictor values within each group. In discriminant analysis, we assume multivariate normal distributions, so optimality requires that this assumption holds or approximately holds.
+
+When these conditions are violated, the Bayes rule using the misspecified priors or densities may perform suboptimally. Nevertheless, the framework remains valuable because:
+
+*Robustness*: Discriminant analysis often performs well even when the normality assumption is violated moderately, particularly with large sample sizes.
+
+*Flexibility in Priors*: We can adjust prior probabilities to reflect business costs or domain knowledge, even if these differ from sample proportions.
+
+*Interpretability*: The probabilistic framework provides posterior probabilities that quantify classification uncertainty, enabling risk-based decision making beyond simple classification.
+
+=== Connection to Discriminant Functions
+
+The discriminant analysis methods (LDA and QDA) implement the Bayes classification rule by making specific assumptions about the class-conditional densities $f_k (bold(x))$. Both methods assume multivariate normal distributions:
+
+$ f_k (bold(x)) = frac(1, (2 pi)^(p slash 2) |bold(Sigma)_k|^(1 slash 2)) exp(-frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k)) $
+
+Taking logarithms and simplifying yields discriminant functions, which are equivalent to comparing posterior probabilities:
+
+*LDA*: Assuming $bold(Sigma)_k = bold(Sigma)$ for all groups yields linear discriminant functions
+
+*QDA*: Allowing group-specific $bold(Sigma)_k$ yields quadratic discriminant functions
+
+Thus, discriminant analysis provides a computationally efficient implementation of the optimal Bayes rule under normality assumptions, transforming the classification problem into comparison of discriminant scores rather than explicit probability calculations.
 
 == Linear Discriminant Analysis (LDA)
 
