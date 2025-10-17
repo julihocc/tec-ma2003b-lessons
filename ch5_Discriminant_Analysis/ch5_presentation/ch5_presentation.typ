@@ -153,22 +153,28 @@
 
 #slide[
   = Bayes Theorem Foundation
-  
-  *Posterior probability of group $k$:*
-  
+
+  *Goal:* Classify observation with features $bold(x)$ into one of $g$ groups
+
+  #v(1em)
+
+  *Bayes Theorem gives posterior probability:*
+
   $ P(G = k | bold(x)) = frac(f_k (bold(x)) pi_k, sum_(j=1)^g f_j (bold(x)) pi_j) $
-  
+
+  #v(0.5em)
+
+  where:
+  - $pi_k$ = prior probability of group $k$
+  - $f_k (bold(x))$ = probability density of $bold(x)$ in group $k$
+
   #v(1em)
-  
-  *Bayes Classification Rule:*
-  
-  Assign to group $k^*$ that maximizes posterior probability:
-  
-  $ k^* = arg max_k f_k (bold(x)) pi_k $
-  
-  #v(1em)
-  
-  This is *optimal* under correct distributional assumptions
+
+  *Bayes Optimal Classification:*
+
+  $ k^* = arg max_k P(G = k | bold(x)) = arg max_k f_k (bold(x)) pi_k $
+
+  Denominator is same for all groups, so we can ignore it
 ]
 
 #slide[
@@ -242,26 +248,127 @@
 
 #slide[
   = Example: Credit Risk - Interpretation
-  
+
   *Key Insight:*
-  
+
   Even though this profile is *3.75x more common* among defaulters...
-  
+
   The *prior probability* (95% vs 5%) is so strong that we still classify as *no default*
-  
+
   #v(1em)
-  
+
   *Decision Rule:*
-  
+
   Classify as *no default* (83.5% > 16.5%)
-  
+
   #v(1em)
-  
+
   *Business Implications:*
   - Approve loan, but consider higher interest rate
   - Monitor account more closely
   - May require additional collateral
   - 16.5% risk is still significant for portfolio management
+]
+
+#slide[
+  = From Bayes to Discriminant Analysis
+
+  *The Challenge:*
+
+  We need to specify $f_k (bold(x))$ for each group
+
+  #v(1em)
+
+  *The Assumption:*
+
+  Assume each group follows *multivariate normal distribution*:
+
+  $ f_k (bold(x)) = frac(1, (2 pi)^(p\/2) |bold(Sigma)_k|^(1\/2)) exp(-frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k)) $
+
+  #v(1em)
+
+  *Key Parameters:*
+  - $bold(mu)_k$ = mean vector for group $k$
+  - $bold(Sigma)_k$ = covariance matrix for group $k$
+]
+
+#slide[
+  = Simplifying the Math
+
+  *Recall:* We want to maximize $f_k (bold(x)) pi_k$
+
+  #v(1em)
+
+  *Trick:* Maximize $log(f_k (bold(x)) pi_k)$ instead (same result, easier math)
+
+  #v(1em)
+
+  *Taking the logarithm:*
+
+  $ log(f_k (bold(x)) pi_k) = -frac(p, 2) log(2 pi) - frac(1, 2) log|bold(Sigma)_k| $
+  $ - frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k) + log(pi_k) $
+
+  #v(1em)
+
+  Drop constant terms (same for all groups), define discriminant score $delta_k (bold(x))$
+]
+
+#slide[
+  = Two Scenarios: LDA vs QDA
+
+  *Scenario 1: Equal Covariances* (LDA assumption)
+
+  If $bold(Sigma)_1 = bold(Sigma)_2 = ... = bold(Sigma)_g = bold(Sigma)$
+
+  Then $log|bold(Sigma)_k|$ is constant across groups
+
+  The quadratic term $(bold(x) - bold(mu)_k)^top bold(Sigma)^(-1) (bold(x) - bold(mu)_k)$ expands to terms linear in $bold(x)$
+
+  Result: *Linear discriminant function*
+
+  #v(1em)
+
+  *Scenario 2: Different Covariances* (QDA assumption)
+
+  Each group has $bold(Sigma)_k$
+
+  Keep all terms including $log|bold(Sigma)_k|$
+
+  Result: *Quadratic discriminant function*
+]
+
+#slide[
+  = Summary: Bayes to LDA/QDA
+
+  #align(center)[
+    #box(fill: blue.lighten(90%), inset: 1em, radius: 8pt)[
+      *The Complete Connection*
+    ]
+  ]
+
+  #v(1em)
+
+  *Step 1:* Bayes optimal rule requires maximizing $f_k (bold(x)) pi_k$
+
+  #v(0.5em)
+
+  *Step 2:* Assume multivariate normal: $f_k (bold(x)) tilde N(bold(mu)_k, bold(Sigma)_k)$
+
+  #v(0.5em)
+
+  *Step 3:* Take logarithm for computational convenience
+
+  #v(0.5em)
+
+  *Step 4:* Simplify based on covariance assumption:
+  - *Equal covariances* $arrow.r$ LDA (linear boundaries)
+  - *Different covariances* $arrow.r$ QDA (quadratic boundaries)
+
+  #v(1em)
+
+  #align(center)[
+    Both methods are *Bayesian classifiers* under normality assumption
+  ]
 ]
 
 #slide[
@@ -289,23 +396,31 @@
 ]
 
 #slide[
-  = LDA: Discriminant Scores
-  
-  *Score for group $k$:*
-  
+  = LDA: Deriving the Discriminant Scores
+
+  *Start with log-likelihood, assume $bold(Sigma)_k = bold(Sigma)$ for all $k$:*
+
+  $ log(f_k (bold(x)) pi_k) = -frac(1, 2) log|bold(Sigma)| - frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)^(-1) (bold(x) - bold(mu)_k) + log(pi_k) $
+
+  #v(0.5em)
+
+  *Expand the quadratic term:*
+
+  $ (bold(x) - bold(mu)_k)^top bold(Sigma)^(-1) (bold(x) - bold(mu)_k) = bold(x)^top bold(Sigma)^(-1) bold(x) - 2 bold(x)^top bold(Sigma)^(-1) bold(mu)_k + bold(mu)_k^top bold(Sigma)^(-1) bold(mu)_k $
+
+  #v(0.5em)
+
+  *Drop terms constant across groups:*
+
+  Drop $-frac(1, 2) log|bold(Sigma)|$ and $bold(x)^top bold(Sigma)^(-1) bold(x)$
+
+  #v(0.5em)
+
+  *Define LDA discriminant score:*
+
   $ delta_k (bold(x)) = bold(x)^top bold(Sigma)^(-1) bold(mu)_k - frac(1, 2) bold(mu)_k^top bold(Sigma)^(-1) bold(mu)_k + log(pi_k) $
-  
-  #v(1em)
-  
-  *Classification Rule:*
-  
-  Assign $bold(x)$ to group with largest $delta_k (bold(x))$
-  
-  #v(1em)
-  
-  *Geometric Interpretation:*
-  - Decision boundaries are hyperplanes
-  - Perpendicular bisectors when priors are equal
+
+  This is *linear* in $bold(x)$
 ]
 
 #slide[
@@ -348,15 +463,29 @@
 ]
 
 #slide[
-  = QDA: Discriminant Scores
-  
-  *Score for group $k$:*
-  
+  = QDA: Deriving the Discriminant Scores
+
+  *Now allow different $bold(Sigma)_k$ for each group:*
+
+  $ log(f_k (bold(x)) pi_k) = -frac(1, 2) log|bold(Sigma)_k| - frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k) + log(pi_k) $
+
+  #v(0.5em)
+
+  *Key difference from LDA:*
+
+  Cannot drop $log|bold(Sigma)_k|$ (varies by group)
+
+  Cannot drop $bold(x)^top bold(Sigma)_k^(-1) bold(x)$ (different $bold(Sigma)_k$ for each group)
+
+  #v(0.5em)
+
+  *Define QDA discriminant score:*
+
   $ delta_k (bold(x)) = -frac(1, 2) log |bold(Sigma)_k| - frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k) + log(pi_k) $
-  
-  #v(1em)
-  
-  Quadratic in $bold(x)$ leads to curved boundaries
+
+  #v(0.5em)
+
+  This is *quadratic* in $bold(x)$, producing curved decision boundaries
 ]
 
 #slide[
