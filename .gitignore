@@ -1,3 +1,7 @@
 
 .vscode/
 .idea/
+*.png
+*.jpg
+*.jpeg
+*.gif
