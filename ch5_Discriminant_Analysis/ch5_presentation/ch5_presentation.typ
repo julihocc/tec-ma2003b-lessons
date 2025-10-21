@@ -474,26 +474,6 @@
 ]
 
 #slide[
-  = Fisher's Approach
-  
-  *Alternative (equivalent) formulation:*
-  
-  Maximize ratio of between-group to within-group variance
-  
-  #v(1em)
-  
-  *For two groups:*
-  
-  $ "maximize" quad frac((overline(y)_1 - overline(y)_2)^2, s_1^2 + s_2^2) $
-  
-  where $y = bold(a)^top bold(x)$
-  
-  #v(1em)
-  
-  *Solution:* $bold(a) prop bold(Sigma)^(-1) (bold(mu)_1 - bold(mu)_2)$
-]
-
-#slide[
   = Quadratic Discriminant Analysis (QDA)
   
   *Relaxes equal covariance assumption*
