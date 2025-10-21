@@ -314,6 +314,56 @@
 ]
 
 #slide[
+  = The Discriminant Score
+
+  *What is it?*
+
+  A simplified scoring function for each class $k$: assign $bold(x)$ to class with highest score
+
+  #v(1em)
+
+  *General formula (after dropping constants):*
+
+  $ delta_k (bold(x)) = -frac(1, 2) log|bold(Sigma)_k| - frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k) + log(pi_k) $
+
+  #v(1em)
+
+  *Three components:*
+
+  *1.* $-frac(1, 2) log|bold(Sigma)_k|$ = penalty for group spread (larger covariance = lower score)
+
+  *2.* $-frac(1, 2) (bold(x) - bold(mu)_k)^top bold(Sigma)_k^(-1) (bold(x) - bold(mu)_k)$ = Mahalanobis distance (closer to center = higher score)
+
+  *3.* $log(pi_k)$ = prior probability boost (more common classes = higher score)
+]
+
+#slide[
+  = Classification with Discriminant Scores
+
+  *Decision Rule:*
+
+  $ "Predicted class" = arg max_k delta_k (bold(x)) $
+
+  Assign observation to the class with the highest discriminant score
+
+  #v(1em)
+
+  *Why this works:*
+
+  - Maximizing $delta_k (bold(x))$ is equivalent to maximizing $P(G = k | bold(x))$
+  - We dropped only constant terms (same for all groups)
+  - Classification decision remains optimal (Bayes rule)
+
+  #v(1em)
+
+  *Computational benefit:*
+
+  - Avoid computing actual probabilities (no denominator needed)
+  - Work with simpler expressions (log-scale, no exponentials)
+  - Still get optimal Bayesian classification
+]
+
+#slide[
   = Two Scenarios: LDA vs QDA
 
   *Scenario 1: Equal Covariances* (LDA assumption)
