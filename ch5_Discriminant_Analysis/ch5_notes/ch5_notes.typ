@@ -321,7 +321,15 @@ qda.fit(X_train, y_train)
 
 *Discriminant Functions*
 
-For LDA with $g$ groups, we get up to $min(g-1, p)$ discriminant functions.
+For LDA with $g$ groups, we get up to $min(g-1, p)$ discriminant functions. The maximum number of discriminant functions is determined by the formula:
+
+$ m = min(g - 1, p) $
+
+where $g$ is the number of groups and $p$ is the number of predictors. This limitation arises because:
+- With $g$ groups, there are only $g-1$ independent contrasts between group means
+- With $p$ predictors, the discriminant space has at most $p$ dimensions
+
+For example, with 3 customer segments and 8 predictors, we obtain $min(3-1, 8) = 2$ discriminant functions.
 
 *First discriminant function* (LD1): Explains most between-group variation
 *Second discriminant function* (LD2): Second-most variation (orthogonal to LD1)
@@ -337,11 +345,23 @@ For LDA with $g$ groups, we get up to $min(g-1, p)$ discriminant functions.
 
 The notebook's Module 4 displays both the discriminant coefficients (scalings) and the group means on standardized features, allowing interpretation of which behavioral patterns define each segment.
 
+*Understanding Discriminant Coefficients*
+
+Discriminant analysis produces two types of coefficients, each serving distinct interpretive purposes:
+
+*Unstandardized Coefficients*: These represent the raw weights applied to predictor variables in their original measurement units. An unstandardized coefficient of 0.5 for income (measured in thousands of dollars) means that a 1,000 dollar increase in income increases the discriminant score by 0.5 units. These coefficients depend on the original measurement scales and cannot be directly compared across variables measured in different units.
+
+*Standardized Coefficients*: These coefficients indicate the relative importance of each predictor independent of its original scale. Standardization converts all predictors to have mean zero and standard deviation one before computing discriminant functions. A standardized coefficient of 0.8 for income and 0.3 for age suggests that income contributes more strongly to group separation than age, after accounting for differences in their variability. Standardized coefficients facilitate comparison across predictors and are analogous to beta coefficients in standardized regression.
+
+The standardized form proves particularly valuable when comparing the relative importance of predictors, while the unstandardized form is necessary when applying the discriminant function to new observations in their original measurement units.
+
 *Discriminant Loadings*
 
-Similar to factor analysis loadings - correlation between original variable and discriminant function.
+Similar to factor analysis loadings - correlation between original variable and discriminant function. Discriminant loadings represent the simple correlation between each original predictor and the discriminant scores, providing an alternative measure of variable importance.
 
-High absolute loading = variable is important for that discriminant function.
+High absolute loading = variable is important for that discriminant function. Loadings above 0.30 in absolute value typically indicate meaningful contributions to the discriminant function.
+
+The relationship between coefficients and loadings mirrors factor analysis: coefficients represent regression-like weights accounting for correlations among predictors, while loadings represent simple correlations ignoring other predictors. When predictors are highly correlated, coefficients and loadings can differ substantially, with loadings often providing more intuitive interpretation.
 
 The notebook creates a DataFrame of coefficients to easily identify the most influential features for each discriminant function.
 
@@ -469,6 +489,57 @@ Marketing return on investment optimization leverages the classification framewo
 
 Campaign personalization benefits from Module 7's posterior probability analysis, which identifies customers with ambiguous segment membership reflected in probability distributions spread across multiple classes. These customers, exhibiting characteristics of multiple segments, may respond favorably to hybrid marketing strategies that combine elements designed for different segments, such as re-engagement messaging paired with loyalty program incentives.
 
+== Credit Risk Classification Example
+
+To illustrate discriminant analysis in a financial context, consider a credit risk assessment problem where a bank classifies loan applicants as either "No Default" (low risk) or "Default" (high risk) based on financial characteristics.
+
+=== Problem Setup
+
+*Groups*: $g = 2$
+- Group 0: No Default (historically 95% of applicants)
+- Group 1: Default (historically 5% of applicants)
+
+*Predictors*: $p = 3$
+- $x_1$: Annual income (thousands of dollars)
+- $x_2$: Debt-to-income ratio (proportion, 0 to 1)
+- $x_3$: Credit score (300 to 850)
+
+=== Discriminant Score Interpretation
+
+After fitting LDA, suppose the discriminant function is:
+
+$ "Score" = 0.002 dot "income" - 8.5 dot "debt ratio" + 0.015 dot "credit score" - 5.2 $
+
+The cutoff threshold with equal prior probabilities would be zero. However, recognizing the imbalanced class distribution and the higher cost of default misclassification, the bank adjusts prior probabilities to reflect business considerations rather than sample proportions.
+
+*Example Classification*:
+
+Consider applicant A with income equal to 50,000 dollars, debt ratio equal to 0.40, and credit score equal to 650:
+
+$ "Score"_A = 0.002(50) - 8.5(0.40) + 0.015(650) - 5.2 $
+$ "Score"_A = 0.1 - 3.4 + 9.75 - 5.2 = 1.25 $
+
+A positive discriminant score (1.25 greater than 0) indicates classification into Group 0 (No Default), suggesting this applicant presents low credit risk. The magnitude of the score reflects the strength of classification confidence.
+
+Consider applicant B with income equal to 35,000 dollars, debt ratio equal to 0.65, and credit score equal to 580:
+
+$ "Score"_B = 0.002(35) - 8.5(0.65) + 0.015(580) - 5.2 $
+$ "Score"_B = 0.07 - 5.525 + 8.7 - 5.2 = -1.955 $
+
+A negative discriminant score (-1.955 less than 0) indicates classification into Group 1 (Default), flagging this applicant as high credit risk. The bank would likely deny this loan application or offer modified terms with higher interest rates to compensate for elevated risk.
+
+*Coefficient Interpretation*:
+
+- *Income* (+0.002): Higher income reduces default risk, though the small coefficient reflects income's measurement in thousands
+- *Debt Ratio* (-8.5): Strong negative coefficient indicates high debt loads substantially increase default risk
+- *Credit Score* (+0.015): Higher credit scores reduce default risk, reflecting proven creditworthiness
+
+The debt-to-income ratio emerges as the strongest predictor when coefficients are standardized, consistent with credit risk theory that emphasizes debt burden as a primary default driver.
+
+*Business Application*:
+
+The discriminant score threshold can be adjusted to reflect business priorities. Setting a higher threshold (e.g., requiring scores above 0.5 instead of 0) makes classification more conservative, approving fewer borderline applicants but reducing default rates. Conversely, lowering the threshold (e.g., -0.5) approves more applicants, increasing loan volume but accepting higher default risk. Banks optimize this threshold by analyzing the trade-off between foregone interest revenue from rejected non-defaulters versus losses from accepted defaulters.
+
 = Advanced Topics
 
 == Variable Selection
@@ -487,17 +558,73 @@ Sampling techniques modify the training data composition to mitigate imbalance e
 
 == Model Diagnostics
 
-Several diagnostic statistics quantify the strength and significance of group separation in discriminant analysis. Wilks' Lambda tests whether group means differ significantly across the predictor space, calculated as the ratio of the determinant of the within-group sum of squares matrix $bold(W)$ to the determinant of the total sum of squares matrix $bold(T)$:
+Several diagnostic statistics quantify the strength and significance of group separation in discriminant analysis. Understanding these diagnostics helps assess model quality and interpret the degree to which groups differ in the multivariate space.
+
+=== Wilks' Lambda
+
+Wilks' Lambda tests whether group means differ significantly across the predictor space, calculated as the ratio of the determinant of the within-group sum of squares matrix $bold(W)$ to the determinant of the total sum of squares matrix $bold(T)$:
 
 $ Lambda = frac(|bold(W)|, |bold(T)|) $
 
-Small values approaching zero indicate strong group separation, as the within-group variation becomes negligible relative to total variation. The associated F-statistic provides formal hypothesis testing of whether group means differ significantly.
+Small values approaching zero indicate strong group separation, as the within-group variation becomes negligible relative to total variation. The test statistic ranges from 0 to 1, where:
+- $Lambda approx 0$: Perfect group separation (all variation is between groups)
+- $Lambda approx 1$: No group separation (all variation is within groups)
+
+The associated F-statistic provides formal hypothesis testing of whether group means differ significantly. Wilks' Lambda is also used in stepwise discriminant analysis as a criterion for variable selection, where variables that minimize Lambda (maximize group separation) are preferred for inclusion in the model.
+
+=== Hotelling's T-squared Test
+
+For testing whether two groups have different centroids (mean vectors), Hotelling's T-squared test provides the multivariate generalization of the univariate t-test. The test statistic is:
+
+$ T^2 = frac(n_1 n_2, n_1 + n_2) (bold(overline(x))_1 - bold(overline(x))_2)^top bold(S)_"pooled"^(-1) (bold(overline(x))_1 - bold(overline(x))_2) $
+
+where $n_1$ and $n_2$ are the sample sizes for the two groups, $bold(overline(x))_1$ and $bold(overline(x))_2$ are the group mean vectors, and $bold(S)_"pooled"$ is the pooled covariance matrix. This test determines whether the multivariate means differ significantly, providing a foundation for discriminant analysis by confirming that groups occupy distinct regions of the predictor space.
+
+For more than two groups, multivariate analysis of variance (MANOVA) extends this concept, testing the null hypothesis that all group centroids are equal. MANOVA and discriminant analysis are closely related: MANOVA tests whether groups differ, while discriminant analysis describes how they differ and builds classification rules based on those differences.
+
+=== Eigenvalues and Discriminant Functions
+
+Each discriminant function has an associated eigenvalue that quantifies its discriminatory power. The eigenvalue represents the ratio of between-group variance to within-group variance along that discriminant function:
+
+$ lambda_i = frac("between-group SS for LD"_i, "within-group SS for LD"_i) $
+
+Larger eigenvalues indicate stronger discrimination. A high eigenvalue means that particular discriminant function effectively separates groups, as the between-group variation dominates the within-group variation along that dimension.
+
+The proportion of discriminatory power explained by each function is calculated as:
+
+$ "Proportion explained by LD"_i = frac(lambda_i, sum_(j=1)^m lambda_j) $
+
+where $m = min(g-1, p)$ is the total number of discriminant functions. Typically, the first discriminant function (LD1) accounts for the largest proportion of group separation, with subsequent functions capturing progressively less discrimination.
+
+*Example Interpretation*: If LD1 has an eigenvalue of 12.5 and LD2 has an eigenvalue of 0.8, then LD1 explains $12.5 / (12.5 + 0.8) = 94%$ of the discriminatory power. This indicates that the first dimension captures nearly all meaningful group separation, and LD2 contributes minimally.
+
+=== Canonical Correlation
 
 Canonical correlation measures the strength of the relationship between discriminant functions and group membership. For each discriminant function, the canonical correlation represents the square root of the proportion of between-group variation to total variation:
 
-$ R_"can" = sqrt(frac("between-group SS", "total SS")) $
+$ R_"can" = sqrt(frac("between-group SS", "total SS")) = sqrt(frac(lambda_i, 1 + lambda_i)) $
 
-Values approaching one indicate excellent discrimination, signifying that the discriminant function effectively captures group differences. Multiple discriminant functions yield multiple canonical correlations, with the first function typically exhibiting the highest value.
+Values approaching one indicate excellent discrimination, signifying that the discriminant function effectively captures group differences. Canonical correlation ranges from 0 to 1, where:
+- $R_"can" approx 1$: Discriminant function perfectly separates groups
+- $R_"can" approx 0$: Discriminant function provides no group separation
+
+Multiple discriminant functions yield multiple canonical correlations, with the first function typically exhibiting the highest value. Squaring the canonical correlation gives the proportion of variance in the discriminant scores explained by group membership, analogous to R-squared in regression.
+
+=== Mahalanobis Distance
+
+Mahalanobis distance quantifies the distance between an observation and a group centroid, accounting for the covariance structure of the data. For observation $bold(x)$ and group $k$, the Mahalanobis distance is:
+
+$ D^2 (bold(x), bold(mu)_k) = (bold(x) - bold(mu)_k)^top bold(Sigma)^(-1) (bold(x) - bold(mu)_k) $
+
+This metric plays multiple roles in discriminant analysis:
+
+*Classification*: With equal prior probabilities, LDA assigns observations to the group with the smallest Mahalanobis distance to its centroid. This geometric interpretation clarifies why LDA works: it identifies the "nearest" group in multivariate space, where "nearest" accounts for variable correlations and scales.
+
+*Outlier Detection*: Observations with large Mahalanobis distances from all group centroids may be multivariate outliers requiring investigation. Such observations lie far from typical group members in the multivariate space.
+
+*Variable Selection*: Mahalanobis distance between group centroids can guide variable selection, as variables that increase the distance between groups enhance discrimination.
+
+Unlike Euclidean distance, Mahalanobis distance accounts for variable correlations and unequal variances, making it more appropriate for multivariate data where predictors are not independent and identically scaled.
 
 == Comparison with Other Methods
 
@@ -514,6 +641,8 @@ Discriminant analysis proves most appropriate when several conditions align. Mod
 == Common Mistakes
 
 Several pitfalls frequently undermine discriminant analysis applications, warranting careful attention throughout the modeling process. Ignoring fundamental assumptions represents a primary source of error. Applying LDA when groups exhibit clearly different covariance structures violates the method's homogeneity assumption, potentially yielding biased decision boundaries that perform poorly on new data. Outliers exert disproportionate influence on discriminant functions due to their impact on estimated means and covariances, yet analysts sometimes proceed without outlier screening, particularly when sample sizes appear large. Mahalanobis distance calculations identify multivariate outliers that may not be apparent from univariate examinations.
+
+The normality assumption requires that predictors follow multivariate normal distributions within each group. While discriminant analysis demonstrates robustness to moderate violations when sample sizes are large, severe departures from normality can compromise both classification accuracy and the optimality properties of the Bayes rule. Particularly problematic are categorical predictors, which inherently violate the continuity assumption underlying multivariate normality. Including categorical variables (such as gender coded as 0/1, or product category coded as 1/2/3) in discriminant analysis creates theoretical inconsistencies, as discrete distributions cannot be multivariate normal. When categorical predictors are essential for classification, analysts face several alternatives: convert categories to quantitative proxies when meaningful (e.g., replace product category with average price), use logistic regression which accommodates categorical predictors naturally, or employ non-parametric classification methods such as classification trees or k-nearest neighbors that impose no distributional assumptions.
 
 Overfitting poses particular risks when the number of predictors approaches or exceeds the sample size relative to the number of groups. The discriminant analysis literature suggests requiring at least twenty observations per predictor per group to ensure stable parameter estimates. Violating this guideline risks producing discriminant functions that fit idiosyncrasies of the training sample rather than capturing genuine group differences, leading to poor generalization performance.
 
@@ -577,6 +706,28 @@ jupyter notebook marketing_discriminant_analysis.ipynb
 - `marketing_roc_curves.png`: Segment-specific classification quality
 
 By working through the complete pipeline from data generation to model comparison, you will develop practical skills in applying discriminant analysis to real-world classification problems.
+
+= AI-Assisted Content Development
+
+These companion notes were developed with the assistance of artificial intelligence (Claude, Anthropic) to enhance their pedagogical value and comprehensiveness. The AI contribution involved:
+
+*Content Organization and Clarity*: Restructuring technical concepts into a logical progression from foundational theory to advanced applications, ensuring accessibility for students with diverse mathematical backgrounds.
+
+*Mathematical Exposition*: Translating formal statistical notation into clear explanations with concrete interpretations, balancing mathematical rigor with practical understanding.
+
+*Example Development*: Creating worked examples (marketing segmentation, credit risk classification) that demonstrate discriminant analysis application to realistic business problems, complete with numerical calculations and business interpretations.
+
+*Coverage Alignment*: Enhancing content to ensure comprehensive coverage of assessment topics, including detailed discussions of diagnostic statistics (Wilks' Lambda, Hotelling's T-squared, eigenvalues, canonical correlation, Mahalanobis distance), coefficient interpretation (standardized vs unstandardized), and methodological considerations (categorical predictors, assumption violations).
+
+*Technical Accuracy*: Verifying formulas, statistical concepts, and Python implementation details against authoritative references to ensure correctness.
+
+The pedagogical structure, learning objectives, and example selection reflect the course instructor's vision (Dr. Juliho Castillo), with AI serving as a tool for content development and refinement rather than as the primary author. All technical content has been reviewed for accuracy and alignment with course objectives.
+
+*AI Tool Used*: Claude 3.5 Sonnet (Anthropic)
+*Development Dates*: October 2024 - October 2025
+*Human Oversight*: Dr. Juliho Castillo, Tecnologico de Monterrey
+
+This disclosure reflects the growing role of AI in educational content creation while maintaining transparency about the development process. Students are encouraged to engage critically with all course materials, verify understanding through practice problems, and seek clarification from the instructor when concepts require additional explanation.
 
 #align(center)[
   #v(2cm)
