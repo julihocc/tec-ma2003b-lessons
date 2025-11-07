@@ -92,7 +92,7 @@
 
 *Content Development:*
 - *AI Assistant:* Claude (Anthropic) - Initial content generation, mathematical formulations, and structural organization
-- *Human Reviewer and Course Coordinator:* Your Name - Academic review, pedagogical alignment, and quality assurance
+- *Human Reviewer and Course Coordinator:* Juliho Castillo Colmenares - Academic review, pedagogical alignment, and quality assurance
 
 == Roles and Responsibilities
 
@@ -113,16 +113,16 @@
 == Contact Information
 
 *Course Coordinator:*
-- *Name:* _Your Full Name_
-- *Email:* _your.email\@institution.edu_
-- *Office:* _Building and Room Number_
-- *Office Hours:* _Days and Times_
+- *Name:* Juliho Castillo Colmenares
+- *Email:* julihocc\@tec
+- *Office:* Tec de Monterrey CCM Office 1540
+- *Office Hours:* Monday-Friday, 9:00 AM - 5:00 PM
 
 *Course Information:*
 - *Course Code:* MA2003B
 - *Course Title:* Application of Multivariate Methods in Data Science
-- *Institution:* _Your Institution Name_
-- *Department:* _Mathematics/Statistics/Data Science Department_
+- *Institution:* Tec de Monterrey
+- *Department:* Escuela de Ingeniería y Ciencias
 
 == Version Information
 
