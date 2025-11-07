@@ -84,6 +84,61 @@
   #v(2em)
 ]
 
+#pagebreak()
+
+= Document Information
+
+== Credits and Authorship
+
+*Content Development:*
+- *AI Assistant:* Claude (Anthropic) - Initial content generation, mathematical formulations, and structural organization
+- *Human Reviewer and Course Coordinator:* Your Name - Academic review, pedagogical alignment, and quality assurance
+
+== Roles and Responsibilities
+
+*Claude (AI Assistant):*
+- Generated comprehensive lecture notes based on cluster analysis curriculum
+- Developed mathematical formulations and technical explanations
+- Created practice questions and detailed answers
+- Structured content according to pedagogical best practices
+- Aligned material with E06 Cluster Analysis quiz topics
+
+*Human Reviewer (Course Coordinator):*
+- Reviewed content for academic accuracy and rigor
+- Ensured alignment with MA2003B course learning objectives
+- Validated examples and practice questions
+- Approved final content for student distribution
+- Maintains ongoing responsibility for course materials
+
+== Contact Information
+
+*Course Coordinator:*
+- *Name:* _Your Full Name_
+- *Email:* _your.email\@institution.edu_
+- *Office:* _Building and Room Number_
+- *Office Hours:* _Days and Times_
+
+*Course Information:*
+- *Course Code:* MA2003B
+- *Course Title:* Application of Multivariate Methods in Data Science
+- *Institution:* _Your Institution Name_
+- *Department:* _Mathematics/Statistics/Data Science Department_
+
+== Version Information
+
+- *Document Version:* 1.0
+- *Created:* 2025-01-07
+- *Last Updated:* 2025-01-07
+- *Status:* Active - Current Semester
+
+== Usage and Distribution
+
+These lecture notes are intended for students enrolled in MA2003B. The material is designed to prepare students for the Cluster Analysis evaluation (E06) and provide comprehensive understanding of unsupervised learning methods.
+
+*Academic Integrity:* Students are expected to use these notes as a study resource in accordance with institutional academic integrity policies.
+
+#pagebreak()
+
 #outline(indent: auto)
 
 #pagebreak()
