@@ -1,45 +1,25 @@
-// Simple presentation setup without external dependencies
-#set page(
-  paper: "presentation-16-9",
-  margin: (x: 2cm, y: 1.5cm),
+// Cluster Analysis Presentation using Touying
+#import "@preview/touying:0.5.3": *
+#import themes.university: *
+
+#show: university-theme.with(
+  aspect-ratio: "16-9",
+  config-info(
+    title: [Cluster Analysis],
+    subtitle: [Discovering Natural Groupings in Data],
+    author: [Juliho Castillo Colmenares],
+    date: none,
+    institution: [Tec de Monterrey],
+    logo: none,
+  ),
+  config-colors(
+    primary: rgb("#003366"),
+    secondary: rgb("#1E88E5"),
+    tertiary: rgb("#43A047"),
+  ),
 )
 
-#set text(
-  font: "New Computer Modern",
-  size: 20pt,
-)
-
-#show math.equation: set text(font: "New Computer Modern Math")
-
-#let slide(body) = {
-  pagebreak(weak: true)
-  body
-}
-
-#let title-slide(body) = {
-  set align(center + horizon)
-  body
-}
-
-// Title slide
-#title-slide[
-  = Cluster Analysis
-  == Discovering Natural Groupings in Data
-
-  #v(2em)
-
-  MA2003B - Application of Multivariate Methods in Data Science
-
-  #v(1em)
-
-  Juliho Castillo Colmenares \
-  Escuela de Ingeniería y Ciencias \
-  Tec de Monterrey
-
-  #v(0.5em)
-
-  #text(size: 16pt)[julihocc\@tec]
-]
+#title-slide()
 
 // Outline
 #slide[
@@ -47,14 +27,14 @@
 
   #v(1em)
 
-  1. Introduction to Cluster Analysis
-  2. Distance and Similarity Measures
-  3. Hierarchical Clustering Methods
-  4. K-Means and Non-Hierarchical Methods
-  5. Determining Optimal Number of Clusters
-  6. Validation Techniques
-  7. Practical Considerations
-  8. Applications and Best Practices
+  + Introduction to Cluster Analysis
+  + Distance and Similarity Measures
+  + Hierarchical Clustering Methods
+  + K-Means and Non-Hierarchical Methods
+  + Determining Optimal Number of Clusters
+  + Validation Techniques
+  + Practical Considerations
+  + Applications and Best Practices
 ]
 
 // Section 1: Introduction
@@ -75,7 +55,7 @@
 
   #v(1em)
 
-  #text(size: 18pt, fill: rgb("#1E88E5"))[
+  #alert[
     *Goal:* Maximize within-cluster similarity and between-cluster dissimilarity
   ]
 ]
@@ -135,10 +115,10 @@
 
   *Common Distance Metrics:*
 
-  1. *Euclidean Distance* (L2 norm) - Most common
-  2. *Manhattan Distance* (L1 norm) - Robust to outliers
-  3. *Cosine Similarity* - For high-dimensional data
-  4. *Correlation Distance* - Pattern similarity
+  + *Euclidean Distance* (L2 norm) - Most common
+  + *Manhattan Distance* (L1 norm) - Robust to outliers
+  + *Cosine Similarity* - For high-dimensional data
+  + *Correlation Distance* - Pattern similarity
 ]
 
 #slide[
@@ -159,7 +139,7 @@
 
   #v(1em)
 
-  #text(size: 18pt, fill: rgb("#F57C00"))[
+  #alert[
     *Warning:* Always standardize variables with different scales!
   ]
 ]
@@ -271,7 +251,7 @@
 
   #v(1em)
 
-  #text(size: 18pt, fill: rgb("#43A047"))[
+  #alert[
     *Recommendation:* Ward's method often works best in practice
   ]
 ]
@@ -328,10 +308,10 @@
   #v(1em)
 
   *Algorithm:*
-  1. *Initialize:* Select k random observations as centroids
-  2. *Assignment:* Assign each point to nearest centroid
-  3. *Update:* Recalculate centroids as cluster means
-  4. *Repeat:* Steps 2-3 until convergence
+  + *Initialize:* Select k random observations as centroids
+  + *Assignment:* Assign each point to nearest centroid
+  + *Update:* Recalculate centroids as cluster means
+  + *Repeat:* Steps 2-3 until convergence
 
   #v(1em)
 
@@ -354,7 +334,7 @@
   *Properties:*
   - Always converges (finite partitions, monotonically decreasing WCSS)
   - Typically converges in 10-30 iterations
-  - Fast: O(n × k × p × iterations)
+  - Fast: O(n times k times p times iterations)
 ]
 
 #slide[
@@ -388,10 +368,10 @@
 
   *Solution: K-Means++ Algorithm*
 
-  1. Choose first centroid randomly
-  2. For each subsequent centroid:
+  + Choose first centroid randomly
+  + For each subsequent centroid:
      - Choose point with probability proportional to squared distance from nearest existing centroid
-  3. Repeat until k centroids selected
+  + Repeat until k centroids selected
 
   #v(1em)
 
@@ -433,11 +413,11 @@
 
   *Multiple Approaches:*
 
-  1. *Elbow Method* - Look for bend in WCSS plot
-  2. *Silhouette Analysis* - Measure cluster quality
-  3. *Gap Statistic* - Compare to null reference
-  4. *Davies-Bouldin Index* - Ratio of compactness to separation
-  5. *Domain Knowledge* - Business requirements
+  + *Elbow Method* - Look for bend in WCSS plot
+  + *Silhouette Analysis* - Measure cluster quality
+  + *Gap Statistic* - Compare to null reference
+  + *Davies-Bouldin Index* - Ratio of compactness to separation
+  + *Domain Knowledge* - Business requirements
 ]
 
 #slide[
@@ -446,10 +426,10 @@
   #v(0.5em)
 
   *Procedure:*
-  1. Run clustering for k = 1, 2, 3, ..., K_max
-  2. Calculate WCSS for each k
-  3. Plot WCSS vs. k
-  4. Look for "elbow" - diminishing returns point
+  + Run clustering for k = 1, 2, 3, ..., K_max
+  + Calculate WCSS for each k
+  + Plot WCSS vs. k
+  + Look for "elbow" - diminishing returns point
 
   #v(1em)
 
@@ -460,7 +440,7 @@
 
   #v(1em)
 
-  #text(size: 18pt, fill: rgb("#F57C00"))[
+  #alert[
     *Limitation:* Elbow not always clear - may need other methods
   ]
 ]
@@ -502,9 +482,9 @@
   #v(1em)
 
   *Procedure:*
-  1. Run clustering for different k values
-  2. Calculate average silhouette width for each k
-  3. Choose k that maximizes $macron(s)$
+  + Run clustering for different k values
+  + Calculate average silhouette width for each k
+  + Choose k that maximizes $macron(s)$
 
   #v(1em)
 
@@ -558,9 +538,9 @@
   #v(0.5em)
 
   *Problems:*
-  1. Distance becomes less meaningful (all points appear equidistant)
-  2. Data becomes sparse (observations spread out)
-  3. Computational cost increases dramatically
+  + Distance becomes less meaningful (all points appear equidistant)
+  + Data becomes sparse (observations spread out)
+  + Computational cost increases dramatically
 
   #v(1em)
 
@@ -571,7 +551,7 @@
 
   #v(1em)
 
-  #text(size: 18pt, fill: rgb("#F57C00"))[
+  #alert[
     *Rule:* If p is large relative to n, reduce dimensions first
   ]
 ]
@@ -629,16 +609,16 @@
 
   #v(0.5em)
 
-  1. *Define objective* - What questions to answer?
-  2. *Select variables* - Domain knowledge
-  3. *Preprocess data* - Handle missing values, outliers
-  4. *Standardize* - If variables on different scales
-  5. *Choose method* - Based on data characteristics
-  6. *Determine k* - Multiple criteria
-  7. *Run clustering* - Multiple times for k-means
-  8. *Validate results* - Internal and stability checks
-  9. *Interpret clusters* - Profile and name clusters
-  10. *Refine and iterate* - Based on insights
+  + *Define objective* - What questions to answer?
+  + *Select variables* - Domain knowledge
+  + *Preprocess data* - Handle missing values, outliers
+  + *Standardize* - If variables on different scales
+  + *Choose method* - Based on data characteristics
+  + *Determine k* - Multiple criteria
+  + *Run clustering* - Multiple times for k-means
+  + *Validate results* - Internal and stability checks
+  + *Interpret clusters* - Profile and name clusters
+  + *Refine and iterate* - Based on insights
 ]
 
 #slide[
@@ -646,19 +626,19 @@
 
   #v(0.5em)
 
-  1. *Not standardizing* when variables have different scales
+  + *Not standardizing* when variables have different scales
 
-  2. *Using k-means* with non-spherical clusters
+  + *Using k-means* with non-spherical clusters
 
-  3. *Ignoring outliers* - can severely distort results
+  + *Ignoring outliers* - can severely distort results
 
-  4. *Over-interpreting* - clustering always finds structure, even in random data
+  + *Over-interpreting* - clustering always finds structure, even in random data
 
-  5. *Using too many variables* - curse of dimensionality
+  + *Using too many variables* - curse of dimensionality
 
-  6. *Running k-means once* - try multiple initializations
+  + *Running k-means once* - try multiple initializations
 
-  7. *Choosing k without validation* - use multiple methods
+  + *Choosing k without validation* - use multiple methods
 ]
 
 #slide[
@@ -666,17 +646,17 @@
 
   #v(0.5em)
 
-  1. *Try multiple methods* - Compare hierarchical, k-means, etc.
+  + *Try multiple methods* - Compare hierarchical, k-means, etc.
 
-  2. *Validate stability* - Bootstrap samples, different initializations
+  + *Validate stability* - Bootstrap samples, different initializations
 
-  3. *Visualize extensively* - Scatter plots, dendrograms, parallel coordinates
+  + *Visualize extensively* - Scatter plots, dendrograms, parallel coordinates
 
-  4. *Use domain knowledge* - Statistical metrics + practical sense
+  + *Use domain knowledge* - Statistical metrics + practical sense
 
-  5. *Document decisions* - Why certain methods, parameters chosen
+  + *Document decisions* - Why certain methods, parameters chosen
 
-  6. *Check interpretability* - Can you explain and use clusters?
+  + *Check interpretability* - Can you explain and use clusters?
 ]
 
 // Summary
@@ -780,12 +760,12 @@
   - Customer lifetime value
 
   *Process:*
-  1. Standardize variables (different scales)
-  2. Try k-means for k = 2 to 10
-  3. Use elbow method and silhouette analysis
-  4. Identify k = 5 optimal clusters
-  5. Profile each segment
-  6. Develop targeted marketing strategies
+  + Standardize variables (different scales)
+  + Try k-means for k = 2 to 10
+  + Use elbow method and silhouette analysis
+  + Identify k = 5 optimal clusters
+  + Profile each segment
+  + Develop targeted marketing strategies
 ]
 
 // Resources
