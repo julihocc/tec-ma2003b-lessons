@@ -17,11 +17,6 @@
     secondary: rgb("#1E88E5"),
     tertiary: rgb("#666666"),
   ),
-  config-common(
-    slide-fn: slide => {
-      align(horizon, slide)
-    },
-  ),
 )
 
 #title-slide()
