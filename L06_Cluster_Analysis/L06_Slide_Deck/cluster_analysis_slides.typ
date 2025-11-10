@@ -798,12 +798,27 @@
 ]
 
 #slide[
-  = Recommended Resources: Online
+  = Recommended Resources: Online Videos
 
-  *Online:*
-  - StatQuest YouTube channel
+  *StatQuest YouTube Channel:*
+  
+  + *K-Means Clustering:* \
+    #link("https://www.youtube.com/watch?v=4b5d3muPQmA")
+  
+  + *Hierarchical Clustering:* \
+    #link("https://www.youtube.com/watch?v=7xHsRkOdVwo")
+  
+  + *Validation Methods (Elbow & Silhouette):* \
+    #link("https://www.youtube.com/watch?v=DzrvLpxTxJw")
+]
+
+#slide[
+  = Recommended Resources: Additional Online
+
+  *Additional Online Resources:*
   - Scikit-learn documentation
   - Coursera/edX courses on unsupervised learning
+  - Interactive clustering visualizations
 ]
 
 // Final slide
