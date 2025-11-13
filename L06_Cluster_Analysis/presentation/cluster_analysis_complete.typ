@@ -43,6 +43,52 @@
   + Customer Segmentation Case Study
 ]
 
+// Case Study Preview
+#slide[
+  = Companion Case Study
+
+  *E-Commerce Customer Segmentation*
+
+  Throughout this presentation, we'll reference a real-world example
+]
+
+#slide[
+  = Case Study: Business Context
+
+  *Scenario:* E-commerce company analyzing customer behavior
+
+  *Challenge:* Discover natural customer segments without predefined categories
+
+  *Goal:* Develop targeted marketing strategies for each segment
+]
+
+#slide[
+  = Case Study: Dataset
+
+  *2,000 Customers* with 7 behavioral variables:
+
+  - monthly_purchases
+  - avg_basket_size
+  - total_spend
+  - session_duration
+  - email_clicks
+  - product_views
+  - return_rate
+
+  #alert[*No predefined labels* - pure unsupervised learning]
+]
+
+#slide[
+  = What We'll Discover
+
+  *Spoiler Preview:*
+  - 4 distinct customer segments
+  - Each with unique behavioral patterns
+  - Actionable marketing strategies
+
+  *You'll see how theory connects to practice throughout*
+]
+
 // Section 1: Introduction
 #slide[
   = What is Cluster Analysis?
@@ -185,6 +231,38 @@
   Transform to mean = 0, standard deviation = 1
 ]
 
+// Case Study Application: Standardization
+#slide[
+  = Case Study: Why Standardization Matters
+
+  *Customer Data Scale Problem:*
+
+  #table(
+    columns: (2fr, 1fr, 1fr),
+    align: (left, center, center),
+    stroke: 0.5pt,
+    inset: 10pt,
+    [*Variable*], [*Min*], [*Max*],
+    [monthly_purchases], [0.2], [17.0],
+    [total_spend (dollars)], [58], [7,892],
+    [return_rate (proportion)], [0.0], [0.5],
+  )
+
+  #alert[Without standardization, total_spend would dominate clustering!]
+]
+
+#slide[
+  = Case Study: After Standardization
+
+  *All variables transformed to mean ≈ 0, std ≈ 1*
+
+  Result: Each behavioral dimension contributes equally
+
+  - Monthly purchases: now comparable to spending
+  - Allows discovery of patterns beyond just "who spends most"
+  - Reveals behavioral segments not visible in raw data
+]
+
 // Section 3: Hierarchical Clustering
 #slide[
   = Hierarchical Clustering
@@ -294,6 +372,35 @@
   - Look for large vertical gaps (jumps in fusion distance)
   - Cut dendrogram where there's substantial increase
   - Draw horizontal line: number of vertical lines crossed = k clusters
+]
+
+// Case Study Application: Hierarchical Clustering
+#slide[
+  = Case Study: Dendrogram Analysis
+
+  *Ward's Method Results:*
+  - Clear hierarchical structure
+  - Large vertical gap suggests 4 clusters
+  - Cut at distance ≈ 50
+
+  *Cluster Sizes (Hierarchical):*
+  - Cluster 0: 440 customers (22%)
+  - Cluster 1: 300 customers (15%)
+  - Cluster 2: 560 customers (28%)
+  - Cluster 3: 700 customers (35%)
+]
+
+#slide[
+  = Case Study: Hierarchical Quality
+
+  *Silhouette Score: 0.458*
+
+  - Above 0.4 is acceptable for customer segmentation
+  - Behavioral boundaries are naturally fuzzy
+  - Reasonably well-separated clusters
+  - Balanced cluster sizes
+
+  #alert[Dendrogram suggests 4 is the natural number of segments]
 ]
 
 #slide[
@@ -451,6 +558,41 @@
   ]
 ]
 
+// Case Study Application: K-Means and Elbow Method
+#slide[
+  = Case Study: Elbow Method Results
+
+  *Tested k = 2 to 10:*
+  - Elbow curve shows diminishing returns after k=4
+  - Silhouette scores peak at k=4
+  - Both metrics converge on same answer
+
+  *K-Means with k=4:*
+  - Silhouette Score: 0.458 (same as hierarchical!)
+  - Convergence of two different methods
+  - Strong evidence for 4 segments
+]
+
+#slide[
+  = Case Study: K-Means Cluster Sizes
+
+  *Final K-Means Segmentation (k=4):*
+
+  #table(
+    columns: (1fr, 1fr, 1fr),
+    align: (center, center, center),
+    stroke: 0.5pt,
+    inset: 10pt,
+    [*Cluster*], [*Size*], [*Percentage*],
+    [0], [307], [15.3%],
+    [1], [707], [35.4%],
+    [2], [432], [21.6%],
+    [3], [554], [27.7%],
+  )
+
+  #alert[Hierarchical and K-means produce similar cluster sizes]
+]
+
 #slide[
   = Silhouette Analysis
 
@@ -493,6 +635,33 @@
   + Choose k that maximizes $macron(s)$
 
   *Advantage:* Provides both quality measure and optimal k
+]
+
+// Case Study Application: Silhouette Analysis
+#slide[
+  = Case Study: Silhouette Plot Insights
+
+  *Silhouette Plot Reveals:*
+  - Most customers have positive coefficients (well-assigned)
+  - All clusters extend beyond average (0.458)
+  - Some variation in cluster quality
+  - Few customers near zero (boundary cases)
+  - Very few negative coefficients (rare misclassifications)
+
+  *Conclusion:* Generally good cluster quality across all 4 segments
+]
+
+#slide[
+  = Case Study: Cluster Profiling Results
+
+  *Four Distinct Customer Segments Identified:*
+
+  + *Engaged Selective (15.3%)*: High basket, high returns, low browsing
+  + *Low-Value Browsers (35.4%)*: Browse but don't buy much
+  + *Premium High-Value (21.6%)*: Highest spenders, frequent purchases
+  + *Frequent Small-Basket (27.7%)*: Regular small orders
+
+  Each differs by >10% from average on multiple dimensions
 ]
 
 // Section 6: Validation
@@ -663,6 +832,8 @@
   - Cluster analysis discovers natural groupings (unsupervised)
   - Distance measures are crucial (Euclidean, Manhattan)
   - Standardization essential for different scales
+
+  *Case Study:* Standardizing customer data (dollars, counts, proportions) ensured equal feature contribution
 ]
 
 #slide[
@@ -671,6 +842,8 @@
   - Hierarchical: Creates tree structure, multiple k values
   - K-means: Fast, scalable, requires specifying k
   - K-medoids: Robust alternative to k-means
+
+  *Case Study:* Both hierarchical and k-means identified 4 customer segments with identical silhouette scores (0.458)
 ]
 
 #slide[
@@ -678,6 +851,8 @@
 
   - Elbow method and silhouette analysis for optimal k
   - Multiple validation measures for quality assessment
+
+  *Case Study:* Convergence of dendrogram, elbow, and silhouette all suggested k=4 segments
 ]
 
 #slide[

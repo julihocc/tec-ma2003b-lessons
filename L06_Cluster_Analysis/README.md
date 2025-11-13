@@ -50,76 +50,113 @@ The synthetic dataset contains 2,000 customers with 7 behavioral metrics:
 
 ### Optimal Number of Clusters
 
-- **Elbow Method**: Suggests k = 4 (clear elbow at 4 clusters)
-- **Silhouette Analysis**: k = 4 achieves highest average silhouette score (0.48)
-- **Dendrogram**: Large fusion distance jump between 4 and 3 clusters
-- **Consensus**: 4 distinct customer segments identified
+- **Elbow Method**: Suggests k = 4 (diminishing returns after k=4)
+- **Silhouette Analysis**: k = 4 achieves highest average silhouette score (0.458)
+- **Dendrogram (Ward's)**: Large vertical gap suggests 4 clusters (cut at distance ≈50)
+- **Consensus**: Both hierarchical and k-means converge on 4 distinct segments
 
 ### Discovered Customer Segments
 
-**Segment 1 - Power Shoppers (22% of customers)**
-- High purchase frequency and spending
-- Long session durations
-- High email engagement and product views
-- Low return rates
-- **Strategy**: Premium loyalty program, early access to products
+#### Cluster 0 - Engaged but Selective Shoppers (15.3% - 307 customers)
 
-**Segment 2 - Bargain Hunters (28% of customers)**
-- Moderate purchase frequency
-- Low average basket size but frequent purchases
-- High product views (comparison shopping)
-- Moderate email clicks
-- **Strategy**: Promotional campaigns, bundle deals
+- **Distinctive Highs**: avg_basket_size (+72%), return_rate (+56%), email_clicks (+52%)
+- **Distinctive Lows**: session_duration (-70%), product_views (-58%), monthly_purchases (-42%)
+- **Profile**: High basket sizes with high returns, engaged with emails but low browsing
+- **Strategy**: VIP loyalty program, free expedited shipping, improve product information to reduce returns, personalized recommendations
 
-**Segment 3 - Window Shoppers (35% of customers)**
-- Low purchase frequency
-- High session duration and product views
-- Very low email engagement
-- Moderate return rates
-- **Strategy**: Cart abandonment emails, retargeting ads
+#### Cluster 1 - Low-Value Browsers (35.4% - 707 customers)
 
-**Segment 4 - Impulse Buyers (15% of customers)**
-- Sporadic high-value purchases
-- Short session durations
-- Large basket sizes when they buy
-- High email click rates
-- **Strategy**: Limited-time offers, flash sales
+- **Distinctive Highs**: session_duration (+19%), return_rate (+15%)
+- **Distinctive Lows**: total_spend (-84%), email_clicks (-78%), monthly_purchases (-76%)
+- **Profile**: Spend time browsing but make very few purchases
+- **Strategy**: Abandoned cart recovery, retargeting ads, limited-time discounts, improve product information and reviews
+
+#### Cluster 2 - Premium High-Value Customers (21.6% - 432 customers)
+
+- **Distinctive Highs**: total_spend (+168%), avg_basket_size (+128%), monthly_purchases (+124%)
+- **Distinctive Lows**: return_rate (-24%)
+- **Profile**: Highest spenders with frequent large purchases and low returns
+- **Strategy**: Exclusive VIP treatment, premium customer service, early access to collections, referral incentives, focus on retention
+
+#### Cluster 3 - Frequent Small-Basket Shoppers (27.7% - 554 customers)
+
+- **Distinctive Highs**: monthly_purchases (+24%), product_views (+12%)
+- **Distinctive Lows**: avg_basket_size (-49%), total_spend (-45%), return_rate (-32%)
+- **Profile**: Regular purchases with lower average order values
+- **Strategy**: Targeted discount codes, free shipping thresholds, value packs, multi-buy promotions
 
 ### Clustering Performance
 
-- **Ward's Hierarchical**: Clear, compact clusters
-- **K-Means**: Comparable results with faster computation
-- **Agreement**: 87% concordance between methods
-- **Silhouette Score**: 0.48 (reasonable cluster structure)
-- **Davies-Bouldin Index**: 0.82 (good separation and compactness)
+- **Ward's Hierarchical Silhouette**: 0.458 (balanced clusters, hierarchical structure)
+- **K-Means Silhouette**: 0.458 (identical to hierarchical - strong validation)
+- **Method Convergence**: Both methods produce similar cluster sizes and quality
+- **Cluster Quality**: Above 0.4 is acceptable for customer segmentation where boundaries are naturally fuzzy
+- **PCA Visualization**: 2D projection shows reasonable cluster separation
 
 ### Business Insights
 
-1. **Segment Size Distribution**: Largest segment (Window Shoppers) represents untapped potential
-2. **Value Concentration**: Top 37% of customers (Power Shoppers + Impulse Buyers) drive 68% of revenue
-3. **Engagement Opportunities**: Window Shoppers need conversion optimization
-4. **Retention Focus**: Power Shoppers require white-glove treatment
+1. **Method Validation**: Convergence of hierarchical and k-means on same structure provides strong evidence of genuine segments
+2. **Value Concentration**: Premium segment (21.6%) drives disproportionate revenue
+3. **Conversion Opportunity**: Low-value browsers (35.4%) represent largest untapped potential
+4. **Engagement Diversity**: Each segment requires distinct marketing approach
+5. **Actionable Profiles**: All segments differ by >10% on multiple dimensions, enabling targeted strategies
 
-## Files in This Directory
+## Presentation Structure
 
-- `fetch_customer_data.py`: Data generation script
-- `customer_clustering_analysis.ipynb`: Complete cluster analysis notebook
-- `customer_data.csv`: Generated customer dataset (2,000 × 7)
-- `CUSTOMER_DATA_DICTIONARY.md`: Detailed variable descriptions
-- `dendrogram.png`: Hierarchical clustering visualization
-- `elbow_plot.png`: K-means elbow method
-- `silhouette_plot.png`: Silhouette analysis for multiple k
-- `cluster_profiles.png`: Radar charts of segment characteristics
-- `pca_clusters.png`: 2D PCA projection with cluster assignments
+The presentation (`cluster_analysis_complete.typ`) integrates theoretical concepts with the practical customer segmentation case study:
+
+**Part 1: Theoretical Foundations** - Core clustering concepts with case study references:
+
+- Introduction to cluster analysis (with e-commerce segmentation preview)
+- Distance and similarity measures (with customer data standardization example)
+- Hierarchical clustering methods (with dendrogram interpretation example showing 4 segments)
+- K-means and non-hierarchical methods (with elbow method results)
+- Determining optimal clusters (with convergence of methods at k=4)
+- Validation techniques (with silhouette analysis showing 0.458 score)
+- Practical considerations and best practices
+
+**Part 2: Practical Application** - Complete customer segmentation workflow:
+
+- Business context and dataset overview
+- Exploratory data analysis with correlations
+- Data standardization (critical for mixed-scale variables)
+- Hierarchical clustering with dendrogram analysis
+- K-means with elbow method determination
+- Cluster interpretation and profiling (4 distinct segments)
+- Silhouette validation and quality assessment
+- PCA visualization in 2D space
+- Business recommendations for each segment
+
+The presentation serves as a companion to the Jupyter notebook, showing how theoretical concepts apply to the real-world segmentation problem throughout.
+
+## Directory Structure
+
+```text
+L06_Cluster_Analysis/
+├── data/                           # Data files and generation scripts
+│   ├── fetch_customer_data.py      # Data generation script
+│   ├── customer_data.csv           # Generated customer dataset (2,000 × 7)
+│   ├── customer_data_with_labels.csv  # Dataset with cluster labels
+│   └── CUSTOMER_DATA_DICTIONARY.md # Detailed variable descriptions
+├── notebook/                       # Analysis notebooks
+│   └── customer_clustering_analysis.ipynb  # Complete cluster analysis
+├── docs/                           # Lecture notes and documentation
+│   ├── cluster_analysis_notes.typ  # Typst source for lecture notes
+│   └── cluster_analysis_notes.pdf  # Compiled lecture notes
+├── presentation/                   # Presentation materials
+│   ├── cluster_analysis_complete.typ  # Typst source for presentation
+│   └── cluster_analysis_complete.pdf  # Compiled presentation slides
+└── README.md                       # This file
+```
 
 ## Usage
 
 ```bash
 # Generate the dataset
-python fetch_customer_data.py
+python data/fetch_customer_data.py
 
 # Run the cluster analysis (Jupyter notebook)
-jupyter notebook customer_clustering_analysis.ipynb
+jupyter notebook notebook/customer_clustering_analysis.ipynb
 ```
 
 ## Educational Value

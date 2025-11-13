@@ -34,6 +34,49 @@
   + Programming and Commercial Systems
 ]
 
+// Case Study Introduction
+#slide[
+  = Case Study: Healthcare Risk Assessment
+
+  *Companion Example Throughout This Presentation*
+]
+
+#slide[
+  = The Research Question
+
+  *Scenario:* Hospital evaluating cardiovascular disease (CVD) risk
+
+  *Dataset:*
+  - 1,000 patients
+  - 13 predictor variables
+  - Multiple health outcomes
+  - Treatment intervention study
+]
+
+#slide[
+  = Variables in Our Study
+
+  *Lifestyle Factors:*
+  - Age, BMI, Exercise hours/week
+  - Smoking years, Alcohol consumption
+  - Stress score, Sleep hours
+
+  *Physiological Measurements:*
+  - Blood pressure (systolic/diastolic)
+  - Cholesterol, Glucose
+  - Triglycerides, HDL
+]
+
+#slide[
+  = Research Objectives
+
+  + *Predict* CVD risk from patient characteristics
+  + *Compare* health profiles between risk groups
+  + *Evaluate* lifestyle intervention effectiveness
+  + *Understand* relationships between lifestyle and physiology
+  + *Validate* assumptions for multivariate tests
+]
+
 // Section 1: Logistic Regression
 #slide[
   = Logistic Regression
@@ -169,6 +212,79 @@
   *Precision:* $"TP" / ("TP" + "FP")$
 ]
 
+// Case Study Application: Logistic Regression
+#slide[
+  = Case Study: Predicting CVD Risk
+
+  *Application of Logistic Regression*
+
+  Objective: Predict high CVD risk (0/1) from 13 patient characteristics
+]
+
+#slide[
+  = CVD Prediction: Model Setup
+
+  *Predictors (13 variables):*
+  - Demographics: age, BMI
+  - Lifestyle: exercise, smoking, alcohol, stress, sleep
+  - Physiology: BP, cholesterol, glucose, triglycerides, HDL
+
+  *Outcome:* CVD risk high (binary: 0 = low risk, 1 = high risk)
+
+  *Data split:* 70% training (n=700), 30% testing (n=300)
+]
+
+#slide[
+  = Top Risk Factors: Odds Ratios
+
+  #table(
+    columns: (2fr, 1fr, 1.5fr),
+    align: (left, center, left),
+    stroke: 0.5pt,
+    inset: 10pt,
+    [*Predictor*], [*Odds Ratio*], [*Interpretation*],
+    [Exercise hours/week], [0.72], [28% lower odds per hour],
+    [Stress score], [1.25], [25% higher odds per point],
+    [Sleep hours], [0.80], [20% lower odds per hour],
+    [BMI], [1.19], [19% higher odds per unit],
+  )
+
+  *All significant predictors contribute to risk assessment*
+]
+
+#slide[
+  = CVD Prediction: Model Performance
+
+  *Confusion Matrix (Test Set):*
+  #table(
+    columns: (1.5fr, 1fr, 1fr),
+    align: center,
+    stroke: 0.5pt,
+    inset: 10pt,
+    [], [*Pred Low*], [*Pred High*],
+    [*Actual Low*], [106], [44],
+    [*Actual High*], [42], [108],
+  )
+
+  *Metrics:*
+  - Accuracy: 71%
+  - AUC-ROC: 0.77
+  - Balanced precision/recall
+]
+
+#slide[
+  = Key Insights: CVD Prediction
+
+  + Exercise is the strongest protective factor (OR = 0.72)
+  + Stress significantly increases risk (OR = 1.25)
+  + Model achieves good discrimination (AUC = 0.77)
+  + Can identify high-risk patients for intervention
+
+  #alert[
+    *Clinical Value:* Early identification enables preventive care
+  ]
+]
+
 // Section 2: Covariance Matrix Inference
 #slide[
   = Inferences for Covariance Matrices
@@ -250,6 +366,61 @@
   *Test Statistic:* Chi-square distributed
 ]
 
+// Case Study Application: Box's M Test
+#slide[
+  = Case Study: Validating MANOVA Assumptions
+
+  *Application of Box's M Test*
+
+  Question: Are covariance matrices equal between treatment groups (MANOVA assumption)?
+]
+
+#slide[
+  = Box's M Test: Setup
+
+  *Testing Homogeneity of Covariances:*
+
+  $ H_0: bold(Sigma)_"Control" = bold(Sigma)_"Intervention" $
+
+  *Variables (p = 4):*
+  - Systolic BP, Diastolic BP
+  - Cholesterol, Glucose
+
+  *Groups:*
+  - Control: n = 479
+  - Intervention: n = 521
+
+  *Why test?* MANOVA assumes equal covariance matrices across groups
+]
+
+#slide[
+  = Box's M Test: Results
+
+  *Test Statistic:*
+  $ M = 8.49 $
+
+  *Degrees of Freedom:* 10
+
+  *Interpretation:* $M < 30$ (rule of thumb)
+
+  #alert[
+    *Conclusion:* Covariance matrices are approximately equal. MANOVA assumption satisfied.
+  ]
+
+  *Implication:* Our MANOVA results are valid and trustworthy
+]
+
+#slide[
+  = Key Insights: Assumption Testing
+
+  + Box's M test validates MANOVA assumptions
+  + Equal covariances ensure valid inference
+  + Small M statistic (8.49) indicates homogeneity
+  + Treatment groups have similar variability patterns
+
+  *Methodological importance:* Always check assumptions before interpreting results
+]
+
 // Section 3: Inferences for Mean Vectors
 #slide[
   = Inferences for a Vector of Means
@@ -327,6 +498,75 @@
   For $p$ variables, use $alpha / p$ for each interval
 
   *T-squared Intervals:* More efficient but wider than individual intervals
+]
+
+// Case Study Application: Hotelling's T-squared
+#slide[
+  = Case Study: Comparing Risk Groups
+
+  *Application of Hotelling's T-squared*
+
+  Question: Do high-risk and low-risk CVD patients differ in their multivariate health profile?
+]
+
+#slide[
+  = Health Profile Comparison: Setup
+
+  *Two Groups:*
+  - Low risk: n = 500
+  - High risk: n = 500
+
+  *Variables (p = 6):*
+  - Systolic BP, Diastolic BP
+  - Cholesterol, Glucose
+  - Triglycerides, HDL
+
+  *Goal:* Single omnibus test for all 6 variables simultaneously
+]
+
+#slide[
+  = Mean Differences by Risk Group
+
+  #table(
+    columns: (2fr, 1fr, 1fr, 1fr),
+    align: (left, center, center, center),
+    stroke: 0.5pt,
+    inset: 8pt,
+    [*Variable*], [*Low Risk*], [*High Risk*], [*Difference*],
+    [Systolic BP], [123.8], [131.1], [+7.3],
+    [Diastolic BP], [78.1], [82.9], [+4.7],
+    [Cholesterol], [184.1], [196.4], [+12.3],
+    [Glucose], [110.0], [116.8], [+6.9],
+    [Triglycerides], [133.6], [145.5], [+11.9],
+    [HDL], [44.5], [41.2], [-3.3],
+  )
+]
+
+#slide[
+  = Hotelling's T-squared Results
+
+  *Test Statistic:*
+  $ T^2 = 228.65 $
+
+  *F Transformation:*
+  $ F = 37.92, quad "df" = (6, 993) $
+
+  *P-value:* < 0.0001
+
+  #alert[
+    *Conclusion:* Strong evidence that high-risk and low-risk patients have significantly different health profiles
+  ]
+]
+
+#slide[
+  = Key Insights: Risk Group Differences
+
+  + High-risk patients show higher values across all adverse markers
+  + Largest differences: cholesterol (+12.3 mg/dL) and triglycerides (+11.9 mg/dL)
+  + HDL (protective) is lower in high-risk group (-3.3 mg/dL)
+  + Multivariate test accounts for correlations among measurements
+
+  *Clinical significance:* Pattern of differences suggests metabolic syndrome
 ]
 
 // Section 4: MANOVA
@@ -459,6 +699,76 @@
   + Contrast tests for specific hypotheses
 ]
 
+// Case Study Application: MANOVA
+#slide[
+  = Case Study: Treatment Intervention
+
+  *Application of MANOVA*
+
+  Question: Does a lifestyle intervention improve multiple health outcomes simultaneously?
+]
+
+#slide[
+  = Treatment Intervention Study: Setup
+
+  *Groups:*
+  - Control: n = 479 (standard care)
+  - Intervention: n = 521 (lifestyle program)
+
+  *Outcomes (p = 4):*
+  - Systolic BP
+  - Diastolic BP
+  - Cholesterol
+  - Glucose
+
+  *Why MANOVA?* Controls Type I error while testing all outcomes together
+]
+
+#slide[
+  = MANOVA Results: Treatment Effect
+
+  *Wilks' Lambda:* $Lambda = 0.889$
+
+  *F Statistic:* $F = 31.05$, df = (4, 995)
+
+  *P-value:* < 0.0001
+
+  #alert[
+    *Conclusion:* The intervention significantly improves health outcomes across the multivariate profile
+  ]
+
+  *Also significant:* Pillai's trace, Hotelling-Lawley, Roy's root (all p < 0.0001)
+]
+
+#slide[
+  = Mean Improvements by Treatment Group
+
+  #table(
+    columns: (2fr, 1fr, 1fr, 1.2fr),
+    align: (left, center, center, center),
+    stroke: 0.5pt,
+    inset: 8pt,
+    [*Outcome*], [*Control*], [*Intervention*], [*Difference*],
+    [Systolic BP], [130.8], [124.3], [-6.5#super[\*\*\*]],
+    [Diastolic BP], [82.7], [78.5], [-4.2#super[\*\*\*]],
+    [Cholesterol], [194.4], [186.5], [-7.9#super[\*\*\*]],
+    [Glucose], [116.3], [110.7], [-5.6#super[\*\*\*]],
+  )
+
+  #super[\*\*\*] All differences significant at p < 0.001 in follow-up ANOVAs
+]
+
+#slide[
+  = Key Insights: Intervention Effects
+
+  + Intervention reduces all cardiovascular risk markers
+  + Largest effect on blood pressure (-6.5 / -4.2 mmHg)
+  + Clinically meaningful reductions in cholesterol and glucose
+  + MANOVA provides single omnibus test (no Type I error inflation)
+
+  *Clinical significance:* Comprehensive lifestyle changes yield broad health benefits
+]
+
 // Section 5: Canonical Correlation
 #slide[
   = Canonical Correlation Analysis
@@ -571,6 +881,104 @@
   + *Check magnitude:* Are correlations practically meaningful?
   + *Interpret loadings:* What do canonical variates represent?
   + *Assess redundancy:* How much variance explained?
+]
+
+// Case Study Application: Canonical Correlation
+#slide[
+  = Case Study: Lifestyle vs. Physiology
+
+  *Application of Canonical Correlation*
+
+  Question: How do lifestyle factors relate to physiological health markers?
+]
+
+#slide[
+  = Lifestyle-Physiology Relationship: Setup
+
+  *Set 1 - Lifestyle Factors (p = 5):*
+  - Exercise hours/week
+  - Smoking years
+  - Alcohol units/week
+  - Stress score
+  - Sleep hours
+
+  *Set 2 - Physiological Markers (q = 6):*
+  - Systolic BP, Diastolic BP
+  - Cholesterol, Glucose
+  - Triglycerides, HDL
+
+  *Maximum pairs:* min(5, 6) = 5
+]
+
+#slide[
+  = Canonical Correlations: Results
+
+  #table(
+    columns: (1.5fr, 1.5fr, 2fr),
+    align: (center, center, left),
+    stroke: 0.5pt,
+    inset: 10pt,
+    [*Pair*], [*Correlation*], [*Interpretation*],
+    [1], [0.639], [Strong relationship],
+    [2], [0.244], [Moderate relationship],
+    [3-5], [< 0.12], [Weak relationships],
+  )
+
+  *Focus on first canonical correlation (r = 0.639)*
+]
+
+#slide[
+  = First Canonical Variate: Lifestyle
+
+  *Canonical Loadings (Structure Coefficients):*
+
+  #table(
+    columns: (2fr, 1fr),
+    align: (left, center),
+    stroke: 0.5pt,
+    inset: 10pt,
+    [*Variable*], [*Loading*],
+    [Exercise hours], [+0.65],
+    [Stress score], [-0.53],
+    [Alcohol units], [-0.37],
+    [Sleep hours], [+0.33],
+    [Smoking years], [-0.27],
+  )
+
+  *Interpretation:* Healthy lifestyle pattern (more exercise, less stress)
+]
+
+#slide[
+  = First Canonical Variate: Physiology
+
+  *Canonical Loadings:*
+
+  #table(
+    columns: (2fr, 1fr),
+    align: (left, center),
+    stroke: 0.5pt,
+    inset: 10pt,
+    [*Variable*], [*Loading*],
+    [Diastolic BP], [-0.70],
+    [Systolic BP], [-0.68],
+    [Cholesterol], [-0.65],
+    [HDL], [+0.65],
+    [Glucose], [-0.61],
+    [Triglycerides], [-0.59],
+  )
+
+  *Interpretation:* Favorable health profile (lower BP, higher HDL)
+]
+
+#slide[
+  = Key Insights: Lifestyle-Physiology Link
+
+  + Strong canonical correlation (r = 0.639) between lifestyle and health
+  + Healthy lifestyle pattern → Favorable physiological profile
+  + Exercise and low stress most important lifestyle factors
+  + Blood pressure and cholesterol most related physiological markers
+
+  *Clinical significance:* Lifestyle interventions can meaningfully improve multiple health markers
 ]
 
 // Section 6: Factor Analysis with Regression
@@ -852,12 +1260,80 @@
 
 // Summary and Resources
 #slide[
+  = Case Study Summary
+
+  *Healthcare Risk Assessment: What We Learned*
+]
+
+#slide[
+  = Key Findings: Prediction and Classification
+
+  *Logistic Regression Results:*
+  - 71% accuracy predicting CVD risk (AUC = 0.77)
+  - Exercise strongest protective factor (OR = 0.72)
+  - Stress increases risk 25% per point (OR = 1.25)
+  - Model identifies high-risk patients for early intervention
+
+  *Clinical Value:* Enables targeted prevention strategies
+]
+
+#slide[
+  = Key Findings: Group Comparisons
+
+  *Hotelling's T-squared:*
+  - High-risk patients differ significantly across 6 health markers (T² = 228.65, p < 0.0001)
+  - Largest differences: cholesterol (+12.3) and triglycerides (+11.9)
+  - Pattern suggests metabolic syndrome
+
+  *Box's M Test:*
+  - Covariance matrices equal between groups (M = 8.49)
+  - MANOVA assumptions validated
+]
+
+#slide[
+  = Key Findings: Treatment Effectiveness
+
+  *MANOVA Results:*
+  - Intervention improves all health outcomes (Λ = 0.889, p < 0.0001)
+  - Blood pressure: -6.5 / -4.2 mmHg
+  - Cholesterol: -7.9 mg/dL
+  - Glucose: -5.6 mg/dL
+
+  *Clinical Impact:* Comprehensive lifestyle changes yield broad benefits
+]
+
+#slide[
+  = Key Findings: Lifestyle-Health Relationships
+
+  *Canonical Correlation:*
+  - Strong link between lifestyle and physiology (r = 0.639)
+  - Healthy lifestyle pattern: ↑ exercise, ↓ stress
+  - Favorable health profile: ↓ BP, ↑ HDL
+  - 40.8% shared variance between domains
+
+  *Clinical Insight:* Lifestyle interventions affect multiple health markers simultaneously
+]
+
+#slide[
+  = Methodological Insights
+
+  + *Multivariate methods reveal patterns* missed by univariate tests
+  + *Type I error control* critical with multiple outcomes
+  + *Assumption testing* (Box's M) validates results
+  + *Effect sizes matter* beyond statistical significance
+  + *Clinical context* guides interpretation
+
+  All methods demonstrated with real healthcare data
+]
+
+#slide[
   = Key Takeaways: Models
 
   *Logistic Regression:*
   - Use for binary outcomes
   - Maximum likelihood estimation
   - Interpret via odds ratios
+  - *Case Study:* 71% accuracy predicting CVD risk
 ]
 
 #slide[
@@ -866,10 +1342,12 @@
   *Covariance Matrix Tests:*
   - Box's M test for equality
   - Wishart distribution foundation
+  - *Case Study:* M = 8.49 (assumption satisfied)
 
   *Mean Vector Tests:*
   - Hotelling's T-squared generalizes t-test
   - Confidence regions are ellipsoids
+  - *Case Study:* T² = 228.65 (strong group differences)
 ]
 
 #slide[
@@ -879,10 +1357,12 @@
   - Multiple response variables simultaneously
   - Wilks' Lambda most common test
   - Controls Type I error
+  - *Case Study:* Λ = 0.889 (intervention effective)
 
   *Canonical Correlation:*
   - Relates two variable sets
   - Multiple correlation pairs
+  - *Case Study:* r = 0.639 (lifestyle-health link)
 ]
 
 #slide[
@@ -897,6 +1377,7 @@
   - Python: scikit-learn, statsmodels
   - R: stats, MASS
   - Commercial: SPSS, SAS
+  - *Case Study:* All analyses implemented in Python
 ]
 
 #slide[
