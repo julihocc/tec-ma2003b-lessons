@@ -88,31 +88,25 @@
 
 = Document Information
 
-== Credits and Authorship
+== Credits and Roles
 
-*Content Development:*
-- *AI Assistant:* Claude (Anthropic) - Initial content generation, mathematical formulations, and structural organization
-- *Human Reviewer and Course Coordinator:* Juliho Castillo Colmenares - Academic review, pedagogical alignment, and quality assurance
+*Instructional Architect: Juliho Castillo Colmenares (Course Instructor)*
+- Designed course structure and learning objectives
+- Established pedagogical direction and content scope
+- Defined assessment criteria and evaluation approach
+- Reviewed content for academic accuracy and rigor
+- Maintains ongoing responsibility for course materials
 
-== Roles and Responsibilities
-
-*Claude (AI Assistant):*
-- Generated comprehensive lecture notes based on multivariate regression curriculum
+*AI Assistant: Claude Sonnet 4.5 (Anthropic)*
+- Generated comprehensive lecture notes based on curriculum design
 - Developed mathematical formulations and technical explanations
 - Created practice questions and detailed answers
 - Structured content according to pedagogical best practices
 - Aligned material with E07 Multivariate Regression quiz topics
 
-*Human Reviewer (Course Coordinator):*
-- Reviewed content for academic accuracy and rigor
-- Ensured alignment with MA2003B course learning objectives
-- Validated examples and practice questions
-- Approved final content for student distribution
-- Maintains ongoing responsibility for course materials
-
 == Contact Information
 
-*Course Coordinator:*
+*Course Instructor:*
 - *Name:* Juliho Castillo Colmenares
 - *Email:* julihocc\@tec
 - *Office:* Tec de Monterrey CCM Office 1540
