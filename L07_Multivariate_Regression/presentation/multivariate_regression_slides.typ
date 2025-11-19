@@ -115,10 +115,19 @@
 
   *Problem:* Binary outcomes (Yes/No, Success/Failure, 0/1)
 
-  Linear regression assumptions violated:
-  - Response not continuous
-  - Errors not normal
-  - Predictions can exceed [0,1]
+  Using ordinary least squares (OLS) for binary responses creates fundamental problems:
+
+  *Prediction Issues:*
+  - Predicted probabilities can be negative or exceed 1 (nonsensical values)
+  - No mechanism to constrain predictions to [0, 1]
+
+  *Assumption Violations:*
+  - Response is not continuous (violates normality assumption)
+  - Errors follow Bernoulli distribution, not Normal distribution
+  - Heteroscedastic errors (variance depends on X: $"Var"(Y|X) = p(X)(1-p(X))$)
+  - Non-constant variance violates homoscedasticity assumption
+
+  Linear regression is mathematically possible but statistically inappropriate for binary data.
 ]
 
 #slide[
@@ -163,41 +172,79 @@
 #slide[
   = The Logistic Function
 
-  *Inverse Logit:*
+  *Inverse Logit:* Solving for $p(X)$ from the logit equation gives the logistic function.
 
-  $ p(X) = (e^(beta_0 + beta_1 X_1 + dots + beta_p X_p)) / (1 + e^(beta_0 + beta_1 X_1 + dots + beta_p X_p)) $
+  *Notation:* $X = (X_1, X_2, dots, X_p)$ is the vector of $p$ predictor variables. We write $p(X)$ to mean the probability depends on all predictors.
 
-  Also written as:
+  Define the linear combination: $eta = beta_0 + beta_1 X_1 + beta_2 X_2 + dots + beta_p X_p$
 
-  $ p(X) = 1 / (1 + e^(-(beta_0 + beta_1 X_1 + dots + beta_p X_p))) $
-]
+  Then the logistic function is:
 
-#slide[
-  = Why Not Ordinary Least Squares?
+  $ p(X) = (e^eta) / (1 + e^eta) = 1 / (1 + e^(-eta)) $
 
-  *Problems with OLS for Binary Response:*
-  - Predicted probabilities can be negative or exceed 1
-  - Errors follow Bernoulli distribution, not Normal
-  - Heteroscedastic errors
-  - Violates fundamental assumptions
+  This is the *logistic* or *sigmoid* function, guaranteeing $p(X) in [0, 1]$ for any predictor values.
 ]
 
 #slide[
   = Maximum Likelihood Estimation
 
-  *Bernoulli Distribution:*
+  Since we cannot use ordinary least squares, we estimate coefficients using *Maximum Likelihood Estimation (MLE)*.
 
-  $ P(Y_i = y_i | X_i) = p(X_i)^(y_i) (1 - p(X_i))^(1-y_i) $
+  *Our Data:* We have collected $n$ observations. Each observation consists of:
+  - An outcome: $y_i in {0, 1}$ (e.g., $y_i = 1$ means "has disease", $y_i = 0$ means "no disease")
+  - Predictor values: $x_(i 1), x_(i 2), dots, x_(i p)$ (the values of $p$ predictors for person $i$)
+
+  *Unknown Parameters:* We need to estimate $(p + 1)$ coefficients
+  - $beta_0$ = intercept coefficient
+  - $beta_1, beta_2, dots, beta_p$ = coefficients for the $p$ predictors
+
+  We write $bold(beta) = (beta_0, beta_1, dots, beta_p)^T$ for the entire vector of unknown parameters.
 ]
 
 #slide[
   = Maximum Likelihood Estimation
 
-  *Log-Likelihood Function:*
+  *The Probability Model:* For each observation $i$, the probability of success depends on:
+  1. The predictor values for that observation: $x_(i 1), x_(i 2), dots, x_(i p)$
+  2. The unknown parameters: $beta_0, beta_1, dots, beta_p$
 
-  $ ell(beta) = sum_(i=1)^n [y_i log(p(X_i)) + (1-y_i) log(1-p(X_i))] $
+  Define the linear combination: $eta_i = beta_0 + beta_1 x_(i 1) + beta_2 x_(i 2) + dots + beta_p x_(i p)$
 
-  *Goal:* Find $beta$ that maximizes $ell(beta)$
+  The probability is computed using the logistic function:
+
+  $ P(Y_i = 1 | x_(i 1), dots, x_(i p); beta_0, dots, beta_p) = 1 / (1 + e^(-eta_i)) $
+
+  We write this as $pi_i (bold(beta))$ for brevity, emphasizing it depends on the parameters $bold(beta)$.
+
+  *Important:* Each $pi_i (bold(beta))$ depends on BOTH the observed predictors for observation $i$ AND the unknown parameters $bold(beta)$.
+]
+
+#slide[
+  = Maximum Likelihood Estimation
+
+  *Probability of Observing Outcome $y_i$:* Given parameters $bold(beta)$, the probability of observing the actual outcome $y_i$ for observation $i$ is:
+
+  $ P(y_i | bold(x)_i, bold(beta)) = [pi_i (bold(beta))]^(y_i) [1 - pi_i (bold(beta))]^(1-y_i) $
+
+  This formula evaluates to:
+  - $pi_i (bold(beta))$ when the observed outcome is $y_i = 1$ (success)
+  - $1 - pi_i (bold(beta))$ when the observed outcome is $y_i = 0$ (failure)
+
+  *Key Idea of MLE:* Find the parameter values $bold(beta)$ that make the observed data $(y_1, y_2, dots, y_n)$ most probable.
+]
+
+#slide[
+  = Maximum Likelihood Estimation
+
+  *Likelihood Function:* Assuming observations are independent, the probability of observing ALL our data is:
+
+  $ L(bold(beta)) = product_(i=1)^n P(y_i | bold(x)_i, bold(beta)) = product_(i=1)^n [pi_i (bold(beta))]^(y_i) [1 - pi_i (bold(beta))]^(1-y_i) $
+
+  *Log-Likelihood Function:* Taking natural logarithm (easier to maximize):
+
+  $ ell(bold(beta)) = sum_(i=1)^n [y_i log(pi_i (bold(beta))) + (1-y_i) log(1-pi_i (bold(beta)))] $
+
+  *Goal:* Find $bold(beta)^*$ that maximizes $ell(bold(beta))$. This requires numerical optimization (Newton-Raphson, gradient descent, etc.) since no closed-form solution exists.
 ]
 
 #slide[
