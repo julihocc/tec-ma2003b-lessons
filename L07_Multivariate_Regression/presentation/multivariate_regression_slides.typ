@@ -57,14 +57,20 @@
   = Variables in Our Study
 
   *Lifestyle Factors:*
-  - Age, BMI, Exercise hours/week
-  - Smoking years, Alcohol consumption
-  - Stress score, Sleep hours
+  - *Age:* Years lived, affects baseline health risk
+  - *BMI:* Body Mass Index, ratio of weight to height indicating body composition
+  - *Exercise hours/week:* Physical activity level, linked to cardiovascular health
+  - *Smoking years:* Duration of tobacco use, major risk factor for multiple diseases
+  - *Alcohol consumption:* Frequency/amount of alcohol intake, impacts liver and heart health
+  - *Stress score:* Quantified psychological stress level, affects blood pressure and hormones
+  - *Sleep hours:* Nightly sleep duration, influences metabolic and cardiovascular function
 
   *Physiological Measurements:*
-  - Blood pressure (systolic/diastolic)
-  - Cholesterol, Glucose
-  - Triglycerides, HDL
+  - *Blood pressure (systolic/diastolic):* Force of blood against artery walls (peak/resting)
+  - *Cholesterol:* Blood lipid levels, excess increases arterial plaque buildup
+  - *Glucose:* Blood sugar level, indicator of diabetes risk and metabolic function
+  - *Triglycerides:* Fat molecules in blood, high levels increase heart disease risk
+  - *HDL:* "Good cholesterol" that removes harmful lipids from bloodstream
 ]
 
 #slide[
