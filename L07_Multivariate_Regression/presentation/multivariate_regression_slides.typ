@@ -125,7 +125,9 @@
   = Logistic Regression Solution
 
   Our goal is to find a function that maps predictor values to probabilities while staying within [0, 1]. Linear regression fails here because predictions can fall outside this valid probability range.
+]
 
+#slide[
   Given a binary outcome variable $Y$ (taking values 0 or 1 for failure or success) and a vector of predictor variables $X = (X_1, X_2, dots, X_p)$, we model the probability of success as:
 
   $ P(Y = 1 | X) = p(X) $
@@ -138,11 +140,12 @@
 
   To connect probabilities (bounded between 0 and 1) to a linear combination of predictors (unbounded), we use the *logit transformation*, also known as the *log-odds*.
 
-  The odds of success are $p / (1-p)$, and taking the natural logarithm gives us:
+  Recall that $p(X) = P(Y = 1 | X)$ is our probability of success. The odds of success are $p(X) / (1-p(X))$, and taking the natural logarithm gives us:
 
-  $ "logit"(p) = log(p / (1-p)) = beta_0 + beta_1 X_1 + dots + beta_p X_p $
+  $ "logit"(p(X)) = log(p(X) / (1-p(X))) = beta_0 + beta_1 X_1 + dots + beta_p X_p $
 
   where:
+  - $p(X)$ is the same probability function defined in the previous slide
   - $beta_0, beta_1, dots, beta_p$ are coefficients to be estimated
   - The logit maps probabilities from [0, 1] to $(-infinity, +infinity)$
   - This transformation makes the model linear in the parameters
