@@ -264,13 +264,14 @@
 
   *Deviance:*
   - An analogue to _Sum of Squared Errors_ for generalized linear models.
-  - Measures the discrepancy between the model and the data using log-likelihood.
-  - *Lower values indicate a better fit.* Primarily used to compare nested models.
+  - Measures discrepancy via log-likelihood ($cal(L)$) compared to a perfect ("saturated") model.
+  - $ D = 2(log(cal(L)_"saturated") - log(cal(L)_"model")) $
+  - *Lower values indicate a better fit.*
 
   *Pseudo R-squared:*
-  - An analogue to the $R^2$ metric from ordinary least squares regression.
-  - Indicates how well the model performs compared to a null model (intercept-only).
-  - *Higher values indicate a better fit.* (e.g., McFadden's, Nagelkerke's $R^2$)
+  - An analogue to $R^2$ that measures improvement over a null (intercept-only) model.
+  - *Higher values indicate a better fit.*
+  - McFadden's $R^2$: $ R^2_"McF" = 1 - (log(cal(L)_"model")) / (log(cal(L)_"null")) $
 ]
 
 #slide[
