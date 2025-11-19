@@ -124,11 +124,13 @@
 #slide[
   = Logistic Regression Solution
 
-  *Key Idea:* Model the probability of success
+  Our goal is to find a function that maps predictor values to probabilities while staying within [0, 1]. Linear regression fails here because predictions can fall outside this valid probability range.
+
+  Given a binary outcome variable $Y$ (taking values 0 or 1 for failure or success) and a vector of predictor variables $X = (X_1, X_2, dots, X_p)$, we model the probability of success as:
 
   $ P(Y = 1 | X) = p(X) $
 
-  where $0 <= p(X) <= 1$
+  where $0 <= p(X) <= 1$ represents the probability that $Y = 1$ given the values of $X$. This approach ensures our predictions always remain valid probabilities.
 ]
 
 #slide[
