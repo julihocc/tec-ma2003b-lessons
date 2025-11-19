@@ -39,6 +39,14 @@
   = Case Study: Healthcare Risk Assessment
 
   *Companion Example Throughout This Presentation*
+
+  A hospital study analyzing cardiovascular disease (CVD) risk using multivariate methods to:
+  - Predict high-risk patients from lifestyle and physiological factors
+  - Compare health profiles between risk groups
+  - Evaluate the effectiveness of lifestyle interventions
+  - Understand complex relationships between multiple health variables
+
+  Real dataset with 1,000 patients demonstrating practical applications of each technique
 ]
 
 #slide[
