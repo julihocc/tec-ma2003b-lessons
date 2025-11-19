@@ -96,6 +96,18 @@
   = Logistic Regression
 
   Moving Beyond Linear Regression
+
+  *What is Logistic Regression?*
+
+  A statistical method for modeling binary outcomes (Yes/No, Success/Failure, 0/1) using predictor variables
+
+  *Key Features:*
+  - Predicts probabilities (0 to 1) rather than continuous values
+  - Uses the logistic (sigmoid) function to model the probability of an event
+  - Estimates coefficients via maximum likelihood (not least squares)
+  - Widely used in classification problems: medical diagnosis, credit scoring, marketing
+
+  *When to Use:* When your outcome variable is categorical (especially binary)
 ]
 
 #slide[
