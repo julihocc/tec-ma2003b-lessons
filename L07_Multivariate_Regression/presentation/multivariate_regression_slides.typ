@@ -262,11 +262,15 @@
 #slide[
   = Model Fit and Diagnostics
 
-  *Deviance:* Measures goodness of fit
+  *Deviance:*
+  - An analogue to _Sum of Squared Errors_ for generalized linear models.
+  - Measures the discrepancy between the model and the data using log-likelihood.
+  - *Lower values indicate a better fit.* Primarily used to compare nested models.
 
-  $ D = -2 log(cal(L)) $
-
-  *Pseudo R-squared:* McFadden's $R^2$, Nagelkerke $R^2$
+  *Pseudo R-squared:*
+  - An analogue to the $R^2$ metric from ordinary least squares regression.
+  - Indicates how well the model performs compared to a null model (intercept-only).
+  - *Higher values indicate a better fit.* (e.g., McFadden's, Nagelkerke's $R^2$)
 ]
 
 #slide[
