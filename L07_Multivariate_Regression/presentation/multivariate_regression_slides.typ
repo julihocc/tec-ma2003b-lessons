@@ -248,15 +248,56 @@
 ]
 
 #slide[
-  = Interpreting Coefficients
+  = Interpreting Coefficients: Log-Odds vs. Odds Ratios
 
-  *Coefficient $beta_j$:*
-  - One unit increase in $X_j$ changes log-odds by $beta_j$
-  - Odds ratio: $e^(beta_j)$
+  Recall the logit equation: $ log(p / (1-p)) = beta_0 + beta_1 X_1 + dots + beta_p X_p $
 
-  #alert[
-    *Example:* If $beta_1 = 0.5$, then $e^(0.5) = 1.65$ means 65% increase in odds
-  ]
+  *1. The Raw Coefficient ($beta_j$)*
+  - A one-unit increase in $X_j$ corresponds to a $beta_j$ change in the *log-odds* of the outcome.
+  - This is mathematically precise but not intuitive. A "0.2 change in log-odds" is hard to grasp.
+
+  *2. The Odds Ratio ($e^(beta_j)$) -- A Better Way*
+  - By exponentiating the coefficient, we get the *Odds Ratio* (OR).
+  - The OR tells us the *multiplicative change* in the *odds* of the outcome for a one-unit increase in $X_j$.
+
+  #block(
+    stroke: 0.5pt,
+    inset: 10pt,
+    radius: 4pt,
+    [
+      *Example: Stress Score ($beta_"stress" = 0.223$)* \
+      The odds ratio is $e^0.223 approx 1.25$. \
+      *Interpretation:* For each one-point increase in the stress score, the *odds* of having high CVD risk are multiplied by 1.25 (i.e., increase by 25%), holding other variables constant.
+    ]
+  )
+]
+
+#slide[
+  = Interpreting Coefficients: The Odds Ratio (cont.)
+
+  *Interpreting Different Odds Ratios:*
+
+  #table(
+    columns: (1fr, 1fr, 2fr),
+    align: (center, center, left),
+    stroke: 0.5pt,
+    inset: 8pt,
+    [*If $beta_j$ is...*], [*Then $e^(beta_j)$ is...*], [*Meaning for a 1-unit increase in $X_j$...*],
+    [Positive ($>0$)], [Greater than 1], [The odds of the outcome *increase*. (e.g., OR=1.25 means 25% increase in odds)],
+    [Negative ($<0$)], [Less than 1], [The odds of the outcome *decrease*. (e.g., OR=0.80 means 20% decrease in odds)],
+    [Zero], [Exactly 1], [There is no change in the odds of the outcome.],
+  )
+
+  #block(
+    stroke: 0.5pt,
+    inset: 10pt,
+    radius: 4pt,
+    [
+      *Example: Exercise ($beta_"exercise" = -0.328$)* \
+      The odds ratio is $e^(-0.328) approx 0.72$. \
+      *Interpretation:* For each additional hour of exercise per week, the *odds* of having high CVD risk are multiplied by 0.72 (i.e., decrease by 28%), holding other variables constant.
+    ]
+  )
 ]
 
 #slide[
