@@ -19,6 +19,8 @@
   ),
 )
 
+#show link: set text(fill: rgb("#1E88E5"))
+
 #title-slide()
 
 // Outline
