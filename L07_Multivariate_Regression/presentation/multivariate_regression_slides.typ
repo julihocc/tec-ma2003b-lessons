@@ -222,9 +222,9 @@
 #slide[
   = Maximum Likelihood Estimation
 
-  *Probability of Observing Outcome $y_i$:* Given parameters $bold(beta)$, the probability of observing the actual outcome $y_i$ for observation $i$ is:
+  *Probability of Observing Outcome $y_i$:* Given parameters $bold(beta)$, the probability of observing the actual outcome $y_i$ for observation $i$ is formally written as $P(Y_i = y_i | ...)$, where $Y_i$ is the random variable for the outcome. The following is a common shorthand:
 
-  $ P(y_i | bold(x)_i, bold(beta)) = [pi_i (bold(beta))]^(y_i) [1 - pi_i (bold(beta))]^(1-y_i) $
+  $ P(Y_i = y_i | bold(x)_i, bold(beta)) = [pi_i (bold(beta))]^(y_i) [1 - pi_i (bold(beta))]^(1-y_i) $
 
   This formula evaluates to:
   - $pi_i (bold(beta))$ when the observed outcome is $y_i = 1$ (success)
@@ -238,7 +238,7 @@
 
   *Likelihood Function:* Assuming observations are independent, the probability of observing ALL our data is:
 
-  $ L(bold(beta)) = product_(i=1)^n P(y_i | bold(x)_i, bold(beta)) = product_(i=1)^n [pi_i (bold(beta))]^(y_i) [1 - pi_i (bold(beta))]^(1-y_i) $
+  $ L(bold(beta)) = product_(i=1)^n P(Y_i = y_i | bold(x)_i, bold(beta)) = product_(i=1)^n [pi_i (bold(beta))]^(y_i) [1 - pi_i (bold(beta))]^(1-y_i) $
 
   *Log-Likelihood Function:* Taking natural logarithm (easier to maximize):
 
