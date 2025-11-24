@@ -303,16 +303,19 @@
 #slide[
   = Model Fit and Diagnostics
 
+  Assessing how well our logistic regression model explains the data is crucial. Unlike linear regression, we use different metrics.
+
   *Deviance:*
-  - An analogue to _Sum of Squared Errors_ for generalized linear models.
-  - Measures discrepancy via log-likelihood ($cal(L)$) compared to a perfect ("saturated") model.
-  - $ D = 2(log(cal(L)_"saturated") - log(cal(L)_"model")) $
-  - *Lower values indicate a better fit.*
+  - A key metric for models where ordinary least squares doesn't apply (like logistic regression). It's a measure of how much your model's predictions deviate from the actual data.
+  - Think of it as the equivalent of the *Sum of Squared Errors* you see in linear regression.
+  - A lower deviance means your model fits the data more closely.
+  - For a deeper dive into deviance, see this video: #link("https://www.youtube.com/watch?v=JC56jS2gVUE")[Deviance Residuals Explained]
 
   *Pseudo R-squared:*
-  - An analogue to $R^2$ that measures improvement over a null (intercept-only) model.
-  - *Higher values indicate a better fit.*
-  - McFadden's $R^2$: $ R^2_"McF" = 1 - (log(cal(L)_"model")) / (log(cal(L)_"null")) $
+  - While linear regression has a standard R-squared to measure goodness-of-fit, logistic and other generalized linear models use "Pseudo" R-squared.
+  - It tells you how much better your model is than a "null" model that only includes an intercept (essentially, a model that just guesses the average outcome).
+  - *McFadden's $R^2$* is a popular version: $ R^2_"McF" = 1 - (log(cal(L)_"model")) / (log(cal(L)_"null")) $.
+  - A higher value (closer to 1) indicates a better fit, but the scale is not directly comparable to the R-squared from linear regression.
 ]
 
 #slide[
