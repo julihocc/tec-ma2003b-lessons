@@ -31,7 +31,7 @@
   = Today's Agenda
 
   + Multivariate Random Vectors & Probability Densities
-  + Sample Statistics: Mean Vectors ($\bar{\mathbf{x}}$) & Covariances ($\mathbf{S}, \mathbf{R}$)
+  + Sample Statistics: Mean Vectors ($overline(bold(x))$) & Covariances ($bold(S), bold(R)$)
   + The Multivariate Normal Distribution (MVN)
   + Geometry of Contour Ellipsoids & Mahalanobis Distance
   + Missing Data Diagnostics & Modern Imputation (KNN, MICE)
@@ -47,41 +47,41 @@
 #slide[
   = Random Vectors & Population Parameters
 
-  Let $\mathbf{X} = [X_1, X_2, \dots, X_p]^T \in \mathbb{R}^p$ be a $p$-dimensional random vector.
+  Let $bold(X) = [X_1, X_2, dots.h, X_p]^T in bb(R)^p$ be a $p$-dimensional random vector.
 
   #v(0.6em)
 
   *Population Mean Vector:*
-  $ \boldsymbol{\mu} = \mathbb{E}[\mathbf{X}] = \begin{bmatrix} \mathbb{E}[X_1] & \mathbb{E}[X_2] & \dots & \mathbb{E}[X_p] \end{bmatrix}^T $
+  $ bold(mu) = bb(E)[bold(X)] = mat(delim: "[", bb(E)[X_1], bb(E)[X_2], dots.h, bb(E)[X_p])^T $
 
   #v(0.6em)
 
   *Population Covariance Matrix:*
-  $ \mathbf{\Sigma} = \operatorname{Cov}(\mathbf{X}) = \mathbb{E}[(\mathbf{X} - \boldsymbol{\mu})(\mathbf{X} - \boldsymbol{\mu})^T] \in \mathbb{R}^{p \times p} $
+  $ bold(Sigma) = op("Cov")(bold(X)) = bb(E)[(bold(X) - bold(mu))(bold(X) - bold(mu))^T] in bb(R)^(p times p) $
 
   #v(0.6em)
 
-  *Property:* $\mathbf{\Sigma}$ is always symmetric and positive semi-definite ($\mathbf{\Sigma} \succeq 0$).
+  *Property:* $bold(Sigma)$ is always symmetric and positive semi-definite ($bold(Sigma) succ.eq 0$).
 ]
 
 #slide[
   = Sample Statistics & Geometric Interpretation
 
-  Given data matrix $\mathbf{X} \in \mathbb{R}^{n \times p}$:
+  Given data matrix $bold(X) in bb(R)^(n times p)$:
 
   #v(0.5em)
 
   *Sample Mean & Covariance Matrix:*
-  $ \bar{\mathbf{x}} = \frac{1}{n} \mathbf{X}^T \mathbf{1}_n, \qquad \mathbf{S} = \frac{1}{n - 1} \sum_{i=1}^n (\mathbf{x}_i - \bar{\mathbf{x}})(\mathbf{x}_i - \bar{\mathbf{x}})^T $
+  $ overline(bold(x)) = frac(1, n) bold(X)^T bold(1)_n, quad quad bold(S) = frac(1, n - 1) sum_(i=1)^n (bold(x)_i - overline(bold(x)))(bold(x)_i - overline(bold(x)))^T $
 
   #v(0.5em)
 
   *Sample Correlation Matrix:*
-  $ \mathbf{R} = \mathbf{D}_{\mathbf{S}}^{-1/2} \mathbf{S} \mathbf{D}_{\mathbf{S}}^{-1/2}, \quad r_{j k} = \frac{s_{j k}}{s_j s_k} = \cos(\theta_{j k}) $
+  $ bold(R) = bold(D)_(bold(S))^(-1/2) bold(S) bold(D)_(bold(S))^(-1/2), quad r_(j k) = frac(s_(j k), s_j s_k) = cos(theta_(j k)) $
 
   #v(0.5em)
 
-  The correlation $r_{j k}$ is the cosine of the angle between mean-centered observation vectors in sample space $\mathbb{R}^n$.
+  The correlation $r_(j k)$ is the cosine of the angle between mean-centered observation vectors in sample space $bb(R)^n$.
 ]
 
 // ============================================================================
@@ -91,34 +91,34 @@
 #slide[
   = The Multivariate Normal Distribution (MVN)
 
-  $\mathbf{X} \sim \mathcal{N}_p(\boldsymbol{\mu}, \mathbf{\Sigma})$ has the joint probability density function:
+  $bold(X) tilde.op cal(N)_p(bold(mu), bold(Sigma))$ has the joint probability density function:
 
-  $ f(\mathbf{x}) = \frac{1}{(2\pi)^{p/2} |\mathbf{\Sigma}|^{1/2}} \exp\left( -\frac{1}{2} (\mathbf{x} - \boldsymbol{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) \right) $
+  $ f(bold(x)) = frac(1, (2pi)^(p/2) |bold(Sigma)|^(1/2)) exp( -frac(1, 2) (bold(x) - bold(mu))^T bold(Sigma)^(-1) (bold(x) - bold(mu)) ) $
 
   #v(0.6em)
 
   *Fundamental Properties:*
-  - Any linear combination $\mathbf{a}^T \mathbf{X}$ is univariate normal $\mathcal{N}(\mathbf{a}^T\boldsymbol{\mu}, \mathbf{a}^T\mathbf{\Sigma}\mathbf{a})$.
+  - Any linear combination $bold(a)^T bold(X)$ is univariate normal $cal(N)(bold(a)^T bold(mu), bold(a)^T bold(Sigma) bold(a))$.
   - All marginals and conditionals are multivariate normal.
-  - $\operatorname{Cov}(X_j, X_k) = 0 \iff X_j \text{ and } X_k \text{ are statistically independent}$.
+  - $op("Cov")(X_j, X_k) = 0 <==> X_j " and " X_k " are statistically independent"$.
 ]
 
 #slide[
   = Geometry: Contour Ellipsoids & Mahalanobis Distance
 
   *Squared Mahalanobis Distance:*
-  $ D^2(\mathbf{x}, \boldsymbol{\mu}) = (\mathbf{x} - \boldsymbol{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) $
+  $ D^2(bold(x), bold(mu)) = (bold(x) - bold(mu))^T bold(Sigma)^(-1) (bold(x) - bold(mu)) $
 
   #v(0.5em)
 
   *Contour Surfaces:*
   Surfaces of constant probability density form hyper-ellipsoids:
-  $ \{ \mathbf{x} : (\mathbf{x} - \boldsymbol{\mu})^T \mathbf{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu}) = c^2 \} $
+  $ \{ bold(x) : (bold(x) - bold(mu))^T bold(Sigma)^(-1) (bold(x) - bold(mu)) = c^2 \} $
 
   #v(0.5em)
 
   *Chi-Square Distribution Property:*
-  $ D^2(\mathbf{X}, \boldsymbol{\mu}) \sim \chi_p^2 $
+  $ D^2(bold(X), bold(mu)) tilde.op chi_p^2 $
   Enables empirical testing of multivariate normality via *Chi-Square Q-Q Plots*.
 ]
 
@@ -140,8 +140,8 @@
     ],
     [
       *2. Multivariate Outliers:*
-      - Data points may look normal marginally, but violate covariance $\mathbf{\Sigma}$.
-      - *Classical Cutoff:* $D_i^2 > \chi_{p, 1 - \alpha}^2$.
+      - Data points may look normal marginally, but violate covariance $bold(Sigma)$.
+      - *Classical Cutoff:* $D_i^2 > chi_(p, 1 - alpha)^2$.
       - *Robust MCD:* Computes minimum covariance determinant to prevent outlier masking.
     ]
   )
@@ -150,17 +150,17 @@
 #slide[
   = Fisher $z$-Transformation for Correlations
 
-  *Problem:* Sampling distribution of $r$ is skewed when $|\rho| > 0$.
+  *Problem:* Sampling distribution of $r$ is skewed when $|rho| > 0$.
 
   #v(0.5em)
 
   *Fisher's Transformation:*
-  $ z = \operatorname{arctanh}(r) = \frac{1}{2} \ln\left( \frac{1 + r}{1 - r} \right) \stackrel{\text{approx}}{\sim} \mathcal{N}\left( \operatorname{arctanh}(\rho), \frac{1}{n - 3} \right) $
+  $ z = op("arctanh")(r) = frac(1, 2) ln( frac(1 + r, 1 - r) ) attach(tilde.op, t: "approx") cal(N)( op("arctanh")(rho), frac(1, n - 3) ) $
 
   #v(0.5em)
 
-  *95% Confidence Interval for $\rho$:*
-  $ [\rho_L, \rho_U] = \left[ \tanh\left( z - 1.96 \frac{1}{\sqrt{n - 3}} \right), \, \tanh\left( z + 1.96 \frac{1}{\sqrt{n - 3}} \right) \right] $
+  *95% Confidence Interval for $rho$:*
+  $ [rho_L, rho_U] = [ tanh( z - 1.96 frac(1, sqrt(n - 3)) ), \, tanh( z + 1.96 frac(1, sqrt(n - 3)) ) ] $
 ]
 
 #slide[
