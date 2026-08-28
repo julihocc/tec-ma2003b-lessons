@@ -223,9 +223,12 @@ $ y_i = beta_0 + beta_1 x_i + beta_2 x_i^2 + dots.h + beta_d x_i^d + epsilon_i $
 Linear in parameters $beta$, estimated using standard OLS.
 
 == Logarithmic Transformations
-- *Log-Linear (Exponential growth):* $ln(y_i) = beta_0 + beta_1 x_i + epsilon_i ==> 100 dot.op beta_1 %$ percentage change in $Y$ per unit $X$.
-- *Linear-Log:* $y_i = beta_0 + beta_1 ln(x_i) + epsilon_i ==> frac(beta_1, 100)$ change in $Y$ per $1%$ increase in $X$.
-- *Log-Log (Elasticity):* $ln(y_i) = beta_0 + beta_1 ln(x_i) + epsilon_i ==> beta_1%$ change in $Y$ per $1%$ increase in $X$.
+
+The percentage-change interpretations below are *local (small-coefficient) approximations*, valid for $beta_1$ near 0 or for describing an infinitesimal change in $X$. For the exact effect of a full one-unit (or 1%) change, use the exact formula alongside each approximation.
+
+- *Log-Linear (Exponential growth):* $ln(y_i) = beta_0 + beta_1 x_i + epsilon_i$. Approximate: $100 dot.op beta_1 %$ change in $Y$ per unit $X$. Exact one-unit effect: $100 (e^(beta_1) - 1) %$.
+- *Linear-Log:* $y_i = beta_0 + beta_1 ln(x_i) + epsilon_i$. Approximate: $frac(beta_1, 100)$ change in $Y$ per $1%$ increase in $X$ (exact for small $Delta X\/X$; for a full 1% increase, $Delta Y approx beta_1 ln(1.01)$).
+- *Log-Log (Elasticity):* $ln(y_i) = beta_0 + beta_1 ln(x_i) + epsilon_i$. Approximate: $beta_1 %$ change in $Y$ per $1%$ increase in $X$. Exact one-percent effect: $100 (1.01^(beta_1) - 1) %$. $beta_1$ is the *elasticity* of $Y$ with respect to $X$ exactly, regardless of the size of the change.
 
 ---
 
