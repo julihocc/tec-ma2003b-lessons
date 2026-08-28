@@ -113,7 +113,20 @@ uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py
 
 ### 5. Compiling Slides & Documents (Typst)
 
-Presentations and lecture notes are typeset using [Typst](https://typst.app/):
+Presentations and lecture notes are typeset using [Typst](https://typst.app/). Typst is a standalone binary, not a Python dependency, so install it separately before compiling:
+
+```bash
+# macOS
+brew install typst
+
+# Windows
+winget install --id Typst.Typst
+
+# Linux / any platform (via cargo)
+cargo install --locked typst-cli
+```
+
+See the [Typst installation guide](https://github.com/typst/typst#installation) for other package managers. Verify with `typst --version`.
 
 ```bash
 # Compile slides (example for L01)

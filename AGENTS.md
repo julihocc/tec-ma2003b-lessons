@@ -17,8 +17,9 @@ Course-wide material is in `docs/`, including `SYLLABUS.md`. Python dependencies
 - `uv sync`: create `.venv` with the locked Python 3.11 environment.
 - `uv run jupyter notebook`: launch notebooks with project dependencies.
 - `uv run python lessons/L01_Regression_Analysis/data/fetch_housing_regression.py`: regenerate a lesson dataset; use the corresponding `fetch_*.py` for other lessons.
-- `uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py`: execute all factor-analysis snippet notebooks non-interactively.
-- `typst compile lessons/L01_Regression_Analysis/docs/regression_analysis_notes.typ`: rebuild a Typst PDF. Apply the same pattern to presentations and other lessons.
+- `uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py`: execute all factor-analysis snippet notebooks non-interactively and check their key numerical results.
+- `uv run python scripts/run_notebooks.py`: execute all seven primary lesson notebooks from a clean kernel; pass notebook paths to run a subset, or `--write-outputs` to persist regenerated outputs.
+- `typst compile lessons/L01_Regression_Analysis/docs/regression_analysis_notes.typ`: rebuild a Typst PDF (requires Typst installed separately; see the root `README.md`). Apply the same pattern to presentations and other lessons.
 
 ## Coding Style & Naming Conventions
 
@@ -26,7 +27,7 @@ Use four-space indentation and PEP 8 conventions for Python. Prefer descriptive 
 
 ## Testing Guidelines
 
-There is no coverage target or general test framework yet. Run the snippet harness after changing factor-analysis notebooks. For other notebooks, restart the kernel and run all cells from top to bottom, checking that outputs are reproducible and paths resolve. Recompile affected `.typ` files and inspect the resulting PDF for layout problems.
+There is no coverage target or general test framework yet. Run the snippet harness after changing factor-analysis notebooks. For other notebooks, run `scripts/run_notebooks.py` (or restart the kernel and run all cells from top to bottom in Jupyter) to confirm outputs are reproducible and paths resolve. Recompile affected `.typ` files and inspect the resulting PDF for layout problems.
 
 ## Commit & Pull Request Guidelines
 
