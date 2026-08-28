@@ -29,7 +29,7 @@ L07_Multivariate_Regression/
 │   ├── health_data.csv                           # Generated patient dataset (1,000 × 14)
 │   ├── HEALTH_DATA_DICTIONARY.md                 # Detailed variable descriptions
 │   └── HEALTH_DATA_DICTIONARY.pdf                 # Reference data dictionary PDF
-├── docs/                                         # Lecture notes and documentation
+├── notes/                                        # Lecture notes and documentation
 │   ├── multivariate_regression_notes.typ         # Typst source for lecture notes
 │   └── multivariate_regression_notes.pdf         # Compiled lecture notes
 ├── notebook/                                     # Analysis notebooks
@@ -59,6 +59,6 @@ cd presentation/
 typst compile multivariate_regression_slides.typ
 
 # Lecture Notes
-cd ../docs/
+cd ../notes/
 typst compile multivariate_regression_notes.typ
 ```

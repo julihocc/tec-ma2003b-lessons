@@ -22,7 +22,7 @@ L03_Principal_Component_Analysis/
 │   ├── fetch_financial_pca.py                    # Multi-asset returns market data generator
 │   ├── financial_market_data.csv                 # Generated dataset (600 trading days × 10 assets)
 │   └── FINANCIAL_MARKET_DATA_DICTIONARY.md       # Detailed variable descriptions
-├── docs/                                         # Lecture notes and study guides
+├── notes/                                        # Lecture notes and study guides
 │   └── principal_component_analysis_notes.typ    # Comprehensive study guide (Typst)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   └── financial_pca_analysis.ipynb              # Global market factor decomposition case study
@@ -50,6 +50,6 @@ cd lessons/L03_Principal_Component_Analysis/presentation/
 typst compile principal_component_analysis_slides.typ
 
 # Lecture Notes
-cd ../docs/
+cd ../notes/
 typst compile principal_component_analysis_notes.typ
 ```

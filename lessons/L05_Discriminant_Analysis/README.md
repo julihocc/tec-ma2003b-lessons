@@ -29,7 +29,7 @@ L05_Discriminant_Analysis/
 │   ├── fetch_marketing.py                  # Synthetic customer behavior data generator
 │   ├── marketing.csv                       # Generated customer dataset (1,200 customers × 8 metrics)
 │   └── MARKETING_DATA_DICTIONARY.md        # Detailed variable descriptions
-├── docs/                                   # Lecture notes and study guides
+├── notes/                                  # Lecture notes and study guides
 │   ├── discriminant_analysis_notes.typ     # Comprehensive study guide (Typst)
 │   └── discriminant_analysis_notes.pdf     # Reference compiled study guide PDF
 ├── notebook/                               # Interactive Jupyter notebooks
@@ -59,6 +59,6 @@ cd presentation/
 typst compile discriminant_analysis_slides.typ
 
 # Study Guide Notes
-cd ../docs/
+cd ../notes/
 typst compile discriminant_analysis_notes.typ
 ```

@@ -28,7 +28,7 @@ L04_Factor_Analysis/
 │   ├── fetch_educational.py                      # Synthetic educational assessment data generator
 │   ├── educational.csv                           # Generated student dataset (200 students × 9 metrics)
 │   └── EDUCATIONAL_ASSESSMENT_DATA_DICTIONARY.md # Detailed variable descriptions
-├── docs/                                         # Lecture notes and reports
+├── notes/                                        # Lecture notes and reports
 │   ├── factor_analysis_notes.typ                 # Comprehensive study guide (Typst)
 │   └── executive_report.typ                      # Executive assessment report (Typst)
 ├── notebook/                                     # Interactive Jupyter notebooks
@@ -72,6 +72,6 @@ cd presentation/
 typst compile factor_analysis_slides.typ
 
 # Study Guide Notes
-cd ../docs/
+cd ../notes/
 typst compile factor_analysis_notes.typ
 ```

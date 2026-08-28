@@ -25,7 +25,7 @@ L01_Regression_Analysis/
 │   ├── fetch_housing_regression.py               # Synthetic property transaction generator
 │   ├── housing_regression.csv                    # Generated dataset (1,000 homes × 9 metrics)
 │   └── HOUSING_REGRESSION_DATA_DICTIONARY.md     # Detailed variable descriptions
-├── docs/                                         # Lecture notes and study guides
+├── notes/                                        # Lecture notes and study guides
 │   └── regression_analysis_notes.typ             # Comprehensive study guide (Typst)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   └── housing_regression_analysis.ipynb         # End-to-end residential valuation case study
@@ -53,6 +53,6 @@ cd lessons/L01_Regression_Analysis/presentation/
 typst compile regression_analysis_slides.typ
 
 # Lecture Notes
-cd ../docs/
+cd ../notes/
 typst compile regression_analysis_notes.typ
 ```

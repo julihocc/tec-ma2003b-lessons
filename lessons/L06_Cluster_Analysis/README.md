@@ -32,7 +32,7 @@ L06_Cluster_Analysis/
 │   ├── customer_data.csv               # Generated customer dataset (2,000 × 7)
 │   ├── customer_data_with_labels.csv   # Dataset with cluster labels
 │   └── CUSTOMER_DATA_DICTIONARY.md     # Detailed variable descriptions
-├── docs/                               # Lecture notes and documentation
+├── notes/                              # Lecture notes and documentation
 │   ├── cluster_analysis_notes.typ      # Typst source for lecture notes
 │   └── cluster_analysis_notes.pdf      # Compiled lecture notes
 ├── notebook/                           # Analysis notebooks
@@ -62,6 +62,6 @@ cd presentation/
 typst compile cluster_analysis_slides.typ
 
 # Lecture Notes
-cd ../docs/
+cd ../notes/
 typst compile cluster_analysis_notes.typ
 ```

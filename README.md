@@ -35,7 +35,7 @@ tec-ma2003b-lessons/
 
 Every lesson module inside `lessons/` follows a standardized **4-folder layout**:
 - `data/`: Dataset files (`.csv`), synthetic data generators (`fetch_*.py`), and data dictionaries (`*.md`).
-- `docs/`: Module lecture notes and theoretical study guides (`<topic>_notes.typ` / `.pdf`).
+- `notes/`: Module lecture notes and theoretical study guides (`<topic>_notes.typ` / `.pdf`).
 - `notebook/`: Hands-on case studies and interactive Jupyter notebooks (`.ipynb`).
 - `presentation/`: Slide presentations built with [Typst](https://typst.app/) + [Touying](https://github.com/touying-typ/touying) (`<topic>_slides.typ` / `.pdf`).
 
@@ -134,7 +134,7 @@ cd lessons/L01_Regression_Analysis/presentation
 typst compile regression_analysis_slides.typ
 
 # Compile lecture notes (example for L01)
-cd ../docs
+cd ../notes
 typst compile regression_analysis_notes.typ
 ```
 

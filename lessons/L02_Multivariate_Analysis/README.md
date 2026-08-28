@@ -25,7 +25,7 @@ L02_Multivariate_Analysis/
 │   ├── fetch_environmental_data.py               # Atmospheric sensor monitoring generator
 │   ├── environmental_data.csv                    # Generated dataset (800 stations × 8 metrics)
 │   └── ENVIRONMENTAL_DATA_DICTIONARY.md          # Detailed variable descriptions
-├── docs/                                         # Lecture notes and study guides
+├── notes/                                        # Lecture notes and study guides
 │   └── multivariate_analysis_notes.typ           # Comprehensive study guide (Typst)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   └── environmental_multivariate_analysis.ipynb # Air quality multivariate case study
@@ -53,6 +53,6 @@ cd lessons/L02_Multivariate_Analysis/presentation/
 typst compile multivariate_analysis_slides.typ
 
 # Lecture Notes
-cd ../docs/
+cd ../notes/
 typst compile multivariate_analysis_notes.typ
 ```

@@ -6,7 +6,7 @@ Course content lives under `lessons/`, organized as `L##_Topic_Name` (for exampl
 
 - `data/`: CSV datasets, data dictionaries, and `fetch_*.py` generators.
 - `notebook/`: Jupyter case studies and, where applicable, reusable snippets.
-- `docs/`: Typst lecture-note sources and compiled PDFs.
+- `notes/`: Typst lecture-note sources and compiled PDFs.
 - `presentation/`: Typst slide sources and compiled PDFs.
 - `README.md`: lesson objectives and usage notes.
 
@@ -19,7 +19,7 @@ Course-wide material is in `docs/`, including `SYLLABUS.md`. Python dependencies
 - `uv run python lessons/L01_Regression_Analysis/data/fetch_housing_regression.py`: regenerate a lesson dataset; use the corresponding `fetch_*.py` for other lessons.
 - `uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py`: execute all factor-analysis snippet notebooks non-interactively and check their key numerical results.
 - `uv run python scripts/run_notebooks.py`: execute all seven primary lesson notebooks from a clean kernel; pass notebook paths to run a subset, or `--write-outputs` to persist regenerated outputs.
-- `typst compile lessons/L01_Regression_Analysis/docs/regression_analysis_notes.typ`: rebuild a Typst PDF (requires Typst installed separately; see the root `README.md`). Apply the same pattern to presentations and other lessons.
+- `typst compile lessons/L01_Regression_Analysis/notes/regression_analysis_notes.typ`: rebuild a Typst PDF (requires Typst installed separately; see the root `README.md`). Apply the same pattern to presentations and other lessons.
 
 ## Coding Style & Naming Conventions
 
