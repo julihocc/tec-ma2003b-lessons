@@ -23,11 +23,11 @@ L03_Principal_Component_Analysis/
 │   ├── financial_market_data.csv                 # Generated dataset (600 trading days × 10 assets)
 │   └── FINANCIAL_MARKET_DATA_DICTIONARY.md       # Detailed variable descriptions
 ├── notes/                                        # Lecture notes and study guides
-│   └── principal_component_analysis_notes.typ    # Comprehensive study guide (Typst)
+│   └── principal_component_analysis_notes.tex    # Comprehensive study guide (LaTeX)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   └── financial_pca_analysis.ipynb              # Global market factor decomposition case study
 ├── presentation/                                 # Presentation slides
-│   └── principal_component_analysis_slides.typ   # Typst presentation (Touying university theme)
+│   └── principal_component_analysis_slides.tex   # LaTeX Beamer presentation
 └── README.md                                     # Module documentation
 ```
 
@@ -43,13 +43,13 @@ uv run python lessons/L03_Principal_Component_Analysis/data/fetch_financial_pca.
 uv run jupyter notebook lessons/L03_Principal_Component_Analysis/notebook/financial_pca_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (Typst)
+### 3. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd lessons/L03_Principal_Component_Analysis/presentation/
-typst compile principal_component_analysis_slides.typ
+pdflatex principal_component_analysis_slides.tex
 
 # Lecture Notes
 cd ../notes/
-typst compile principal_component_analysis_notes.typ
+pdflatex principal_component_analysis_notes.tex
 ```

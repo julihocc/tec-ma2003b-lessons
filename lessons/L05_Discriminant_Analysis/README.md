@@ -30,12 +30,12 @@ L05_Discriminant_Analysis/
 │   ├── marketing.csv                       # Generated customer dataset (1,200 customers × 8 metrics)
 │   └── MARKETING_DATA_DICTIONARY.md        # Detailed variable descriptions
 ├── notes/                                  # Lecture notes and study guides
-│   ├── discriminant_analysis_notes.typ     # Comprehensive study guide (Typst)
+│   ├── discriminant_analysis_notes.tex     # Comprehensive study guide (LaTeX)
 │   └── discriminant_analysis_notes.pdf     # Reference compiled study guide PDF
 ├── notebook/                               # Interactive Jupyter notebooks
 │   └── marketing_discriminant_analysis.ipynb # End-to-end customer segmentation case study
 ├── presentation/                           # Presentation slides
-│   ├── discriminant_analysis_slides.typ    # Typst presentation (Touying university theme)
+│   ├── discriminant_analysis_slides.tex    # LaTeX Beamer presentation
 │   └── discriminant_analysis_slides.pdf    # Reference compiled presentation PDF
 └── README.md                               # Module documentation
 ```
@@ -52,13 +52,13 @@ python data/fetch_marketing.py
 jupyter notebook notebook/marketing_discriminant_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (Typst)
+### 3. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd presentation/
-typst compile discriminant_analysis_slides.typ
+pdflatex discriminant_analysis_slides.tex
 
 # Study Guide Notes
 cd ../notes/
-typst compile discriminant_analysis_notes.typ
+pdflatex discriminant_analysis_notes.tex
 ```

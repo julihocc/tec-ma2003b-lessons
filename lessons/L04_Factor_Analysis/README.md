@@ -29,8 +29,8 @@ L04_Factor_Analysis/
 │   ├── educational.csv                           # Generated student dataset (200 students × 9 metrics)
 │   └── EDUCATIONAL_ASSESSMENT_DATA_DICTIONARY.md # Detailed variable descriptions
 ├── notes/                                        # Lecture notes and reports
-│   ├── factor_analysis_notes.typ                 # Comprehensive study guide (Typst)
-│   └── executive_report.typ                      # Executive assessment report (Typst)
+│   ├── factor_analysis_notes.tex                 # Comprehensive study guide (LaTeX)
+│   └── executive_report.tex                      # Executive assessment report (LaTeX)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   ├── educational_analysis.ipynb                # End-to-end educational assessment case study
 │   └── snippets/                                 # Hands-on tutorial notebook series
@@ -43,7 +43,7 @@ L04_Factor_Analysis/
 │       ├── TESTING_RESULTS.md                    # Test execution results
 │       └── test_all_snippets.py                  # Automated test script
 ├── presentation/                                 # Presentation slides
-│   ├── factor_analysis_slides.typ                # Typst presentation (Touying university theme)
+│   ├── factor_analysis_slides.tex                # LaTeX Beamer presentation
 │   └── fa_presentation.pdf                       # Reference compiled presentation
 └── README.md                                     # Module documentation
 ```
@@ -65,13 +65,13 @@ jupyter notebook notebook/educational_analysis.ipynb
 python notebook/snippets/test_all_snippets.py
 ```
 
-### 4. Compile Slides & Documents (Typst)
+### 4. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd presentation/
-typst compile factor_analysis_slides.typ
+pdflatex factor_analysis_slides.tex
 
 # Study Guide Notes
 cd ../notes/
-typst compile factor_analysis_notes.typ
+pdflatex factor_analysis_notes.tex
 ```

@@ -35,9 +35,9 @@ tec-ma2003b-lessons/
 
 Every lesson module inside `lessons/` follows a standardized **4-folder layout**:
 - `data/`: Dataset files (`.csv`), synthetic data generators (`fetch_*.py`), and data dictionaries (`*.md`).
-- `notes/`: Module lecture notes and theoretical study guides (`<topic>_notes.typ` / `.pdf`).
+- `notes/`: Module lecture notes and theoretical study guides (`<topic>_notes.tex` / `.pdf`).
 - `notebook/`: Hands-on case studies and interactive Jupyter notebooks (`.ipynb`).
-- `presentation/`: Slide presentations built with [Typst](https://typst.app/) + [Touying](https://github.com/touying-typ/touying) (`<topic>_slides.typ` / `.pdf`).
+- `presentation/`: Slide presentations built with LaTeX Beamer (`<topic>_slides.tex` / `.pdf`).
 
 ---
 
@@ -111,31 +111,27 @@ Navigate to any lesson `notebook/` subfolder (e.g. `lessons/L01_Regression_Analy
 uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py
 ```
 
-### 5. Compiling Slides & Documents (Typst)
+### 5. Compiling Slides & Documents (LaTeX)
 
-Presentations and lecture notes are typeset using [Typst](https://typst.app/). Typst is a standalone binary, not a Python dependency, so install it separately before compiling:
+Presentations and lecture notes are typeset using LaTeX. Install a LaTeX distribution such as MiKTeX or TeX Live before compiling, and verify that `pdflatex` is available on your PATH.
 
 ```bash
-# macOS
-brew install typst
+# Windows (MiKTeX)
+winget install --id MiKTeX.MiKTeX
 
-# Windows
-winget install --id Typst.Typst
-
-# Linux / any platform (via cargo)
-cargo install --locked typst-cli
+# macOS / Linux: install TeX Live using your platform's package manager
 ```
 
-See the [Typst installation guide](https://github.com/typst/typst#installation) for other package managers. Verify with `typst --version`.
+Verify with `pdflatex --version`.
 
 ```bash
 # Compile slides (example for L01)
 cd lessons/L01_Regression_Analysis/presentation
-typst compile regression_analysis_slides.typ
+pdflatex regression_analysis_slides.tex
 
 # Compile lecture notes (example for L01)
 cd ../notes
-typst compile regression_analysis_notes.typ
+pdflatex regression_analysis_notes.tex
 ```
 
 ---
@@ -146,7 +142,7 @@ typst compile regression_analysis_notes.typ
 - **Computing & Statistics:** `numpy`, `pandas`, `scipy`, `scikit-learn`, `statsmodels`, `factor_analyzer`
 - **Data Visualization:** `matplotlib`, `seaborn`
 - **Interactive Notebooks:** Jupyter / JupyterLab
-- **Typesetting & Slides:** [Typst](https://typst.app/) with `@preview/touying:0.5.3` (University Theme, Tec de Monterrey branding)
+- **Typesetting & Slides:** LaTeX with the Beamer presentation class
 - **Asset Storage:** Git LFS (`*.ipynb`, `*.csv`, `*.pdf`)
 
 ---

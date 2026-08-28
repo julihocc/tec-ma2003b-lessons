@@ -26,11 +26,11 @@ L02_Multivariate_Analysis/
 │   ├── environmental_data.csv                    # Generated dataset (800 stations × 8 metrics)
 │   └── ENVIRONMENTAL_DATA_DICTIONARY.md          # Detailed variable descriptions
 ├── notes/                                        # Lecture notes and study guides
-│   └── multivariate_analysis_notes.typ           # Comprehensive study guide (Typst)
+│   └── multivariate_analysis_notes.tex           # Comprehensive study guide (LaTeX)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   └── environmental_multivariate_analysis.ipynb # Air quality multivariate case study
 ├── presentation/                                 # Presentation slides
-│   └── multivariate_analysis_slides.typ          # Typst presentation (Touying university theme)
+│   └── multivariate_analysis_slides.tex          # LaTeX Beamer presentation
 └── README.md                                     # Module documentation
 ```
 
@@ -46,13 +46,13 @@ uv run python lessons/L02_Multivariate_Analysis/data/fetch_environmental_data.py
 uv run jupyter notebook lessons/L02_Multivariate_Analysis/notebook/environmental_multivariate_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (Typst)
+### 3. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd lessons/L02_Multivariate_Analysis/presentation/
-typst compile multivariate_analysis_slides.typ
+pdflatex multivariate_analysis_slides.tex
 
 # Lecture Notes
 cd ../notes/
-typst compile multivariate_analysis_notes.typ
+pdflatex multivariate_analysis_notes.tex
 ```

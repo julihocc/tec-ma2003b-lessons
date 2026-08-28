@@ -30,12 +30,12 @@ L07_Multivariate_Regression/
 │   ├── HEALTH_DATA_DICTIONARY.md                 # Detailed variable descriptions
 │   └── HEALTH_DATA_DICTIONARY.pdf                 # Reference data dictionary PDF
 ├── notes/                                        # Lecture notes and documentation
-│   ├── multivariate_regression_notes.typ         # Typst source for lecture notes
+│   ├── multivariate_regression_notes.tex         # LaTeX source for lecture notes
 │   └── multivariate_regression_notes.pdf         # Compiled lecture notes
 ├── notebook/                                     # Analysis notebooks
 │   └── health_risk_analysis.ipynb                # Complete multivariate regression analysis
 ├── presentation/                                 # Presentation materials
-│   ├── multivariate_regression_slides.typ        # Typst source for presentation (Touying)
+│   ├── multivariate_regression_slides.tex        # LaTeX Beamer source for presentation
 │   └── multivariate_regression_slides.pdf        # Compiled presentation slides
 └── README.md                                     # Module documentation
 ```
@@ -52,13 +52,13 @@ python data/fetch_health_data.py
 jupyter notebook notebook/health_risk_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (Typst)
+### 3. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd presentation/
-typst compile multivariate_regression_slides.typ
+pdflatex multivariate_regression_slides.tex
 
 # Lecture Notes
 cd ../notes/
-typst compile multivariate_regression_notes.typ
+pdflatex multivariate_regression_notes.tex
 ```

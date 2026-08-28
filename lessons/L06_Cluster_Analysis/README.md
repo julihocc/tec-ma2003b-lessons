@@ -33,12 +33,12 @@ L06_Cluster_Analysis/
 │   ├── customer_data_with_labels.csv   # Dataset with cluster labels
 │   └── CUSTOMER_DATA_DICTIONARY.md     # Detailed variable descriptions
 ├── notes/                              # Lecture notes and documentation
-│   ├── cluster_analysis_notes.typ      # Typst source for lecture notes
+│   ├── cluster_analysis_notes.tex      # LaTeX source for lecture notes
 │   └── cluster_analysis_notes.pdf      # Compiled lecture notes
 ├── notebook/                           # Analysis notebooks
 │   └── customer_clustering_analysis.ipynb # Complete cluster analysis
 ├── presentation/                       # Presentation materials
-│   ├── cluster_analysis_slides.typ     # Typst source for presentation (Touying)
+│   ├── cluster_analysis_slides.tex     # LaTeX Beamer source for presentation
 │   └── cluster_analysis_slides.pdf     # Compiled presentation slides
 └── README.md                           # Module documentation
 ```
@@ -55,13 +55,13 @@ python data/fetch_customer_data.py
 jupyter notebook notebook/customer_clustering_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (Typst)
+### 3. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd presentation/
-typst compile cluster_analysis_slides.typ
+pdflatex cluster_analysis_slides.tex
 
 # Lecture Notes
 cd ../notes/
-typst compile cluster_analysis_notes.typ
+pdflatex cluster_analysis_notes.tex
 ```

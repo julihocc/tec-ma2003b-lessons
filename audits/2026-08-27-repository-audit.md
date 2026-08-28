@@ -30,9 +30,9 @@ The locked environment installs `factor-analyzer 0.5.1` with `scikit-learn 1.9.0
 
 **Recommendation:** add clean-kernel execution for every primary notebook and assertions for important pedagogical results. Fail on empty notebooks and unexpected skipped sections.
 
-### Medium-Low — Typst workflow is not self-contained
+### Medium-Low — LaTeX workflow is not self-contained
 
-[`README.md`](../README.md) documents `typst compile` but does not include Typst installation instructions. Typst was unavailable in the audited environment, so the 16 `.typ` sources could not be compiled. Nine sources currently have no corresponding committed PDF.
+[`README.md`](../README.md) documents `pdflatex` but does not include LaTeX installation instructions. LaTeX was unavailable in the audited environment, so the 16 `.tex` sources could not be compiled. Nine sources currently have no corresponding committed PDF.
 
 ### Low — Saved notebook output is stale
 
@@ -52,7 +52,7 @@ Several notebooks contain old absolute Windows/Linux development paths, compatib
 
 ## Residual Risks
 
-Typst compilation and PDF visual layout were not verified because Typst was not installed. No external dependency-vulnerability/CVE scan was performed. Basic secret-pattern scanning is not a substitute for a dedicated secret scanner.
+LaTeX compilation and PDF visual layout were not verified because LaTeX was not installed. No external dependency-vulnerability/CVE scan was performed. Basic secret-pattern scanning is not a substitute for a dedicated secret scanner.
 
 ## Recommended Remediation Order
 
@@ -60,4 +60,4 @@ Typst compilation and PDF visual layout were not verified because Typst was not 
 2. Resolve the L04 dependency incompatibility in project metadata and the lockfile.
 3. Add automated clean-kernel execution for all primary notebooks.
 4. Strengthen snippet assertions and correct the PCA sign-comparison explanation.
-5. Document Typst installation, compile all sources, and refresh stale notebook outputs.
+5. Document LaTeX installation, compile all sources, and refresh stale notebook outputs.

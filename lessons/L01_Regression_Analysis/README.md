@@ -26,11 +26,11 @@ L01_Regression_Analysis/
 │   ├── housing_regression.csv                    # Generated dataset (1,000 homes × 9 metrics)
 │   └── HOUSING_REGRESSION_DATA_DICTIONARY.md     # Detailed variable descriptions
 ├── notes/                                        # Lecture notes and study guides
-│   └── regression_analysis_notes.typ             # Comprehensive study guide (Typst)
+│   └── regression_analysis_notes.tex             # Comprehensive study guide (LaTeX)
 ├── notebook/                                     # Interactive Jupyter notebooks
 │   └── housing_regression_analysis.ipynb         # End-to-end residential valuation case study
 ├── presentation/                                 # Presentation slides
-│   └── regression_analysis_slides.typ            # Typst presentation (Touying university theme)
+│   └── regression_analysis_slides.tex            # LaTeX Beamer presentation
 └── README.md                                     # Module documentation
 ```
 
@@ -46,13 +46,13 @@ uv run python lessons/L01_Regression_Analysis/data/fetch_housing_regression.py
 uv run jupyter notebook lessons/L01_Regression_Analysis/notebook/housing_regression_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (Typst)
+### 3. Compile Slides & Documents (LaTeX)
 ```bash
 # Presentation
 cd lessons/L01_Regression_Analysis/presentation/
-typst compile regression_analysis_slides.typ
+pdflatex regression_analysis_slides.tex
 
 # Lecture Notes
 cd ../notes/
-typst compile regression_analysis_notes.typ
+pdflatex regression_analysis_notes.tex
 ```
