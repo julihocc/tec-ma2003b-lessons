@@ -1,67 +1,63 @@
-# Chapter 6 — Cluster Analysis
+# Chapter 6 — Analysis by Conglomerates (Cluster Analysis)
 
-This chapter covers Cluster Analysis techniques for discovering natural customer segments in e-commerce behavioral data. Unlike supervised segmentation, this analysis uses unsupervised learning to reveal hidden patterns without predefined categories.
+This chapter covers unsupervised statistical learning, proximity and distance metrics, hierarchical agglomerative clustering (AGNES), partitioning algorithms (K-Means), and cluster validation metrics.
 
-## Business Context
+## Chapter Overview (Syllabus Section 6)
 
-An e-commerce company wants to understand their customer base better to optimize marketing strategies, personalize experiences, and allocate resources efficiently. Without predetermined customer categories, the company uses cluster analysis to:
+Cluster Analysis partitions a set of unlabeled multivariate observations into natural, homogeneous subgroups (*clusters*) such that objects within the same cluster are highly similar while objects across different clusters are distinctly separated. This module explores both hierarchical linkage methods (Ward's, Complete, Single) and non-hierarchical methods (K-Means, K-Means++), supported by validation metrics (Silhouette, Elbow) and e-commerce behavioral segmentation case studies.
 
-- **Discover Natural Segments**: Identify groups based on behavioral patterns
-- **Personalize Marketing**: Tailor campaigns to each discovered segment
-- **Optimize Resources**: Focus efforts on high-potential customer groups
-- **Improve Retention**: Develop segment-specific retention strategies
+## Syllabus Topics & Subtopics
 
-## Dataset Description
-
-The synthetic dataset contains 2,000 customers with 7 behavioral metrics:
-
-- **monthly_purchases**: Average purchases per month
-- **avg_basket_size**: Average number of items per transaction
-- **total_spend**: Total spending over observation period (dollars)
-- **session_duration**: Average time spent per website visit (minutes)
-- **email_clicks**: Average email marketing clicks per month
-- **product_views**: Average product pages viewed per session
-- **return_rate**: Proportion of purchased items returned
+- **6.1** Similarity and dissimilarity measures
+- **6.2** Graphical methods (dispersion, main components, Andrews)
+- **6.3** Non-hierarchical grouping methods
+- **6.4** Hierarchical grouping
+- **6.5** Nearest neighbor method
+- **6.6** Coding and commercial programs
 
 ## Directory Structure
 
 ```text
 L06_Cluster_Analysis/
-├── data/                               # Data files and generation scripts
-│   ├── fetch_customer_data.py          # Data generation script
-│   ├── customer_data.csv               # Generated customer dataset (2,000 × 7)
-│   ├── customer_data_with_labels.csv   # Dataset with cluster labels
-│   └── CUSTOMER_DATA_DICTIONARY.md     # Detailed variable descriptions
-├── notes/                              # Lecture notes and documentation
-│   ├── cluster_analysis_notes.tex      # LaTeX source for lecture notes
-│   └── cluster_analysis_notes.pdf      # Compiled lecture notes
-├── notebook/                           # Analysis notebooks
-│   └── customer_clustering_analysis.ipynb # Complete cluster analysis
-├── presentation/                       # Presentation materials
-│   ├── cluster_analysis_slides.tex     # LaTeX Beamer source for presentation
-│   └── cluster_analysis_slides.pdf     # Compiled presentation slides
-└── README.md                           # Module documentation
+├── data/                                         # Datasets and generation scripts
+│   ├── fetch_customer_data.py                    # Multi-channel shopper behavioral generator
+│   ├── customer_data.csv                         # Unlabeled dataset (2,000 customers × 7 features)
+│   ├── customer_data_with_labels.csv             # Ground-truth labeled benchmark dataset
+│   ├── CUSTOMER_DATA_DICTIONARY.md               # Detailed variable descriptions
+│   └── README.md                                 # Data documentation & regeneration guide
+├── notebook/                                     # Interactive Jupyter notebooks
+│   ├── customer_clustering_analysis.ipynb        # End-to-end unsupervised segmentation case study
+│   └── README.md                                 # Notebook walkthrough & cell progression
+├── notes/                                        # Lecture notes and study guides
+│   ├── cluster_analysis_notes.typ                # Comprehensive study guide (Typst)
+│   ├── cluster_analysis_notes.pdf                # Compiled lecture note PDF
+│   └── README.md                                 # Notes outline & compilation guide
+├── presentation/                                 # Presentation slides
+│   ├── cluster_analysis_slides.typ               # Typst presentation (Touying university theme)
+│   ├── cluster_analysis_slides.pdf               # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
+└── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
-python data/fetch_customer_data.py
+uv run python lessons/L06_Cluster_Analysis/data/fetch_customer_data.py
 ```
 
 ### 2. Run Interactive Notebook
 ```bash
-jupyter notebook notebook/customer_clustering_analysis.ipynb
+uv run jupyter notebook lessons/L06_Cluster_Analysis/notebook/customer_clustering_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (LaTeX)
+### 3. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
-cd presentation/
-pdflatex cluster_analysis_slides.tex
+cd lessons/L06_Cluster_Analysis/presentation/
+typst compile cluster_analysis_slides.typ
 
 # Lecture Notes
 cd ../notes/
-pdflatex cluster_analysis_notes.tex
+typst compile cluster_analysis_notes.typ
 ```
