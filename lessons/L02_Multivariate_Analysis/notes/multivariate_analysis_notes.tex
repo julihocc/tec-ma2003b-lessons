@@ -1,0 +1,537 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Multivariate Analysis - Lecture Notes},
+  pdfauthor={MA2003B},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Multivariate Analysis - Lecture Notes}
+\author{MA2003B}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Multivariate Analysis Foundations}
+
+Theoretical Principles, Probability Models, and Diagnostics
+
+MA2003B --- Application of Multivariate Methods in Data Science
+
+Tecnológico de Monterrey
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Course and Chapter Overview}
+
+\textbf{ }
+
+\subsection{Course Context}
+
+Multivariate statistical methods extend classical single-variable
+inference to systems where \(p \geq 2\) interconnected random variables
+are observed simultaneously. In \textbf{MA2003B}, this module provides
+the fundamental matrix algebra, probability theory, and diagnostic
+toolset required for all downstream dimensionality reduction (PCA,
+Factor Analysis) and supervised classification (Discriminant Analysis)
+techniques.
+
+\textbf{ }
+
+\subsection{Learning Objectives}
+
+By the end of this chapter, students will be able to:
+
+\begin{itemize}
+\item
+  Formulate random vectors, joint probability density functions, and
+  marginal/conditional expectations.
+\item
+  Compute and interpret sample mean vectors (\(\overline{\mathbf{x}}\)),
+  sample covariance matrices (\(\mathbf{S}\)), and sample correlation
+  matrices (\(\mathbf{R}\)).
+\item
+  Analyze the mathematical properties and geometry of the Multivariate
+  Normal (MVN) distribution.
+\item
+  Construct constant-density contour ellipsoids and compute Mahalanobis
+  generalized distances.
+\item
+  Identify missing data mechanisms (MCAR, MAR, MNAR) and apply modern
+  imputation algorithms (KNN, MICE).
+\item
+  Detect multivariate outliers using Mahalanobis distances and Robust
+  Minimum Covariance Determinant (MCD) estimators.
+\item
+  Derive Fisher \(z\)-transformations and construct confidence intervals
+  for correlation parameters (\(\rho\)).
+\item
+  Apply multidimensional visualization techniques including scatter
+  matrices, correlation heatmaps, and Andrews curves.
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{2.1 Multivariate Distributions \& Random Vectors}
+
+\textbf{ }
+
+\subsection{Random Vectors}
+
+Let
+\(\mathbf{X} = \left\lbrack X_{1},X_{2},\ldots,X_{p} \right\rbrack^{T}\)
+be a \(p\)-dimensional column random vector where each component
+\(X_{j}\) is a real-valued random variable.
+
+\textbf{ }
+
+\subsection{Joint Cumulative Distribution Function (CDF)}
+
+\[F\left( \mathbf{x} \right) = P\left( X_{1} \leq x_{1},X_{2} \leq x_{2},\ldots,X_{p} \leq x_{p} \right)\]
+
+\textbf{ }
+
+\subsection{Joint Probability Density Function (PDF)}
+
+For continuous random vectors with density
+\(f\left( \mathbf{x} \right) = f\left( x_{1},\ldots,x_{p} \right)\):
+\[P\left( \mathbf{X} \in A \right) = \int\ldots\int_{A}f\left( x_{1},\ldots,x_{p} \right),dx_{1}\ldots dx_{p}\]
+
+Marginal density for subset \(\mathbf{X}_{1}\):
+\[f_{1}\left( \mathbf{x}_{1} \right) = \int_{\mathbb{R}^{p - k}}f\left( \mathbf{x}_{1},\mathbf{x}_{2} \right),d\mathbf{x}_{2}\]
+
+Conditional density of \(\mathbf{X}_{1}\) given
+\(\mathbf{X}_{2} = \mathbf{x}_{2}\):
+\[f\left( \mathbf{x}_{1}~|~\mathbf{x}_{2} \right) = \frac{f\left( \mathbf{x}_{1},\mathbf{x}_{2} \right)}{f_{2}\left( \mathbf{x}_{2} \right)},\quad\text{ provided  }f_{2}\left( \mathbf{x}_{2} \right) > 0\]
+
+---
+
+\textbf{ }
+
+\section{2.2 Mean Vectors and Covariance Matrices}
+
+\textbf{ }
+
+\subsection{Population Mean Vector}
+
+\[\mathbf{\mu} = \mathbb{E}\left\lbrack \mathbf{X} \right\rbrack = \begin{bmatrix}
+\mathbb{E}\left\lbrack X_{1} \right\rbrack \\
+\mathbb{E}\left\lbrack X_{2} \right\rbrack \\
+ \vdots \\
+\mathbb{E}\left\lbrack X_{p} \right\rbrack
+\end{bmatrix} = \begin{bmatrix}
+\mu_{1} \\
+\mu_{2} \\
+ \vdots \\
+\mu_{p}
+\end{bmatrix}\]
+
+\textbf{ }
+
+\subsection{Population Covariance Matrix}
+
+\[\mathbf{\Sigma} = \operatorname{Cov}(\mathbf{X}) = \mathbb{E}\left\lbrack \left( \mathbf{X} - \mathbf{\mu} \right)\left( \mathbf{X} - \mathbf{\mu} \right)^{T} \right\rbrack = \begin{bmatrix}
+\sigma_{11} & \sigma_{12} & \ldots & \sigma_{1p} \\
+\sigma_{21} & \sigma_{22} & \ldots & \sigma_{2p} \\
+ \vdots & \vdots & \ddots & \vdots \\
+\sigma_{p1} & \sigma_{p2} & \ldots & \sigma_{pp}
+\end{bmatrix}\]
+
+where \(\sigma_{jj} = \operatorname{Var}(X_{j}) = \sigma_{j}^{2}\) and
+\(\sigma_{jk} = \operatorname{Cov}(X_{j},X_{k}) = \sigma_{kj}\).
+
+\textbf{Info: } \textbf{Positive Semi-Definiteness:} For any non-zero
+constant vector \(\mathbf{a} \in \mathbb{R}^{p}\),
+\(\operatorname{Var}(\mathbf{a}^{T}\mathbf{X}) = \mathbf{a}^{T}\mathbf{\Sigma}\mathbf{a} \geq 0\).
+Hence, all valid covariance matrices \(\mathbf{\Sigma}\) are symmetric
+positive semi-definite (\(\mathbf{\Sigma} \succeq 0\)).
+
+\textbf{ }
+
+\subsection{Sample Statistics Matrix Operations}
+
+Given a data matrix \(\mathbf{X} \in \mathbb{R}^{n \times p}\) with
+\(n\) observations:
+
+\begin{itemize}
+\item
+  \textbf{Sample Mean Vector:}
+  \[\overline{\mathbf{x}} = \frac{1}{n}\mathbf{X}^{T}\mathbf{1}_{n} = \begin{bmatrix}
+  {\overline{x}}_{1} & {\overline{x}}_{2} & \ldots & {\overline{x}}_{p}
+  \end{bmatrix}^{T}\]
+\item
+  \textbf{Sample Covariance Matrix:}
+  \[\mathbf{S} = \frac{1}{n - 1}\sum_{i = 1}^{n}\left( \mathbf{x}_{i} - \overline{\mathbf{x}} \right)\left( \mathbf{x}_{i} - \overline{\mathbf{x}} \right)^{T} = \frac{1}{n - 1}\mathbf{X}^{T}\left( \mathbf{I}_{n} - \frac{1}{n}\mathbf{1}_{n}\mathbf{1}_{n}^{T} \right)\mathbf{X}\]
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{2.3 Correlations and Correlation Matrices}
+
+\textbf{ }
+
+\subsection{Population and Sample Correlation}
+
+Let
+\(\mathbf{D} = \operatorname{diag}(\sigma_{11},\sigma_{22},\ldots,\sigma_{pp})\)
+be the diagonal \textbf{variance} matrix
+(\(\sigma_{jj} = \operatorname{Var}(X_{j})\), not a standard deviation).
+Its inverse square root
+\(\mathbf{D}^{- \frac{1}{2}} = \operatorname{diag}(\frac{1}{\sigma_{1}},\ldots,\frac{1}{\sigma_{p}})\)
+contains reciprocal standard deviations, which is what rescales
+\(\mathbf{\Sigma}\) to a correlation matrix below.
+
+\begin{itemize}
+\item
+  \textbf{Population Correlation Matrix:}
+  \[\mathbf{P} = \mathbf{D}^{- \frac{1}{2}}\mathbf{\Sigma}\mathbf{D}^{- \frac{1}{2}} = \begin{bmatrix}
+  1 & \rho_{12} & \ldots & \rho_{1p} \\
+  \rho_{21} & 1 & \ldots & \rho_{2p} \\
+   \vdots & \vdots & \ddots & \vdots \\
+  \rho_{p1} & \rho_{p2} & \ldots & 1
+  \end{bmatrix},\quad\rho_{jk} = \frac{\sigma_{jk}}{\sigma_{j}\sigma_{k}} \in \lbrack - 1,1\rbrack\]
+\item
+  \textbf{Sample Correlation Matrix:}
+  \[\mathbf{R} = \mathbf{D}_{\mathbf{S}}^{- \frac{1}{2}}\mathbf{S}\mathbf{D}_{\mathbf{S}}^{- \frac{1}{2}},\quad r_{jk} = \frac{s_{jk}}{s_{j}s_{k}}\]
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Geometric Interpretation}
+
+In sample space \(\mathbb{R}^{n}\), the sample correlation coefficient
+\(r_{jk}\) equals the \textbf{cosine of the angle} \(\theta\) between
+the mean-centered observation vectors
+\(\mathbf{d}_{j} = \mathbf{x}_{j} - {\overline{x}}_{j}\mathbf{1}\) and
+\(\mathbf{d}_{k} = \mathbf{x}_{k} - {\overline{x}}_{k}\mathbf{1}\):
+\[r_{jk} = \cos(\theta) = \frac{\mathbf{d}_{j}^{T}\mathbf{d}_{k}}{|\mathbf{d}_{j}||\mathbf{d}_{k}|}\]
+
+---
+
+\textbf{ }
+
+\section{2.4 The Multivariate Normal (MVN) Distribution}
+
+\textbf{ }
+
+\subsection{Probability Density Function}
+
+A \(p\)-dimensional random vector \(\mathbf{X}\) follows a Multivariate
+Normal distribution
+\(\mathbf{X} \sim \mathcal{N}_{p\left( \mathbf{\mu},\mathbf{\Sigma} \right)}\)
+(with positive definite \(\mathbf{\Sigma} \succ 0\)) if its joint PDF
+is:
+
+\[f\left( \mathbf{x} \right) = \frac{1}{(2\pi)^{\frac{p}{2}}|\mathbf{\Sigma}|^{\frac{1}{2}}}\exp( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right))\]
+
+\textbf{ }
+
+\subsection{Key Properties of MVN}
+
+\begin{enumerate}
+\item
+  \textbf{Linear Combinations:} If
+  \(\mathbf{X} \sim \mathcal{N}_{p\left( \mathbf{\mu},\mathbf{\Sigma} \right)}\)
+  and \(\mathbf{A} \in \mathbb{R}^{q \times p}\), then
+  \(\mathbf{A}\mathbf{X} + \mathbf{b} \sim \mathcal{N}_{q\left( \mathbf{A}\mathbf{\mu} + \mathbf{b},\mathbf{A}\mathbf{\Sigma}\mathbf{A}^{T} \right)}\).
+\item
+  \textbf{Marginals and Conditionals:} All marginal and conditional
+  distributions of an MVN vector are themselves Multivariate Normal.
+\item
+  \textbf{Zero Covariance Implies Independence:} For MVN distributions,
+  \(\operatorname{Cov}(X_{j},X_{k}) = 0 \Longleftrightarrow X_{j} \perp X_{k}\).
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Geometry of Contour Ellipsoids \& Mahalanobis Distance}
+
+The exponent in the MVN density defines the \textbf{squared Mahalanobis
+distance}:
+\[D^{2}\left( \mathbf{x},\mathbf{\mu} \right) = \left( \mathbf{x} - \mathbf{\mu} \right)^{T}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right)\]
+
+\begin{itemize}
+\item
+  The surfaces of constant probability density are hyper-ellipsoids
+  centered at \(\mathbf{\mu}\):
+  \[\{\mathbf{x} \in \mathbb{R}^{p}:\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right) = c^{2}\}\]
+\item
+  The principal axes of the ellipsoid align with the eigenvectors
+  \(\mathbf{v}_{1},\ldots,\mathbf{v}_{p}\) of \(\mathbf{\Sigma}\), with
+  half-lengths proportional to \(\pm c\sqrt{\lambda_{j}}\).
+\item
+  Under multivariate normality:
+  \[D^{2}\left( \mathbf{X},\mathbf{\mu} \right) \sim \chi_{p}^{2}\]
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{2.5 Lost, Null, and Incorrect Values (Data Quality \&
+Imputation)}
+
+\textbf{ }
+
+\subsection{Missing Data Mechanisms}
+
+\begin{itemize}
+\item
+  \textbf{Missing Completely at Random (MCAR):} The probability of
+  missingness is independent of both observed and unobserved data:
+  \(P\left( M~|~Y_{\text{obs}},Y_{\text{mis}} \right) = P(M)\).
+\item
+  \textbf{Missing at Random (MAR):} Missingness depends on observed
+  variables but not unobserved values:
+  \(P\left( M~|~Y_{\text{obs}},Y_{\text{mis}} \right) = P\left( M~|~Y_{\text{obs}} \right)\).
+\item
+  \textbf{Missing Not at Random (MNAR):} Missingness depends directly on
+  the unobserved value itself.
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Imputation Strategies}
+
+\begin{enumerate}
+\item
+  \textbf{Mean/Median Imputation:} Simple but distorts variance and
+  attenuates covariance structures.
+\item
+  \textbf{K-Nearest Neighbors (KNN) Imputation:} Replaces missing values
+  with the weighted average of the \(K\) closest complete records using
+  Euclidean/Gower distance.
+\item
+  \textbf{Iterative Imputer (MICE - Multivariate Imputation by Chained
+  Equations):} Models each feature with missing values as a function of
+  all other features in a round-robin Gibbs sampling scheme.
+\end{enumerate}
+
+---
+
+\textbf{ }
+
+\section{2.6 Multivariate Aberrant Data (Outlier Detection)}
+
+\textbf{ }
+
+\subsection{Univariate vs. Multivariate Outliers}
+
+An observation may have perfectly normal marginal values on each
+individual coordinate \(X_{j}\) while being a severe multivariate
+outlier because it violates the joint correlation structure
+\(\mathbf{\Sigma}\).
+
+\textbf{ }
+
+\subsection{Diagnostic Metrics}
+
+\begin{itemize}
+\item
+  \textbf{Sample Mahalanobis Squared Distance:}
+  \[D_{i}^{2} = \left( \mathbf{x}_{i} - \overline{\mathbf{x}} \right)^{T}\mathbf{S}^{- 1}\left( \mathbf{x}_{i} - \overline{\mathbf{x}} \right)\]
+\item
+  \textbf{Chi-Square Outlier Rule:} Flag observation \(i\) as an outlier
+  if \(D_{i}^{2} > \chi_{p,1 - \alpha}^{2}\) (typically
+  \(\alpha = 0.001\)).
+\item
+  \textbf{Robust Covariance Estimation (MCD):} Classical
+  \(\overline{\mathbf{x}}\) and \(\mathbf{S}\) are sensitive to outliers
+  (breakdown point \(= \frac{1}{n}\)). The \textbf{Minimum Covariance
+  Determinant (MCD)} finds the subset of \(h \leq n\) observations whose
+  sample covariance matrix has the smallest determinant, providing
+  robust location \({\hat{\mathbf{\mu}}}_{\text{MCD}}\) and scatter
+  \({\hat{\mathbf{\Sigma}}}_{\text{MCD}}\).
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{2.7 Sample Correlations: Fisher and Ruben Confidence Intervals}
+
+\textbf{ }
+
+\subsection{\texorpdfstring{Fisher's
+\(z\)-Transformation}{Fisher's z-Transformation}}
+
+The sampling distribution of Pearson's \(r\) is highly skewed when
+\(|\rho| > 0\). Fisher's transformation normalizes the distribution:
+
+\[z = \frac{1}{2}\ln(\frac{1 + r}{1 - r}) = \operatorname{arctanh}(r)\]
+
+Asymptotically:
+\[z \sim^{\text{approx}}\mathcal{N}(\frac{1}{2}\ln(\frac{1 + \rho}{1 - \rho}),\frac{1}{n - 3})\]
+
+\(100(1 - \alpha)\%\) Confidence Interval for
+\(\zeta = \operatorname{arctanh}(\rho)\):
+\[\left\lbrack z_{L},z_{U} \right\rbrack = z \pm z_{1 - \frac{\alpha}{2}}\frac{1}{\sqrt{n - 3}}\]
+
+Back-transforming to correlation scale:
+\[\rho_{L} = \tanh(z_{L}) = \frac{\exp(2z_{L}) - 1}{\exp(2z_{L}) + 1},\quad\quad\rho_{U} = \tanh(z_{U}) = \frac{\exp(2z_{U}) - 1}{\exp(2z_{U}) + 1}\]
+
+---
+
+\textbf{ }
+
+\section{2.8 Multivariate Descriptive Analytics \& Visualization}
+
+\textbf{ }
+
+\subsection{Multidimensional Plotting Techniques}
+
+\begin{itemize}
+\item
+  \textbf{Scatter Plot Matrix (SPLOM):} Visualizes all
+  \(\frac{p(p - 1)}{2}\) pairwise bivariate relationships simultaneously
+  with diagonal univariate kernel density estimates.
+\item
+  \textbf{Correlation Heatmaps:} Displays \(\mathbf{R}\) with color
+  intensity gradients and optional hierarchical clustering dendrograms.
+\item
+  \textbf{Andrews Curves:} Maps each \(p\)-dimensional observation
+  \(\mathbf{x}_{i} = \left\lbrack x_{i1},\ldots,x_{ip} \right\rbrack^{T}\)
+  to a continuous trigonometric function over
+  \(t \in \lbrack - \pi,\pi\rbrack\):
+  \[f_{\mathbf{x}_{i}}(t) = \frac{x_{i1}}{\sqrt{2}} + x_{i2}\sin(t) + x_{i3}\cos(t) + x_{i4}\sin(2t) + x_{i5}\cos(2t) + \ldots\]
+  Similar multivariate observations appear as closely clustered curves
+  in function space.
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{Practical Python Implementation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{from}\NormalTok{ scipy }\ImportTok{import}\NormalTok{ stats}
+\ImportTok{from}\NormalTok{ sklearn.impute }\ImportTok{import}\NormalTok{ KNNImputer}
+\ImportTok{from}\NormalTok{ sklearn.covariance }\ImportTok{import}\NormalTok{ MinCovDet}
+
+\CommentTok{\# 1. Imputation of Missing Values (KNN)}
+\NormalTok{imputer }\OperatorTok{=}\NormalTok{ KNNImputer(n\_neighbors}\OperatorTok{=}\DecValTok{5}\NormalTok{)}
+\NormalTok{X\_imputed }\OperatorTok{=}\NormalTok{ pd.DataFrame(imputer.fit\_transform(df.iloc[:, }\DecValTok{1}\NormalTok{:]), columns}\OperatorTok{=}\NormalTok{df.columns[}\DecValTok{1}\NormalTok{:])}
+
+\CommentTok{\# 2. Sample Mean Vector \& Covariance Matrix}
+\NormalTok{mean\_vec }\OperatorTok{=}\NormalTok{ X\_imputed.mean()}
+\NormalTok{cov\_mat }\OperatorTok{=}\NormalTok{ X\_imputed.cov()}
+\NormalTok{corr\_mat }\OperatorTok{=}\NormalTok{ X\_imputed.corr()}
+
+\CommentTok{\# 3. Mahalanobis Distance Outlier Detection}
+\NormalTok{inv\_cov }\OperatorTok{=}\NormalTok{ np.linalg.inv(cov\_mat)}
+\NormalTok{diff }\OperatorTok{=}\NormalTok{ X\_imputed }\OperatorTok{{-}}\NormalTok{ mean\_vec}
+\NormalTok{mahal\_d2 }\OperatorTok{=}\NormalTok{ np.}\BuiltInTok{sum}\NormalTok{(diff.dot(inv\_cov) }\OperatorTok{*}\NormalTok{ diff, axis}\OperatorTok{=}\DecValTok{1}\NormalTok{)}
+\NormalTok{cutoff }\OperatorTok{=}\NormalTok{ stats.chi2.ppf(}\FloatTok{0.999}\NormalTok{, df}\OperatorTok{=}\NormalTok{X\_imputed.shape[}\DecValTok{1}\NormalTok{])}
+\NormalTok{outliers }\OperatorTok{=}\NormalTok{ X\_imputed[mahal\_d2 }\OperatorTok{\textgreater{}}\NormalTok{ cutoff]}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Detected }\SpecialCharTok{\{}\BuiltInTok{len}\NormalTok{(outliers)}\SpecialCharTok{\}}\SpecialStringTok{ multivariate outliers (cutoff = }\SpecialCharTok{\{}\NormalTok{cutoff}\SpecialCharTok{:.2f\}}\SpecialStringTok{)"}\NormalTok{)}
+
+\CommentTok{\# 4. Fisher z Confidence Interval for Correlation}
+\NormalTok{r }\OperatorTok{=}\NormalTok{ corr\_mat.loc[}\StringTok{"pm25"}\NormalTok{, }\StringTok{"pm10"}\NormalTok{]}
+\NormalTok{n }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(X\_imputed)}
+\NormalTok{z }\OperatorTok{=}\NormalTok{ np.arctanh(r)}
+\NormalTok{se }\OperatorTok{=} \DecValTok{1} \OperatorTok{/}\NormalTok{ np.sqrt(n }\OperatorTok{{-}} \DecValTok{3}\NormalTok{)}
+\NormalTok{ci\_z }\OperatorTok{=}\NormalTok{ (z }\OperatorTok{{-}} \FloatTok{1.96} \OperatorTok{*}\NormalTok{ se, z }\OperatorTok{+} \FloatTok{1.96} \OperatorTok{*}\NormalTok{ se)}
+\NormalTok{ci\_r }\OperatorTok{=}\NormalTok{ (np.tanh(ci\_z[}\DecValTok{0}\NormalTok{]), np.tanh(ci\_z[}\DecValTok{1}\NormalTok{]))}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"PM2.5 vs PM10: r = }\SpecialCharTok{\{}\NormalTok{r}\SpecialCharTok{:.4f\}}\SpecialStringTok{, 95\% CI = [}\SpecialCharTok{\{}\NormalTok{ci\_r[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{, }\SpecialCharTok{\{}\NormalTok{ci\_r[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{:.4f\}}\SpecialStringTok{]"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
+

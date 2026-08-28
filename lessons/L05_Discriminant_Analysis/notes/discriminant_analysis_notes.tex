@@ -1,0 +1,1808 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Discriminant Analysis - Companion Notes},
+  pdfauthor={Dr. Juliho Castillo},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Discriminant Analysis - Companion Notes}
+\author{Dr. Juliho Castillo}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Discriminant Analysis}
+
+Companion Notes for Chapter 5
+
+MA2003B - Multivariate Methods in Data Science
+
+Dr. Juliho Castillo ⋅ Tecnologico de Monterrey
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{Hands-On Learning Resource}
+
+This document is accompanied by an interactive Jupyter notebook that
+demonstrates all concepts with executable Python code and
+visualizations:
+
+\texttt{ch5\_guiding\_example/marketing\_discriminant\_analysis.ipynb}
+
+The notebook analyzes a customer segmentation case study with 1,200
+e-commerce customers, comparing Linear Discriminant Analysis (LDA) and
+Quadratic Discriminant Analysis (QDA) for marketing campaign
+optimization.
+
+Each major concept in these notes references specific modules in the
+notebook where you can see the implementation and results.
+
+\section{Introduction: The Classification Problem}
+
+\subsection{Why Discriminant Analysis?}
+
+Imagine you are a marketing analyst at an e-commerce company with
+thousands of customers. You want to answer a fundamental question:
+\textbf{Given a customer's behavior, which segment do they belong to?}
+Are they a high-value customer worth premium retention efforts? A loyal
+regular who might respond to upselling? Or an occasional buyer who needs
+re-engagement?
+
+This is a \textbf{classification problem} - we have several known groups
+and want to assign new observations to the correct group based on
+measured characteristics. Discriminant Analysis provides a principled
+statistical approach to this problem.
+
+\subsection{Real-World Applications}
+
+Discriminant analysis finds extensive application across diverse domains
+where classification decisions require both accuracy and
+interpretability. In business and marketing contexts, the technique
+enables customer segmentation for targeted campaigns by identifying
+behavioral patterns that distinguish high-value customers from
+occasional buyers. Financial institutions employ discriminant analysis
+for credit risk assessment, where the method helps determine whether to
+approve or reject loan applications based on applicant characteristics
+and historical default patterns. Additionally, churn prediction models
+leverage discriminant functions to identify customers at risk of
+discontinuing service, allowing proactive retention efforts.
+
+The healthcare and medical sectors utilize discriminant analysis for
+diagnostic purposes, where the method combines patient symptoms,
+laboratory test results, and medical history to classify individuals
+into disease categories. Treatment response prediction represents
+another critical application, as clinicians can use discriminant models
+to identify which patients are likely to benefit from specific
+therapeutic interventions. Medical imaging classification similarly
+benefits from discriminant techniques, particularly when distinguishing
+between normal and pathological tissue patterns in radiological studies.
+
+Manufacturing industries apply discriminant analysis extensively in
+quality control processes, where products must be classified as
+acceptable, borderline, or defective based on multiple measurement
+criteria. Defect type classification helps identify the root causes of
+manufacturing problems by associating specific defects with process
+parameters. Process monitoring and fault detection systems employ
+discriminant functions to distinguish normal operating conditions from
+various failure modes, enabling timely intervention before quality
+degradation occurs.
+
+In sports and performance contexts, discriminant analysis assists in
+athlete classification for training programs by identifying
+physiological and performance characteristics that predict success in
+different athletic domains. Talent identification systems use
+discriminant models to evaluate prospective athletes based on multiple
+attributes, helping coaches allocate resources effectively. Performance
+level assessment employs these techniques to classify athletes into
+skill categories, informing coaching strategies and competitive
+placement decisions.
+
+\subsection{The Core Idea}
+
+Discriminant Analysis finds \textbf{discriminant functions} --- linear
+(or quadratic) combinations of your predictor variables that best
+separate your groups. Think of it as finding the ``best viewing angle''
+to distinguish between groups in multidimensional space.
+
+\textbf{Key Question}: Which combination of behavioral metrics (purchase
+frequency, order value, engagement, etc.) best distinguishes high-value
+customers from loyal customers from occasional customers?
+
+\section{Mathematical Foundations}
+
+\subsection{The Setup}
+
+The discriminant analysis framework requires formalization of the
+classification problem structure. The analysis involves \(g\) distinct
+groups or populations into which observations must be classified, with
+\(p\) predictor variables measured on each observation. A training
+dataset provides examples of observations with known group memberships,
+enabling the estimation of discriminant functions. The ultimate goal
+consists of developing a classification rule that assigns new
+observations to one of the \(g\) groups based on their predictor values.
+
+The mathematical notation employed throughout discriminant analysis
+includes several key quantities. The vector
+\(\mathbf{x} = \left( x_{1},x_{2},\ldots,x_{p} \right)^{\top}\)
+represents the predictor variables for a given observation, where the
+superscript indicates vector transposition. The prior probability
+\(\pi_{k}\) denotes the probability that a randomly selected observation
+belongs to group \(k\), which may reflect either the proportion of group
+\(k\) in the population or be specified based on domain considerations.
+The mean vector \(\mathbf{\mu}_{k}\) characterizes the central tendency
+of group \(k\) in the \(p\)-dimensional predictor space, while the
+covariance matrix \(\mathbf{\Sigma}_{k}\) describes the variability and
+correlation structure within group \(k\). Finally, the probability
+density function \(f_{k}\left( \mathbf{x} \right)\) specifies the
+likelihood of observing predictor values \(\mathbf{x}\) given membership
+in group \(k\), with the multivariate normal distribution serving as the
+standard assumption in classical discriminant analysis.
+
+\subsection{Classification Rules: Bayes Theorem}
+
+The foundation of discriminant analysis is Bayes theorem, which provides
+the optimal classification framework when distributional assumptions
+hold. Understanding this theorem in depth clarifies how discriminant
+analysis achieves its classification decisions and why these decisions
+are optimal under certain conditions.
+
+\subsubsection{Understanding the Notation}
+
+Before examining the theorem itself, we must clarify the mathematical
+notation employed throughout discriminant analysis:
+
+\textbf{Group Membership Variable G}: The random variable \(G\)
+represents the group or class to which an observation belongs. This
+categorical variable can take values \(1,2,\ldots,g\), where \(g\)
+denotes the total number of groups in the classification problem. For
+example, in a credit risk application, \(G\) might take values from the
+set \{0, 1\}, where 0 indicates ``no default'' and 1 indicates
+``default''. In the marketing segmentation example, \(G\) takes values
+from \{1, 2, 3\}, corresponding to High-Value, Loyal, and Occasional
+customer segments respectively.
+
+\textbf{Predictor Vector x}: The vector
+\(\mathbf{x} = \left( x_{1},x_{2},\ldots,x_{p} \right)^{\top}\) contains
+the values of \(p\) predictor variables measured on a specific
+observation. In the marketing context, this might be
+\(\mathbf{x} = \left( \text{purchase frequency},\text{ order value},\text{ browsing time},\ldots \right)^{\top}\).
+Each component \(x_{j}\) represents a measured characteristic that
+potentially helps discriminate between groups.
+
+\textbf{Prior Probability pi\_k}: The quantity \(\pi_{k}\) denotes the
+prior probability that a randomly selected observation belongs to group
+\(k\), calculated before observing the predictor values. This
+probability reflects either population frequencies or domain knowledge
+about group prevalence. The prior probabilities must satisfy
+\(\pi_{k} > 0\) for all groups and \(\sum_{k = 1}^{g}\pi_{k} = 1\).
+
+\textbf{Class-Conditional Density f\_k(x)}: The function
+\(f_{k}\left( \mathbf{x} \right)\) represents the probability density of
+observing predictor values \(\mathbf{x}\) given that the observation
+belongs to group \(k\). In discriminant analysis, we typically assume
+\(f_{k}\left( \mathbf{x} \right)\) follows a multivariate normal
+distribution with mean vector \(\mathbf{\mu}_{k}\) and covariance matrix
+\(\mathbf{\Sigma}_{k}\). This density quantifies how typical or likely
+the observed predictor values are for members of group \(k\).
+
+\subsubsection{The Bayes Theorem Formula}
+
+Given observation \(\mathbf{x}\), the posterior probability of belonging
+to group \(k\) is:
+
+\[P\left( G = k~|~\mathbf{x} \right) = \frac{f_{k}\left( \mathbf{x} \right)\pi_{k}}{\sum_{j = 1}^{g}f_{j}\left( \mathbf{x} \right)\pi_{j}}\]
+
+This equation decomposes into several interpretable components:
+
+\textbf{Left Side - Posterior Probability}: The quantity
+\(P\left( G = k~|~\mathbf{x} \right)\) represents the probability that
+an observation with observed predictor values \(\mathbf{x}\) belongs to
+group \(k\). This is precisely what we want to calculate for
+classification purposes. The vertical bar notation \(|\) reads as
+``given'' or ``conditional on'', so we interpret this as ``the
+probability of group membership \(k\) given that we have observed
+predictor values \(\mathbf{x}\)''.
+
+\textbf{Numerator Components}:
+
+\begin{itemize}
+\item
+  \(f_{k}\left( \mathbf{x} \right)\): The likelihood of observing these
+  predictor values if the observation belongs to group \(k\)
+\item
+  \(\pi_{k}\): The prior probability of group \(k\) before observing any
+  predictor values
+\item
+  Product \(f_{k}\left( \mathbf{x} \right)\pi_{k}\): The joint
+  probability of both belonging to group \(k\) and having predictor
+  values \(\mathbf{x}\)
+\end{itemize}
+
+\textbf{Denominator}: The sum
+\(\sum_{j = 1}^{g}f_{j}\left( \mathbf{x} \right)\pi_{j}\) aggregates the
+joint probabilities across all \(g\) groups. This normalization constant
+ensures that the posterior probabilities sum to unity across all
+possible group assignments:
+\(\sum_{k = 1}^{g}P\left( G = k~|~\mathbf{x} \right) = 1\).
+
+\subsubsection{Intuitive Interpretation}
+
+Bayes theorem combines two distinct sources of information to produce
+classification decisions:
+
+\textbf{Prior Knowledge}: The prior probabilities \(\pi_{k}\) encode
+what we know about group frequencies before examining any specific
+observation. If historical data shows that 5 percent of loan applicants
+default, we set \(\pi_{1} = 0.05\) for the default group. This prior
+information prevents the classifier from ignoring base rates and making
+unrealistic predictions.
+
+\textbf{Evidence from Data}: The class-conditional density
+\(f_{k}\left( \mathbf{x} \right)\) quantifies how typical the observed
+predictor values are for group \(k\). If a loan applicant has income
+equal to 50,000 dollars, debt ratio equal to 0.4, and credit score equal
+to 650, the density \(f_{1}\left( \mathbf{x} \right)\) tells us how
+likely these values are among customers who ultimately default, while
+\(f_{0}\left( \mathbf{x} \right)\) tells us how likely they are among
+customers who do not default.
+
+The posterior probability is proportional to the product of these two
+components: ``how likely this data is for group \(k\)'' multiplied by
+``how common group \(k\) is''. Groups that are both common (high
+\(\pi_{k}\)) and compatible with the observed data (high
+\(f_{k}\left( \mathbf{x} \right)\)) receive high posterior
+probabilities.
+
+\subsubsection{Detailed Example: Credit Risk Assessment}
+
+Consider a credit risk classification problem with the following
+characteristics:
+
+\textbf{Groups}: \(k = 0\) (no default), \(k = 1\) (default)
+
+\textbf{Prior Probabilities}: Based on historical data,
+\(\pi_{0} = 0.95\) (95 percent of customers do not default) and
+\(\pi_{1} = 0.05\) (5 percent default)
+
+\textbf{Observation}: A loan applicant with
+\(\mathbf{x} = \left\lbrack \text{income } = 50000,\text{ debt ratio } = 0.4,\text{ credit score } = 650 \right\rbrack^{\top}\)
+
+\textbf{Class-Conditional Densities}: Suppose our fitted discriminant
+analysis model produces:
+
+\begin{itemize}
+\item
+  \(f_{0}\left( \mathbf{x} \right) = 0.0008\) (this financial profile is
+  somewhat typical for non-defaulters)
+\item
+  \(f_{1}\left( \mathbf{x} \right) = 0.0030\) (this financial profile is
+  more typical for defaulters)
+\end{itemize}
+
+The posterior probabilities calculate as:
+
+Numerator for group 0:
+\(f_{0}\left( \mathbf{x} \right)\pi_{0} = 0.0008 \times 0.95 = 0.00076\)
+
+Numerator for group 1:
+\(f_{1}\left( \mathbf{x} \right)\pi_{1} = 0.0030 \times 0.05 = 0.00015\)
+
+Denominator:
+\(\sum_{j = 0}^{1}f_{j}\left( \mathbf{x} \right)\pi_{j} = 0.00076 + 0.00015 = 0.00091\)
+
+Posterior probabilities:
+
+\begin{itemize}
+\item
+  \(P\left( G = 0~|~\mathbf{x} \right) = \frac{0.00076}{0.00091} \approx 0.835\)
+  (83.5 percent probability of no default)
+\item
+  \(P\left( G = 1~|~\mathbf{x} \right) = \frac{0.00015}{0.00091} \approx 0.165\)
+  (16.5 percent probability of default)
+\end{itemize}
+
+Despite the financial profile being more typical of defaulters (density
+ratio \(\frac{f_{1}}{f_{0}} = 3.75\)), the strong prior probability
+favoring non-default prevents the classifier from predicting default.
+The model balances the evidence from the data against the base rate
+information.
+
+\subsubsection{The Bayes Classification Rule}
+
+\textbf{Bayes Classification Rule}: Assign observation \(\mathbf{x}\) to
+the group \(k^{\ast}\) that maximizes the posterior probability:
+
+\[k^{\ast} = \arg\max\limits_{k}P\left( G = k~|~\mathbf{x} \right) = \arg\max\limits_{k}f_{k}\left( \mathbf{x} \right)\pi_{k}\]
+
+The second equality follows because the denominator
+\(\sum_{j = 1}^{g}f_{j}\left( \mathbf{x} \right)\pi_{j}\) is identical
+across all groups and therefore does not affect which group achieves the
+maximum. Consequently, we need only compare the numerators
+\(f_{k}\left( \mathbf{x} \right)\pi_{k}\) across groups.
+
+In the credit risk example above, we would classify the applicant as
+non-default (group 0) because
+\(P\left( G = 0~|~\mathbf{x} \right) = 0.835 > P\left( G = 1~|~\mathbf{x} \right) = 0.165\).
+
+\subsubsection{Optimality of the Bayes Rule}
+
+The Bayes classification rule is optimal in a precise mathematical
+sense: it minimizes the total probability of misclassification. This
+result, known as the Bayes risk minimization theorem, states that among
+all possible classification rules, assigning observations to the group
+with the highest posterior probability achieves the lowest possible
+error rate.
+
+This optimality holds under three critical conditions:
+
+\textbf{Condition 1 - Correct Prior Probabilities}: The specified prior
+probabilities \(\pi_{k}\) accurately reflect the true prevalence of
+groups in the population or appropriately weight the relative importance
+of different groups.
+
+\textbf{Condition 2 - Correct Density Specification}: The assumed
+class-conditional densities \(f_{k}\left( \mathbf{x} \right)\) correctly
+specify the distribution of predictor values within each group. In
+discriminant analysis, we assume multivariate normal distributions, so
+optimality requires that this assumption holds or approximately holds.
+
+\textbf{Condition 3 - Equal Misclassification Costs (0-1 Loss)}:
+``Minimizes the total probability of misclassification'' and ``assign to
+the highest posterior probability'' are only the same rule under 0-1
+loss, where every type of error counts equally. Under asymmetric costs
+(e.g. missing a default is worse than a false alarm), the
+\textbf{risk}-minimizing rule instead compares
+\(\pi_{k}f_{k}\left( \mathbf{x} \right) \cdot C_{k}\) weighted by cost,
+and can assign an observation to a group whose posterior probability is
+not the largest.
+
+When these conditions are violated, the Bayes rule using the
+misspecified priors or densities may perform suboptimally. Nevertheless,
+the framework remains valuable because:
+
+\textbf{Robustness}: Discriminant analysis often performs well even when
+the normality assumption is violated moderately, particularly with large
+sample sizes.
+
+\textbf{Flexibility in Priors}: We can adjust prior probabilities to
+reflect business costs or domain knowledge, even if these differ from
+sample proportions.
+
+\textbf{Interpretability}: The probabilistic framework provides
+posterior probabilities that quantify classification uncertainty,
+enabling risk-based decision making beyond simple classification.
+
+\subsubsection{Connection to Discriminant Functions}
+
+The discriminant analysis methods (LDA and QDA) implement the Bayes
+classification rule by making specific assumptions about the
+class-conditional densities \(f_{k}\left( \mathbf{x} \right)\). Both
+methods assume multivariate normal distributions:
+
+\[f_{k}\left( \mathbf{x} \right) = \frac{1}{(2\pi)^{p/2}|\mathbf{\Sigma}_{k}|^{1/2}}\exp( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu}_{k} \right)^{\top}\mathbf{\Sigma}_{k}^{- 1}\left( \mathbf{x} - \mathbf{\mu}_{k} \right))\]
+
+Taking logarithms and simplifying yields discriminant functions, which
+are equivalent to comparing posterior probabilities:
+
+\textbf{LDA}: Assuming \(\mathbf{\Sigma}_{k} = \mathbf{\Sigma}\) for all
+groups yields linear discriminant functions
+
+\textbf{QDA}: Allowing group-specific \(\mathbf{\Sigma}_{k}\) yields
+quadratic discriminant functions
+
+Thus, discriminant analysis provides a computationally efficient
+implementation of the optimal Bayes rule under normality assumptions,
+transforming the classification problem into comparison of discriminant
+scores rather than explicit probability calculations.
+
+\subsection{Linear Discriminant Analysis (LDA)}
+
+\subsubsection{Assumptions}
+
+LDA makes two critical assumptions:
+
+\begin{enumerate}
+\item
+  \textbf{Multivariate Normality}: Each group follows a multivariate
+  normal distribution
+\item
+  \textbf{Equal Covariances}: All groups share the same covariance
+  matrix:
+  \(\mathbf{\Sigma}_{1} = \mathbf{\Sigma}_{2} = \ldots = \mathbf{\Sigma}_{g} = \mathbf{\Sigma}\)
+\end{enumerate}
+
+Under these assumptions, the discriminant functions become
+\textbf{linear} in \(\mathbf{x}\).
+
+\subsubsection{Fisher Linear Discriminant}
+
+An alternative (but equivalent) approach by R.A. Fisher: Find linear
+combinations of variables that maximize the ratio of between-group
+variance to within-group variance.
+
+\textbf{For two groups}, find weights \(\mathbf{a}\) that maximize:
+
+\[\text{ maximize }\quad\frac{\left( {\overline{y}}_{1} - {\overline{y}}_{2} \right)^{2}}{s_{1}^{2} + s_{2}^{2}}\]
+
+where \(y = \mathbf{a}^{\top}\mathbf{x}\) is the discriminant score.
+
+The solution is:
+\(\mathbf{a} \propto \mathbf{\Sigma}^{- 1}\left( \mathbf{\mu}_{1} - \mathbf{\mu}_{2} \right)\)
+
+This gives us the \textbf{linear discriminant function}.
+
+\subsubsection{Discriminant Scores}
+
+For observation \(\mathbf{x}\), the discriminant score for group \(k\)
+is:
+
+\[\delta_{k}\left( \mathbf{x} \right) = \mathbf{x}^{\top}\mathbf{\Sigma}^{- 1}\mathbf{\mu}_{k} - \frac{1}{2}\mathbf{\mu}_{k}^{\top}\mathbf{\Sigma}^{- 1}\mathbf{\mu}_{k} + \log(\pi_{k})\]
+
+\textbf{Classification Rule}: Assign \(\mathbf{x}\) to the group with
+the largest discriminant score \(\delta_{k}\left( \mathbf{x} \right)\).
+
+\subsubsection{Geometric Interpretation}
+
+The geometric perspective on linear discriminant analysis provides
+valuable intuition about the classification mechanism. Each discriminant
+function defines a hyperplane in the \(p\)-dimensional predictor space,
+with these hyperplanes serving as decision boundaries that partition the
+space into regions corresponding to different group assignments. The
+linearity of these decision boundaries, which gives the method its name,
+implies that the boundaries consist of straight lines in two dimensions,
+flat planes in three dimensions, and hyperplanes in higher dimensions.
+The boundary between groups \(k\) and \(l\) is the hyperplane with
+normal vector
+\(\mathbf{\Sigma}^{- 1}\left( \mathbf{\mu}_{k} - \mathbf{\mu}_{l} \right)\),
+passing through the point equidistant (in \textbf{Mahalanobis} distance)
+between the two centroids when priors are equal. This normal vector
+equals \(\mathbf{\mu}_{k} - \mathbf{\mu}_{l}\) itself -- making the
+boundary a literal perpendicular bisector in ordinary Euclidean
+coordinates -- only in the special case where \(\mathbf{\Sigma}\) is
+proportional to the identity matrix (uncorrelated predictors with equal
+variances). In general, \(\mathbf{\Sigma}^{- 1}\) tilts and rescales the
+boundary, so ``nearest centroid'' must be read in Mahalanobis distance,
+not raw Euclidean distance.
+
+\subsection{Quadratic Discriminant Analysis (QDA)}
+
+\subsubsection{When LDA Is Not Enough}
+
+QDA relaxes the equal covariance assumption. Each group \(k\) has its
+own covariance matrix \(\mathbf{\Sigma}_{k}\).
+
+\textbf{When to use QDA}:
+
+\begin{itemize}
+\item
+  Groups have genuinely different variability patterns
+\item
+  You have sufficient sample size (more parameters to estimate)
+\item
+  Linear boundaries do not fit the data well
+\end{itemize}
+
+\subsubsection{Quadratic Discriminant Functions}
+
+The discriminant score becomes:
+
+\[\delta_{k}\left( \mathbf{x} \right) = - \frac{1}{2}\log|\mathbf{\Sigma}_{k}| - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu}_{k} \right)^{\top}\mathbf{\Sigma}_{k}^{- 1}\left( \mathbf{x} - \mathbf{\mu}_{k} \right) + \log(\pi_{k})\]
+
+This is \textbf{quadratic} in \(\mathbf{x}\), leading to curved
+(quadratic) decision boundaries.
+
+\subsubsection{Trade-offs: LDA vs QDA}
+
+The choice between Linear Discriminant Analysis and Quadratic
+Discriminant Analysis involves balancing model complexity against
+estimation precision. LDA offers several compelling advantages that make
+it the preferred starting point for most applications. The method
+requires estimation of only \(\frac{p(p + 1)}{2}\) covariance parameters
+for the pooled covariance matrix, compared to
+\(g \cdot \frac{p(p + 1)}{2}\) parameters required by QDA when each of
+the \(g\) groups maintains its own covariance structure. This parameter
+efficiency translates to greater stability when working with smaller
+sample sizes, as fewer quantities require estimation from limited data.
+The reduced complexity also makes LDA less prone to overfitting,
+particularly when the number of predictors approaches the sample size.
+Additionally, the linear structure of LDA discriminant functions
+facilitates interpretation, as the coefficients directly indicate how
+variables combine to separate groups.
+
+Conversely, QDA provides advantages when the assumption of equal
+covariances proves untenable. The method's flexibility allows it to fit
+complex, curved decision boundaries that better capture the structure of
+data when groups genuinely exhibit different variability patterns. This
+flexibility translates to improved classification accuracy when the
+equal covariance assumption is violated substantially. Furthermore, QDA
+does not constrain groups to share variance structures, making it more
+appropriate when domain knowledge suggests heterogeneous within-group
+variability.
+
+A practical rule of thumb guides the selection between these methods.
+The recommended approach begins with LDA as the baseline model. Three
+conditions suggest moving to QDA warrants consideration. First, the
+sample size should be substantially larger than the number of
+predictors, as QDA's additional parameters require more data for
+reliable estimation. Second, exploratory analysis should reveal clearly
+different spread patterns across groups, suggesting that the equal
+covariance assumption may not hold. Third, LDA should demonstrate
+unsatisfactory performance, with classification accuracy falling short
+of acceptable thresholds or exhibiting systematic patterns of
+misclassification that curved boundaries might address.
+
+\section{Practical Implementation}
+
+\textbf{Interactive Tutorial}: The notebook
+\texttt{ch5\_guiding\_example/marketing\_discriminant\_analysis.ipynb}
+demonstrates each step of this workflow with executable Python code,
+detailed explanations, and visualizations.
+
+\subsection{The Analysis Workflow}
+
+\subsubsection{Step 1: Data Preparation}
+
+The data preparation phase establishes the foundation for reliable
+discriminant analysis, with Module 2 of the accompanying notebook
+providing complete implementation details. Feature selection represents
+the initial critical decision, requiring analysts to identify predictors
+that effectively discriminate between groups while avoiding redundancy.
+The selection process should eliminate highly correlated predictors to
+mitigate multicollinearity issues that can destabilize coefficient
+estimates and inflate standard errors. Domain knowledge plays an
+essential role in this process, as subject matter expertise often
+reveals which variables possess theoretical relevance for group
+separation beyond what correlation analysis alone might suggest.
+
+Standardization becomes necessary when variables exist on disparate
+scales, as the raw magnitude differences can cause variables with larger
+numerical ranges to dominate the discriminant functions inappropriately.
+For instance, mixing monetary variables measured in dollars (ranging
+from 0 to 200) with rate variables expressed as proportions (ranging
+from 0 to 1) without standardization would give undue weight to the
+monetary variables. The notebook implementation employs the
+\texttt{StandardScaler} transformation to convert all features to have
+mean zero and standard deviation one, ensuring that each variable
+contributes to the analysis based on its discriminatory power rather
+than its measurement scale.
+
+The train-test split procedure requires careful attention to maintain
+the integrity of model evaluation. Stratified sampling preserves the
+proportional representation of each group in both the training and
+testing subsets, preventing bias that could arise if certain groups were
+over-represented in one subset. The typical split allocates seventy
+percent of observations to the training set for parameter estimation and
+thirty percent to the testing set for unbiased performance evaluation.
+The implementation utilizes the \texttt{train\_test\_split} function
+with the \texttt{stratify=y} parameter, which ensures all groups appear
+in both subsets according to their original proportions.
+
+\subsubsection{Step 2: Assumption Checking}
+
+Verification of underlying assumptions ensures the validity of
+discriminant analysis results and guides methodological choices. The
+multivariate normality assumption, which posits that observations within
+each group follow a multivariate normal distribution, can be assessed
+through several diagnostic approaches. Q-Q plots constructed for each
+variable within each group provide visual evidence of univariate
+normality, while multivariate tests such as the Mardia test and
+Henze-Zirkler test offer formal statistical evaluation of multivariate
+normality. Fortunately, discriminant analysis demonstrates robustness to
+moderate violations of normality when sample sizes are large, as the
+Central Limit Theorem ensures that parameter estimates remain
+approximately normally distributed even when the underlying data deviate
+somewhat from normality.
+
+The equal covariance assumption, which is fundamental to LDA, merits
+particular scrutiny. Box's M test provides a formal statistical test of
+covariance homogeneity across groups, though practitioners should note
+that this test exhibits considerable sensitivity and frequently rejects
+the null hypothesis even when differences are practically negligible.
+Visual inspection of covariance matrices computed separately for each
+group often provides more practical insight, allowing analysts to judge
+whether observed differences justify the additional complexity of QDA.
+When the equal covariance assumption is violated substantially, the
+analyst faces a choice between transitioning to QDA, which accommodates
+group-specific covariances, or applying variance-stabilizing
+transformations to the data.
+
+Multicollinearity assessment protects against numerical instability and
+interpretation difficulties arising from highly correlated predictors.
+Examination of the correlation matrix among predictors reveals pairwise
+relationships, while Variance Inflation Factors quantify the degree to
+which each predictor's variance is inflated due to linear relationships
+with other predictors. When multicollinearity proves problematic, the
+analyst should remove redundant predictors, retaining those with greater
+theoretical relevance or stronger discriminatory power.
+
+\subsubsection{Step 3: Model Fitting}
+
+\textbf{Notebook Reference}: Module 3 (LDA) and Module 6 (QDA)
+demonstrate model fitting with scikit-learn.
+
+Linear Discriminant Analysis estimation in Python employs the
+scikit-learn library's \texttt{LinearDiscriminantAnalysis} class. The
+estimation procedure fits the model to training data, producing several
+key outputs that inform interpretation and prediction. The
+\texttt{lda.scalings\_} attribute contains the discriminant function
+coefficients, which indicate how the original variables combine to form
+discriminant scores. The \texttt{lda.means\_} attribute stores the group
+centroids, representing the mean position of each group in the predictor
+space. While the pooled covariance matrix remains internal to the
+implementation, the \texttt{lda.priors\_} attribute reveals the prior
+probabilities assigned to each group, and the
+\texttt{lda.explained\_variance\_ratio\_} attribute quantifies how much
+between-group variance each discriminant function captures.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.discriminant\_analysis }\ImportTok{import}\NormalTok{ LinearDiscriminantAnalysis}
+
+\NormalTok{lda }\OperatorTok{=}\NormalTok{ LinearDiscriminantAnalysis()}
+\NormalTok{lda.fit(X\_train, y\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+Quadratic Discriminant Analysis follows a parallel implementation
+pattern through scikit-learn's \texttt{QuadraticDiscriminantAnalysis}
+class. The model fitting process estimates group-specific parameters,
+with the \texttt{qda.means\_} attribute providing group centroids
+analogous to those in LDA. The group-specific covariance matrices, which
+distinguish QDA from LDA, remain internal to the implementation but
+govern the quadratic decision boundaries. The \texttt{qda.priors\_}
+attribute contains prior probabilities, while the
+\texttt{predict\_proba()} method generates posterior probabilities that
+quantify classification confidence for each observation and group
+combination.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.discriminant\_analysis }\ImportTok{import}\NormalTok{ QuadraticDiscriminantAnalysis}
+
+\NormalTok{qda }\OperatorTok{=}\NormalTok{ QuadraticDiscriminantAnalysis()}
+\NormalTok{qda.fit(X\_train, y\_train)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsubsection{Step 4: Interpretation}
+
+\textbf{Notebook Reference}: Module 4 provides detailed coefficient
+interpretation with group means analysis.
+
+\textbf{Discriminant Functions}
+
+For LDA with \(g\) groups, we get up to \(\min(g - 1,p)\) discriminant
+functions. The maximum number of discriminant functions is determined by
+the formula:
+
+\[m = \min(g - 1,p)\]
+
+where \(g\) is the number of groups and \(p\) is the number of
+predictors. This limitation arises because:
+
+\begin{itemize}
+\item
+  With \(g\) groups, there are only \(g - 1\) independent contrasts
+  between group means
+\item
+  With \(p\) predictors, the discriminant space has at most \(p\)
+  dimensions
+\end{itemize}
+
+For example, with 3 customer segments and 8 predictors, we obtain
+\(\min(3 - 1,8) = 2\) discriminant functions.
+
+\textbf{First discriminant function} (LD1): Explains most between-group
+variation \textbf{Second discriminant function} (LD2): Second-most
+variation (orthogonal to LD1)
+
+\textbf{Marketing Example Interpretation} (from the notebook):
+
+\begin{itemize}
+\item
+  \textbf{LD1} (95.8\% of variance) separates High-Value from Occasional
+  customers
+
+  \begin{itemize}
+  \item
+    Strong negative coefficients: purchase frequency, loyalty points
+  \item
+    Represents overall customer engagement and activity level
+  \end{itemize}
+\item
+  \textbf{LD2} (4.2\% of variance) captures remaining separation
+
+  \begin{itemize}
+  \item
+    Strong positive coefficient: average order value
+  \item
+    Strong negative coefficient: browsing time
+  \item
+    Represents order size patterns versus browsing efficiency
+  \end{itemize}
+\end{itemize}
+
+The notebook's Module 4 displays both the discriminant coefficients
+(scalings) and the group means on standardized features, allowing
+interpretation of which behavioral patterns define each segment.
+
+\textbf{Understanding Discriminant Coefficients}
+
+Discriminant analysis produces two types of coefficients, each serving
+distinct interpretive purposes:
+
+\textbf{Unstandardized Coefficients}: These represent the raw weights
+applied to predictor variables in their original measurement units. An
+unstandardized coefficient of 0.5 for income (measured in thousands of
+dollars) means that a 1,000 dollar increase in income increases the
+discriminant score by 0.5 units. These coefficients depend on the
+original measurement scales and cannot be directly compared across
+variables measured in different units.
+
+\textbf{Standardized Coefficients}: These coefficients indicate the
+relative importance of each predictor independent of its original scale.
+Standardization converts all predictors to have mean zero and standard
+deviation one before computing discriminant functions. A standardized
+coefficient of 0.8 for income and 0.3 for age suggests that income
+contributes more strongly to group separation than age, after accounting
+for differences in their variability. Standardized coefficients
+facilitate comparison across predictors and are analogous to beta
+coefficients in standardized regression.
+
+The standardized form proves particularly valuable when comparing the
+relative importance of predictors, while the unstandardized form is
+necessary when applying the discriminant function to new observations in
+their original measurement units.
+
+\textbf{Discriminant Loadings}
+
+Similar to factor analysis loadings - correlation between original
+variable and discriminant function. Discriminant loadings represent the
+simple correlation between each original predictor and the discriminant
+scores, providing an alternative measure of variable importance.
+
+High absolute loading = variable is important for that discriminant
+function. Loadings above 0.30 in absolute value typically indicate
+meaningful contributions to the discriminant function.
+
+The relationship between coefficients and loadings mirrors factor
+analysis: coefficients represent regression-like weights accounting for
+correlations among predictors, while loadings represent simple
+correlations ignoring other predictors. When predictors are highly
+correlated, coefficients and loadings can differ substantially, with
+loadings often providing more intuitive interpretation.
+
+The notebook creates a DataFrame of coefficients to easily identify the
+most influential features for each discriminant function.
+
+\subsubsection{Step 5: Validation}
+
+Comprehensive model validation ensures that discriminant analysis
+results generalize beyond the training data and meet performance
+requirements. Modules 3, 6, 9, and 10 of the accompanying notebook
+provide detailed validation analyses that illustrate these principles.
+Classification accuracy assessment begins with the confusion matrix
+constructed from test set predictions, as presented in Module 9. This
+matrix reveals not only overall accuracy but also class-specific
+performance through precision, recall, and F1-scores compiled in the
+classification report. Practitioners must resist the temptation to focus
+solely on overall accuracy, as this aggregate metric can obscure poor
+performance on specific groups, particularly when class sizes differ
+substantially.
+
+Cross-validation provides a more robust estimate of model performance by
+evaluating the model across multiple train-test partitions of the data.
+K-fold cross-validation, typically employing five or ten folds, assesses
+performance stability across different data splits and guards against
+the possibility that a single train-test split might yield
+unrepresentative results. The notebook implementation utilizes the
+\texttt{cross\_val\_score} function with five folds, generating a
+distribution of accuracy estimates that characterizes model performance
+more comprehensively than a single test set evaluation.
+
+Visual validation techniques complement numerical performance metrics by
+revealing the geometric structure of group separation. Module 5 presents
+scatter plots of discriminant scores in the two-dimensional space
+defined by LD1 and LD2, allowing visual assessment of how well the
+discriminant functions separate groups. Module 8 provides decision
+boundary plots that project the classification regions onto
+two-dimensional feature subspaces, illustrating where the model assigns
+observations to each group. Module 10 generates ROC curves for each
+segment using the one-versus-rest approach, with the area under these
+curves quantifying the model's ability to distinguish each segment from
+all others. These visualizations verify that groups are well-separated
+and reveal any regions of potential classification ambiguity.
+
+Advanced validation metrics provide additional insights into model
+performance characteristics. Module 10's ROC curve analysis with AUC
+scores quantifies discrimination ability for each group independently,
+revealing whether certain groups prove easier to classify than others.
+Module 7 analyzes posterior probabilities to assess prediction
+confidence, identifying observations where the model assigns high
+probability to the predicted class versus those where probabilities
+spread across multiple classes. Module 9's side-by-side confusion matrix
+comparison for LDA versus QDA facilitates direct assessment of whether
+QDA's additional complexity translates to meaningful performance
+improvements.
+
+\section{Applied Example: Marketing Segmentation}
+
+\textbf{Complete Implementation}: See
+\texttt{ch5\_guiding\_example/marketing\_discriminant\_analysis.ipynb}
+for the full interactive analysis with visualizations and detailed
+interpretations.
+
+\subsection{Business Problem}
+
+An e-commerce company has 1,200 customers and wants to classify them
+into three segments for targeted marketing:
+
+\begin{enumerate}
+\item
+  \textbf{High-Value} (30\%): Premium customers, high spending and
+  engagement
+\item
+  \textbf{Loyal} (40\%): Regular customers, moderate spending,
+  consistent
+\item
+  \textbf{Occasional} (30\%): Infrequent buyers, need re-engagement
+\end{enumerate}
+
+The dataset is synthetically generated using
+\texttt{fetch\_marketing.py} to ensure reproducibility and known
+statistical properties for educational purposes.
+
+\subsection{Variables (p = 8)}
+
+The analysis employs eight behavioral metrics that characterize customer
+engagement patterns across multiple dimensions. Purchase frequency
+measures the average number of transactions a customer completes per
+month, providing insight into shopping regularity. Average order value,
+denominated in US dollars, captures the typical monetary amount spent
+per transaction, distinguishing high-spending customers from those
+making smaller purchases. Browsing time quantifies the minutes spent per
+website session, reflecting engagement level and product consideration
+depth. Cart abandonment rate, expressed as a proportion between zero and
+one, indicates the frequency with which customers initiate but fail to
+complete purchases. Email open rate, similarly scaled from zero to one,
+measures responsiveness to marketing communications. Loyalty points
+represent the accumulated rewards a customer has earned through the
+company's retention program. Support tickets count the average monthly
+customer service interactions, potentially indicating product
+satisfaction or purchase complexity. Social engagement tracks monthly
+interactions with the company's social media presence, including likes,
+shares, and comments.
+
+The \texttt{MARKETING\_DATA\_DICTIONARY.md} document provides
+comprehensive variable descriptions, including detailed range
+specifications, measurement precision, and the multivariate normal data
+generation methodology employed to create the synthetic dataset.
+
+\subsection{Analysis Strategy}
+
+\subsubsection{Why Both LDA and QDA?}
+
+\textbf{LDA}: Assumes all customer segments have similar variability
+patterns \textbf{QDA}: Allows different patterns (e.g., Occasional
+customers might be more variable)
+
+We'll fit both and compare performance.
+
+\subsubsection{Feature Standardization}
+
+Since variables are on different scales (dollars, rates, counts), we
+standardize:
+
+\[z_{j} = \frac{x_{j} - {\overline{x}}_{j}}{s_{j}}\]
+
+This ensures no variable dominates due to scale.
+
+\subsection{Results}
+
+\textbf{Note}: The following results are from the Jupyter notebook
+analysis. Run \texttt{marketing\_discriminant\_analysis.ipynb} to
+reproduce these findings and generate visualizations.
+
+\subsubsection{Discriminant Functions}
+
+The notebook's Module 4 (Interpreting Discriminant Functions) reveals:
+
+\textbf{LD1 (95.8\% of between-group variance)}:
+
+\begin{itemize}
+\item
+  Separates High-Value from Occasional customers along the primary axis
+\item
+  Key drivers: Purchase frequency (strong negative), loyalty points
+  (strong negative), average order value (negative)
+\item
+  Interpretation: Overall customer value and activity level
+\end{itemize}
+
+\textbf{LD2 (4.2\% of between-group variance)}:
+
+\begin{itemize}
+\item
+  Distinguishes remaining group differences
+\item
+  Key drivers: Average order value (strong positive), browsing time
+  (negative)
+\item
+  Interpretation: Order size versus browsing efficiency
+\end{itemize}
+
+\textbf{Insight}: Two independent dimensions describe customer segments:
+
+\begin{enumerate}
+\item
+  Overall engagement and frequency (LD1 - dominant factor)
+\item
+  Purchase value patterns (LD2 - secondary factor)
+\end{enumerate}
+
+\subsubsection{Classification Performance}
+
+\textbf{LDA Results} (Module 3):
+
+\begin{itemize}
+\item
+  Test accuracy: Nearly perfect classification
+\item
+  Cross-validation: 99.9\% (± 0.3\%)
+\item
+  Strong performance across all segments
+\end{itemize}
+
+\textbf{QDA Results} (Module 6):
+
+\begin{itemize}
+\item
+  Test accuracy: Perfect classification
+\item
+  Cross-validation: 100.0\% (± 0.0\%)
+\item
+  Slightly outperforms LDA with more flexible boundaries
+\end{itemize}
+
+\textbf{Interpretation}: Both models achieve excellent performance. The
+synthetic data's well-separated structure allows for near-perfect
+classification, demonstrating the power of discriminant analysis when
+groups have distinct multivariate profiles.
+
+\subsubsection{Model Comparison and Visualization}
+
+The notebook includes comprehensive visualizations:
+
+\textbf{Module 5}: Discriminant space scatter plot showing customer
+distribution in LD1-LD2 space with group centroids
+
+\textbf{Module 8}: QDA decision boundaries visualization using purchase
+frequency and average order value
+
+\textbf{Module 9}: Side-by-side confusion matrices comparing LDA and QDA
+performance
+
+\textbf{Module 10}: ROC curves for each segment showing excellent
+discrimination (AUC near 1.0)
+
+\subsubsection{Model Selection Recommendation}
+
+Module 11 provides a comprehensive comparison and recommends
+\textbf{LDA} despite QDA's marginally better performance because:
+
+\begin{itemize}
+\item
+  Similar accuracy (difference is negligible)
+\item
+  Simpler model with fewer parameters
+\item
+  More interpretable discriminant functions
+\item
+  Lower overfitting risk
+\item
+  Easier to explain to stakeholders
+\end{itemize}
+
+\subsection{Business Insights}
+
+\subsubsection{Segment Characteristics}
+
+Module 4's group means analysis reveals distinct behavioral profiles
+that characterize each customer segment. High-Value customers exhibit
+positive standardized values across purchase frequency, order value, and
+browsing time, indicating sustained engagement with the company's
+offerings. This segment demonstrates exceptionally high email open rates
+and social engagement, suggesting strong brand affinity and
+responsiveness to marketing communications. Notably, these customers
+show low cart abandonment rates and minimal support ticket generation,
+reflecting purchase certainty and product satisfaction. The highest
+loyalty points accumulation among this group confirms their long-term
+value to the organization. The recommended strategy for High-Value
+customers emphasizes retention through premium services, personalized
+product recommendations, and exclusive benefits that reinforce their
+valued status.
+
+Loyal customers present moderate purchase frequency and order values,
+positioning them between the extremes of occasional and high-value
+segments. This group maintains good email engagement and accumulates
+loyalty points steadily, though not at the accelerated pace observed
+among High-Value customers. Their behavioral metrics demonstrate balance
+across most dimensions, suggesting consistent but not exceptional
+engagement. The strategic approach for Loyal customers focuses on
+upselling opportunities that encourage larger purchases and
+cross-selling initiatives that broaden their product adoption.
+Enhancements to the loyalty program can incentivize increased spending
+and engagement, potentially facilitating migration toward High-Value
+status.
+
+Occasional customers display negative standardized values across most
+engagement metrics, indicating sporadic and limited interaction with the
+company. This segment exhibits elevated cart abandonment rates and
+generates more support tickets per capita, suggesting hesitation in
+purchase decisions or difficulties in the buying process. Minimal
+loyalty points accumulation and social engagement further characterize
+this group's tenuous connection to the brand. The strategic imperative
+for Occasional customers involves re-engagement campaigns designed to
+increase purchase frequency, cart recovery mechanisms that address
+abandonment triggers, and educational content that builds product
+knowledge and purchase confidence.
+
+\subsubsection{Actionable Applications}
+
+The discriminant analysis framework enables several practical
+applications that translate statistical insights into business value.
+New customer classification becomes feasible once a customer accumulates
+sufficient behavioral data, typically requiring two to three months of
+transaction history. The model then automatically assigns the customer
+to a segment, enabling tailored marketing strategies from an early stage
+in the customer relationship. Module 7 demonstrates how posterior
+probabilities provide confidence scores for each classification,
+allowing the marketing team to gauge classification certainty and adjust
+campaign intensity accordingly.
+
+Monitoring segment migration over time reveals customer lifecycle
+dynamics that inform retention strategies. Tracking discriminant scores
+longitudinally identifies Occasional customers who transition toward
+Loyal status, validating re-engagement efforts, as well as Loyal
+customers whose scores drift toward Occasional levels, signaling
+attrition risk. The discriminant scores serve as early warning
+indicators of segment transition, enabling proactive interventions
+before customers fully migrate to less valuable segments.
+
+Marketing return on investment optimization leverages the classification
+framework to allocate resources efficiently across customer segments.
+Expensive retention campaigns targeting High-Value customers, where
+classification confidence is typically high, maximize the impact of
+premium marketing investments. Cost-effective email campaigns suit Loyal
+customers, whose moderate value justifies ongoing engagement without
+intensive personalization. Automated cart recovery mechanisms address
+Occasional customers efficiently, deploying technology-enabled
+interventions that require minimal manual effort.
+
+Campaign personalization benefits from Module 7's posterior probability
+analysis, which identifies customers with ambiguous segment membership
+reflected in probability distributions spread across multiple classes.
+These customers, exhibiting characteristics of multiple segments, may
+respond favorably to hybrid marketing strategies that combine elements
+designed for different segments, such as re-engagement messaging paired
+with loyalty program incentives.
+
+\subsection{Credit Risk Classification Example}
+
+To illustrate discriminant analysis in a financial context, consider a
+credit risk assessment problem where a bank classifies loan applicants
+as either ``No Default'' (low risk) or ``Default'' (high risk) based on
+financial characteristics.
+
+\subsubsection{Problem Setup}
+
+\textbf{Groups}: \(g = 2\)
+
+\begin{itemize}
+\item
+  Group 0: No Default (historically 95\% of applicants)
+\item
+  Group 1: Default (historically 5\% of applicants)
+\end{itemize}
+
+\textbf{Predictors}: \(p = 3\)
+
+\begin{itemize}
+\item
+  \(x_{1}\): Annual income (thousands of dollars)
+\item
+  \(x_{2}\): Debt-to-income ratio (proportion, 0 to 1)
+\item
+  \(x_{3}\): Credit score (300 to 850)
+\end{itemize}
+
+\subsubsection{Discriminant Score Interpretation}
+
+After fitting LDA, suppose the discriminant function is:
+
+\[\text{ Score } = 0.002 \cdot \text{ income } - 8.5 \cdot \text{ debt ratio } + 0.015 \cdot \text{ credit score } - 5.2\]
+
+The cutoff threshold with equal prior probabilities would be zero.
+However, recognizing the imbalanced class distribution and the higher
+cost of default misclassification, the bank adjusts prior probabilities
+to reflect business considerations rather than sample proportions.
+
+\textbf{Example Classification}:
+
+Consider applicant A with income equal to 50,000 dollars, debt ratio
+equal to 0.40, and credit score equal to 650:
+
+\[\text{ Score}_{A} = 0.002(50) - 8.5(0.40) + 0.015(650) - 5.2\]
+\[\text{ Score}_{A} = 0.1 - 3.4 + 9.75 - 5.2 = 1.25\]
+
+A positive discriminant score (1.25 greater than 0) indicates
+classification into Group 0 (No Default), suggesting this applicant
+presents low credit risk. The magnitude of the score reflects the
+strength of classification confidence.
+
+Consider applicant B with income equal to 35,000 dollars, debt ratio
+equal to 0.65, and credit score equal to 580:
+
+\[\text{ Score}_{B} = 0.002(35) - 8.5(0.65) + 0.015(580) - 5.2\]
+\[\text{ Score}_{B} = 0.07 - 5.525 + 8.7 - 5.2 = - 1.955\]
+
+A negative discriminant score (-1.955 less than 0) indicates
+classification into Group 1 (Default), flagging this applicant as high
+credit risk. The bank would likely deny this loan application or offer
+modified terms with higher interest rates to compensate for elevated
+risk.
+
+\textbf{Coefficient Interpretation}:
+
+\begin{itemize}
+\item
+  \textbf{Income} (+0.002): Higher income reduces default risk, though
+  the small coefficient reflects income's measurement in thousands
+\item
+  \textbf{Debt Ratio} (-8.5): Strong negative coefficient indicates high
+  debt loads substantially increase default risk
+\item
+  \textbf{Credit Score} (+0.015): Higher credit scores reduce default
+  risk, reflecting proven creditworthiness
+\end{itemize}
+
+The debt-to-income ratio emerges as the strongest predictor when
+coefficients are standardized, consistent with credit risk theory that
+emphasizes debt burden as a primary default driver.
+
+\textbf{Business Application}:
+
+The discriminant score threshold can be adjusted to reflect business
+priorities. Setting a higher threshold (e.g., requiring scores above 0.5
+instead of 0) makes classification more conservative, approving fewer
+borderline applicants but reducing default rates. Conversely, lowering
+the threshold (e.g., -0.5) approves more applicants, increasing loan
+volume but accepting higher default risk. Banks optimize this threshold
+by analyzing the trade-off between foregone interest revenue from
+rejected non-defaulters versus losses from accepted defaulters.
+
+\section{Advanced Topics}
+
+\subsection{Variable Selection}
+
+The inclusion of all available predictors may not optimize discriminant
+analysis performance, motivating variable selection procedures that
+identify parsimonious models. Stepwise discriminant analysis employs
+iterative algorithms to build or refine predictor sets. Forward
+selection begins with an empty model and sequentially adds variables
+that contribute most substantially to group separation, typically
+measured by F-to-enter statistics or Wilks' Lambda changes. Conversely,
+backward elimination starts with all candidate predictors and
+iteratively removes those contributing least to discrimination, guided
+by F-to-remove statistics. Both approaches utilize Wilks' Lambda or
+related F-statistics to quantify how much each variable enhances group
+separation. While computationally convenient, stepwise methods can be
+unstable when predictors are highly correlated and may capitalize on
+chance associations in finite samples.
+
+Shrinkage methods offer modern alternatives that stabilize coefficient
+estimates through regularization. Regularized Discriminant Analysis
+(RDA) introduces a tuning parameter that shrinks the group-specific
+covariance matrices toward a common structure, effectively interpolating
+between LDA and QDA while reducing parameter variance. Penalized LDA
+extends this concept by applying penalties such as the L1 norm to
+discriminant coefficients, encouraging sparse solutions where many
+coefficients equal zero. This sparsity proves valuable in
+high-dimensional settings where interpretability benefits from
+identifying a small subset of influential predictors.
+
+\subsection{Handling Imbalanced Classes}
+
+Substantial imbalance in group sizes, such as ninety-five percent
+acceptable items versus five percent defective items, poses challenges
+for discriminant analysis. When sample proportions serve as prior
+probabilities, the classifier tends to favor the majority class,
+achieving high overall accuracy by predominantly predicting the larger
+group while performing poorly on the minority class. Two complementary
+strategies address this issue.
+
+Adjusting prior probabilities away from sample proportions recalibrates
+the classification rule to account for the practical importance of
+different groups. Setting equal priors regardless of sample sizes gives
+each group equal a priori weight, preventing the majority class from
+dominating predictions solely due to its prevalence. Alternatively,
+priors can reflect business costs, assigning higher prior probability to
+groups where misclassification carries greater consequences. For
+instance, if failing to detect a defective item costs substantially more
+than falsely flagging an acceptable item, elevated prior probability for
+the defective class appropriately adjusts the decision threshold.
+
+Sampling techniques modify the training data composition to mitigate
+imbalance effects. Oversampling the minority class through replication
+or synthetic data generation increases its representation in the
+training set, allowing the model to learn its characteristics more
+effectively. Undersampling the majority class reduces its dominance by
+randomly selecting a subset of observations for model training. The
+Synthetic Minority Over-sampling Technique (SMOTE) generates artificial
+minority class observations by interpolating between existing minority
+class instances in feature space, effectively expanding the minority
+class representation while introducing variation beyond simple
+replication.
+
+\subsection{Model Diagnostics}
+
+Several diagnostic statistics quantify the strength and significance of
+group separation in discriminant analysis. Understanding these
+diagnostics helps assess model quality and interpret the degree to which
+groups differ in the multivariate space.
+
+\subsubsection{Wilks' Lambda}
+
+Wilks' Lambda tests whether group means differ significantly across the
+predictor space, calculated as the ratio of the determinant of the
+within-group sum of squares matrix \(\mathbf{W}\) to the determinant of
+the total sum of squares matrix \(\mathbf{T}\):
+
+\[\Lambda = \frac{|\mathbf{W}|}{|\mathbf{T}|}\]
+
+Small values approaching zero indicate strong group separation, as the
+within-group variation becomes negligible relative to total variation.
+The test statistic ranges from 0 to 1, where:
+
+\begin{itemize}
+\item
+  \(\Lambda \approx 0\): Perfect group separation (all variation is
+  between groups)
+\item
+  \(\Lambda \approx 1\): No group separation (all variation is within
+  groups)
+\end{itemize}
+
+The associated F-statistic provides formal hypothesis testing of whether
+group means differ significantly. Wilks' Lambda is also used in stepwise
+discriminant analysis as a criterion for variable selection, where
+variables that minimize Lambda (maximize group separation) are preferred
+for inclusion in the model.
+
+\subsubsection{Hotelling's T-squared Test}
+
+For testing whether two groups have different centroids (mean vectors),
+Hotelling's T-squared test provides the multivariate generalization of
+the univariate t-test. The test statistic is:
+
+\[T^{2} = \frac{n_{1}n_{2}}{n_{1} + n_{2}}\left( \mathbf{\overline{x}}_{1} - \mathbf{\overline{x}}_{2} \right)^{\top}\mathbf{S}_{\text{pooled}}^{- 1}\left( \mathbf{\overline{x}}_{1} - \mathbf{\overline{x}}_{2} \right)\]
+
+where \(n_{1}\) and \(n_{2}\) are the sample sizes for the two groups,
+\(\mathbf{\overline{x}}_{1}\) and \(\mathbf{\overline{x}}_{2}\) are the
+group mean vectors, and \(\mathbf{S}_{\text{pooled}}\) is the pooled
+covariance matrix. This test determines whether the multivariate means
+differ significantly, providing a foundation for discriminant analysis
+by confirming that groups occupy distinct regions of the predictor
+space.
+
+For more than two groups, multivariate analysis of variance (MANOVA)
+extends this concept, testing the null hypothesis that all group
+centroids are equal. MANOVA and discriminant analysis are closely
+related: MANOVA tests whether groups differ, while discriminant analysis
+describes how they differ and builds classification rules based on those
+differences.
+
+\subsubsection{Eigenvalues and Discriminant Functions}
+
+Each discriminant function has an associated eigenvalue that quantifies
+its discriminatory power. The eigenvalue represents the ratio of
+between-group variance to within-group variance along that discriminant
+function:
+
+\[\lambda_{i} = \frac{\text{between-group SS for LD}_{i}}{\text{ within-group SS for LD}_{i}}\]
+
+Larger eigenvalues indicate stronger discrimination. A high eigenvalue
+means that particular discriminant function effectively separates
+groups, as the between-group variation dominates the within-group
+variation along that dimension.
+
+The proportion of discriminatory power explained by each function is
+calculated as:
+
+\[\text{ Proportion explained by LD}_{i} = \frac{\lambda_{i}}{\sum_{j = 1}^{m}\lambda_{j}}\]
+
+where \(m = \min(g - 1,p)\) is the total number of discriminant
+functions. Typically, the first discriminant function (LD1) accounts for
+the largest proportion of group separation, with subsequent functions
+capturing progressively less discrimination.
+
+\textbf{Example Interpretation}: If LD1 has an eigenvalue of 12.5 and
+LD2 has an eigenvalue of 0.8, then LD1 explains
+\(\frac{12.5}{12.5 + 0.8} = 94\%\) of the discriminatory power. This
+indicates that the first dimension captures nearly all meaningful group
+separation, and LD2 contributes minimally.
+
+\subsubsection{Canonical Correlation}
+
+Canonical correlation measures the strength of the relationship between
+discriminant functions and group membership. For each discriminant
+function, the canonical correlation represents the square root of the
+proportion of between-group variation to total variation:
+
+\[R_{\text{can }} = \sqrt{\frac{\text{between-group SS}}{\text{ total SS}}} = \sqrt{\frac{\lambda_{i}}{1 + \lambda_{i}}}\]
+
+Values approaching one indicate excellent discrimination, signifying
+that the discriminant function effectively captures group differences.
+Canonical correlation ranges from 0 to 1, where:
+
+\begin{itemize}
+\item
+  \(R_{\text{can }} \approx 1\): Discriminant function perfectly
+  separates groups
+\item
+  \(R_{\text{can }} \approx 0\): Discriminant function provides no group
+  separation
+\end{itemize}
+
+Multiple discriminant functions yield multiple canonical correlations,
+with the first function typically exhibiting the highest value. Squaring
+the canonical correlation gives the proportion of variance in the
+discriminant scores explained by group membership, analogous to
+R-squared in regression.
+
+\subsubsection{Mahalanobis Distance}
+
+Mahalanobis distance quantifies the distance between an observation and
+a group centroid, accounting for the covariance structure of the data.
+For observation \(\mathbf{x}\) and group \(k\), the Mahalanobis distance
+is:
+
+\[D^{2}\left( \mathbf{x},\mathbf{\mu}_{k} \right) = \left( \mathbf{x} - \mathbf{\mu}_{k} \right)^{\top}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu}_{k} \right)\]
+
+This metric plays multiple roles in discriminant analysis:
+
+\textbf{Classification}: With equal prior probabilities, LDA assigns
+observations to the group with the smallest Mahalanobis distance to its
+centroid. This geometric interpretation clarifies why LDA works: it
+identifies the ``nearest'' group in multivariate space, where
+``nearest'' accounts for variable correlations and scales.
+
+\textbf{Outlier Detection}: Observations with large Mahalanobis
+distances from all group centroids may be multivariate outliers
+requiring investigation. Such observations lie far from typical group
+members in the multivariate space.
+
+\textbf{Variable Selection}: Mahalanobis distance between group
+centroids can guide variable selection, as variables that increase the
+distance between groups enhance discrimination.
+
+Unlike Euclidean distance, Mahalanobis distance accounts for variable
+correlations and unequal variances, making it more appropriate for
+multivariate data where predictors are not independent and identically
+scaled.
+
+\subsection{Comparison with Other Methods}
+
+Discriminant analysis occupies a particular niche among classification
+methods, with its suitability depending on data characteristics and
+analytical objectives. Logistic regression offers greater flexibility by
+avoiding the normality assumption, modeling the log-odds of class
+membership directly as a linear function of predictors. This approach
+works particularly well for binary outcomes and provides probability
+estimates through a natural probabilistic framework. However, extending
+logistic regression to multiple groups through multinomial models
+sacrifices some interpretability, as the method requires estimating
+separate coefficient sets for each group contrast rather than generating
+low-dimensional discriminant functions.
+
+Support Vector Machines (SVM) provide powerful alternatives when
+decision boundaries exhibit complex, non-linear structure. The kernel
+trick enables SVMs to implicitly operate in high-dimensional feature
+spaces where linear separation becomes feasible, accommodating intricate
+decision boundaries without explicit feature engineering. SVMs impose no
+distributional assumptions, making them robust across diverse data
+types. The method's geometric focus on boundary optimization, however,
+yields less interpretable models than discriminant functions, and SVMs
+often excel in high-dimensional settings where discriminant analysis may
+struggle due to parameter estimation challenges.
+
+Random Forests handle non-linear relationships naturally through
+recursive partitioning, building ensemble predictions from multiple
+decision trees. This approach demonstrates robustness to outliers and
+accommodates complex interactions without requiring explicit
+specification. Variable importance measures derived from random forests
+indicate which predictors contribute most to classification accuracy.
+The ensemble nature of random forests, however, creates black-box models
+that resist interpretation beyond variable importance rankings, limiting
+their utility when understanding group differences constitutes a primary
+analytical goal.
+
+Discriminant analysis proves most appropriate when several conditions
+align. Moderate sample sizes and dimensionality suit the method's
+parameter estimation requirements, as extreme dimensionality or limited
+sample sizes introduce estimation instability. Interpretability
+requirements favor discriminant analysis, as the discriminant functions
+directly reveal which variable combinations separate groups. Analytical
+objectives focused on understanding group differences rather than
+maximizing predictive accuracy align with the method's strengths.
+Finally, data conforming reasonably well to multivariate normality with
+similar within-group covariance structures satisfy the method's
+parametric assumptions, ensuring optimal performance.
+
+\section{Common Pitfalls and Best Practices}
+
+\subsection{Common Mistakes}
+
+Several pitfalls frequently undermine discriminant analysis
+applications, warranting careful attention throughout the modeling
+process. Ignoring fundamental assumptions represents a primary source of
+error. Applying LDA when groups exhibit clearly different covariance
+structures violates the method's homogeneity assumption, potentially
+yielding biased decision boundaries that perform poorly on new data.
+Outliers exert disproportionate influence on discriminant functions due
+to their impact on estimated means and covariances, yet analysts
+sometimes proceed without outlier screening, particularly when sample
+sizes appear large. Mahalanobis distance calculations identify
+multivariate outliers that may not be apparent from univariate
+examinations.
+
+The normality assumption requires that predictors follow multivariate
+normal distributions within each group. While discriminant analysis
+demonstrates robustness to moderate violations when sample sizes are
+large, severe departures from normality can compromise both
+classification accuracy and the optimality properties of the Bayes rule.
+Particularly problematic are categorical predictors, which inherently
+violate the continuity assumption underlying multivariate normality.
+Including categorical variables (such as gender coded as 0/1, or product
+category coded as 1/2/3) in discriminant analysis creates theoretical
+inconsistencies, as discrete distributions cannot be multivariate
+normal. When categorical predictors are essential for classification,
+analysts face several alternatives: convert categories to quantitative
+proxies when meaningful (e.g., replace product category with average
+price), use logistic regression which accommodates categorical
+predictors naturally, or employ non-parametric classification methods
+such as classification trees or k-nearest neighbors that impose no
+distributional assumptions.
+
+Overfitting poses particular risks when the number of predictors
+approaches or exceeds the sample size relative to the number of groups.
+The discriminant analysis literature suggests requiring at least twenty
+observations per predictor per group to ensure stable parameter
+estimates. Violating this guideline risks producing discriminant
+functions that fit idiosyncrasies of the training sample rather than
+capturing genuine group differences, leading to poor generalization
+performance.
+
+The practice of evaluating model performance on training data yields
+overly optimistic accuracy estimates that mislead analysts regarding
+true predictive performance. Training accuracy necessarily exceeds test
+accuracy because the model parameters are optimized to fit the training
+observations. Proper validation requires held-out test sets or
+cross-validation procedures that assess performance on observations not
+used for parameter estimation.
+
+Class imbalance creates a subtle trap where models achieve high overall
+accuracy by predominantly predicting the majority class while failing to
+identify minority class members effectively. Overall accuracy masks this
+problem, as correct classification of the majority class dominates the
+aggregate metric. Examining per-class precision, recall, and F1-scores
+reveals whether the model performs adequately across all groups rather
+than succeeding primarily through majority class predictions.
+
+Correlated predictors introduce multicollinearity that inflates
+coefficient standard errors and produces unstable discriminant functions
+where small data perturbations yield substantially different
+coefficients. The presence of highly redundant variables provides no
+additional information for discrimination while complicating
+interpretation and increasing estimation variance. Variable selection or
+principal component analysis can address severe multicollinearity by
+reducing predictor dimensionality.
+
+\subsection{Best Practices}
+
+Successful discriminant analysis implementation rests on several
+foundational practices that enhance reliability and interpretability.
+Data quality requires meticulous attention before model fitting begins.
+Missing data must be handled appropriately, either through principled
+imputation methods or case deletion when missingness is minimal and
+random. Outlier screening using Mahalanobis distance identifies
+observations that deviate substantially from their group's multivariate
+center, allowing assessment of whether these points represent data entry
+errors, measurement anomalies, or genuine extreme cases warranting
+special handling. Verification of data entry errors prevents spurious
+results arising from typographical mistakes or unit conversion errors.
+
+Model selection proceeds most effectively through a disciplined
+progression from simplicity to complexity. Beginning with LDA
+establishes a baseline that subsequent, more complex models must
+meaningfully improve upon to justify their adoption. Cross-validation
+provides honest performance estimates that account for sampling
+variability, generating multiple train-test partitions to characterize
+performance distributions rather than relying on a single partition that
+might be unrepresentative. Multiple performance metrics paint a
+comprehensive picture of model behavior, with accuracy, precision,
+recall, F1-scores, and AUC each illuminating different aspects of
+classification performance.
+
+Interpretation extends beyond merely reporting classification accuracy
+to explaining the substantive meaning of discriminant functions.
+Coefficient examination reveals which predictors drive group separation
+and how they combine to form discriminant scores. Visualizing decision
+boundaries, when feasible through dimensionality reduction, provides
+geometric intuition about classification regions. Translating
+statistical results into domain-specific insights ensures that
+stakeholders understand not just which observations are classified into
+which groups, but why the classification occurs and what it means for
+practical decision-making.
+
+Validation practices maintain model reliability over time and across
+contexts. Testing on truly independent data, distinct from any data used
+during model development, provides the most conservative performance
+assessment. Monitoring performance over time in production deployments
+detects concept drift, where the relationships between predictors and
+groups evolve, degrading model accuracy. Updating models as patterns
+change ensures continued relevance, with retraining schedules determined
+by the rate of observed performance degradation.
+
+\section{Summary and Key Takeaways}
+
+Discriminant analysis provides a classification framework for assigning
+observations to predefined groups based on measured predictor variables.
+The method identifies linear combinations of predictors in LDA or
+quadratic combinations in QDA that maximally separate groups in the
+feature space. Under the assumptions of multivariate normality and known
+covariance structures, discriminant analysis implements the optimal
+Bayes classification rule, minimizing the total probability of
+misclassification when these conditions hold.
+
+The method proves most appropriate when analysts possess labeled
+training data with known group memberships, seek interpretable insights
+into group differences rather than black-box predictions, work with
+moderate sample sizes and dimensionality where parameter estimation
+remains stable, and observe data that conform reasonably well to
+multivariate normality assumptions. These conditions position
+discriminant analysis as a valuable tool when understanding group
+structure constitutes a primary analytical objective alongside
+prediction.
+
+Several key decisions shape discriminant analysis applications. The
+choice between LDA and QDA balances the parsimony of equal covariance
+assumptions against the flexibility of group-specific covariances, with
+LDA serving as the recommended starting point. Predictor selection
+combines domain knowledge about theoretically relevant variables with
+statistical criteria that identify redundant or non-discriminating
+features. Prior probability specification chooses between equal priors
+that weight groups uniformly, proportional priors that reflect sample or
+population frequencies, or cost-based priors that account for asymmetric
+misclassification consequences.
+
+Interpretation distinguishes discriminant analysis from purely
+predictive methods. The discriminant functions reveal how groups differ
+by showing which variable combinations drive separation. Discriminant
+loadings or coefficients indicate which variables contribute most
+substantially to each function. Classification accuracy quantifies
+predictive performance, but the interpretive insights into group
+structure often provide greater analytical value than prediction
+accuracy alone.
+
+Validation requirements apply universally to discriminant analysis
+applications. Hold-out test sets or cross-validation procedures provide
+honest performance estimates uncontaminated by training data
+optimization. Per-group performance metrics ensure that classification
+succeeds across all groups rather than primarily through majority class
+prediction. Monitoring performance over time in operational deployments
+detects degradation and informs model updating schedules.
+
+The power of discriminant analysis ultimately lies not merely in
+classification accuracy, but in understanding what makes groups
+different. This interpretive capability transforms multivariate data
+into actionable insights that inform both scientific understanding and
+practical decision-making, distinguishing the method from alternative
+classification approaches that prioritize prediction over explanation.
+
+\section{Putting It Into Practice}
+
+To solidify your understanding of discriminant analysis, work through
+the complete marketing segmentation example:
+
+\textbf{Step 1}: Generate the customer dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\BuiltInTok{cd}\NormalTok{ ch5\_guiding\_example}
+\ExtensionTok{python}\NormalTok{ fetch\_marketing.py}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Step 2}: Open and run the Jupyter notebook
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ExtensionTok{jupyter}\NormalTok{ notebook marketing\_discriminant\_analysis.ipynb}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Step 3}: Execute each module sequentially, reading the
+explanations and examining the outputs
+
+\textbf{Step 4}: Experiment with modifications:
+
+\begin{itemize}
+\item
+  Try different train/test splits
+\item
+  Exclude certain features to see impact on performance
+\item
+  Adjust prior probabilities in the discriminant models
+\item
+  Create additional visualizations
+\end{itemize}
+
+\textbf{Step 5}: Review the generated PNG files:
+
+\begin{itemize}
+\item
+  \texttt{marketing\_lda\_scores.png}: Discriminant space visualization
+\item
+  \texttt{marketing\_qda\_boundaries.png}: Decision boundaries in 2D
+\item
+  \texttt{marketing\_confusion\_comparison.png}: LDA vs QDA performance
+\item
+  \texttt{marketing\_roc\_curves.png}: Segment-specific classification
+  quality
+\end{itemize}
+
+By working through the complete pipeline from data generation to model
+comparison, you will develop practical skills in applying discriminant
+analysis to real-world classification problems.
+
+\section{AI-Assisted Content Development}
+
+These companion notes were developed with the assistance of artificial
+intelligence (Claude, Anthropic) to enhance their pedagogical value and
+comprehensiveness. The AI contribution involved:
+
+\textbf{Content Organization and Clarity}: Restructuring technical
+concepts into a logical progression from foundational theory to advanced
+applications, ensuring accessibility for students with diverse
+mathematical backgrounds.
+
+\textbf{Mathematical Exposition}: Translating formal statistical
+notation into clear explanations with concrete interpretations,
+balancing mathematical rigor with practical understanding.
+
+\textbf{Example Development}: Creating worked examples (marketing
+segmentation, credit risk classification) that demonstrate discriminant
+analysis application to realistic business problems, complete with
+numerical calculations and business interpretations.
+
+\textbf{Coverage Alignment}: Enhancing content to ensure comprehensive
+coverage of assessment topics, including detailed discussions of
+diagnostic statistics (Wilks' Lambda, Hotelling's T-squared,
+eigenvalues, canonical correlation, Mahalanobis distance), coefficient
+interpretation (standardized vs unstandardized), and methodological
+considerations (categorical predictors, assumption violations).
+
+\textbf{Technical Accuracy}: Verifying formulas, statistical concepts,
+and Python implementation details against authoritative references to
+ensure correctness.
+
+The pedagogical structure, learning objectives, and example selection
+reflect the course instructor's vision (Dr. Juliho Castillo), with AI
+serving as a tool for content development and refinement rather than as
+the primary author. All technical content has been reviewed for accuracy
+and alignment with course objectives.
+
+\textbf{AI Tool Used}: Claude 3.5 Sonnet (Anthropic) \textbf{Development
+Dates}: October 2024 - October 2025 \textbf{Human Oversight}: Dr. Juliho
+Castillo, Tecnologico de Monterrey
+
+This disclosure reflects the growing role of AI in educational content
+creation while maintaining transparency about the development process.
+Students are encouraged to engage critically with all course materials,
+verify understanding through practice problems, and seek clarification
+from the instructor when concepts require additional explanation.
+
+{ ``The goal is to turn data into information, and information into
+insight.''\\
+- Carly Fiorina }
+
+\end{document}
+

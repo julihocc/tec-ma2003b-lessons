@@ -1,0 +1,429 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Principal Component Analysis - Lecture Notes},
+  pdfauthor={MA2003B},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Principal Component Analysis - Lecture Notes}
+\author{MA2003B}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Principal Component Analysis (PCA)}
+
+Dimensionality Reduction, Spectral Decomposition, and Geometry
+
+MA2003B --- Application of Multivariate Methods in Data Science
+
+Tecnológico de Monterrey
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Course and Chapter Overview}
+
+\textbf{ }
+
+\subsection{Course Context}
+
+Principal Component Analysis (PCA) is the primary unsupervised
+dimensionality reduction technique in multivariate data science.
+Introduced by Karl Pearson (1901) and generalized by Harold Hotelling
+(1933), PCA transforms a system of \(p\) correlated variables into
+\(k \ll p\) mutually orthogonal components that capture the maximum
+possible variance.
+
+\textbf{ }
+
+\subsection{Learning Objectives}
+
+By the end of this chapter, students will be able to:
+
+\begin{itemize}
+\item
+  Identify appropriate practical and scientific use cases for PCA.
+\item
+  Understand the geometric interpretation of PCA as an orthogonal
+  rotation along the principal axes of the covariance ellipsoid.
+\item
+  Derive the principal component formulation via spectral decomposition
+  of \(\mathbf{S}\) and \(\mathbf{R}\) using Lagrange multipliers.
+\item
+  Calculate component loadings, individual scores, and proportions of
+  variance explained.
+\item
+  Apply rigorous component retention criteria (Kaiser criterion, Scree
+  plots, Horn's Parallel Analysis).
+\item
+  Construct and interpret 2D/3D PCA Biplots.
+\item
+  Implement end-to-end PCA pipelines in Python using
+  \texttt{scikit-learn}.
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{3.1 Cases Where PCA is Used}
+
+\textbf{ }
+
+\subsection{Primary Applications}
+
+\begin{enumerate}
+\item
+  \textbf{}Multicollinearity Elimination:\textbf{} Replaces highly
+  correlated regression predictors with uncorrelated principal
+  components (Principal Component Regression, PCR).
+\item
+  \textbf{}High-Dimensional Data Compression:\textbf{} Reduces memory
+  footprint and computational cost in downstream machine learning
+  algorithms while retaining \(> 80\%\) of systemic variance.
+\item
+  \textbf{}Exploratory 2D/3D Visualization:\textbf{} Projects
+  high-dimensional datasets (\(p \geq 10\)) onto principal score planes
+  to identify natural clustering, trajectories, and outliers.
+\item
+  \textbf{}Macroeconomic \& Financial Risk Factor Modeling:\textbf{}
+  Extracts systematic market drivers (e.g. Yield curve level, slope,
+  curvature) from multi-asset return streams.
+\end{enumerate}
+
+\textbf{Info: } \textbf{PCA vs. Factor Analysis:} PCA is a
+variance-focused mathematical transformation of all observed variance
+(common + unique). In contrast, Factor Analysis posits an underlying
+measurement model focusing strictly on shared common variance
+(\(\mathbf{\Sigma} = \mathbf{\Lambda}\mathbf{\Lambda}^{T} + \mathbf{\Psi}\)).
+
+---
+
+\textbf{ }
+
+\section{3.2 Geometrical Description of Major Components}
+
+\textbf{ }
+
+\subsection{Geometric Rotation of Axes}
+
+Let \(\mathbf{x}_{1},\ldots,\mathbf{x}_{n} \in \mathbb{R}^{p}\) be a
+sample of observations centered at
+\(\overline{\mathbf{x}} = \mathbf{0}\).
+
+\begin{itemize}
+\item
+  The \textbf{first principal component}
+  \(Y_{1} = \mathbf{a}_{1}^{T}\mathbf{X}\) defines the direction in
+  \(\mathbb{R}^{p}\) along which the orthogonal projection of the data
+  points exhibits \textbf{maximum dispersion (variance)}.
+\item
+  The \textbf{second principal component}
+  \(Y_{2} = \mathbf{a}_{2}^{T}\mathbf{X}\) defines the direction of
+  maximum remaining variance, subject to being \textbf{orthogonal} to
+  \(\mathbf{a}_{1}\) (\(\mathbf{a}_{2}^{T}\mathbf{a}_{1} = 0\)).
+\item
+  Geometrically, the eigenvectors of \(\mathbf{S}\) specify the
+  orientation of the principal axes of the constant-density ellipsoid
+  \(\{\mathbf{x}:\mathbf{x}^{T}\mathbf{S}^{- 1}\mathbf{x} = c^{2}\}\).
+\end{itemize}
+
+---
+
+\textbf{ }
+
+\section{3.3 Mathematical Formulation \& Spectral Decomposition}
+
+\textbf{ }
+
+\subsection{Derivation via Lagrange Multipliers}
+
+Let \(\mathbf{X}\) be a random vector with covariance matrix
+\(\mathbf{\Sigma}\) (or sample covariance \(\mathbf{S}\)). We seek a
+linear combination \(Y_{1} = \mathbf{a}_{1}^{T}\mathbf{X}\) that
+maximizes:
+
+\[\operatorname{Var}(Y_{1}) = \mathbf{a}_{1}^{T}\mathbf{\Sigma}\mathbf{a}_{1}\quad\text{ subject to  }\mathbf{a}_{1}^{T}\mathbf{a}_{1} = 1\]
+
+The Lagrangian is:
+\[\mathcal{L}(\mathbf{a}_{1},\lambda_{1}) = \mathbf{a}_{1}^{T}\mathbf{\Sigma}\mathbf{a}_{1} - \lambda_{1}\left( \mathbf{a}_{1}^{T}\mathbf{a}_{1} - 1 \right)\]
+
+Setting the gradient to zero:
+\[\frac{\partial\mathcal{L}}{\partial\mathbf{a}_{1}} = 2\mathbf{\Sigma}\mathbf{a}_{1} - 2\lambda_{1}\mathbf{a}_{1} = \mathbf{0} \Longrightarrow \mathbf{\Sigma}\mathbf{a}_{1} = \lambda_{1}\mathbf{a}_{1}\]
+
+Thus:
+
+\begin{itemize}
+\item
+  \(\lambda_{1}\) is the \textbf{largest eigenvalue} of
+  \(\mathbf{\Sigma}\).
+\item
+  \(\mathbf{a}_{1}\) is the corresponding \textbf{normalized
+  eigenvector} (\(|\mathbf{a}_{1}| = 1\)).
+\item
+  Maximum variance equals the eigenvalue:
+  \(\operatorname{Var}(Y_{1}) = \mathbf{a}_{1}^{T}\mathbf{\Sigma}\mathbf{a}_{1} = \lambda_{1}\).
+\end{itemize}
+
+For the \(j\)-th component:
+\[\mathbf{\Sigma}\mathbf{a}_{j} = \lambda_{j}\mathbf{a}_{j},\quad\lambda_{1} \geq \lambda_{2} \geq \ldots \geq \lambda_{p} \geq 0\]
+
+\textbf{ }
+
+\subsection{\texorpdfstring{Spectral Decomposition of Covariance
+(\(\mathbf{S}\)) and Correlation
+(\(\mathbf{R}\))}{Spectral Decomposition of Covariance (\textbackslash mathbf\{S\}) and Correlation (\textbackslash mathbf\{R\})}}
+
+\[\mathbf{S} = \mathbf{V}\mathbf{\Lambda}\mathbf{V}^{T} = \sum_{j = 1}^{p}\lambda_{j}\mathbf{v}_{j}\mathbf{v}_{j}^{T}\]
+
+where
+\(\mathbf{V} = \left\lbrack \mathbf{v}_{1},\ldots,\mathbf{v}_{p} \right\rbrack\)
+is the orthogonal eigenvector matrix
+(\(\mathbf{V}^{T}\mathbf{V} = \mathbf{I}\)), and
+\(\mathbf{\Lambda} = \operatorname{diag}(\lambda_{1},\ldots,\lambda_{p})\).
+
+\textbf{ }
+
+\subsection{Total Variance and Variance Explained}
+
+\[\text{ Total Variance } = \operatorname{tr}(\mathbf{S}) = \sum_{j = 1}^{p}s_{jj} = \sum_{j = 1}^{p}\lambda_{j}\]
+
+The proportion of total sample variance explained by the \(j\)-th
+principal component is:
+\[\text{ Variance Proportion}_{j} = \frac{\lambda_{j}}{\sum_{k = 1}^{p}\lambda_{k}}\]
+
+\textbf{ }
+
+\subsection{Component Loadings (Correlations)}
+
+The correlation between the original variable \(X_{k}\) and the \(j\)-th
+component \(Y_{j}\) is:
+\[\operatorname{Corr}(X_{k},Y_{j}) = \frac{a_{jk}\sqrt{\lambda_{j}}}{\sqrt{s_{kk}}}\]
+
+When PCA is performed on the \textbf{correlation matrix} \(\mathbf{R}\)
+(where \(s_{kk} = 1\)):
+\[\operatorname{Corr}(X_{k},Y_{j}) = a_{jk}\sqrt{\lambda_{j}}\]
+
+---
+
+\textbf{ }
+
+\section{3.4 Determination of the Number of Major Components}
+
+Several complementary rules guide component retention:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2858}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4286}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2858}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Criterion}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Mathematical Rule}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Best Use Context}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Kaiser-Guttman Rule & Retain components where \(\lambda_{j} > 1.0\) (for
+\(\mathbf{R}\)) or \(\lambda_{j} > \overline{\lambda}\) (for
+\(\mathbf{S}\)) & Standard correlation matrix PCA \\
+Cattell Scree Plot & Visually locate the ``elbow'' (inflection point)
+where eigenvalues level off & Exploratory visual inspection \\
+Cumulative Variance & Retain minimum \(k\) such that
+\(\sum_{j = 1}^{k}\frac{\lambda_{j}}{\sum}\lambda_{m} \geq 70\% - 85\%\)
+& Data compression goals \\
+Horn's Parallel Analysis & Retain \(\lambda_{j}\) that exceeds the 95th
+percentile of eigenvalues from random uncorrelated noise & Rigorous
+statistical benchmark \\
+\end{longtable}
+}
+
+---
+
+\textbf{ }
+
+\section{3.5 Biplots and Interpretation in Python}
+
+\textbf{ }
+
+\subsection{The PCA Biplot (Gabriel 1971)}
+
+A Biplot simultaneously displays two sets of coordinates on the first
+two principal axes:
+
+\begin{enumerate}
+\item
+  \textbf{}Observation Scores (\(Y_{i1},Y_{i2}\)):\textbf{} Plotted as
+  scatter points showing sample clustering.
+\item
+  \textbf{}Variable Loading Vectors
+  (\(\mathbf{a}_{1},\mathbf{a}_{2}\)):\textbf{} Plotted as vectors
+  emanating from the origin.
+
+  \begin{itemize}
+  \item
+    Vector length indicates the strength of representation in the 2D
+    subspace.
+  \item
+    The cosine of the angle between two variable vectors approximates
+    their correlation.
+  \end{itemize}
+\end{enumerate}
+
+---
+
+\textbf{ }
+
+\section{Practical Python Implementation}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ matplotlib.pyplot }\ImportTok{as}\NormalTok{ plt}
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler}
+\ImportTok{from}\NormalTok{ sklearn.decomposition }\ImportTok{import}\NormalTok{ PCA}
+
+\CommentTok{\# 1. Standardize Features}
+\NormalTok{scaler }\OperatorTok{=}\NormalTok{ StandardScaler()}
+\NormalTok{X\_scaled }\OperatorTok{=}\NormalTok{ scaler.fit\_transform(df.iloc[:, }\DecValTok{1}\NormalTok{:])}
+
+\CommentTok{\# 2. Fit Full PCA}
+\NormalTok{pca }\OperatorTok{=}\NormalTok{ PCA()}
+\NormalTok{scores }\OperatorTok{=}\NormalTok{ pca.fit\_transform(X\_scaled)}
+\NormalTok{eigenvalues }\OperatorTok{=}\NormalTok{ pca.explained\_variance\_}
+\NormalTok{variance\_ratio }\OperatorTok{=}\NormalTok{ pca.explained\_variance\_ratio\_}
+
+\CommentTok{\# 3. Scree Plot \& Kaiser Criterion}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{8}\NormalTok{, }\DecValTok{4}\NormalTok{))}
+\NormalTok{plt.plot(}\BuiltInTok{range}\NormalTok{(}\DecValTok{1}\NormalTok{, }\BuiltInTok{len}\NormalTok{(eigenvalues) }\OperatorTok{+} \DecValTok{1}\NormalTok{), eigenvalues, }\StringTok{\textquotesingle{}o{-}\textquotesingle{}}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}navy\textquotesingle{}}\NormalTok{, lw}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{plt.axhline(}\FloatTok{1.0}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}red\textquotesingle{}}\NormalTok{, ls}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{, label}\OperatorTok{=}\StringTok{\textquotesingle{}Kaiser Threshold (λ = 1.0)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.xlabel(}\StringTok{\textquotesingle{}Principal Component Index\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.ylabel(}\StringTok{\textquotesingle{}Eigenvalue (Variance Explained)\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.title(}\StringTok{\textquotesingle{}PCA Scree Plot\textquotesingle{}}\NormalTok{)}
+\NormalTok{plt.legend()}
+\NormalTok{plt.show()}
+
+\CommentTok{\# 4. Component Loadings DataFrame}
+\NormalTok{loadings }\OperatorTok{=}\NormalTok{ pd.DataFrame(}
+\NormalTok{    pca.components\_[:}\DecValTok{3}\NormalTok{].T }\OperatorTok{*}\NormalTok{ np.sqrt(pca.explained\_variance\_[:}\DecValTok{3}\NormalTok{]),}
+\NormalTok{    index}\OperatorTok{=}\NormalTok{df.columns[}\DecValTok{1}\NormalTok{:],}
+\NormalTok{    columns}\OperatorTok{=}\NormalTok{[}\StringTok{\textquotesingle{}PC1\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}PC2\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}PC3\textquotesingle{}}\NormalTok{]}
+\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\StringTok{"=== Component Loadings Matrix ==="}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(loadings.}\BuiltInTok{round}\NormalTok{(}\DecValTok{3}\NormalTok{))}
+\end{Highlighting}
+\end{Shaded}
+
+
+\end{document}
+
+
+

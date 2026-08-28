@@ -1,0 +1,1903 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Cluster Analysis - Lecture Notes},
+  pdfauthor={MA2003B},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Cluster Analysis - Lecture Notes}
+\author{MA2003B}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Cluster Analysis}
+
+Lecture Notes
+
+MA2003B - Application of Multivariate Methods in Data Science
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Document Information}
+
+\textbf{ }
+
+\subsection{Credits and Authorship}
+
+\textbf{Content Development:}
+
+\begin{itemize}
+\item
+  \textbf{AI Assistant:} Claude (Anthropic) - Initial content
+  generation, mathematical formulations, and structural organization
+\item
+  \textbf{Human Reviewer and Course Coordinator:} Juliho Castillo
+  Colmenares - Academic review, pedagogical alignment, and quality
+  assurance
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Roles and Responsibilities}
+
+\textbf{Claude (AI Assistant):}
+
+\begin{itemize}
+\item
+  Generated comprehensive lecture notes based on cluster analysis
+  curriculum
+\item
+  Developed mathematical formulations and technical explanations
+\item
+  Created practice questions and detailed answers
+\item
+  Structured content according to pedagogical best practices
+\item
+  Aligned material with E06 Cluster Analysis quiz topics
+\end{itemize}
+
+\textbf{Human Reviewer (Course Coordinator):}
+
+\begin{itemize}
+\item
+  Reviewed content for academic accuracy and rigor
+\item
+  Ensured alignment with MA2003B course learning objectives
+\item
+  Validated examples and practice questions
+\item
+  Approved final content for student distribution
+\item
+  Maintains ongoing responsibility for course materials
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Contact Information}
+
+\textbf{Course Coordinator:}
+
+\begin{itemize}
+\item
+  \textbf{Name:} Juliho Castillo Colmenares
+\item
+  \textbf{Email:} julihocc@tec
+\item
+  \textbf{Office:} Tec de Monterrey CCM Office 1540
+\item
+  \textbf{Office Hours:} Monday-Friday, 9:00 AM - 5:00 PM
+\end{itemize}
+
+\textbf{Course Information:}
+
+\begin{itemize}
+\item
+  \textbf{Course Code:} MA2003B
+\item
+  \textbf{Course Title:} Application of Multivariate Methods in Data
+  Science
+\item
+  \textbf{Institution:} Tec de Monterrey
+\item
+  \textbf{Department:} Escuela de Ingeniería y Ciencias
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Version Information}
+
+\begin{itemize}
+\item
+  \textbf{Document Version:} 1.0
+\item
+  \textbf{Created:} 2025-01-07
+\item
+  \textbf{Last Updated:} 2025-01-07
+\item
+  \textbf{Status:} Active - Current Semester
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Usage and Distribution}
+
+These lecture notes are intended for students enrolled in MA2003B. The
+material is designed to prepare students for the Cluster Analysis
+evaluation (E06) and provide comprehensive understanding of unsupervised
+learning methods.
+
+\textbf{Academic Integrity:} Students are expected to use these notes as
+a study resource in accordance with institutional academic integrity
+policies.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Introduction to Cluster Analysis}
+
+\textbf{ }
+
+\subsection{What is Cluster Analysis?}
+
+\textbf{Cluster Analysis} is an exploratory data analysis technique used
+to discover natural groupings (clusters) in data \textbf{without
+predefined categories}. Unlike discriminant analysis, which classifies
+observations into known groups, cluster analysis seeks to identify
+previously unknown structure in the data.
+
+\textbf{Info: } \textbf{Key Distinction:} Cluster analysis is
+\textbf{unsupervised learning} - we don't know the ``true'' groups
+beforehand. We let the data reveal its own structure.
+
+\textbf{ }
+
+\subsection{Primary Objectives}
+
+\begin{enumerate}
+\item
+  \textbf{Grouping:} Partition observations into homogeneous groups
+\item
+  \textbf{Data reduction:} Simplify large datasets by representing
+  groups
+\item
+  \textbf{Pattern discovery:} Identify natural structure in data
+\item
+  \textbf{Hypothesis generation:} Suggest new classifications for
+  further study
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Common Applications}
+
+\begin{itemize}
+\item
+  \textbf{Marketing:} Customer segmentation for targeted campaigns
+\item
+  \textbf{Biology:} Taxonomy and species classification
+\item
+  \textbf{Medicine:} Disease subtype identification
+\item
+  \textbf{Social Sciences:} Community detection in networks
+\item
+  \textbf{Image Processing:} Image segmentation and compression
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Distance and Similarity Measures}
+
+\textbf{ }
+
+\subsection{Why Distance Matters}
+
+Clustering relies on measuring how ``close'' or ``similar'' observations
+are to each other. The choice of distance metric fundamentally affects
+the clustering results.
+
+\textbf{ }
+
+\subsection{Common Distance Measures}
+
+\subsubsection{Euclidean Distance (L2 Norm)}
+
+The most commonly used distance measure, representing straight-line
+distance in n-dimensional space.
+
+\[d(x,y) = \sqrt{\sum_{i = 1}^{p}\left( x_{i} - y_{i} \right)^{2}}\]
+
+\textbf{Properties:}
+
+\begin{itemize}
+\item
+  Sensitive to scale differences between variables
+\item
+  Assumes equal importance of all dimensions
+\item
+  Works best when variables are continuous and measured on similar
+  scales
+\end{itemize}
+
+\textbf{Example: } For points \(x = (2,3)\) and \(y = (5,7)\):
+
+\(d(x,y) = \sqrt{(5 - 2)^{2} + (7 - 3)^{2}} = \sqrt{9 + 16} = 5\)
+
+\subsubsection{Manhattan Distance (L1 Norm)}
+
+Also called ``city block'' distance, it measures distance as the sum of
+absolute differences.
+
+\[d(x,y) = \sum_{i = 1}^{p}|x_{i} - y_{i}|\]
+
+\textbf{When to use:}
+
+\begin{itemize}
+\item
+  Data contains outliers or extreme values (more robust than Euclidean)
+\item
+  Variables represent counts or discrete quantities
+\item
+  Working in high-dimensional spaces
+\end{itemize}
+
+\textbf{Example: } For the same points \(x = (2,3)\) and \(y = (5,7)\):
+
+\(d(x,y) = |5 - 2| + |7 - 3| = 3 + 4 = 7\)
+
+\subsubsection{Other Distance Measures}
+
+\textbf{Cosine Similarity:} Measures angle between vectors (useful for
+text data)
+
+\[\text{ similarity}(x,y) = \frac{x \cdot y}{\| x\| \cdot \| y\|}\]
+
+\textbf{Correlation-based Distance:} \(d(x,y) = 1 - r(x,y)\)
+
+Used when pattern similarity is more important than magnitude.
+
+\textbf{Warning: } \textbf{Critical:} Always standardize variables
+measured on different scales before computing distances! Variables with
+larger scales will dominate the distance calculation otherwise.
+
+\textbf{ }
+
+\subsection{Standardization}
+
+Before clustering, transform variables to have mean 0 and standard
+deviation 1:
+
+\[z_{i} = \frac{x_{i} - \mu}{\sigma}\]
+
+This ensures all variables contribute equally to distance calculations.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Hierarchical Clustering}
+
+\textbf{ }
+
+\subsection{Overview}
+
+Hierarchical clustering builds a tree-like structure (dendrogram)
+showing nested clusters at different levels of granularity. It doesn't
+require specifying the number of clusters in advance.
+
+\textbf{ }
+
+\subsection{Types of Hierarchical Clustering}
+
+\subsubsection{Agglomerative (Bottom-Up)}
+
+\begin{itemize}
+\item
+  \textbf{Start:} Each observation is its own cluster
+\item
+  \textbf{Process:} Iteratively merge the two closest clusters
+\item
+  \textbf{End:} All observations in one cluster
+\item
+  \textbf{Most common approach}
+\end{itemize}
+
+\subsubsection{Divisive (Top-Down)}
+
+\begin{itemize}
+\item
+  \textbf{Start:} All observations in one cluster
+\item
+  \textbf{Process:} Iteratively split the most heterogeneous cluster
+\item
+  \textbf{End:} Each observation is its own cluster
+\item
+  \textbf{Less common, computationally intensive}
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Linkage Methods}
+
+Linkage methods define how to measure distance between \textbf{clusters}
+(not just individual points).
+
+\subsubsection{Single Linkage (Nearest Neighbor)}
+
+Distance = \textbf{minimum} distance between any two points in the
+clusters
+
+\[d\left( C_{1},C_{2} \right) = \min\limits_{x \in C_{1},y \in C_{2}}d(x,y)\]
+
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Can detect elongated, non-spherical clusters
+\item
+  Handles irregular cluster shapes
+\end{itemize}
+
+\textbf{Disadvantages:}
+
+\begin{itemize}
+\item
+  Susceptible to ``chaining effect'' - clusters connect via single
+  intermediate points
+\item
+  Sensitive to noise and outliers
+\end{itemize}
+
+\subsubsection{Complete Linkage (Farthest Neighbor)}
+
+Distance = \textbf{maximum} distance between any two points in the
+clusters
+
+\[d\left( C_{1},C_{2} \right) = \max\limits_{x \in C_{1},y \in C_{2}}d(x,y)\]
+
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Avoids single linkage's chaining effect (does not merge clusters based
+  on one close pair while ignoring the rest)
+\item
+  Tends to produce compact, spherical clusters
+\end{itemize}
+
+\textbf{Disadvantages:}
+
+\begin{itemize}
+\item
+  May break large clusters
+\item
+  Biased toward finding clusters of similar size
+\item
+  Its \textbf{maximum}-pairwise-distance criterion is itself driven by
+  whichever two points are farthest apart, so a single outlier in either
+  cluster can dominate the linkage distance -- complete linkage is not
+  generally ``robust to outliers,'' only less prone than single linkage
+  to the specific failure mode of chaining
+\end{itemize}
+
+\subsubsection{Average Linkage}
+
+Distance = \textbf{average} of all pairwise distances between clusters
+
+\[d\left( C_{1},C_{2} \right) = \frac{1}{n_{1}n_{2}}\sum_{x \in C_{1}}\sum_{y \in C_{2}}d(x,y)\]
+
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Compromise between single and complete linkage
+\item
+  Less affected by outliers than single linkage
+\item
+  Generally produces good results
+\end{itemize}
+
+\subsubsection{Ward's Method}
+
+Minimizes the \textbf{total within-cluster sum of squares} (variance),
+\textbf{provided the dissimilarity is squared Euclidean distance} --
+this variance-minimizing interpretation does not hold for other distance
+metrics (e.g. Manhattan, cosine), even though Ward's linkage update rule
+can technically be run on any dissimilarity matrix.
+
+At each step, merge the two clusters that result in the smallest
+increase in total within-cluster variance.
+
+\[\text{ ESS } = \sum_{i = 1}^{k}\sum_{x \in C_{i}}\| x - \mu_{i}\|_{2}^{2}\]
+
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Tends to create compact, equal-sized clusters
+\item
+  Minimizes variance within clusters
+\item
+  Often produces the best results in practice
+\end{itemize}
+
+\textbf{Disadvantages:}
+
+\begin{itemize}
+\item
+  Assumes spherical clusters
+\item
+  Sensitive to outliers
+\end{itemize}
+
+\textbf{Tip: } \textbf{Practical Recommendation:} Ward's method is often
+the best choice for exploratory analysis. Use average linkage as an
+alternative. Avoid single linkage unless you specifically need to detect
+elongated clusters.
+
+\textbf{ }
+
+\subsection{Dendrograms}
+
+A dendrogram visualizes the hierarchical clustering process as a tree
+diagram.
+
+\textbf{Reading a Dendrogram:}
+
+\begin{itemize}
+\item
+  Horizontal axis: Individual observations or clusters
+\item
+  Vertical axis: Distance or dissimilarity at which clusters merge
+\item
+  Height of branches: Indicates the distance between merged clusters
+\end{itemize}
+
+\textbf{Determining Number of Clusters:} Look for large vertical gaps
+(jumps in distance) - cut the dendrogram where there's a substantial
+increase in fusion distance.
+
+\textbf{Info: } \textbf{Cutting the Dendrogram:} Draw a horizontal line
+across the dendrogram. The number of vertical lines it crosses equals
+the number of clusters at that level.
+
+\textbf{ }
+
+\subsection{Chaining Effect}
+
+The ``chaining effect'' occurs when clusters form long, elongated chains
+rather than compact groups. This happens with single linkage when
+observations connect via intermediate points.
+
+\textbf{Example scenario:} Observations A-B-C-D form a chain where each
+is close to its neighbor, but A and D are far apart. Single linkage
+would group them together.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Non-Hierarchical Clustering}
+
+\textbf{ }
+
+\subsection{K-Means Clustering}
+
+The most popular non-hierarchical method. Partitions data into k
+clusters by minimizing within-cluster variance.
+
+\subsubsection{Algorithm}
+
+\begin{enumerate}
+\item
+  \textbf{Initialize:} Randomly select k observations as initial cluster
+  centers (centroids)
+\item
+  \textbf{Assignment:} Assign each observation to the nearest centroid
+\item
+  \textbf{Update:} Recalculate centroids as the mean of all points in
+  each cluster
+\item
+  \textbf{Repeat:} Steps 2-3 until assignments no longer change
+  (convergence)
+\end{enumerate}
+
+\subsubsection{Mathematical Objective}
+
+Minimize the total within-cluster sum of squares (WCSS):
+
+\[\min\sum_{i = 1}^{k}\sum_{x \in C_{i}}\| x - \mu_{i}\|^{2}\]
+
+where \(\mu_{i}\) is the centroid of cluster \(C_{i}\).
+
+\subsubsection{Convergence}
+
+The algorithm \textbf{always converges} because:
+
+\begin{itemize}
+\item
+  Each iteration reduces or maintains WCSS
+\item
+  There are finitely many possible partitions
+\item
+  Typically converges in 10-30 iterations
+\end{itemize}
+
+Convergence is reached when cluster assignments no longer change between
+iterations.
+
+\subsubsection{Advantages}
+
+\begin{itemize}
+\item
+  \textbf{Fast:} Computational complexity O(n × k × p × iterations)
+\item
+  \textbf{Scalable:} Works well with large datasets
+\item
+  \textbf{Simple:} Easy to understand and implement
+\item
+  \textbf{Efficient:} Generally converges quickly
+\end{itemize}
+
+\subsubsection{Limitations}
+
+\begin{enumerate}
+\item
+  \textbf{Requires specifying k in advance} - must know or guess number
+  of clusters
+\item
+  \textbf{Sensitive to initialization} - different starting points may
+  yield different results
+\item
+  \textbf{Assumes spherical clusters} - struggles with elongated or
+  irregular shapes
+\item
+  \textbf{Sensitive to outliers} - outliers can distort centroids
+\item
+  \textbf{Assumes equal cluster sizes} - tends to create similar-sized
+  clusters
+\end{enumerate}
+
+\subsubsection{K-Means++ Initialization}
+
+An improved initialization method that spreads out initial centroids:
+
+\begin{enumerate}
+\item
+  Choose first centroid randomly
+\item
+  For each subsequent centroid, choose a point with probability
+  proportional to its squared distance from nearest existing centroid
+\item
+  Repeat until k centroids selected
+\end{enumerate}
+
+\textbf{Benefit:} Significantly reduces the risk of poor initialization
+and typically produces better results.
+
+\textbf{ }
+
+\subsection{K-Medoids (PAM - Partitioning Around Medoids)}
+
+Similar to k-means but uses actual data points as cluster centers
+(medoids) instead of computed means.
+
+\subsubsection{Key Difference from K-Means}
+
+\begin{itemize}
+\item
+  \textbf{K-means:} Centers are computed means (may not be actual data
+  points)
+\item
+  \textbf{K-medoids:} Centers are actual data points from the dataset
+\end{itemize}
+
+\subsubsection{Advantages}
+
+\begin{itemize}
+\item
+  \textbf{More robust to outliers than k-means} - an extreme point can
+  still become (or shift) a medoid, but a medoid is constrained to be an
+  actual observation, so it cannot be dragged arbitrarily far the way a
+  computed mean can
+\item
+  \textbf{Works with any distance metric} - not limited to Euclidean
+  distance
+\item
+  \textbf{Interpretable centers} - medoids are actual observations
+\end{itemize}
+
+\subsubsection{Disadvantages}
+
+\begin{itemize}
+\item
+  \textbf{Slower:} Higher computational complexity than k-means
+\item
+  \textbf{Less common:} Not as widely implemented in software
+\end{itemize}
+
+\textbf{Tip: } \textbf{When to use K-medoids:} Choose k-medoids when
+your data contains outliers or when you need cluster centers to be
+actual observations (e.g., choosing representative customers).
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Determining Optimal Number of Clusters}
+
+\textbf{ }
+
+\subsection{The Fundamental Challenge}
+
+Unlike supervised learning, we don't have a ``ground truth'' for the
+correct number of clusters. We must use heuristics and domain knowledge.
+
+\textbf{ }
+
+\subsection{Elbow Method}
+
+Plot the total within-cluster sum of squares (WCSS) against the number
+of clusters k.
+
+\textbf{Procedure:}
+
+\begin{enumerate}
+\item
+  Run clustering for k = 1, 2, 3, \ldots, K\_max
+\item
+  Calculate WCSS for each k
+\item
+  Plot WCSS vs. k
+\item
+  Look for an ``elbow'' - the point where adding more clusters yields
+  diminishing returns
+\end{enumerate}
+
+\[\text{ WCSS}(k) = \sum_{i = 1}^{k}\sum_{x \in C_{i}}\| x - \mu_{i}\|^{2}\]
+
+\textbf{Interpretation:}
+
+\begin{itemize}
+\item
+  WCSS always decreases as k increases
+\item
+  The ``elbow'' indicates where additional clusters don't substantially
+  improve fit
+\item
+  Choose k at the elbow point
+\end{itemize}
+
+\textbf{Warning: } \textbf{Limitation:} The elbow is not always clear -
+sometimes the curve is smooth with no obvious bend.
+
+\textbf{ }
+
+\subsection{Silhouette Analysis}
+
+Measures how well each point fits within its assigned cluster compared
+to other clusters.
+
+\subsubsection{Silhouette Coefficient}
+
+For each observation i:
+
+\[s(i) = \frac{b(i) - a(i)}{\max(a(i),b(i))}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(a(i)\) = average distance to other points in the same cluster
+  (cohesion)
+\item
+  \(b(i)\) = average distance to points in the nearest neighboring
+  cluster (separation)
+\end{itemize}
+
+\textbf{Range:} \(s(i) \in \lbrack - 1, + 1\rbrack\)
+
+\textbf{Interpretation:}
+
+\begin{itemize}
+\item
+  \(s(i) \approx + 1\): Point is well-matched to its cluster (far from
+  neighbors)
+\item
+  \(s(i) \approx 0\): Point is on the border between clusters
+\item
+  \(s(i) \approx - 1\): Point may be assigned to the wrong cluster
+\end{itemize}
+
+\subsubsection{Average Silhouette Width}
+
+Calculate the mean silhouette coefficient across all observations:
+
+\[\overline{s} = \frac{1}{n}\sum_{i = 1}^{n}s(i)\]
+
+\textbf{Usage:} Run clustering for different values of k and choose the
+k that maximizes the average silhouette width.
+
+\textbf{Info: } \textbf{Silhouette Plot:} Create a bar chart showing
+silhouette coefficients for each observation, grouped by cluster. Wide,
+tall bars indicate good clustering.
+
+\textbf{ }
+
+\subsection{Other Methods}
+
+\subsubsection{Gap Statistic}
+
+Compares WCSS to its expected value under a null reference distribution
+(random data):
+
+\[\operatorname{Gap}(k) = {\mathbb{E}}^{\ast}\left\lbrack \log(\text{WCSS}_{k}) \right\rbrack - \log(\text{WCSS}_{k})\]
+
+where the expectation is estimated by averaging over many reference
+datasets sampled uniformly over the observed data's range.
+
+\textbf{Selection rule:} Simply picking the \(k\) with the largest
+\(\operatorname{Gap}(k)\) ignores the Monte Carlo simulation error in
+estimating the expectation. The standard rule (Tibshirani, Walther \&
+Hastie, 2001) instead uses the \textbf{one-standard-error} criterion:
+letting \(s_{k}\) be the estimated standard error of
+\(\operatorname{Gap}(k)\), choose the \textbf{smallest} \(k\) such that
+\[\operatorname{Gap}(k) \geq \operatorname{Gap}(k + 1) - s_{k + 1}\]
+i.e. the smallest \(k\) whose gap is not significantly exceeded by the
+next larger \(k\).
+
+\subsubsection{Davies-Bouldin Index}
+
+Measures the ratio of within-cluster dispersion to between-cluster
+separation.
+
+\[\text{ DB } = \frac{1}{k}\sum_{i = 1}^{k}\max\limits_{j \neq i}\left( \frac{\sigma_{i} + \sigma_{j}}{d\left( c_{i},c_{j} \right)} \right)\]
+
+\textbf{Lower values indicate better clustering} - compact clusters that
+are far apart.
+
+\subsubsection{Domain Knowledge}
+
+Often the most important factor:
+
+\begin{itemize}
+\item
+  Business requirements (e.g., ``we need 3-5 customer segments for our
+  marketing capacity'')
+\item
+  Interpretability (fewer clusters are easier to explain)
+\item
+  Actionability (can we act differently for each cluster?)
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Validation and Quality Assessment}
+
+\textbf{ }
+
+\subsection{Internal Validation}
+
+Measures clustering quality using only the data itself (no external
+labels).
+
+\subsubsection{Within-Cluster Sum of Squares (WCSS)}
+
+\[\text{ WCSS } = \sum_{i = 1}^{k}\sum_{x \in C_{i}}\| x - \mu_{i}\|^{2}\]
+
+\textbf{Lower is better} - indicates tight, compact clusters.
+
+\textbf{Limitation:} Always decreases with more clusters, reaching 0
+when k = n.
+
+\subsubsection{Between-Cluster Sum of Squares (BCSS)}
+
+\[\text{ BCSS } = \sum_{i = 1}^{k}n_{i}\|\mu_{i} - \mu\|^{2}\]
+
+where \(\mu\) is the overall data mean.
+
+\textbf{Higher is better} - indicates well-separated clusters.
+
+\subsubsection{Silhouette Coefficient}
+
+Already discussed - ranges from -1 to +1, higher is better.
+
+\subsubsection{Davies-Bouldin Index}
+
+\[\text{ DB } = \frac{1}{k}\sum_{i = 1}^{k}\max\limits_{j \neq i}\left( \frac{\sigma_{i} + \sigma_{j}}{d\left( c_{i},c_{j} \right)} \right)\]
+
+\textbf{Lower is better} - indicates compact, well-separated clusters.
+
+\subsubsection{Dunn Index}
+
+\[\text{ Dunn } = \frac{\min\limits_{i \neq j}d\left( C_{i},C_{j} \right)}{\max\limits_{k}\text{ diameter}\left( C_{k} \right)}\]
+
+Ratio of minimum inter-cluster distance to maximum cluster diameter.
+
+\textbf{Higher is better} - indicates well-separated, compact clusters.
+
+\textbf{ }
+
+\subsection{External Validation}
+
+When ``true'' labels are available (e.g., for method comparison).
+
+\subsubsection{Adjusted Rand Index (ARI)}
+
+Measures agreement between clustering results and true labels, adjusted
+for chance.
+
+\textbf{Range:} {[}-1, +1{]}
+
+\begin{itemize}
+\item
+  1 = perfect agreement
+\item
+  0 = random clustering
+\item
+  Negative = worse than random
+\end{itemize}
+
+\subsubsection{Normalized Mutual Information (NMI)}
+
+Measures information shared between clustering and true labels.
+
+\textbf{Range:} {[}0, 1{]}, higher is better.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Practical Considerations}
+
+\textbf{ }
+
+\subsection{Curse of Dimensionality}
+
+As the number of dimensions (variables) increases:
+
+\begin{enumerate}
+\item
+  \textbf{Distance becomes less meaningful} - all points appear
+  equidistant in high dimensions
+\item
+  \textbf{Data becomes sparse} - observations spread out, making
+  clusters harder to find
+\item
+  \textbf{Computational cost increases} - both time and memory
+  requirements grow
+\end{enumerate}
+
+\textbf{Solutions:}
+
+\begin{itemize}
+\item
+  \textbf{Dimensionality reduction:} Use PCA or feature selection before
+  clustering
+\item
+  \textbf{Feature selection:} Choose only relevant variables
+\item
+  \textbf{Specialized methods:} Use algorithms designed for high
+  dimensions
+\end{itemize}
+
+\textbf{Warning: } \textbf{Rule of Thumb:} If p (dimensions) is large
+relative to n (observations), consider dimensionality reduction before
+clustering.
+
+\textbf{ }
+
+\subsection{Standardization and Scaling}
+
+\subsubsection{Why Standardize?}
+
+Variables measured on different scales will dominate distance
+calculations.
+
+\textbf{Example:} Age (20-80) vs. Income (20,000-200,000)
+
+\begin{itemize}
+\item
+  Without standardization, income dominates
+\item
+  Euclidean distance primarily reflects income differences
+\end{itemize}
+
+\subsubsection{When to Standardize}
+
+\textbf{Always standardize when:}
+
+\begin{itemize}
+\item
+  Variables have different units (e.g., kg, cm, years)
+\item
+  Variables have different scales (e.g., 0-1 vs. 0-1000)
+\item
+  You want all variables to contribute equally
+\end{itemize}
+
+\textbf{Consider not standardizing when:}
+
+\begin{itemize}
+\item
+  All variables have the same units and scale
+\item
+  Scale differences are meaningful (e.g., different importance)
+\item
+  Using correlation-based distances
+\end{itemize}
+
+\subsubsection{Standardization Methods}
+
+\textbf{Z-score standardization:} \[z = \frac{x - \mu}{\sigma}\]
+
+\textbf{Min-max scaling:} \[x' = \frac{x - \min(x)}{\max(x) - \min(x)}\]
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\subsection{Handling Mixed Data Types}
+
+\subsubsection{Continuous + Categorical Variables}
+
+\textbf{Option 1: Gower Distance}
+
+Combines different distance measures for different variable types:
+
+\[d_{\text{Gower}(i,j)} = \frac{\sum_{k = 1}^{p}\delta_{ijk}d_{ijk}}{\sum_{k = 1}^{p}\delta_{ijk}}\]
+
+where:
+
+\begin{itemize}
+\item
+  For continuous:
+  \(d_{ijk} = |x_{ik} - x_{jk}\frac{|}{\text{ range}_{k}}\)
+\item
+  For categorical: \(d_{ijk} = 0\) if same, 1 if different
+\item
+  \(\delta_{ijk} = 1\) if comparison is valid, 0 if missing
+\end{itemize}
+
+\textbf{Option 2: Dummy Encoding}
+
+Convert categorical variables to binary dummy variables, then use
+standard distance measures.
+
+\textbf{Caution:} This changes the geometry of the data.
+
+\subsubsection{Pure Categorical Data}
+
+Use specialized distance measures:
+
+\begin{itemize}
+\item
+  \textbf{Matching coefficient:} Proportion of matching categories
+\item
+  \textbf{Jaccard distance:} For binary data
+\item
+  \textbf{Hamming distance:} Number of position differences
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Outliers and Robustness}
+
+\subsubsection{Impact of Outliers}
+
+\begin{itemize}
+\item
+  \textbf{K-means:} Highly sensitive - outliers pull centroids away from
+  dense regions
+\item
+  \textbf{Hierarchical (Ward's):} Sensitive - outliers inflate variance
+\item
+  \textbf{Single linkage:} Moderately sensitive - may create singleton
+  clusters
+\item
+  \textbf{K-medoids:} More robust than k-means - medoids are constrained
+  to be actual observations, but an outlier can still be selected as (or
+  influence) a medoid
+\end{itemize}
+
+\subsubsection{Strategies for Handling Outliers}
+
+\begin{enumerate}
+\item
+  \textbf{Pre-processing:} Detect and remove outliers before clustering
+\item
+  \textbf{Robust methods:} Use k-medoids or other robust algorithms
+\item
+  \textbf{Outlier clusters:} Accept that some clusters may be outliers
+\item
+  \textbf{Trimming:} Use trimmed versions of distance measures
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Computational Considerations}
+
+\subsubsection{Complexity}
+
+\begin{itemize}
+\item
+  \textbf{K-means:} O(n × k × p × iterations) - very efficient
+\item
+  \textbf{Hierarchical:} O(\(n^{2}\) × p) for distance matrix,
+  O(\(n^{3}\)) for some linkages
+\item
+  \textbf{K-medoids:} O(\(k(n - k)^{2}\) × p) - slower than k-means
+\end{itemize}
+
+\subsubsection{Scalability Recommendations}
+
+\begin{itemize}
+\item
+  \textbf{Small datasets (n \textless{} 1,000):} Any method works
+\item
+  \textbf{Medium datasets (n = 1,000-10,000):} K-means or k-medoids
+\item
+  \textbf{Large datasets (n \textgreater{} 10,000):} K-means with
+  sampling, or specialized algorithms
+\item
+  \textbf{Very large datasets (n \textgreater{} 1M):} Mini-batch
+  k-means, approximate methods
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Cluster Analysis Workflow}
+
+\textbf{ }
+
+\subsection{Step-by-Step Procedure}
+
+\subsubsection{1. Problem Definition}
+
+\begin{itemize}
+\item
+  Define the objective: What questions are we trying to answer?
+\item
+  Determine what makes a ``good'' cluster in your context
+\item
+  Consider how results will be used
+\end{itemize}
+
+\subsubsection{2. Variable Selection}
+
+\begin{itemize}
+\item
+  Choose relevant variables (domain knowledge)
+\item
+  Remove redundant variables (high correlation)
+\item
+  Consider creating derived features
+\item
+  Decide whether to include or exclude certain variables
+\end{itemize}
+
+\subsubsection{3. Data Preprocessing}
+
+\textbf{Handle Missing Values:}
+
+\begin{itemize}
+\item
+  Imputation
+\item
+  Deletion
+\item
+  Special clustering methods for incomplete data
+\end{itemize}
+
+\textbf{Deal with Outliers:}
+
+\begin{itemize}
+\item
+  Detect using box plots, z-scores, Mahalanobis distance
+\item
+  Decide: remove, transform, or use robust methods
+\end{itemize}
+
+\textbf{Transform Variables:}
+
+\begin{itemize}
+\item
+  Log transform for skewed distributions
+\item
+  Square root for count data
+\item
+  Box-Cox transformations
+\end{itemize}
+
+\textbf{Standardize:}
+
+\begin{itemize}
+\item
+  Z-score standardization if variables on different scales
+\item
+  Consider domain knowledge about variable importance
+\end{itemize}
+
+\subsubsection{4. Choose Clustering Method}
+
+\textbf{Hierarchical if:}
+
+\begin{itemize}
+\item
+  Small to medium dataset
+\item
+  Want to explore different numbers of clusters
+\item
+  Need hierarchical structure (taxonomy)
+\item
+  Don't know k in advance
+\end{itemize}
+
+\textbf{K-means if:}
+
+\begin{itemize}
+\item
+  Large dataset
+\item
+  Approximately know the number of clusters
+\item
+  Need speed and efficiency
+\item
+  Clusters are roughly spherical
+\end{itemize}
+
+\textbf{K-medoids if:}
+
+\begin{itemize}
+\item
+  Outliers present
+\item
+  Need cluster centers to be actual observations
+\item
+  Can afford extra computation
+\end{itemize}
+
+\textbf{Other methods if:}
+
+\begin{itemize}
+\item
+  Non-spherical clusters (DBSCAN)
+\item
+  Mixed data types (k-prototypes)
+\item
+  High dimensions (subspace clustering)
+\end{itemize}
+
+\subsubsection{5. Determine Number of Clusters}
+
+\begin{itemize}
+\item
+  Use elbow method
+\item
+  Calculate silhouette coefficients
+\item
+  Try multiple values of k
+\item
+  Consider business constraints
+\item
+  Validate interpretability
+\end{itemize}
+
+\subsubsection{6. Run Clustering}
+
+\begin{itemize}
+\item
+  For k-means: run multiple times with different initializations
+\item
+  For hierarchical: create dendrogram and examine
+\item
+  Save cluster assignments and centers
+\end{itemize}
+
+\subsubsection{7. Validate Results}
+
+\textbf{Internal validation:}
+
+\begin{itemize}
+\item
+  Check silhouette coefficients
+\item
+  Examine within/between cluster variance
+\item
+  Look for negative silhouette values
+\end{itemize}
+
+\textbf{Stability:}
+
+\begin{itemize}
+\item
+  Re-run with bootstrap samples
+\item
+  Check if clusters are consistent
+\end{itemize}
+
+\textbf{Interpretability:}
+
+\begin{itemize}
+\item
+  Can you describe each cluster clearly?
+\item
+  Do clusters make business sense?
+\end{itemize}
+
+\subsubsection{8. Interpret and Profile Clusters}
+
+\begin{itemize}
+\item
+  Examine cluster centers/medoids
+\item
+  Calculate cluster means for each variable
+\item
+  Create visualizations (parallel coordinates, scatter plots)
+\item
+  Name/label clusters based on characteristics
+\item
+  Identify distinguishing features of each cluster
+\end{itemize}
+
+\subsubsection{9. Validation and Iteration}
+
+\begin{itemize}
+\item
+  Test on new data if possible
+\item
+  Refine based on domain expert feedback
+\item
+  Consider alternative numbers of clusters
+\item
+  Try different methods or distance measures
+\end{itemize}
+
+\subsubsection{10. Report and Act}
+
+\begin{itemize}
+\item
+  Document methodology and rationale
+\item
+  Present cluster profiles clearly
+\item
+  Provide actionable insights
+\item
+  Discuss limitations and next steps
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Advanced Topics}
+
+\textbf{ }
+
+\subsection{Density-Based Clustering}
+
+\subsubsection{DBSCAN (Density-Based Spatial Clustering)}
+
+Unlike k-means, DBSCAN can find clusters of arbitrary shape and identify
+outliers.
+
+\textbf{Key Parameters:}
+
+\begin{itemize}
+\item
+  \(\varepsilon\): neighborhood radius
+\item
+  MinPts: minimum points to form dense region
+\end{itemize}
+
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Finds non-spherical clusters
+\item
+  Robust to outliers (marks them as noise)
+\item
+  No need to specify number of clusters
+\end{itemize}
+
+\textbf{Disadvantages:}
+
+\begin{itemize}
+\item
+  Struggles with varying densities
+\item
+  Sensitive to parameters
+\item
+  Higher computational cost
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Fuzzy Clustering}
+
+Each observation has a degree of membership in each cluster (soft
+assignment) rather than belonging to exactly one cluster (hard
+assignment).
+
+\textbf{Fuzzy C-means:}
+
+\begin{itemize}
+\item
+  Membership values range from 0 to 1
+\item
+  Memberships for each point sum to 1
+\item
+  Useful when boundaries between clusters are unclear
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Model-Based Clustering}
+
+Assumes data comes from a mixture of probability distributions
+(typically Gaussian).
+
+\textbf{Gaussian Mixture Models (GMM):}
+
+\begin{itemize}
+\item
+  Each cluster is a Gaussian distribution
+\item
+  Use EM algorithm to estimate parameters
+\item
+  Provides probabilistic cluster assignments
+\item
+  Can estimate optimal k using BIC or AIC
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Subspace and Projected Clustering}
+
+For high-dimensional data, different clusters may exist in different
+subspaces (subsets of variables).
+
+\textbf{Approaches:}
+
+\begin{itemize}
+\item
+  Find clusters in different variable subsets
+\item
+  Identify relevant dimensions for each cluster
+\item
+  Useful when curse of dimensionality is severe
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Common Pitfalls and Best Practices}
+
+\textbf{ }
+
+\subsection{Common Mistakes to Avoid}
+
+\textbf{Warning: } \textbf{Pitfall 1: Not standardizing variables}
+
+Variables with larger scales will dominate distance calculations,
+leading to meaningless clusters based primarily on scale rather than
+pattern.
+
+\textbf{Warning: } \textbf{Pitfall 2: Using k-means with non-spherical
+clusters}
+
+K-means assumes spherical clusters and will force non-spherical data
+into inappropriate spherical groups.
+
+\textbf{Warning: } \textbf{Pitfall 3: Ignoring outliers}
+
+Outliers can severely distort clustering results, especially with
+k-means and Ward's method.
+
+\textbf{Warning: } \textbf{Pitfall 4: Over-interpreting results}
+
+Clustering will always find some structure, even in random data.
+Validate that clusters are meaningful and stable.
+
+\textbf{Warning: } \textbf{Pitfall 5: Using too many variables}
+
+High dimensionality makes clustering difficult. Focus on relevant,
+non-redundant variables.
+
+\textbf{ }
+
+\subsection{Best Practices}
+
+\textbf{Tip: } \textbf{Practice 1: Try multiple methods}
+
+Compare hierarchical, k-means, and other approaches. Robust clusters
+will appear across methods.
+
+\textbf{Tip: } \textbf{Practice 2: Validate stability}
+
+Run clustering multiple times with different initializations or
+bootstrap samples. Good clusters should be consistent.
+
+\textbf{Tip: } \textbf{Practice 3: Visualize extensively}
+
+Use scatter plots, parallel coordinates, heatmaps, and dendrograms to
+understand cluster structure.
+
+\textbf{Tip: } \textbf{Practice 4: Use domain knowledge}
+
+Statistical metrics are important, but clusters must make practical
+sense in your domain.
+
+\textbf{Tip: } \textbf{Practice 5: Document decisions}
+
+Record why you chose certain methods, parameters, and number of
+clusters. Clustering involves many subjective choices.
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Summary and Key Takeaways}
+
+\textbf{ }
+
+\subsection{Fundamental Concepts}
+
+\begin{enumerate}
+\item
+  \textbf{Cluster analysis discovers natural groupings} in data without
+  predefined categories
+\item
+  \textbf{Distance measures are crucial} - choice affects results
+  fundamentally:
+
+  \begin{itemize}
+  \item
+    Euclidean for continuous, similar scales
+  \item
+    Manhattan for robustness to outliers
+  \item
+    Correlation for pattern similarity
+  \end{itemize}
+\item
+  \textbf{Standardization is essential} when variables have different
+  scales
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Clustering Methods}
+
+\textbf{Hierarchical Clustering:}
+
+\begin{itemize}
+\item
+  Creates tree structure (dendrogram)
+\item
+  Don't need to specify k in advance
+\item
+  Linkage method matters:
+
+  \begin{itemize}
+  \item
+    Single: can find elongated clusters, prone to chaining
+  \item
+    Complete: compact clusters, robust to outliers
+  \item
+    Average: good compromise
+  \item
+    Ward's: minimizes variance, often best results
+  \end{itemize}
+\end{itemize}
+
+\textbf{K-means:}
+
+\begin{itemize}
+\item
+  Fast, scalable, widely used
+\item
+  Requires specifying k
+\item
+  Assumes spherical clusters
+\item
+  Sensitive to initialization and outliers
+\item
+  Use k-means++ for better initialization
+\end{itemize}
+
+\textbf{K-medoids:}
+
+\begin{itemize}
+\item
+  More robust to outliers than k-means
+\item
+  Centers are actual data points
+\item
+  Slower than k-means
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Determining Optimal k}
+
+\begin{enumerate}
+\item
+  \textbf{Elbow method:} Look for bend in WCSS vs. k plot
+\item
+  \textbf{Silhouette analysis:} Choose k that maximizes average
+  silhouette width
+\item
+  \textbf{Domain knowledge:} Consider business requirements and
+  interpretability
+\item
+  \textbf{Try multiple values:} Compare and validate
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Validation}
+
+\begin{itemize}
+\item
+  \textbf{Silhouette coefficient:} +1 = perfect, 0 = borderline, -1 =
+  wrong cluster
+\item
+  \textbf{Davies-Bouldin Index:} Lower is better
+\item
+  \textbf{Stability:} Rerun with different seeds/samples
+\item
+  \textbf{Interpretability:} Can you explain and use the clusters?
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Practical Workflow}
+
+\begin{enumerate}
+\item
+  Define objective and select variables
+\item
+  Preprocess: handle missing values, outliers, transform, standardize
+\item
+  Choose method based on data characteristics and goals
+\item
+  Determine k using multiple criteria
+\item
+  Run clustering (multiple times if k-means)
+\item
+  Validate and interpret results
+\item
+  Refine and iterate as needed
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Critical Considerations}
+
+\begin{itemize}
+\item
+  \textbf{Curse of dimensionality:} Reduce dimensions if p is large
+\item
+  \textbf{Outliers:} Detect and handle appropriately
+\item
+  \textbf{Mixed data types:} Use specialized distances or preprocessing
+\item
+  \textbf{Scale matters:} Always consider whether to standardize
+\item
+  \textbf{No ``true'' answer:} Clustering is exploratory; validate and
+  iterate
+\end{itemize}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Practice Questions}
+
+Test your understanding with these questions based on the lecture
+material:
+
+\textbf{ }
+
+\subsection{Conceptual Questions}
+
+\begin{enumerate}
+\item
+  What is the fundamental difference between cluster analysis and
+  discriminant analysis?
+\item
+  Why is standardization important before clustering? Give an example
+  where lack of standardization would cause problems.
+\item
+  Explain the ``chaining effect'' in hierarchical clustering. Which
+  linkage method is most susceptible to it?
+\item
+  What are the main advantages and disadvantages of k-means clustering?
+\item
+  How does the silhouette coefficient help determine if a point is
+  well-clustered?
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Application Questions}
+
+\begin{enumerate}
+\setcounter{enumi}{5}
+\item
+  You have customer data with variables: age (years), income (dollars),
+  purchases (count), and loyalty\_score (0-100). Should you standardize
+  before clustering? Why?
+\item
+  Your elbow plot shows a smooth curve with no clear ``elbow''. What
+  should you do?
+\item
+  You run k-means with k=3 five times and get different results each
+  time. What might explain this, and how can you address it?
+\item
+  Your dataset has 50,000 observations and 20 variables. Which
+  clustering method would you recommend and why?
+\item
+  After clustering customers, you find one cluster has 5,000 members and
+  another has only 50. Is this a problem? What might it indicate?
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Interpretation Questions}
+
+\begin{enumerate}
+\setcounter{enumi}{10}
+\item
+  What does it mean if a point has a silhouette coefficient of -0.3?
+\item
+  You get a Davies-Bouldin Index of 0.5 for k=3 and 0.8 for k=5. Which
+  is better?
+\item
+  In a dendrogram, you see a large vertical jump between 3 and 4
+  clusters. What does this suggest?
+\item
+  Your average silhouette width is 0.25. Is this good clustering?
+\item
+  K-means gives you compact, equal-sized clusters, but hierarchical
+  clustering with average linkage gives very different results. What
+  should you do?
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Answers to Practice Questions}
+
+\textbf{ }
+
+\subsection{Conceptual Answers}
+
+\begin{enumerate}
+\item
+  \textbf{Cluster analysis} discovers unknown groupings (unsupervised),
+  while \textbf{discriminant analysis} classifies into predefined groups
+  (supervised).
+\item
+  Standardization ensures all variables contribute equally to distance.
+  Example: Without standardization, income (0-200,000) would dominate
+  over age (0-100) in Euclidean distance calculations.
+\item
+  Clusters form long chains rather than compact groups when similar
+  observations link via intermediate points. \textbf{Single linkage} is
+  most susceptible.
+\item
+  \textbf{Advantages:} Fast, scalable, simple, works well with large
+  data. \textbf{Disadvantages:} Requires knowing k, sensitive to
+  initialization, assumes spherical clusters, sensitive to outliers.
+\item
+  Silhouette close to +1 means the point is much closer to its own
+  cluster than to neighboring clusters (well-clustered). Close to 0
+  means borderline between clusters. Negative means likely in wrong
+  cluster.
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Application Answers}
+
+\begin{enumerate}
+\setcounter{enumi}{5}
+\item
+  \textbf{Yes, standardize.} Income (thousands) would dominate age,
+  purchases, and loyalty\_score if not standardized, making the
+  clustering essentially based only on income.
+\item
+  Use alternative methods: (1) Silhouette analysis, (2) Gap statistic,
+  (3) Domain knowledge about appropriate number of segments, (4) Try
+  multiple k values and compare interpretability.
+\item
+  Different \textbf{initializations} lead to different local optima.
+  Solutions: (1) Run multiple times and choose best result (lowest
+  WCSS), (2) Use k-means++ initialization, (3) Compare stability across
+  runs.
+\item
+  \textbf{K-means} - hierarchical clustering would require O(\(n^{2}\))
+  distance matrix (50,000 × 50,000 = 2.5 billion calculations). K-means
+  scales much better to large n.
+\item
+  Not necessarily a problem. Small cluster might be: (1) Valuable niche
+  segment (VIP customers), (2) Outliers that should be investigated, or
+  (3) Indication that k is too high. Examine cluster characteristics to
+  determine.
+\end{enumerate}
+
+\textbf{ }
+
+\subsection{Interpretation Answers}
+
+\begin{enumerate}
+\setcounter{enumi}{10}
+\item
+  The point is \textbf{likely in the wrong cluster} - it's closer to a
+  neighboring cluster than to its assigned cluster. Consider it
+  misclassified.
+\item
+  \textbf{k=3 is better.} Lower Davies-Bouldin Index indicates more
+  compact, better-separated clusters (0.5 \textless{} 0.8).
+\item
+  Suggests that \textbf{k=3 is optimal} - merging from 3 to 4 clusters
+  causes a large increase in within-cluster heterogeneity, indicating
+  natural separation at 3 clusters.
+\item
+  \textbf{Moderate clustering.} Silhouette width of 0.25 indicates some
+  structure but not strong separation. Values 0.2-0.5 suggest reasonable
+  but not excellent clustering. Consider if this is acceptable for your
+  application.
+\item
+  \textbf{Compare both results carefully:} (1) Examine cluster profiles
+  and interpretability, (2) Test stability with bootstrap samples, (3)
+  Validate with domain knowledge, (4) Try intermediate methods like
+  k-medoids. Different methods capture different aspects of structure -
+  neither is necessarily ``wrong.''
+\end{enumerate}
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\textbf{ }
+
+\section{Additional Resources}
+
+\textbf{ }
+
+\subsection{Recommended Reading}
+
+\textbf{Textbooks:}
+
+\begin{itemize}
+\item
+  Everitt, B., et al. (2011). \emph{Cluster Analysis} (5th ed.). Wiley.
+\item
+  Kaufman, L., \& Rousseeuw, P. J. (2005). \emph{Finding Groups in
+  Data}. Wiley.
+\item
+  James, G., et al. (2021). \emph{An Introduction to Statistical
+  Learning} (2nd ed.). Springer. Chapter 12.
+\end{itemize}
+
+\textbf{Papers:}
+
+\begin{itemize}
+\item
+  Arthur, D., \& Vassilvitskii, S. (2007). k-means++: The advantages of
+  careful seeding. \emph{SODA `07}.
+\item
+  Rousseeuw, P. J. (1987). Silhouettes: A graphical aid to the
+  interpretation. \emph{Journal of Computational and Applied
+  Mathematics}, 20, 53-65.
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Software Implementations}
+
+\textbf{Python:}
+
+\begin{itemize}
+\item
+  scikit-learn: KMeans, AgglomerativeClustering, DBSCAN
+\item
+  scipy.cluster: Hierarchical clustering and dendrograms
+\item
+  sklearn.metrics: Silhouette, Davies-Bouldin scores
+\end{itemize}
+
+\textbf{R:}
+
+\begin{itemize}
+\item
+  stats: kmeans(), hclust(), dist()
+\item
+  cluster: pam(), silhouette()
+\item
+  factoextra: Visualization tools
+\end{itemize}
+
+\textbf{ }
+
+\subsection{Online Resources}
+
+\begin{itemize}
+\item
+  Scikit-learn Clustering Documentation: comprehensive guide with
+  examples
+\item
+  StatQuest YouTube: Visual explanations of clustering concepts
+\item
+  Towards Data Science: Practical tutorials and case studies
+\end{itemize}
+
+\textbf{End of Lecture Notes}
+
+Good luck with your studies!
+
+\end{document}
+

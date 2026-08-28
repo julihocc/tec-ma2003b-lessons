@@ -1,0 +1,2659 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[letterpaper,top=2cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Factor Analysis Study Guide},
+  pdfauthor={Dr. Juliho Castillo},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{Factor Analysis Study Guide}
+\author{Dr. Juliho Castillo}
+\date{}
+
+\begin{document}
+\maketitle
+
+\textbf{Factor Analysis Study Guide}
+
+Comprehensive Lecture Notes
+
+Dr. Juliho Castillo
+
+Tecnológico de Monterrey
+
+13:54:59 2026-08-28
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Introduction}
+
+This study guide provides comprehensive coverage of Principal Component
+Analysis (PCA) and Factor Analysis, two fundamental multivariate
+statistical techniques. The material is organized to help students
+understand both the theoretical foundations and practical applications
+of these methods.
+
+\textbf{Learning Objectives:}
+
+\begin{itemize}
+\item
+  Understand the mathematical foundations of PCA and Factor Analysis
+\item
+  Learn when to apply each method appropriately
+\item
+  Gain hands-on experience through real-world examples
+\item
+  Develop skills in interpreting and communicating results
+\end{itemize}
+
+\section{Theoretical Foundations}
+
+\subsection{Principal Component Analysis (PCA) Theory}
+
+\subsubsection{What is Principal Component Analysis?}
+
+Principal Component Analysis (PCA) is a fundamental technique in
+multivariate statistics and data science. At its core, PCA is a
+\textbf{linear transformation} that reduces the dimensionality of data
+while preserving as much variance as possible.
+
+\textbf{Key Characteristics:}
+
+\begin{itemize}
+\item
+  \textbf{Dimension Reduction}: Transforms high-dimensional data into a
+  lower-dimensional space
+\item
+  \textbf{Variance Maximization}: Each principal component captures the
+  maximum possible variance
+\item
+  \textbf{Orthogonality}: Principal components are uncorrelated
+  (orthogonal to each other)
+\item
+  \textbf{Linear Transformation}: Components are linear combinations of
+  original variables
+\end{itemize}
+
+\textbf{Primary Applications:}
+
+\begin{enumerate}
+\item
+  \textbf{Data Visualization}: Reducing data to 2D or 3D for plotting
+\item
+  \textbf{Noise Reduction}: Filtering out low-variance components
+\item
+  \textbf{Feature Engineering}: Creating new features for machine
+  learning
+\item
+  \textbf{Exploratory Data Analysis}: Understanding data structure and
+  patterns
+\end{enumerate}
+
+\subsubsection{Mathematical Foundation}
+
+Let \(\mathbf{X}\) be an \(n \times p\) data matrix where:
+
+\begin{itemize}
+\item
+  \(n\) = number of observations (rows)
+\item
+  \(p\) = number of variables (columns)
+\item
+  Each row represents one observation
+\item
+  Each column represents one variable
+\end{itemize}
+
+\textbf{Step 1: Data Centering}
+
+First, we center the data by subtracting the mean from each variable:
+\[\mathbf{X}_{\text{centered }} = \mathbf{X} - \mathbf{1}_{n}\mathbf{\mu}^{\top}\]
+
+where
+\(\mathbf{\mu} = \left( \mu_{1},\mu_{2},\ldots,\mu_{p} \right)^{\top}\)
+is the vector of variable means.
+
+\textbf{Step 2: Covariance Matrix}
+
+The sample covariance matrix is:
+\[\mathbf{S} = \frac{1}{n - 1}\mathbf{X}_{\text{centered}}^{\top}\mathbf{X}_{\text{centered }}\]
+
+For standardized analysis (correlation matrix), we first standardize
+each variable:
+\[\mathbf{R} = \frac{1}{n - 1}\mathbf{Z}^{\top}\mathbf{Z}\]
+
+where \(\mathbf{Z}\) contains standardized variables (mean 0, variance
+1).
+
+\textbf{Step 3: Eigendecomposition}
+
+The heart of PCA is the eigendecomposition of the covariance (or
+correlation) matrix:
+\[\mathbf{S}\mathbf{v}_{j} = \lambda_{j}\mathbf{v}_{j}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(\lambda_{1} \geq \lambda_{2} \geq \ldots \geq \lambda_{p} \geq 0\)
+  are eigenvalues
+\item
+  \(\mathbf{v}_{1},\mathbf{v}_{2},\ldots,\mathbf{v}_{p}\) are
+  corresponding eigenvectors
+\item
+  Eigenvectors are orthonormal:
+  \(\mathbf{v}_{i}^{\top}\mathbf{v}_{j} = \delta_{ij}\)
+\end{itemize}
+
+\textbf{Step 4: Principal Components}
+
+The \(j\)-th principal component for observation \(i\) is:
+\[\text{ PC}_{ij} = \mathbf{v}_{j}^{\top}\left( \mathbf{x}_{i} - \mathbf{\mu} \right)\]
+
+In matrix form, the principal component scores are:
+\[\mathbf{Y} = \mathbf{X}_{\text{centered }}\mathbf{V}\]
+
+where
+\(\mathbf{V} = \left\lbrack \mathbf{v}_{1},\mathbf{v}_{2},\ldots,\mathbf{v}_{p} \right\rbrack\)
+is the matrix of eigenvectors.
+
+\subsubsection{Variance Explained}
+
+Each principal component explains a specific amount of variance:
+
+\textbf{Individual Variance:}
+\[\text{ Var}\left( \text{PC}_{j} \right) = \lambda_{j}\]
+
+\textbf{Proportion of Variance Explained:}
+\[\text{ Proportion}_{j} = \frac{\lambda_{j}}{\sum_{k = 1}^{p}\lambda_{k}}\]
+
+\textbf{Cumulative Variance Explained:}
+\[\text{ Cumulative}_{j} = \frac{\sum_{k = 1}^{j}\lambda_{k}}{\sum_{k = 1}^{p}\lambda_{k}}\]
+
+\textbf{Important Property:} The total variance is preserved:
+\(\sum_{j = 1}^{p}\lambda_{j} = \sum_{j = 1}^{p}\text{ Var}\left( X_{j} \right)\)
+
+\subsubsection{Practical Implementation Steps}
+
+\textbf{Step 1: Data Preparation}
+
+\begin{verbatim}
+1. Check for missing values and outliers
+2. Decide on standardization:
+   - Use correlation matrix if variables have different scales
+   - Use covariance matrix if variables are on similar scales
+3. Center (and possibly standardize) the data
+\end{verbatim}
+
+\textbf{Step 2: Compute PCA}
+
+\begin{verbatim}
+1. Calculate covariance or correlation matrix
+2. Perform eigendecomposition
+3. Sort eigenvalues and eigenvectors in descending order
+4. Compute principal component scores
+\end{verbatim}
+
+\textbf{Step 3: Determine Number of Components}
+
+\begin{verbatim}
+1. Kaiser criterion: retain components with eigenvalue > 1
+2. Scree plot: look for "elbow" where slope levels off
+3. Cumulative variance: retain components explaining 70-90% of variance
+4. Parallel analysis: compare to random data eigenvalues
+\end{verbatim}
+
+\textbf{Step 4: Interpretation}
+
+\begin{verbatim}
+1. Examine component loadings (eigenvectors)
+2. Identify which variables contribute most to each component
+3. Name components based on variable patterns
+4. Validate interpretation with domain knowledge
+\end{verbatim}
+
+\subsubsection{Component Loadings and Interpretation}
+
+The eigenvectors \(\mathbf{v}_{j}\) are the \textbf{component
+coefficients} (or weights) used to build each component score from the
+standardized variables. \textbf{Loadings} are a distinct, rescaled
+quantity: \(\text{loading}_{ij} = v_{ij}\sqrt{\lambda_{j}}\), the
+correlation between variable \(i\) and component \(j\) for standardized
+data (this matches the definition used in L03). Loadings, not raw
+eigenvector coefficients, are what should be interpreted and compared
+across components, since they are on a correlation-like scale
+(\(\lbrack - 1,1\rbrack\)) that eigenvector coefficients alone do not
+have.
+
+\textbf{Loading Interpretation:}
+
+\begin{itemize}
+\item
+  Large absolute loading: variable strongly influences the component
+\item
+  Positive loading: variable and component move in same direction
+\item
+  Negative loading: variable and component move in opposite directions
+\item
+  Small loading: variable has little influence on the component
+\end{itemize}
+
+\textbf{Rotation Consideration:} Unlike Factor Analysis, PCA typically
+does not use rotation because:
+
+\begin{itemize}
+\item
+  Rotation would redistribute variance among components
+\item
+  The goal is maximum variance explanation, not interpretability
+\item
+  Each component is defined to be orthogonal and capture maximum
+  residual variance
+\end{itemize}
+
+\subsubsection{Key Assumptions and Limitations}
+
+\textbf{Assumptions (for descriptive PCA):}
+
+\begin{enumerate}
+\item
+  \textbf{Linearity}: Relationships between variables are linear
+\item
+  \textbf{Continuous or ordinal-scale variables}: PCA is defined for any
+  numeric data; it does not require normality or \(n > p\)
+\end{enumerate}
+
+\emph{Note: Descriptive PCA (finding directions of maximum variance) is
+well-defined even when \(n < p\), when the correlation matrix is
+rank-deficient, or when data are non-normal -- it is simply an
+eigendecomposition. \(n > p\), normality, and no perfect
+multicollinearity matter for \textbf{specific} goals built on top of PCA
+(e.g. certain significance tests for eigenvalues, or a unique full-rank
+solution), not for PCA's existence.}
+
+\textbf{Limitations:}
+
+\begin{enumerate}
+\item
+  \textbf{Interpretability}: Components may not have clear substantive
+  meaning
+\item
+  \textbf{All Variance}: Includes both signal and noise variance
+\item
+  \textbf{Linear Only}: Cannot capture nonlinear relationships
+\item
+  \textbf{Outlier Sensitivity}: Sensitive to extreme values
+\item
+  \textbf{Scale Dependency}: Results depend on whether data is
+  standardized
+\end{enumerate}
+
+---
+
+\textbf{Study Questions for Section 2.1:}
+
+\begin{enumerate}
+\item
+  What is the fundamental goal of PCA?
+\item
+  Why do we center the data before computing PCA?
+\item
+  What does it mean for principal components to be orthogonal?
+\item
+  How do you interpret a component loading of -0.8 for a variable?
+\item
+  When would you use the correlation matrix vs. covariance matrix?
+\end{enumerate}
+
+\subsection{Factor Analysis Theory}
+
+\subsubsection{What is Factor Analysis?}
+
+Factor Analysis (FA) is a statistical method designed to model the
+relationships among observed variables through a smaller number of
+unobserved variables called \textbf{latent factors} or \textbf{common
+factors}. Unlike PCA, which focuses on variance maximization, Factor
+Analysis explicitly models the underlying structure that generates the
+observed correlations.
+
+\textbf{Fundamental Concept:} Factor Analysis assumes that observed
+variables are \textbf{manifestations} of underlying latent constructs.
+These latent factors cannot be directly measured but influence multiple
+observable variables.
+
+\textbf{Key Distinctions from PCA:}
+
+\begin{itemize}
+\item
+  \textbf{Purpose}: Models latent constructs rather than reducing
+  dimensions
+\item
+  \textbf{Variance}: Separates common variance from unique variance
+\item
+  \textbf{Error Modeling}: Models unique variance, which combines
+  measurement error and variable-specific true variance (it does not
+  isolate error on its own)
+\item
+  \textbf{Exploratory vs. Confirmatory}: What this chapter covers is
+  \textbf{exploratory} factor analysis (EFA) -- it discovers a plausible
+  factor structure from the data without assuming a specific number or
+  pattern of loadings in advance. Testing a specific, pre-specified
+  theoretical structure against the data (and evaluating its fit) is
+  \textbf{confirmatory} factor analysis (CFA), a distinct method covered
+  later in this chapter.
+\end{itemize}
+
+\textbf{Primary Applications:}
+
+\begin{enumerate}
+\item
+  \textbf{Psychological Testing}: Measuring intelligence, personality
+  traits, attitudes
+\item
+  \textbf{Market Research}: Understanding consumer preferences and
+  behavior patterns
+\item
+  \textbf{Educational Assessment}: Identifying academic ability factors
+\item
+  \textbf{Medical Research}: Discovering disease symptom clusters
+\item
+  \textbf{Social Sciences}: Measuring abstract concepts like
+  socioeconomic status
+\end{enumerate}
+
+\subsubsection{The Factor Analysis Model}
+
+The core Factor Analysis model expresses each observed variable as a
+linear combination of common factors plus a unique component:
+
+\[X_{i} = \lambda_{i,1}F_{1} + \lambda_{i,2}F_{2} + \ldots + \lambda_{i,k}F_{k} + U_{i}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(X_{i}\) = \(i\)-th observed variable (standardized)
+\item
+  \(F_{j}\) = \(j\)-th common factor (\(j = 1,2,\ldots,k\))
+\item
+  \(\lambda_{i,j}\) = factor loading of variable \(i\) on factor \(j\)
+\item
+  \(U_{i}\) = unique factor for variable \(i\)
+\item
+  \(k\) = number of common factors (typically \(k \ll p\))
+\end{itemize}
+
+\textbf{In Matrix Form:}
+\[\mathbf{X} = \mathbf{\Lambda}\mathbf{F} + \mathbf{U}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(\mathbf{X}\) = \(p \times 1\) vector of observed variables
+\item
+  \(\mathbf{\Lambda}\) = \(p \times k\) matrix of factor loadings
+\item
+  \(\mathbf{F}\) = \(k \times 1\) vector of common factors
+\item
+  \(\mathbf{U}\) = \(p \times 1\) vector of unique factors
+\end{itemize}
+
+\subsubsection{Model Assumptions}
+
+\textbf{Assumptions about Factors:}
+
+\begin{enumerate}
+\item
+  \(E\left\lbrack \mathbf{F} \right\rbrack = \mathbf{0}\) (factors have
+  zero mean)
+\item
+  \(\text{Var}\left( \mathbf{F} \right) = \mathbf{I}\) (factors are
+  standardized and uncorrelated)
+\item
+  \(E\left\lbrack \mathbf{U} \right\rbrack = \mathbf{0}\) (unique
+  factors have zero mean)
+\item
+  \(\text{Cov}\left( \mathbf{F},\mathbf{U} \right) = \mathbf{0}\)
+  (common and unique factors are uncorrelated)
+\item
+  \(\text{Cov}\left( \mathbf{U} \right) = \mathbf{\Psi}\) (unique
+  factors may be correlated in some models)
+\end{enumerate}
+
+\textbf{Classical Factor Model Assumptions:} In the classical model,
+unique factors are also assumed uncorrelated:
+\[\text{ Cov}\left( U_{i},U_{j} \right) = 0\text{ for }i \neq j\]
+
+This means
+\(\mathbf{\Psi} = \text{ diag}\left( \psi_{1},\psi_{2},\ldots,\psi_{p} \right)\).
+
+\subsubsection{Variance Decomposition}
+
+Factor Analysis provides a fundamental decomposition of each variable's
+variance:
+
+\textbf{Total Variance = Common Variance + Unique Variance}
+
+For variable \(i\):
+\[\text{ Var}\left( X_{i} \right) = \sum_{j = 1}^{k}\lambda_{i,j}^{2} + \psi_{i} = h_{i}^{2} + \psi_{i}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(h_{i}^{2} = \sum_{j = 1}^{k}\lambda_{i,j}^{2}\) =
+  \textbf{communality} (variance explained by common factors)
+\item
+  \(\psi_{i}\) = \textbf{unique variance} (specific variance + error
+  variance)
+\end{itemize}
+
+\textbf{Key Concepts:}
+
+\begin{itemize}
+\item
+  \textbf{Communality} (\(h_{i}^{2}\)): Proportion of variable's
+  variance explained by common factors
+\item
+  \textbf{Uniqueness} (\(\psi_{i}\)): Proportion of variance not
+  explained by common factors
+\item
+  \textbf{Specific Variance}: Systematic variance unique to one variable
+\item
+  \textbf{Error Variance}: Random measurement error
+\end{itemize}
+
+\subsubsection{The Correlation Structure}
+
+Under the factor model, the correlation matrix has a specific structure:
+
+\[\mathbf{R} = \mathbf{\Lambda}\mathbf{\Lambda}^{\top} + \mathbf{\Psi}\]
+
+This fundamental equation shows that:
+
+\begin{itemize}
+\item
+  Correlations between variables arise from shared common factors
+\item
+  The diagonal elements equal 1.0 (correlation of variable with itself)
+\item
+  Off-diagonal elements depend on factor loadings
+\end{itemize}
+
+\textbf{Reduced Correlation Matrix:} The \textbf{reduced correlation
+matrix} replaces the diagonal 1's with communality estimates:
+\[\mathbf{R}^{\ast} = \mathbf{\Lambda}\mathbf{\Lambda}^{\top}\]
+
+This matrix contains only the variance attributable to common factors.
+
+\subsubsection{Factor Extraction Methods}
+
+Several methods exist for estimating factor loadings:
+
+\textbf{1. Principal Axis Factoring (PAF)}
+
+\begin{itemize}
+\item
+  Most common method
+\item
+  Iteratively estimates communalities
+\item
+  Uses reduced correlation matrix
+\item
+  Procedure:
+
+  \begin{enumerate}
+  \item
+    Start with initial communality estimates
+  \item
+    Perform eigendecomposition of reduced correlation matrix
+  \item
+    Extract factors and update communality estimates
+  \item
+    Repeat until convergence
+  \end{enumerate}
+\end{itemize}
+
+\textbf{2. Maximum Likelihood (ML)}
+
+\begin{itemize}
+\item
+  Assumes multivariate normal distribution
+\item
+  Provides statistical tests for number of factors
+\item
+  Allows goodness-of-fit testing
+\item
+  Computationally more intensive
+\end{itemize}
+
+\textbf{3. Principal Components Method}
+
+\begin{itemize}
+\item
+  Uses principal components as initial solution
+\item
+  Simpler but less theoretically justified
+\item
+  May overextract factors
+\end{itemize}
+
+\textbf{4. Minimum Residual (MINRES)}
+
+\begin{itemize}
+\item
+  Minimizes squared residuals
+\item
+  Good compromise between PAF and ML
+\item
+  Robust to distributional assumptions
+\end{itemize}
+
+\subsubsection{Determining the Number of Factors}
+
+\textbf{1. Kaiser Criterion}
+
+\begin{itemize}
+\item
+  Retain factors with eigenvalues \textgreater{} 1.0
+\item
+  Applied to the eigenvalues of the \textbf{original} correlation matrix
+  (diagonal of 1's), not the reduced/common-factor correlation matrix
+  used for extraction -- this matches standard software implementations
+  (including \texttt{factor\_analyzer.get\_eigenvalues()}, which returns
+  both)
+\item
+  May overextract in some cases
+\end{itemize}
+
+\textbf{2. Scree Test}
+
+\begin{itemize}
+\item
+  Plot eigenvalues and look for ``elbow''
+\item
+  Retain factors before the sharp drop
+\item
+  Subjective but often effective
+\end{itemize}
+
+\textbf{3. Parallel Analysis}
+
+\begin{itemize}
+\item
+  Compare eigenvalues to those from random data
+\item
+  More accurate than Kaiser criterion
+\item
+  Accounts for sampling variability
+\end{itemize}
+
+\textbf{4. Theoretical Considerations}
+
+\begin{itemize}
+\item
+  Based on substantive theory
+\item
+  Number of expected constructs
+\item
+  Interpretability of factors
+\end{itemize}
+
+\textbf{5. Goodness-of-Fit Tests (ML only)}
+
+\begin{itemize}
+\item
+  Chi-square test for model fit
+\item
+  Various fit indices (CFI, TLI, RMSEA)
+\item
+  Formal statistical criteria
+\end{itemize}
+
+\subsubsection{Factor Rotation}
+
+Raw factor solutions are often difficult to interpret. \textbf{Factor
+rotation} seeks a more interpretable solution while maintaining the same
+overall fit.
+
+\textbf{Goals of Rotation:}
+
+\begin{itemize}
+\item
+  Achieve ``simple structure''
+\item
+  Each variable loads highly on few factors
+\item
+  Each factor is defined by several variables
+\item
+  Minimize cross-loadings
+\end{itemize}
+
+\textbf{Types of Rotation:}
+
+\textbf{Orthogonal Rotation} (factors remain uncorrelated):
+
+\begin{itemize}
+\item
+  \textbf{Varimax}: Maximizes variance of squared loadings within
+  factors
+\item
+  \textbf{Quartimax}: Minimizes number of factors needed to explain each
+  variable
+\item
+  \textbf{Equamax}: Compromise between Varimax and Quartimax
+\end{itemize}
+
+\textbf{Oblique Rotation} (factors allowed to correlate):
+
+\begin{itemize}
+\item
+  \textbf{Promax}: Oblique version of Varimax
+\item
+  \textbf{Direct Oblimin}: Controls degree of correlation between
+  factors
+\item
+  \textbf{Harris-Kaiser}: Orthogonal followed by oblique transformation
+\end{itemize}
+
+\textbf{Choosing Rotation Method:}
+
+\begin{itemize}
+\item
+  Use orthogonal if factors should be uncorrelated theoretically
+\item
+  Use oblique if factors are expected to correlate
+\item
+  Varimax is most popular for orthogonal rotation
+\item
+  Promax is most popular for oblique rotation
+\end{itemize}
+
+\subsubsection{Interpretation Guidelines}
+
+\textbf{Factor Loading Interpretation:}
+
+\begin{itemize}
+\item
+  \(|\lambda_{i,j}| \geq 0.70\): Excellent indicator of factor
+\item
+  \(|\lambda_{i,j}| \geq 0.60\): Good indicator of factor
+\item
+  \(|\lambda_{i,j}| \geq 0.50\): Fair indicator of factor
+\item
+  \(|\lambda_{i,j}| \geq 0.40\): Poor but possibly significant
+\item
+  \(|\lambda_{i,j}| < 0.40\): Generally not interpretable
+\end{itemize}
+
+\textbf{Cross-Loadings:}
+
+\begin{itemize}
+\item
+  Variables should load highly on one factor
+\item
+  Cross-loadings \textgreater{} 0.40 may indicate:
+
+  \begin{itemize}
+  \item
+    Variable measures multiple constructs
+  \item
+    Need for additional factors
+  \item
+    Poor item design
+  \end{itemize}
+\end{itemize}
+
+\textbf{Factor Naming:}
+
+\begin{itemize}
+\item
+  Examine variables with highest loadings
+\item
+  Consider theoretical meaning
+\item
+  Use domain knowledge
+\item
+  Avoid over-interpretation
+\end{itemize}
+
+\subsubsection{Model Evaluation}
+
+\textbf{Communality Assessment:}
+
+\begin{itemize}
+\item
+  High communalities (\(h^{2} > 0.70\)): Variables well-explained by
+  factors
+\item
+  Low communalities (\(h^{2} < 0.40\)): Variables poorly explained
+\item
+  Very low communalities may indicate:
+
+  \begin{itemize}
+  \item
+    Variable doesn't belong in analysis
+  \item
+    Additional factors needed
+  \item
+    Measurement problems
+  \end{itemize}
+\end{itemize}
+
+\textbf{Overall Model Fit:}
+
+\begin{itemize}
+\item
+  Proportion of variance explained by common factors
+\item
+  Residual correlations should be small
+\item
+  Theoretical sensibility of factor structure
+\end{itemize}
+
+\textbf{Replication and Validation:}
+
+\begin{itemize}
+\item
+  Cross-validation with independent samples
+\item
+  Confirmatory factor analysis
+\item
+  External validity checks
+\end{itemize}
+
+---
+
+\textbf{Study Questions for Section 2.2:}
+
+\begin{enumerate}
+\item
+  What is the key difference between Factor Analysis and PCA in terms of
+  their goals?
+\item
+  Explain the concept of communality and how it differs from total
+  variance.
+\item
+  Why is factor rotation necessary, and when would you choose oblique
+  over orthogonal rotation?
+\item
+  How do you interpret a factor loading of 0.75 for a variable on a
+  factor?
+\item
+  What does it mean when a variable has low communality in a factor
+  analysis?
+\end{enumerate}
+
+\subsection{Practical Implementation of Factor Analysis}
+
+\subsubsection{Step-by-Step Factor Analysis Process}
+
+Factor Analysis involves a systematic sequence of steps, each requiring
+careful consideration and validation. This section provides a
+comprehensive guide to conducting Factor Analysis in practice.
+
+\subsubsection{Step 1: Data Preparation and Assessment}
+
+\textbf{Data Requirements:}
+
+\begin{itemize}
+\item
+  \textbf{Sample Size}: Minimum 5-10 observations per variable
+\item
+  \textbf{Recommended}: At least 200 observations for stable results
+\item
+  \textbf{Variables}: Continuous or ordinal variables
+\item
+  \textbf{Missing Data}: Handle before analysis (listwise deletion,
+  imputation)
+\end{itemize}
+
+\textbf{Data Quality Checks:}
+
+\begin{enumerate}
+\item
+  \textbf{Outliers}: Identify and handle extreme values
+\item
+  \textbf{Normality}: Check distribution of variables (especially for ML
+  estimation)
+\item
+  \textbf{Linearity}: Examine scatterplots between variables
+\item
+  \textbf{Multicollinearity}: Check for extremely high correlations (r
+  \textgreater{} 0.90)
+\end{enumerate}
+
+\textbf{Variable Selection:}
+
+\begin{itemize}
+\item
+  Include variables theoretically related to expected factors
+\item
+  Remove variables with very low correlations with others
+\item
+  Consider reverse-coding negatively worded items
+\item
+  Ensure adequate representation of each expected factor
+\end{itemize}
+
+\subsubsection{Step 2: Testing Factorability}
+
+Before conducting Factor Analysis, verify that the data is suitable for
+factoring.
+
+\textbf{Correlation Matrix Inspection:}
+
+\begin{itemize}
+\item
+  Most correlations should be ≥ 0.30
+\item
+  Look for patterns suggesting underlying factors
+\item
+  Identify variables that don't correlate with others
+\end{itemize}
+
+\textbf{Kaiser-Meyer-Olkin (KMO) Test:}
+\[\text{ KMO } = \frac{\sum\sum r_{ij}^{2}}{\sum\sum r_{ij}^{2} + \sum\sum a_{ij}^{2}}\]
+
+where \(a_{ij}\) are partial correlations.
+
+\textbf{KMO Interpretation:}
+
+\begin{itemize}
+\item
+  KMO ≥ 0.90: Excellent factorability
+\item
+  KMO ≥ 0.80: Good factorability
+\end{itemize}
+
+\begin{itemize}
+\item
+  KMO ≥ 0.70: Adequate factorability
+\item
+  KMO ≥ 0.60: Marginal factorability
+\item
+  KMO \textless{} 0.60: Poor factorability (consider removing variables)
+\end{itemize}
+
+\textbf{Bartlett's Test of Sphericity:} Tests the null hypothesis:
+\(H_{0}:\mathbf{R} = \mathbf{I}\) (correlation matrix is identity)
+
+A significant result (p \textless{} 0.05) indicates that Factor Analysis
+is appropriate.
+
+\textbf{Anti-image Correlation Matrix:}
+
+\begin{itemize}
+\item
+  Examine diagonal elements (MSA values)
+\item
+  Variables with MSA \textless{} 0.50 should be considered for removal
+\item
+  Off-diagonal elements should be small
+\end{itemize}
+
+\subsubsection{Step 3: Factor Extraction}
+
+\textbf{Choosing Extraction Method:}
+
+\textbf{Principal Axis Factoring (PAF) - Most Common:}
+
+\begin{verbatim}
+1. Start with communality estimates in diagonal
+2. Compute eigenvalues and eigenvectors of reduced R
+3. Extract factors based on eigenvalues > 0
+4. Compute new communality estimates
+5. Repeat until convergence
+\end{verbatim}
+
+\textbf{Maximum Likelihood (ML) - When Normality Assumed:}
+
+\begin{verbatim}
+1. Assume multivariate normal distribution
+2. Iteratively estimate parameters
+3. Provides goodness-of-fit tests
+4. Allows statistical inference
+\end{verbatim}
+
+\textbf{Implementation Considerations:}
+
+\begin{itemize}
+\item
+  PAF is more robust to distributional violations
+\item
+  ML provides formal statistical tests
+\item
+  Both methods usually yield similar results
+\item
+  Start with PAF for exploratory analysis
+\end{itemize}
+
+\subsubsection{Step 4: Determining Number of Factors}
+
+\textbf{Multiple Criteria Approach:}
+
+\textbf{1. Eigenvalue Criteria:}
+
+\begin{itemize}
+\item
+  Kaiser Rule: Retain factors with eigenvalues \textgreater{} 1.0
+\item
+  Modified Kaiser Rule: Use for correlation matrices only
+\item
+  Plot eigenvalues (scree plot)
+\end{itemize}
+
+\textbf{2. Parallel Analysis:}
+
+\begin{verbatim}
+For each number of factors k:
+1. Generate random correlation matrices
+2. Compute mean eigenvalues from random data
+3. Compare actual eigenvalues to random ones
+4. Retain factors where actual > random
+\end{verbatim}
+
+\textbf{3. Percentage of Variance:}
+
+\begin{itemize}
+\item
+  Retain factors explaining meaningful variance
+\item
+  Social sciences: 50-60\% total variance
+\item
+  Natural sciences: 80\%+ total variance
+\end{itemize}
+
+\textbf{4. Interpretability:}
+
+\begin{itemize}
+\item
+  Can factors be meaningfully named?
+\item
+  Do factors make theoretical sense?
+\item
+  Are factors sufficiently different?
+\end{itemize}
+
+\textbf{5. Statistical Tests (ML only):}
+
+\begin{itemize}
+\item
+  Chi-square test for number of factors
+\item
+  Likelihood ratio tests
+\item
+  Information criteria (AIC, BIC)
+\end{itemize}
+
+\textbf{Decision Strategy:}
+
+\begin{enumerate}
+\item
+  Apply multiple criteria
+\item
+  Consider theoretical expectations
+\item
+  Examine interpretability of solutions
+\item
+  Choose most parsimonious interpretable solution
+\end{enumerate}
+
+\subsubsection{Step 5: Factor Rotation}
+
+\textbf{Rotation Goals:}
+
+\begin{itemize}
+\item
+  Achieve simple structure
+\item
+  Maximize interpretability
+\item
+  Minimize cross-loadings
+\end{itemize}
+
+\textbf{Rotation Decision Tree:}
+
+\begin{verbatim}
+Are factors expected to be correlated?
+├─ Yes → Use Oblique Rotation
+│   ├─ Promax (most common)
+│   ├─ Direct Oblimin
+│   └─ Harris-Kaiser
+└─ No → Use Orthogonal Rotation
+    ├─ Varimax (most common)
+    ├─ Quartimax
+    └─ Equamax
+\end{verbatim}
+
+\textbf{Rotation Procedure:}
+
+\begin{enumerate}
+\item
+  Start with unrotated solution
+\item
+  Apply chosen rotation method
+\item
+  Examine factor loading matrix
+\item
+  Check for simple structure
+\item
+  Consider alternative rotations if needed
+\end{enumerate}
+
+\textbf{Evaluating Rotation Quality:}
+
+\begin{itemize}
+\item
+  High loadings (\textgreater0.50) on target factors
+\item
+  Low cross-loadings (\textless0.40)
+\item
+  Each factor defined by multiple variables
+\item
+  Factors are interpretable
+\end{itemize}
+
+\subsubsection{Step 6: Interpretation and Naming}
+
+\textbf{Factor Interpretation Process:}
+
+\textbf{1. Examine Factor Loadings:}
+
+\begin{itemize}
+\item
+  Focus on loadings ≥ \textbar0.50\textbar{}
+\item
+  Consider both positive and negative loadings
+\item
+  Look for patterns across variables
+\end{itemize}
+
+\textbf{2. Identify Marker Variables:}
+
+\begin{itemize}
+\item
+  Variables with highest loadings on each factor
+\item
+  Variables that load on only one factor
+\item
+  Use these to understand factor meaning
+\end{itemize}
+
+\textbf{3. Factor Naming Strategy:}
+
+\begin{itemize}
+\item
+  Examine content of highest-loading variables
+\item
+  Consider theoretical framework
+\item
+  Use descriptive, meaningful names
+\item
+  Avoid over-interpretation
+\end{itemize}
+
+\textbf{Example Interpretation Process:}
+
+\begin{verbatim}
+Factor 1 Loadings:
+- Math Achievement: 0.85
+- Science Achievement: 0.78
+- Reading Achievement: 0.72
+- Vocabulary: 0.65
+
+Interpretation: "Academic Achievement" factor
+\end{verbatim}
+
+\textbf{4. Check for Problematic Patterns:}
+
+\begin{itemize}
+\item
+  Factors with few indicator variables (\textless3)
+\item
+  Variables that don't load substantially on any factor
+\item
+  Factors that are difficult to interpret
+\item
+  Unexpected cross-loadings
+\end{itemize}
+
+\subsubsection{Step 7: Model Evaluation and Validation}
+
+\textbf{Adequacy of Factor Solution:}
+
+\textbf{1. Communality Assessment:}
+
+\begin{itemize}
+\item
+  Examine communalities for each variable
+\item
+  Low communalities (\textless0.40) indicate poor fit
+\item
+  Consider removing poorly explained variables
+\end{itemize}
+
+\textbf{2. Residual Analysis:}
+
+\begin{itemize}
+\item
+  Examine residual correlations
+\item
+  Large residuals suggest additional factors needed
+\item
+  Systematic patterns in residuals indicate model problems
+\end{itemize}
+
+\textbf{3. Percentage of Variance Explained:}
+
+\begin{itemize}
+\item
+  Total variance explained by common factors
+\item
+  Variance explained by each factor
+\item
+  Compare to established benchmarks
+\end{itemize}
+
+\textbf{4. Theoretical Consistency:}
+
+\begin{itemize}
+\item
+  Do factors match theoretical expectations?
+\item
+  Are factor intercorrelations reasonable?
+\item
+  Can results be replicated?
+\end{itemize}
+
+\textbf{Validation Strategies:}
+
+\textbf{1. Cross-Validation:}
+
+\begin{itemize}
+\item
+  Split sample randomly
+\item
+  Conduct FA on each half
+\item
+  Compare factor structures
+\item
+  Use coefficient of congruence
+\end{itemize}
+
+\textbf{2. Confirmatory Factor Analysis:}
+
+\begin{itemize}
+\item
+  Test specific factor structure
+\item
+  Use structural equation modeling
+\item
+  Assess model fit indices
+\item
+  Compare alternative models
+\end{itemize}
+
+\textbf{3. External Validation:}
+
+\begin{itemize}
+\item
+  Correlate factors with external criteria
+\item
+  Examine predictive validity
+\item
+  Test known-groups validity
+\item
+  Assess convergent/discriminant validity
+\end{itemize}
+
+\subsubsection{Step 8: Reporting Results}
+
+\textbf{Essential Elements to Report:}
+
+\textbf{1. Sample and Variables:}
+
+\begin{itemize}
+\item
+  Sample size and characteristics
+\item
+  Number and type of variables
+\item
+  Missing data handling
+\end{itemize}
+
+\textbf{2. Factorability Assessment:}
+
+\begin{itemize}
+\item
+  KMO measure
+\item
+  Bartlett's test results
+\item
+  Any variables removed
+\end{itemize}
+
+\textbf{3. Extraction Details:}
+
+\begin{itemize}
+\item
+  Method used (PAF, ML, etc.)
+\item
+  Criteria for number of factors
+\item
+  Total variance explained
+\end{itemize}
+
+\textbf{4. Rotation Information:}
+
+\begin{itemize}
+\item
+  Type of rotation used
+\item
+  Rationale for choice
+\end{itemize}
+
+\textbf{5. Factor Structure:}
+
+\begin{itemize}
+\item
+  Factor loading matrix
+\item
+  Factor correlations (if oblique)
+\item
+  Communalities
+\end{itemize}
+
+\textbf{6. Interpretation:}
+
+\begin{itemize}
+\item
+  Factor names and descriptions
+\item
+  Theoretical implications
+\item
+  Limitations and assumptions
+\end{itemize}
+
+\textbf{Common Reporting Mistakes to Avoid:}
+
+\begin{itemize}
+\item
+  Reporting only rotated or only unrotated loadings
+\item
+  Not reporting communalities
+\item
+  Insufficient detail about methodology
+\item
+  Over-interpreting small loadings
+\item
+  Not discussing limitations
+\end{itemize}
+
+---
+
+\textbf{Study Questions for Section 2.3:}
+
+\begin{enumerate}
+\item
+  What is the minimum recommended sample size for Factor Analysis and
+  why?
+\item
+  How do you interpret a KMO value of 0.65?
+\item
+  What is the difference between Bartlett's test and the KMO test?
+\item
+  When would you choose Maximum Likelihood over Principal Axis
+  Factoring?
+\item
+  What makes a factor solution ``interpretable''?
+\item
+  How do you validate a factor analysis solution?
+\end{enumerate}
+
+\subsection{Applied Examples and Case Studies}
+
+This section presents detailed examples of Factor Analysis applications
+across different domains, illustrating the complete analytical process
+from data preparation to interpretation.
+
+\subsubsection{Case Study 1: Psychological Assessment - Big Five
+Personality}
+
+\textbf{Background:} A researcher wants to validate the Big Five
+personality model using a 25-item personality questionnaire administered
+to 500 adults. Each item is rated on a 5-point Likert scale.
+
+\textbf{Research Questions:}
+
+\begin{enumerate}
+\item
+  Do the items cluster into five distinct personality factors?
+\item
+  How well do the factors correspond to theoretical expectations?
+\item
+  What is the reliability of each factor?
+\end{enumerate}
+
+\textbf{Step-by-Step Analysis:}
+
+\textbf{Data Preparation:}
+
+\begin{itemize}
+\item
+  Sample: N = 500 adults
+\item
+  Variables: 25 personality items (5 items per expected factor)
+\item
+  Scale: 1 = Strongly Disagree to 5 = Strongly Agree
+\item
+  Missing data: 2.3\% handled via listwise deletion
+\end{itemize}
+
+\textbf{Factorability Assessment:}
+
+\begin{itemize}
+\item
+  KMO = 0.87 (Good factorability)
+\item
+  Bartlett's test: χ² = 4,832.5, df = 300, p \textless{} 0.001
+\item
+  All individual MSA values \textgreater{} 0.75
+\end{itemize}
+
+\textbf{Factor Extraction:}
+
+\begin{itemize}
+\item
+  Method: Principal Axis Factoring
+\item
+  Initial eigenvalues: 6.84, 3.21, 2.67, 1.89, 1.43, 0.89, 0.76\ldots{}
+\item
+  Parallel analysis suggests 5 factors
+\item
+  Five factors explain 64.2\% of total variance
+\end{itemize}
+
+\textbf{Factor Rotation:}
+
+\begin{itemize}
+\item
+  Method: Promax (oblique) - personality factors expected to correlate
+\item
+  Factor correlations range from 0.12 to 0.38
+\end{itemize}
+
+\textbf{Factor Structure and Interpretation:}
+
+\textbf{Factor 1: Extraversion (15.2\% variance)}
+
+\begin{verbatim}
+Item                                    Loading
+"I am the life of the party"              0.78
+"I talk to a lot of different people"     0.74
+"I feel comfortable around people"        0.71
+"I start conversations"                   0.68
+"I make friends easily"                   0.66
+\end{verbatim}
+
+\textbf{Factor 2: Conscientiousness (12.8\% variance)}
+
+\begin{verbatim}
+Item                                    Loading
+"I am always prepared"                    0.81
+"I pay attention to details"              0.76
+"I get chores done right away"            0.73
+"I like order"                           0.69
+"I follow a schedule"                    0.65
+\end{verbatim}
+
+\textbf{Factor 3: Neuroticism (11.7\% variance)}
+
+\begin{verbatim}
+Item                                    Loading
+"I get stressed out easily"               0.79
+"I worry about things"                    0.75
+"I get irritated easily"                  0.71
+"I often feel blue"                      0.68
+"I panic easily"                         0.63
+\end{verbatim}
+
+\textbf{Factor 4: Agreeableness (12.3\% variance)}
+
+\begin{verbatim}
+Item                                    Loading
+"I sympathize with others' feelings"      0.77
+"I have a soft heart"                     0.74
+"I take time out for others"              0.70
+"I feel others' emotions"                 0.67
+"I make people feel at ease"              0.64
+\end{verbatim}
+
+\textbf{Factor 5: Openness (12.2\% variance)}
+
+\begin{verbatim}
+Item                                    Loading
+"I have a vivid imagination"              0.76
+"I have excellent ideas"                  0.73
+"I am quick to understand things"         0.69
+"I use difficult words"                   0.66
+"I spend time reflecting on things"       0.62
+\end{verbatim}
+
+\textbf{Results Summary:}
+
+\begin{itemize}
+\item
+  All communalities \textgreater{} 0.45
+\item
+  No problematic cross-loadings (\textgreater{} 0.40)
+\item
+  Factor structure matches theoretical expectations
+\item
+  Coefficient alpha reliability: 0.82-0.89 for all factors
+\end{itemize}
+
+\textbf{Interpretation:} The analysis successfully replicated the Big
+Five personality structure with strong factor loadings and good
+reliability. The moderate factor intercorrelations (0.12-0.38) support
+the use of oblique rotation and align with personality theory.
+
+\subsubsection{Case Study 2: Market Research - Consumer Technology
+Preferences}
+
+\textbf{Background:} A technology company surveyed 800 consumers about
+their preferences for smartphone features using 20 attributes rated on
+importance (1-7 scale).
+
+\textbf{Research Objective:} Identify underlying preference dimensions
+to guide product development and marketing strategy.
+
+\textbf{Analysis Overview:}
+
+\textbf{Preliminary Analysis:}
+
+\begin{itemize}
+\item
+  KMO = 0.91 (Excellent)
+\item
+  Bartlett's test significant (p \textless{} 0.001)
+\item
+  No multicollinearity issues detected
+\end{itemize}
+
+\textbf{Factor Solution:}
+
+\begin{itemize}
+\item
+  Method: Maximum Likelihood with Varimax rotation
+\item
+  Four factors extracted (eigenvalues \textgreater{} 1.0)
+\item
+  Total variance explained: 67.8\%
+\end{itemize}
+
+\textbf{Factor Interpretation:}
+
+\textbf{Factor 1: Performance \& Technology (24.3\% variance)}
+
+\begin{itemize}
+\item
+  Processor speed (0.84)
+\item
+  RAM capacity (0.79)
+\item
+  Graphics performance (0.76)
+\item
+  Operating system (0.71)
+\item
+  Storage capacity (0.68)
+\end{itemize}
+
+\textbf{Factor 2: Design \& Aesthetics (18.7\% variance)}
+
+\begin{itemize}
+\item
+  Physical appearance (0.82)
+\item
+  Color options (0.78)
+\item
+  Build quality (0.75)
+\item
+  Weight and thickness (0.72)
+\item
+  Screen size (0.65)
+\end{itemize}
+
+\textbf{Factor 3: Value \& Practicality (13.9\% variance)}
+
+\begin{itemize}
+\item
+  Price affordability (0.81)
+\item
+  Battery life (0.77)
+\item
+  Durability (0.74)
+\item
+  Warranty coverage (0.69)
+\item
+  Repair availability (0.63)
+\end{itemize}
+
+\textbf{Factor 4: Connectivity \& Features (10.9\% variance)}
+
+\begin{itemize}
+\item
+  Camera quality (0.79)
+\item
+  Wireless capabilities (0.75)
+\item
+  Apps availability (0.71)
+\item
+  Internet speed (0.68)
+\item
+  Social media integration (0.64)
+\end{itemize}
+
+\textbf{Business Implications:}
+
+\begin{itemize}
+\item
+  Four distinct consumer segments identified
+\item
+  Product positioning strategies developed for each factor
+\item
+  Marketing messages tailored to preference dimensions
+\item
+  Feature prioritization based on factor importance
+\end{itemize}
+
+\subsubsection{Case Study 3: Educational Research - Academic Motivation}
+
+\textbf{Background:} Educational researchers administered a 36-item
+Academic Motivation Scale to 650 university students to understand
+different types of academic motivation.
+
+\textbf{Theoretical Framework:} Self-Determination Theory predicts seven
+types of motivation:
+
+\begin{enumerate}
+\item
+  Intrinsic Motivation (3 types)
+\item
+  Extrinsic Motivation (3 types)
+\end{enumerate}
+
+\begin{enumerate}
+\setcounter{enumi}{2}
+\item
+  Amotivation (1 type)
+\end{enumerate}
+
+\textbf{Analytical Challenge:} Test whether the data supports the
+theoretical seven-factor structure versus alternative models.
+
+\textbf{Model Comparison Approach:}
+
+\textbf{Model 1: Seven-Factor Solution}
+
+\begin{itemize}
+\item
+  Factors: IM-Knowledge, IM-Accomplishment, IM-Stimulation,
+  EM-Identified, EM-Introjected, EM-External, Amotivation
+\item
+  Fit: χ² = 892.3, df = 573, CFI = 0.94, RMSEA = 0.058
+\item
+  All factor loadings \textgreater{} 0.50
+\item
+  Good interpretability
+\end{itemize}
+
+\textbf{Model 2: Three-Factor Solution}
+
+\begin{itemize}
+\item
+  Factors: Intrinsic, Extrinsic, Amotivation
+\item
+  Fit: χ² = 1,247.8, df = 591, CFI = 0.89, RMSEA = 0.078
+\item
+  Some loss of discriminant validity
+\end{itemize}
+
+\textbf{Model 3: One-Factor Solution}
+
+\begin{itemize}
+\item
+  Single ``Academic Motivation'' factor
+\item
+  Fit: χ² = 2,156.4, df = 594, CFI = 0.71, RMSEA = 0.122
+\item
+  Poor fit, not theoretically meaningful
+\end{itemize}
+
+\textbf{Results:} The seven-factor model provided the best fit to the
+data, supporting the theoretical distinction between different types of
+academic motivation.
+
+\textbf{Factor Correlations (Oblique Rotation):}
+
+\begin{verbatim}
+                   IM-K  IM-A  IM-S  EM-I  EM-J  EM-E  AMOT
+IM-Knowledge        1.00
+IM-Accomplishment   0.73  1.00
+IM-Stimulation      0.68  0.71  1.00
+EM-Identified       0.45  0.52  0.41  1.00
+EM-Introjected      0.21  0.28  0.18  0.65  1.00
+EM-External         0.08  0.12  0.05  0.43  0.58  1.00
+Amotivation        -0.35 -0.41 -0.38 -0.52 -0.28 -0.15  1.00
+\end{verbatim}
+
+The pattern shows expected relationships: intrinsic motivation types
+correlate positively with each other and negatively with amotivation.
+
+\subsubsection{Case Study 4: Health Research - Quality of Life
+Assessment}
+
+\textbf{Background:} Medical researchers developed a quality of life
+questionnaire for cancer patients with 28 items across multiple life
+domains.
+
+\textbf{Methodological Considerations:}
+
+\begin{itemize}
+\item
+  Small sample size (N = 185) relative to variables
+\item
+  Missing data due to patient fatigue
+\item
+  Ordinal rating scales (0-4)
+\item
+  Potential floor/ceiling effects
+\end{itemize}
+
+\textbf{Special Analytical Approaches:}
+
+\textbf{Missing Data Handling:}
+
+\begin{itemize}
+\item
+  Multiple imputation (m = 20 imputations)
+\item
+  Analysis conducted on each imputed dataset
+\item
+  Results pooled using Rubin's rules
+\end{itemize}
+
+\textbf{Ordinal Data Treatment:}
+
+\begin{itemize}
+\item
+  Polychoric correlation matrix used
+\item
+  Weighted least squares estimation
+\item
+  Robust standard errors computed
+\end{itemize}
+
+\textbf{Factor Structure:} Four factors emerged representing different
+quality of life domains:
+
+\textbf{Factor 1: Physical Functioning}
+
+\begin{itemize}
+\item
+  Physical symptoms and limitations
+\item
+  Energy and fatigue levels
+\item
+  Daily activity capacity
+\end{itemize}
+
+\textbf{Factor 2: Emotional Well-being}
+
+\begin{itemize}
+\item
+  Anxiety and depression
+\item
+  Mood and emotional state
+\item
+  Coping with illness
+\end{itemize}
+
+\textbf{Factor 3: Social Functioning}
+
+\begin{itemize}
+\item
+  Relationships with family/friends
+\item
+  Social activities participation
+\item
+  Support system quality
+\end{itemize}
+
+\textbf{Factor 4: Treatment Impact}
+
+\begin{itemize}
+\item
+  Side effects management
+\item
+  Treatment satisfaction
+\item
+  Healthcare communication
+\end{itemize}
+
+\textbf{Validation Results:}
+
+\begin{itemize}
+\item
+  Cross-validation with independent sample (N = 142)
+\item
+  Coefficient of congruence \textgreater{} 0.85 for all factors
+\item
+  Convergent validity with established QOL measures
+\item
+  Known-groups validity confirmed
+\end{itemize}
+
+\subsubsection{Common Challenges and Solutions}
+
+\textbf{Challenge 1: Small Sample Sizes} \textbf{Solutions:}
+
+\begin{itemize}
+\item
+  Use more conservative factor retention criteria
+\item
+  Focus on replication rather than exploration
+\item
+  Consider item parceling for complex models
+\item
+  Report confidence intervals for loadings
+\end{itemize}
+
+\textbf{Challenge 2: Mixed Data Types} \textbf{Solutions:}
+
+\begin{itemize}
+\item
+  Use appropriate correlation matrices (polychoric, tetrachoric)
+\item
+  Consider categorical factor analysis methods
+\item
+  Transform variables when appropriate
+\item
+  Report sensitivity analyses
+\end{itemize}
+
+\textbf{Challenge 3: Cross-Loadings and Complex Structure}
+\textbf{Solutions:}
+
+\begin{itemize}
+\item
+  Try different rotation methods
+\item
+  Consider hierarchical factor models
+\item
+  Use confirmatory factor analysis
+\item
+  Examine item content for ambiguity
+\end{itemize}
+
+\textbf{Challenge 4: Non-Normal Data} \textbf{Solutions:}
+
+\begin{itemize}
+\item
+  Use robust estimation methods
+\item
+  Consider non-parametric alternatives
+\item
+  Transform variables when appropriate
+\item
+  Report distributional assumptions
+\end{itemize}
+
+\textbf{Challenge 5: Interpretation Difficulties} \textbf{Solutions:}
+
+\begin{itemize}
+\item
+  Examine multiple solutions (different numbers of factors)
+\item
+  Consider theoretical expectations
+\item
+  Use external validation criteria
+\item
+  Consult domain experts
+\end{itemize}
+
+---
+
+\textbf{Study Questions for Section 2.4:}
+
+\begin{enumerate}
+\item
+  In the personality case study, why was oblique rotation chosen over
+  orthogonal rotation?
+\item
+  How would you handle a situation where parallel analysis suggests 3
+  factors but theory predicts 5?
+\item
+  What are the advantages and disadvantages of using polychoric
+  correlations for ordinal data?
+\item
+  How do you interpret factor correlations in an oblique solution?
+\item
+  What validation strategies are most appropriate for small sample
+  factor analyses?
+\item
+  When might you choose a hierarchical factor model over a simple
+  structure model?
+\end{enumerate}
+
+\subsection{Software Implementation and Advanced Topics}
+
+This section covers practical software implementation of Factor Analysis
+and advanced methodological considerations for complex research
+scenarios.
+
+\subsubsection{Software Packages and Implementation}
+
+\textbf{Python Implementation:}
+
+\textbf{Primary Libraries:}
+
+\begin{itemize}
+\item
+  \texttt{factor\_analyzer}: Dedicated Factor Analysis library
+\item
+  \texttt{sklearn.decomposition}: PCA and Factor Analysis
+\item
+  \texttt{scipy.stats}: Statistical tests and correlations
+\item
+  \texttt{pandas}: Data manipulation
+\item
+  \texttt{numpy}: Numerical computations
+\end{itemize}
+
+\textbf{Basic Factor Analysis Workflow in Python:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ factor\_analyzer }\ImportTok{import}\NormalTok{ FactorAnalyzer}
+\ImportTok{from}\NormalTok{ factor\_analyzer.factor\_analyzer }\ImportTok{import}\NormalTok{ calculate\_kmo, calculate\_bartlett\_sphericity}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Load and prepare data}
+\NormalTok{data }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{\textquotesingle{}survey\_data.csv\textquotesingle{}}\NormalTok{)}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ data.select\_dtypes(include}\OperatorTok{=}\NormalTok{[np.number])}
+
+\CommentTok{\# Test factorability}
+\NormalTok{kmo\_all, kmo\_model }\OperatorTok{=}\NormalTok{ calculate\_kmo(X)}
+\NormalTok{chi\_square\_value, p\_value }\OperatorTok{=}\NormalTok{ calculate\_bartlett\_sphericity(X)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f\textquotesingle{}KMO: }\SpecialCharTok{\{}\NormalTok{kmo\_model}\SpecialCharTok{:.3f\}}\SpecialStringTok{\textquotesingle{}}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f\textquotesingle{}Bartlett p{-}value: }\SpecialCharTok{\{}\NormalTok{p\_value}\SpecialCharTok{:.3f\}}\SpecialStringTok{\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Determine number of factors}
+\NormalTok{fa }\OperatorTok{=}\NormalTok{ FactorAnalyzer(rotation}\OperatorTok{=}\VariableTok{None}\NormalTok{, n\_factors}\OperatorTok{=}\NormalTok{X.shape[}\DecValTok{1}\NormalTok{])}
+\NormalTok{fa.fit(X)}
+\NormalTok{eigenvalues }\OperatorTok{=}\NormalTok{ fa.get\_eigenvalues()[}\DecValTok{0}\NormalTok{]}
+
+\CommentTok{\# Perform Factor Analysis}
+\NormalTok{fa\_final }\OperatorTok{=}\NormalTok{ FactorAnalyzer(n\_factors}\OperatorTok{=}\DecValTok{5}\NormalTok{, rotation}\OperatorTok{=}\StringTok{\textquotesingle{}promax\textquotesingle{}}\NormalTok{)}
+\NormalTok{fa\_final.fit(X)}
+
+\CommentTok{\# Extract results}
+\NormalTok{loadings }\OperatorTok{=}\NormalTok{ fa\_final.loadings\_}
+\NormalTok{communalities }\OperatorTok{=}\NormalTok{ fa\_final.get\_communalities()}
+\NormalTok{factor\_variance }\OperatorTok{=}\NormalTok{ fa\_final.get\_factor\_variance()}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{R Implementation:}
+
+\textbf{Primary Packages:}
+
+\begin{itemize}
+\item
+  \texttt{psych}: Comprehensive psychometric package
+\item
+  \texttt{GPArotation}: Advanced rotation methods
+\item
+  \texttt{corrplot}: Correlation visualization
+\item
+  \texttt{lavaan}: Confirmatory Factor Analysis
+\end{itemize}
+
+\textbf{Basic Factor Analysis in R:}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\FunctionTok{library}\NormalTok{(psych)}
+\FunctionTok{library}\NormalTok{(GPArotation)}
+
+\CommentTok{\# Load data}
+\NormalTok{data }\OtherTok{\textless{}{-}} \FunctionTok{read.csv}\NormalTok{(}\StringTok{"survey\_data.csv"}\NormalTok{)}
+
+\CommentTok{\# Test factorability}
+\FunctionTok{KMO}\NormalTok{(data)}
+\FunctionTok{cortest.bartlett}\NormalTok{(}\FunctionTok{cor}\NormalTok{(data), }\AttributeTok{n =} \FunctionTok{nrow}\NormalTok{(data))}
+
+\CommentTok{\# Determine number of factors}
+\FunctionTok{fa.parallel}\NormalTok{(data, }\AttributeTok{fa =} \StringTok{"fa"}\NormalTok{)}
+\FunctionTok{VSS}\NormalTok{(data, }\AttributeTok{rotate =} \StringTok{"varimax"}\NormalTok{)}
+
+\CommentTok{\# Perform Factor Analysis}
+\NormalTok{fa\_result }\OtherTok{\textless{}{-}} \FunctionTok{fa}\NormalTok{(data, }\AttributeTok{nfactors =} \DecValTok{5}\NormalTok{, }\AttributeTok{rotate =} \StringTok{"promax"}\NormalTok{, }\AttributeTok{fm =} \StringTok{"pa"}\NormalTok{)}
+
+\CommentTok{\# Examine results}
+\FunctionTok{print}\NormalTok{(fa\_result, }\AttributeTok{cut =} \FloatTok{0.3}\NormalTok{, }\AttributeTok{sort =} \ConstantTok{TRUE}\NormalTok{)}
+\FunctionTok{fa.diagram}\NormalTok{(fa\_result)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{SPSS Implementation:}
+
+\textbf{Menu Path: Analyze → Dimension Reduction → Factor}
+
+\textbf{Key Options:}
+
+\begin{itemize}
+\item
+  Extraction: Principal Axis Factoring or Maximum Likelihood
+\item
+  Rotation: Varimax (orthogonal) or Promax (oblique)
+\item
+  Scores: Save factor scores as variables
+\item
+  Options: KMO and Bartlett's test, communalities
+\end{itemize}
+
+\textbf{Critical SPSS Settings:}
+
+\begin{itemize}
+\item
+  Extraction Criteria: Eigenvalues over 1, or fixed number
+\item
+  Maximum Iterations: Increase to 100 for convergence
+\item
+  Convergence: 0.001 for precise solutions
+\item
+  Display: Sorted by size, suppress small coefficients
+\end{itemize}
+
+\subsubsection{Advanced Factor Analysis Topics}
+
+\subsubsection{Confirmatory Factor Analysis (CFA)}
+
+\textbf{When to Use CFA:}
+
+\begin{itemize}
+\item
+  Testing specific theoretical models
+\item
+  Validating measurement instruments
+\item
+  Cross-group comparisons
+\item
+  Longitudinal factor invariance
+\end{itemize}
+
+\textbf{CFA vs. Exploratory FA:}
+
+\begin{verbatim}
+Exploratory FA:
+- Data-driven approach
+- Discovers factor structure
+- All variables can load on all factors
+- Generates hypotheses
+
+Confirmatory FA:
+- Theory-driven approach
+- Tests predetermined structure
+- Specified loadings pattern
+- Tests hypotheses
+\end{verbatim}
+
+\textbf{Model Specification in CFA:}
+
+\begin{itemize}
+\item
+  Fixed parameters (typically loadings set to 0)
+\item
+  Free parameters (estimated from data)
+\item
+  Constraints (equality restrictions)
+\item
+  Identification requirements
+\end{itemize}
+
+\textbf{Fit Indices for CFA Models:}
+
+\begin{itemize}
+\item
+  Chi-square test: Model vs. saturated model
+\item
+  CFI (Comparative Fit Index): ≥ 0.95 excellent
+\item
+  TLI (Tucker-Lewis Index): ≥ 0.95 excellent
+\item
+  RMSEA (Root Mean Square Error): \textless{} 0.06 excellent
+\item
+  SRMR (Standardized Root Mean Residual): \textless{} 0.08 good
+\end{itemize}
+
+\subsubsection{Hierarchical Factor Analysis}
+
+\textbf{Concept:} Higher-order factors that explain correlations among
+first-order factors.
+
+\textbf{Model Structure:}
+
+\begin{verbatim}
+Second-Order Factor
+    ├── First-Order Factor 1
+    │   ├── Variable 1
+    │   ├── Variable 2
+    │   └── Variable 3
+    ├── First-Order Factor 2
+    │   ├── Variable 4
+    │   ├── Variable 5
+    │   └── Variable 6
+    └── First-Order Factor 3
+        ├── Variable 7
+        ├── Variable 8
+        └── Variable 9
+\end{verbatim}
+
+\textbf{Applications:}
+
+\begin{itemize}
+\item
+  Intelligence research (g-factor)
+\item
+  Personality assessment (higher-order traits)
+\item
+  Quality of life measurement
+\item
+  Organizational behavior
+\end{itemize}
+
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Parsimonious representation
+\item
+  Theoretical alignment
+\item
+  Explains factor correlations
+\item
+  Hierarchical interpretation
+\end{itemize}
+
+\subsubsection{Bifactor Models}
+
+\textbf{Structure:} All variables load on a general factor plus specific
+factors.
+
+\textbf{Key Features:}
+
+\begin{itemize}
+\item
+  General factor: Common to all variables
+\item
+  Specific factors: Orthogonal to general factor
+\item
+  No correlations between specific factors
+\item
+  Direct modeling of multidimensionality
+\end{itemize}
+
+\textbf{When to Use:}
+
+\begin{itemize}
+\item
+  Unidimensionality assumption violated
+\item
+  Interest in general and specific components
+\item
+  Educational and psychological testing
+\item
+  Quality control applications
+\end{itemize}
+
+\textbf{Model Comparison:}
+
+\begin{verbatim}
+Traditional Model: F1 ↔ F2 ↔ F3 (correlated factors)
+Hierarchical Model: G → F1, F2, F3 (higher-order)
+Bifactor Model: G + S1, S2, S3 (general + specific)
+\end{verbatim}
+
+\subsubsection{Factor Analysis with Ordinal Data}
+
+\textbf{Challenges with Ordinal Data:}
+
+\begin{itemize}
+\item
+  Pearson correlations underestimate relationships
+\item
+  Distributional assumptions violated
+\item
+  Floor and ceiling effects
+\item
+  Limited response categories
+\end{itemize}
+
+\textbf{Polychoric Correlations:} Assume underlying continuous variables
+for ordinal responses.
+
+\textbf{Estimation Methods:}
+
+\begin{itemize}
+\item
+  Weighted Least Squares (WLS)
+\item
+  Diagonally Weighted Least Squares (DWLS)
+\item
+  Robust Maximum Likelihood
+\item
+  Bayesian estimation
+\end{itemize}
+
+\textbf{Practical Considerations:}
+
+\begin{itemize}
+\item
+  Minimum 5 response categories preferred
+\item
+  Check threshold parameters
+\item
+  Examine residuals carefully
+\item
+  Consider alternative models
+\end{itemize}
+
+\subsubsection{Missing Data in Factor Analysis}
+
+\textbf{Missing Data Mechanisms:}
+
+\begin{itemize}
+\item
+  MCAR (Missing Completely at Random)
+\item
+  MAR (Missing at Random)
+\item
+  MNAR (Missing Not at Random)
+\end{itemize}
+
+\textbf{Handling Strategies:}
+
+\textbf{1. Listwise Deletion:}
+
+\begin{itemize}
+\item
+  Simple but reduces sample size
+\item
+  Assumes MCAR mechanism
+\item
+  May introduce bias
+\end{itemize}
+
+\textbf{2. Pairwise Deletion:}
+
+\begin{itemize}
+\item
+  Uses available data for each correlation
+\item
+  May produce non-positive definite matrices
+\item
+  Inconsistent sample sizes
+\end{itemize}
+
+\textbf{3. Multiple Imputation:}
+
+\begin{itemize}
+\item
+  Creates multiple complete datasets
+\item
+  Accounts for uncertainty
+\item
+  Requires MAR assumption
+\end{itemize}
+
+\textbf{4. Full Information Maximum Likelihood (FIML):}
+
+\begin{itemize}
+\item
+  Uses all available information
+\item
+  Efficient and unbiased under MAR
+\item
+  Available in SEM software
+\end{itemize}
+
+\textbf{Best Practices:}
+
+\begin{itemize}
+\item
+  Examine missing data patterns
+\item
+  Test missing data assumptions
+\item
+  Use appropriate method for mechanism
+\item
+  Report sensitivity analyses
+\end{itemize}
+
+\subsubsection{Factor Score Estimation}
+
+\textbf{Methods for Computing Factor Scores:}
+
+\textbf{1. Regression Method:}
+\[\hat{\mathbf{F}} = \mathbf{\Lambda}^{\top}\mathbf{R}^{- 1}\mathbf{X}\]
+
+\begin{itemize}
+\item
+  Minimizes squared error
+\item
+  Correlated even for orthogonal factors
+\item
+  Most commonly used
+\end{itemize}
+
+\textbf{2. Bartlett Method:}
+\[\hat{\mathbf{F}} = \left( \mathbf{\Lambda}^{\top}\mathbf{\Psi}^{- 1}\mathbf{\Lambda} \right)^{- 1}\mathbf{\Lambda}^{\top}\mathbf{\Psi}^{- 1}\mathbf{X}\]
+
+\begin{itemize}
+\item
+  Unbiased estimates
+\item
+  Preserves factor correlations
+\item
+  Computationally intensive
+\end{itemize}
+
+\textbf{3. Anderson-Rubin Method:}
+
+\begin{itemize}
+\item
+  Orthogonal scores
+\item
+  Unit variance
+\item
+  Zero correlations maintained
+\end{itemize}
+
+\textbf{Choosing Score Method:}
+
+\begin{itemize}
+\item
+  Regression: General purpose, most interpretable
+\item
+  Bartlett: When factor correlations important
+\item
+  Anderson-Rubin: When orthogonality required
+\end{itemize}
+
+\textbf{Factor Score Applications:}
+
+\begin{itemize}
+\item
+  Further statistical analyses
+\item
+  Group comparisons
+\item
+  Predictive modeling
+\item
+  Clustering analysis
+\end{itemize}
+
+\subsubsection{Advanced Rotation Methods}
+
+\textbf{Gradient Projection Algorithms:}
+
+\begin{itemize}
+\item
+  Faster convergence
+\item
+  Better local optima
+\item
+  Handles constraints efficiently
+\end{itemize}
+
+\textbf{Procrustes Rotation:}
+
+\begin{itemize}
+\item
+  Rotates to target matrix
+\item
+  Cross-study comparisons
+\item
+  Theoretical alignment
+\end{itemize}
+
+\textbf{Independent Cluster Rotation:}
+
+\begin{itemize}
+\item
+  Separate rotation of clusters
+\item
+  Complex factor structures
+\item
+  Exploratory-confirmatory hybrid
+\end{itemize}
+
+\textbf{Robust Rotation Methods:}
+
+\begin{itemize}
+\item
+  Outlier-resistant
+\item
+  Non-normal data
+\item
+  Contaminated samples
+\end{itemize}
+
+\subsubsection{Model Selection and Comparison}
+
+\textbf{Information Criteria:}
+
+\begin{itemize}
+\item
+  AIC (Akaike Information Criterion)
+\item
+  BIC (Bayesian Information Criterion)
+\item
+  Sample-size adjusted BIC
+\item
+  CAIC (Consistent AIC)
+\end{itemize}
+
+\textbf{Cross-Validation Approaches:}
+
+\begin{itemize}
+\item
+  Split-sample validation
+\item
+  K-fold cross-validation
+\item
+  Bootstrap validation
+\item
+  Permutation tests
+\end{itemize}
+
+\textbf{Nested Model Comparisons:}
+
+\begin{itemize}
+\item
+  Likelihood ratio tests
+\item
+  Chi-square difference tests
+\item
+  Sequential model building
+\item
+  Parsimony considerations
+\end{itemize}
+
+\textbf{Non-Nested Comparisons:}
+
+\begin{itemize}
+\item
+  Information criteria
+\item
+  Predictive accuracy
+\item
+  Theoretical coherence
+\item
+  Practical utility
+\end{itemize}
+
+\subsubsection{Contemporary Developments}
+
+\textbf{Machine Learning Integration:}
+
+\begin{itemize}
+\item
+  Factor Analysis as dimensionality reduction
+\item
+  Integration with clustering algorithms
+\item
+  Deep learning applications
+\item
+  Automated model selection
+\end{itemize}
+
+\textbf{Bayesian Factor Analysis:}
+
+\begin{itemize}
+\item
+  Prior specification
+\item
+  Posterior distributions
+\item
+  Model uncertainty
+\item
+  Flexible modeling frameworks
+\end{itemize}
+
+\textbf{Network Psychometrics:}
+
+\begin{itemize}
+\item
+  Alternative to latent variable models
+\item
+  Direct variable relationships
+\item
+  Partial correlation networks
+\item
+  Dynamic systems approach
+\end{itemize}
+
+\textbf{Big Data Considerations:}
+
+\begin{itemize}
+\item
+  Scalable algorithms
+\item
+  Streaming factor analysis
+\item
+  Distributed computing
+\item
+  Approximate methods
+\end{itemize}
+
+---
+
+\section{Conclusion and Summary}
+
+This comprehensive study guide has covered the theoretical foundations,
+practical implementation, and advanced applications of Principal
+Component Analysis and Factor Analysis. These powerful multivariate
+techniques provide researchers with tools to:
+
+\begin{itemize}
+\item
+  Reduce data dimensionality while preserving essential information
+\item
+  Discover underlying latent structures in complex datasets
+\item
+  Validate theoretical models and measurement instruments
+\item
+  Extract meaningful patterns from large-scale surveys and assessments
+\end{itemize}
+
+\textbf{Key Takeaways:}
+
+\textbf{Methodological Rigor:}
+
+\begin{itemize}
+\item
+  Proper assessment of data suitability is crucial
+\item
+  Multiple criteria should guide factor retention decisions
+\item
+  Rotation method selection impacts interpretability
+\item
+  Validation is essential for reliable results
+\end{itemize}
+
+\textbf{Practical Application:}
+
+\begin{itemize}
+\item
+  Software implementation requires understanding of underlying theory
+\item
+  Real-world data presents challenges requiring adaptive strategies
+\item
+  Domain expertise enhances statistical analysis
+\item
+  Communication of results must balance technical accuracy with
+  accessibility
+\end{itemize}
+
+\textbf{Future Directions:}
+
+\begin{itemize}
+\item
+  Integration with machine learning methods
+\item
+  Handling of big data and streaming applications
+\item
+  Development of robust methods for complex data
+\item
+  Advancement in Bayesian and network approaches
+\end{itemize}
+
+The field continues to evolve with new methodological developments and
+computational advances, making these techniques increasingly powerful
+and accessible for researchers across disciplines.
+
+---
+
+\textbf{Final Study Questions - Integration and Application:}
+
+\begin{enumerate}
+\item
+  Compare and contrast the assumptions and applications of PCA versus
+  Factor Analysis.
+\item
+  Design a complete factor analysis study for your research area,
+  including power analysis and validation strategy.
+\item
+  How would you handle a dataset with mixed continuous and ordinal
+  variables in factor analysis?
+\item
+  What are the trade-offs between exploratory and confirmatory
+  approaches in factor analysis?
+\item
+  How do modern machine learning approaches complement traditional
+  factor analysis methods?
+\item
+  What ethical considerations arise when using factor analysis in
+  high-stakes assessment contexts?
+\end{enumerate}
+
+\textbf{Recommended Further Reading:}
+
+\begin{itemize}
+\item
+  Fabrigar, L. R., \& Wegener, D. T. (2012). \textbf{Exploratory Factor
+  Analysis}
+\item
+  Brown, T. A. (2015). \textbf{Confirmatory Factor Analysis for Applied
+  Research}
+\item
+  Hayton, J. C., Allen, D. G., \& Scarpello, V. (2004). Factor retention
+  decisions in exploratory factor analysis
+\item
+  Howard, M. C. (2016). A review of exploratory factor analysis
+  decisions and overview of current practices
+\end{itemize}
+
+\end{document}
+
