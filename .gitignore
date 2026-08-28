@@ -1,4 +1,3 @@
-
 .vscode/
 .idea/
 *.png
@@ -6,3 +5,4 @@
 *.jpeg
 *.gif
 *.pyc
+.venv/*
