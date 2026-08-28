@@ -1,0 +1,19 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ma2003b-notes}[2026/08/28 v1.0 MA2003B shared style for lecture notes]
+
+\RequirePackage{xcolor}
+\RequirePackage[letterpaper,top=2cm,bottom=2cm,left=1.5cm,right=1.5cm]{geometry}
+\RequirePackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\RequirePackage{ma2003b-common}
+
+% Article-specific longtable/footnote support
+% Correct order of tables after \paragraph or \subparagraph
+\RequirePackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\RequirePackage{footnotehyper}}{\RequirePackage{footnote}}
+\makesavenoteenv{longtable}

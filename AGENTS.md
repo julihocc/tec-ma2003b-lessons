@@ -10,7 +10,7 @@ Course content lives under `lessons/`, organized as `L##_Topic_Name` (for exampl
 - `presentation/`: LaTeX Beamer slide sources and compiled PDFs.
 - `README.md`: lesson objectives and usage notes.
 
-Course-wide material is in `docs/`, including `SYLLABUS.md`. Python dependencies are declared in `pyproject.toml` and locked in `uv.lock`.
+Course-wide material is in `docs/`, including `SYLLABUS.md`. Python dependencies are declared in `pyproject.toml` and locked in `uv.lock`. Shared LaTeX styles live in `latex/`: `ma2003b-common.sty` (fonts, Pandoc syntax-highlighting macros, table/hyperref plumbing shared by both classes), `ma2003b-notes.sty` (article-class notes styling), and `ma2003b-beamer.sty` (Beamer presentation styling, Tec de Monterrey Madrid theme/branding). Every lesson `.tex` source pulls these in via a single `\usepackage{ma2003b-notes}` or `\usepackage{ma2003b-beamer}` line instead of duplicating the preamble.
 
 ## Build, Test, and Development Commands
 
@@ -19,7 +19,7 @@ Course-wide material is in `docs/`, including `SYLLABUS.md`. Python dependencies
 - `uv run python lessons/L01_Regression_Analysis/data/fetch_housing_regression.py`: regenerate a lesson dataset; use the corresponding `fetch_*.py` for other lessons.
 - `uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py`: execute all factor-analysis snippet notebooks non-interactively and check their key numerical results.
 - `uv run python scripts/run_notebooks.py`: execute all seven primary lesson notebooks from a clean kernel; pass notebook paths to run a subset, or `--write-outputs` to persist regenerated outputs.
-- `pdflatex lessons/L01_Regression_Analysis/notes/regression_analysis_notes.tex`: rebuild a lecture-note PDF. Apply the same pattern to presentations and other lessons.
+- `./compile.ps1 lessons/L01_Regression_Analysis/notes/regression_analysis_notes.tex` (PowerShell) or `./compile.sh lessons/L01_Regression_Analysis/notes/regression_analysis_notes.tex` (bash): rebuild a lecture-note or presentation PDF. Works from any working directory and applies to any lesson's notes/presentation source. Under the hood it points `TEXINPUTS` at the repo's `latex/` style directory and runs `latexmk -xelatex` (xelatex is required: some notes sources contain literal Unicode math symbols that plain `pdflatex` cannot typeset). To compile manually instead: set `TEXINPUTS` to `<repo-root>\latex//;` (note the trailing `;`, which re-appends the default TeX search path) and run `xelatex <file>.tex` twice.
 
 ## Coding Style & Naming Conventions
 
@@ -27,7 +27,7 @@ Use four-space indentation and PEP 8 conventions for Python. Prefer descriptive 
 
 ## Testing Guidelines
 
-There is no coverage target or general test framework yet. Run the snippet harness after changing factor-analysis notebooks. For other notebooks, run `scripts/run_notebooks.py` (or restart the kernel and run all cells from top to bottom in Jupyter) to confirm outputs are reproducible and paths resolve. Recompile affected `.tex` files and inspect the resulting PDF for layout problems.
+There is no coverage target or general test framework yet. Run the snippet harness after changing factor-analysis notebooks. For other notebooks, run `scripts/run_notebooks.py` (or restart the kernel and run all cells from top to bottom in Jupyter) to confirm outputs are reproducible and paths resolve. Recompile affected `.tex` files with `./compile.ps1`/`./compile.sh` and inspect the resulting PDF for layout problems. If you touch `latex/ma2003b-*.sty`, recompile at least one notes file and one presentation file, since both classes share it.
 
 ## Commit & Pull Request Guidelines
 

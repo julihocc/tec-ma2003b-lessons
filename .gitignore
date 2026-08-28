@@ -6,3 +6,18 @@
 *.gif
 *.pyc
 .venv/*
+
+# LaTeX build artifacts (latexmk/pdflatex intermediates)
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.nav
+*.snm
+*.toc
+*.vrb
+*.out
+*.bbl
+*.blg
+*.synctex.gz
+*.xdv

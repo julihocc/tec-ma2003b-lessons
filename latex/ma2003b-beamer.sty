@@ -1,0 +1,58 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{ma2003b-beamer}[2026/08/28 v1.0 MA2003B shared style for Beamer presentations]
+
+\newif\ifbibliography
+\RequirePackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+
+\RequirePackage{ma2003b-common}
+
+\usetheme{Madrid}
+\definecolor{TecBlue}{RGB}{0,51,102}
+\setbeamercolor{structure}{fg=TecBlue}
+\setbeamercolor{frametitle}{fg=TecBlue}
+\setbeamercolor{title}{fg=white}
+\setbeamertemplate{navigation symbols}{}
+
+% Beamer-specific table/caption support (make caption package work with longtable)
+\RequirePackage{caption}
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
