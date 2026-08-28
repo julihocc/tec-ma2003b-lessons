@@ -179,11 +179,13 @@ In the credit risk example above, we would classify the applicant as non-default
 
 The Bayes classification rule is optimal in a precise mathematical sense: it minimizes the total probability of misclassification. This result, known as the Bayes risk minimization theorem, states that among all possible classification rules, assigning observations to the group with the highest posterior probability achieves the lowest possible error rate.
 
-This optimality holds under two critical conditions:
+This optimality holds under three critical conditions:
 
 *Condition 1 - Correct Prior Probabilities*: The specified prior probabilities $pi_k$ accurately reflect the true prevalence of groups in the population or appropriately weight the relative importance of different groups.
 
 *Condition 2 - Correct Density Specification*: The assumed class-conditional densities $f_k (bold(x))$ correctly specify the distribution of predictor values within each group. In discriminant analysis, we assume multivariate normal distributions, so optimality requires that this assumption holds or approximately holds.
+
+*Condition 3 - Equal Misclassification Costs (0-1 Loss)*: "Minimizes the total probability of misclassification" and "assign to the highest posterior probability" are only the same rule under 0-1 loss, where every type of error counts equally. Under asymmetric costs (e.g. missing a default is worse than a false alarm), the *risk*-minimizing rule instead compares $pi_k f_k (bold(x)) dot C_k$ weighted by cost, and can assign an observation to a group whose posterior probability is not the largest.
 
 When these conditions are violated, the Bayes rule using the misspecified priors or densities may perform suboptimally. Nevertheless, the framework remains valuable because:
 
@@ -242,7 +244,7 @@ $ delta_k (bold(x)) = bold(x)^top bold(Sigma)^(-1) bold(mu)_k - frac(1, 2) bold(
 
 === Geometric Interpretation
 
-The geometric perspective on linear discriminant analysis provides valuable intuition about the classification mechanism. Each discriminant function defines a hyperplane in the $p$-dimensional predictor space, with these hyperplanes serving as decision boundaries that partition the space into regions corresponding to different group assignments. The linearity of these decision boundaries, which gives the method its name, implies that the boundaries consist of straight lines in two dimensions, flat planes in three dimensions, and hyperplanes in higher dimensions. When prior probabilities are equal across groups, the decision boundaries take a particularly elegant form as perpendicular bisectors of the lines connecting group centroids, reflecting the intuitive principle that observations should be assigned to the nearest group center when groups are equally likely a priori.
+The geometric perspective on linear discriminant analysis provides valuable intuition about the classification mechanism. Each discriminant function defines a hyperplane in the $p$-dimensional predictor space, with these hyperplanes serving as decision boundaries that partition the space into regions corresponding to different group assignments. The linearity of these decision boundaries, which gives the method its name, implies that the boundaries consist of straight lines in two dimensions, flat planes in three dimensions, and hyperplanes in higher dimensions. The boundary between groups $k$ and $l$ is the hyperplane with normal vector $bold(Sigma)^(-1)(bold(mu)_k - bold(mu)_l)$, passing through the point equidistant (in *Mahalanobis* distance) between the two centroids when priors are equal. This normal vector equals $bold(mu)_k - bold(mu)_l$ itself -- making the boundary a literal perpendicular bisector in ordinary Euclidean coordinates -- only in the special case where $bold(Sigma)$ is proportional to the identity matrix (uncorrelated predictors with equal variances). In general, $bold(Sigma)^(-1)$ tilts and rescales the boundary, so "nearest centroid" must be read in Mahalanobis distance, not raw Euclidean distance.
 
 == Quadratic Discriminant Analysis (QDA)
 

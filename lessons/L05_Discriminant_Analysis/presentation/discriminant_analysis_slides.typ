@@ -42,7 +42,7 @@
 #slide[
   = The Classification Problem
 
-  *Scenario:* Given an observation $\mathbf{x} \in \mathbb{R}^p$, assign it to one of $k$ predefined mutually exclusive groups $\Pi_1, \Pi_2, \dots, \Pi_k$.
+  *Scenario:* Given an observation $bold(x) in bb(R)^p$, assign it to one of $k$ predefined mutually exclusive groups $Pi_1, Pi_2, dots.h, Pi_k$.
 
   #v(0.8em)
 
@@ -70,7 +70,7 @@
   )
 
   #v(0.8em)
-  *Goal:* Construct discriminant score functions $d_i(\mathbf{x})$ that maximize separation between groups while minimizing within-group scatter.
+  *Goal:* Construct discriminant score functions $d_i(bold(x))$ that maximize separation between groups while minimizing within-group scatter.
 ]
 
 // ============================================================================
@@ -80,40 +80,40 @@
 #slide[
   = Fisher's Linear Discriminant (Two Populations)
 
-  Let $\mathbf{x} \in \mathbb{R}^p$ from population $\Pi_1 \sim (\boldsymbol{\mu}_1, \mathbf{\Sigma})$ or $\Pi_2 \sim (\boldsymbol{\mu}_2, \mathbf{\Sigma})$ with shared covariance $\mathbf{\Sigma}$.
+  Let $bold(x) in bb(R)^p$ from population $Pi_1 tilde.op (bold(mu)_1, bold(Sigma))$ or $Pi_2 tilde.op (bold(mu)_2, bold(Sigma))$ with shared covariance $bold(Sigma)$.
 
   #v(0.5em)
 
-  *Fisher's Criterion:* Find linear combination $y = \mathbf{a}^T \mathbf{x}$ maximizing the ratio of between-group to within-group variance:
-  $ J(\mathbf{a}) = \frac{(\mathbf{a}^T \boldsymbol{\mu}_1 - \mathbf{a}^T \boldsymbol{\mu}_2)^2}{\mathbf{a}^T \mathbf{\Sigma} \mathbf{a}} $
+  *Fisher's Criterion:* Find linear combination $y = bold(a)^T bold(x)$ maximizing the ratio of between-group to within-group variance:
+  $ J(bold(a)) = frac((bold(a)^T bold(mu)_1 - bold(a)^T bold(mu)_2)^2, bold(a)^T bold(Sigma) bold(a)) $
 
   #v(0.5em)
 
   *Optimal Coefficient Vector:*
-  $ \mathbf{a}^* = \mathbf{\Sigma}^{-1}(\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2) \quad \left(\text{sample estimator: } \hat{\mathbf{a}} = \mathbf{S}_{\text{pooled}}^{-1}(\bar{\mathbf{x}}_1 - \bar{\mathbf{x}}_2)\right) $
+  $ bold(a)^* = bold(Sigma)^(-1)(bold(mu)_1 - bold(mu)_2) quad ("sample estimator: " hat(bold(a)) = bold(S)_("pooled")^(-1)(overline(bold(x))_1 - overline(bold(x))_2)) $
 
   *Decision Rule (Equal Priors):*
-  Assign to $\Pi_1$ if $\mathbf{a}^T \mathbf{x} \ge \frac{1}{2}\mathbf{a}^T(\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2) = m$; otherwise assign to $\Pi_2$.
+  Assign to $Pi_1$ if $bold(a)^T bold(x) gt.eq frac(1, 2) bold(a)^T(bold(mu)_1 + bold(mu)_2) = m$; otherwise assign to $Pi_2$.
 ]
 
 #slide[
   = Prior Probabilities & Misclassification Costs (ECM)
 
-  In real business applications, groups have unequal base rates $p_1, p_2$ and misclassification penalties $C(2|1) \neq C(1|2)$.
+  In real business applications, groups have unequal base rates $p_1, p_2$ and misclassification penalties $C(2|1) eq.not C(1|2)$.
 
   #v(0.6em)
 
   *Expected Cost of Misclassification (ECM):*
-  $ \operatorname{ECM} = C(2|1) p_1 P(2|1) + C(1|2) p_2 P(1|2) $
+  $ op("ECM") = C(2|1) p_1 P(2|1) + C(1|2) p_2 P(1|2) $
 
   #v(0.6em)
 
   *Bayes Optimal Decision Rule (Minimize ECM):*
-  Assign $\mathbf{x}$ to $\Pi_1$ if:
-  $ \frac{f_1(\mathbf{x})}{f_2(\mathbf{x})} \ge \left(\frac{C(1|2)}{C(2|1)}\right) \left(\frac{p_2}{p_1}\right) $
+  Assign $bold(x)$ to $Pi_1$ if:
+  $ frac(f_1(bold(x)), f_2(bold(x))) gt.eq (frac(C(1|2), C(2|1))) (frac(p_2, p_1)) $
 
   Taking logarithms under multivariate normality yields an adjusted linear cutoff:
-  $ d_L(\mathbf{x}) = (\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)^T \mathbf{\Sigma}^{-1} \mathbf{x} - \frac{1}{2}(\boldsymbol{\mu}_1 - \boldsymbol{\mu}_2)^T \mathbf{\Sigma}^{-1}(\boldsymbol{\mu}_1 + \boldsymbol{\mu}_2) \ge \ln\left[ \frac{C(1|2) p_2}{C(2|1) p_1} \right] $
+  $ d_L(bold(x)) = (bold(mu)_1 - bold(mu)_2)^T bold(Sigma)^(-1) bold(x) - frac(1, 2)(bold(mu)_1 - bold(mu)_2)^T bold(Sigma)^(-1)(bold(mu)_1 + bold(mu)_2) gt.eq ln[ frac(C(1|2) p_2, C(2|1) p_1) ] $
 ]
 
 // ============================================================================
@@ -123,32 +123,32 @@
 #slide[
   = Multi-Group Discrimination ($k > 2$ Populations)
 
-  When classifying among $k$ groups, we define between-group matrix $\mathbf{B}$ and within-group matrix $\mathbf{W}$:
-  $ \mathbf{W} = \sum_{i=1}^k \sum_{j=1}^{n_i} (\mathbf{x}_{i j} - \bar{\mathbf{x}}_i)(\mathbf{x}_{i j} - \bar{\mathbf{x}}_i)^T, \quad \mathbf{B} = \sum_{i=1}^k n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}})(\bar{\mathbf{x}}_i - \bar{\mathbf{x}})^T $
+  When classifying among $k$ groups, we define between-group matrix $bold(B)$ and within-group matrix $bold(W)$:
+  $ bold(W) = sum_(i=1)^k sum_(j=1)^(n_i) (bold(x)_(i j) - overline(bold(x))_i)(bold(x)_(i j) - overline(bold(x))_i)^T, quad bold(B) = sum_(i=1)^k n_i (overline(bold(x))_i - overline(bold(x)))(overline(bold(x))_i - overline(bold(x)))^T $
 
   #v(0.6em)
 
   *Canonical Discriminant Functions:*
-  Eigenvalue problem: $\mathbf{W}^{-1}\mathbf{B}\mathbf{v}_r = \lambda_r \mathbf{v}_r$.
-  - Number of non-zero canonical functions: $s = \min(k - 1, p)$.
-  - $r$-th canonical score: $Z_r = \mathbf{v}_r^T \mathbf{x}$.
-  - Canonical correlations: $\rho_r = \sqrt{\frac{\lambda_r}{1 + \lambda_r}}$.
+  Eigenvalue problem: $bold(W)^(-1) bold(B) bold(v)_r = lambda_r bold(v)_r$.
+  - Number of non-zero canonical functions: $s = min(k - 1, p)$.
+  - $r$-th canonical score: $Z_r = bold(v)_r^T bold(x)$.
+  - Canonical correlations: $rho_r = sqrt(frac(lambda_r, 1 + lambda_r))$.
 ]
 
 #slide[
   = Wilks' Lambda & Stepwise Variable Selection
 
-  *Wilks' Lambda ($\Lambda$):*
-  $ \Lambda = \frac{|\mathbf{W}|}{|\mathbf{W} + \mathbf{B}|} = \prod_{r=1}^s \frac{1}{1 + \lambda_r}, \quad \Lambda \in (0, 1] $
+  *Wilks' Lambda ($Lambda$):*
+  $ Lambda = frac(|bold(W)|, |bold(W) + bold(B)|) = product_(r=1)^s frac(1, 1 + lambda_r), quad Lambda in (0, 1] $
 
-  - $\Lambda \to 0$: High group separation (predictors strongly discriminate).
-  - $\Lambda \to 1$: No group separation (group centroids are identical).
+  - $Lambda arrow.r 0$: High group separation (predictors strongly discriminate).
+  - $Lambda arrow.r 1$: No group separation (group centroids are identical).
 
   #v(0.8em)
 
   *Stepwise Variable Selection:*
-  - *Forward Selection:* Add predictor that produces largest reduction in $\Lambda$ ($F_{\text{to enter}} > F_{\text{in}}$).
-  - *Backward Elimination:* Remove least contributing predictor ($F_{\text{to remove}} < F_{\text{out}}$).
+  - *Forward Selection:* Add predictor that produces largest reduction in $Lambda$ ($F_("to enter") > F_("in")$).
+  - *Backward Elimination:* Remove least contributing predictor ($F_("to remove") < F_("out")$).
   - Prevents overfitting and maximizes model parsimony.
 ]
 
@@ -163,9 +163,9 @@
     columns: (1.5fr, 2fr, 2fr),
     align: (left, left, left),
     table.header([*Feature*], [*LDA (Linear)*], [*QDA (Quadratic)*]),
-    [Covariance Assumption], [Equal: $\mathbf{\Sigma}_1 = \mathbf{\Sigma}_2 = \dots = \mathbf{\Sigma}_k = \mathbf{\Sigma}$], [Unequal: $\mathbf{\Sigma}_i \neq \mathbf{\Sigma}_j$ per class],
+    [Covariance Assumption], [Equal: $bold(Sigma)_1 = bold(Sigma)_2 = dots.h = bold(Sigma)_k = bold(Sigma)$], [Unequal: $bold(Sigma)_i eq.not bold(Sigma)_j$ per class],
     [Decision Boundary], [Hyperplanes (Linear)], [Quadric surfaces (Hyperbolas / Parabolas)],
-    [Parameters to Estimate], [$p$ means + 1 pooled $\mathbf{\Sigma}$ ($O(p^2)$)], [$k$ means + $k$ individual $\mathbf{\Sigma}_i$ ($O(k p^2)$)],
+    [Parameters to Estimate], [$p$ means + 1 pooled $bold(Sigma)$ ($O(p^2)$)], [$k$ means + $k$ individual $bold(Sigma)_i$ ($O(k p^2)$)],
     [Sample Size Requirement], [Moderate ($n > p$)], [Large per class ($n_i > p$)],
     [Robustness], [More robust to small sample sizes], [Captures complex non-linear variance patterns]
   )
@@ -230,8 +230,8 @@
 
   #v(0.8em)
   *Key Results:*
-  - LDA achieves $> 94\%$ classification accuracy on test split.
-  - First canonical function captures $87.3\%$ of between-group variance (`avg_order_value` and `purchase_freq` dominate).
+  - LDA achieves $> 94%$ classification accuracy on test split.
+  - First canonical function captures $87.3%$ of between-group variance (`avg_order_value` and `purchase_freq` dominate).
   - Decision boundaries provide clear automated routing for CRM campaign triggers.
 ]
 
