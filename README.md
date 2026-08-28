@@ -16,7 +16,7 @@ This repository contains teaching materials, lecture notes, slide presentations,
 tec-ma2003b-lessons/
 ├── docs/                                          # Course-wide documentation & syllabus
 │   ├── SYLLABUS.md                                # Complete syllabus transcription
-│   └── MA2003B - Analítico.pdf                    # Official Plan Analítico PDF
+│   └── MA2003B - Analítico.pdf                    # Official Plan Analítico PDF (LFS)
 ├── lessons/                                       # Course lesson modules (Chapters 1 to 7)
 │   ├── L01_Regression_Analysis/
 │   ├── L02_Multivariate_Analysis/
@@ -25,7 +25,10 @@ tec-ma2003b-lessons/
 │   ├── L05_Discriminant_Analysis/
 │   ├── L06_Cluster_Analysis/
 │   └── L07_Multivariate_Regression/
-├── requirements.txt                               # Unified course dependencies
+├── pyproject.toml                                 # uv project configuration
+├── uv.lock                                        # Deterministic dependency lockfile
+├── .python-version                                # Pinned Python runtime (3.11)
+├── requirements.txt                               # Pip-compatible dependency export
 └── README.md                                      # Repository overview
 ```
 
@@ -51,56 +54,56 @@ Every lesson module inside `lessons/` follows a standardized **4-folder layout**
 
 ---
 
-## 🚀 Quickstart & Setup
+## 🚀 Quickstart with `uv`
 
-### 1. Environment Setup
+This project uses [`uv`](https://docs.astral.sh/uv/) for Python dependency and environment management.
 
-Clone the repository and install the unified dependencies:
+### 1. Install & Sync Environment
+
+Clone the repository and sync all locked dependencies in seconds:
 
 ```bash
 # Clone the repository
 git clone https://github.com/julihocc/tec-ma2003b-lessons.git
 cd tec-ma2003b-lessons
 
-# Create and activate a virtual environment
-python -m venv .venv
-
-# On Linux/macOS:
-source .venv/bin/activate
-# On Windows (PowerShell):
-.venv\Scripts\Activate.ps1
-
-# Install required dependencies
-pip install -r requirements.txt
+# Install dependencies and create .venv automatically
+uv sync
 ```
 
 ### 2. Generating Datasets
 
-Each module includes a self-contained data generation script:
+Run any data generator directly through `uv run`:
 
 ```bash
 # Chapter 4: Factor Analysis
-python lessons/L04_Factor_Analysis/data/fetch_educational.py
+uv run python lessons/L04_Factor_Analysis/data/fetch_educational.py
 
 # Chapter 5: Discriminant Analysis
-python lessons/L05_Discriminant_Analysis/data/fetch_marketing.py
+uv run python lessons/L05_Discriminant_Analysis/data/fetch_marketing.py
 
 # Chapter 6: Cluster Analysis
-python lessons/L06_Cluster_Analysis/data/fetch_customer_data.py
+uv run python lessons/L06_Cluster_Analysis/data/fetch_customer_data.py
 
 # Chapter 7: Multivariate Regression
-python lessons/L07_Multivariate_Regression/data/fetch_health_data.py
+uv run python lessons/L07_Multivariate_Regression/data/fetch_health_data.py
 ```
 
-### 3. Launching Notebooks
+### 3. Launching Jupyter Notebooks
 
 ```bash
-jupyter notebook
+uv run jupyter notebook
 ```
 
 Navigate to any lesson `notebook/` subfolder (e.g. `lessons/L06_Cluster_Analysis/notebook/customer_clustering_analysis.ipynb`) to run the interactive analyses.
 
-### 4. Compiling Slides & Documents (Typst)
+### 4. Running Snippet Tests
+
+```bash
+uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py
+```
+
+### 5. Compiling Slides & Documents (Typst)
 
 Presentations and lecture notes are typeset using [Typst](https://typst.app/):
 
@@ -118,10 +121,12 @@ typst compile cluster_analysis_notes.typ
 
 ## 🛠️ Technology Stack
 
+- **Environment & Package Manager:** [uv](https://docs.astral.sh/uv/) with `pyproject.toml` and `uv.lock`
 - **Computing & Statistics:** `numpy`, `pandas`, `scipy`, `scikit-learn`, `statsmodels`, `factor_analyzer`
 - **Data Visualization:** `matplotlib`, `seaborn`
 - **Interactive Notebooks:** Jupyter / JupyterLab
 - **Typesetting & Slides:** [Typst](https://typst.app/) with `@preview/touying:0.5.3` (University Theme, Tec de Monterrey branding)
+- **Asset Storage:** Git LFS (`*.ipynb`, `*.csv`, `*.pdf`)
 
 ---
 

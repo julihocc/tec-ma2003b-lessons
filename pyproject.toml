@@ -1,0 +1,22 @@
+[project]
+name = "tec-ma2003b-lessons"
+version = "0.1.0"
+description = "Teaching materials and notebooks for MA2003B: Application of Multivariate Methods in Data Science at Tecnologico de Monterrey"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "factor-analyzer>=0.5.0",
+    "ipykernel>=6.20.0",
+    "jupyter>=1.0.0",
+    "matplotlib>=3.7.0",
+    "notebook>=7.0.0",
+    "numpy>=1.24.0",
+    "pandas>=2.0.0",
+    "scikit-learn>=1.2.0",
+    "scipy>=1.10.0",
+    "seaborn>=0.12.0",
+    "statsmodels>=0.14.0",
+]
+
+[tool.uv]
+package = false
