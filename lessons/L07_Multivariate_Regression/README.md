@@ -1,64 +1,64 @@
-# Chapter 7 — Multivariate Regression & Modeling
+# Chapter 7 — Multivariate Regression
 
-This chapter demonstrates multivariate regression methods for analyzing relationships between lifestyle factors, physiological measurements, and cardiovascular disease (CVD) risk. The analysis showcases logistic regression, mean vector testing, MANOVA, and canonical correlation analysis.
+This chapter covers multivariate linear regression with multiple response variables, inference for covariance matrices, Hotelling's $T^2$ hypothesis testing, Multivariate Analysis of Variance (MANOVA), Logistic regression, and Canonical Correlation Analysis (CCA).
 
-## Business Context
+## Chapter Overview (Syllabus Section 7)
 
-A healthcare research institute wants to understand the complex relationships between patient lifestyle behaviors, physiological health markers, and cardiovascular disease risk. The goals are to:
+Multivariate Regression models the simultaneous joint behavior of multiple response variables ($\mathbf{Y} \in \mathbb{R}^m$) as a function of multiple explanatory variables ($\mathbf{X} \in \mathbb{R}^{k+1}$). This module establishes cross-equation covariance estimation, simultaneous multivariate hypothesis testing (MANOVA, Hotelling's $T^2$), categorical binary classification (Logistic Regression), and dual-battery association analysis (Canonical Correlation Analysis).
 
-- **Predict CVD Risk**: Identify patients at high risk based on lifestyle and health markers
-- **Evaluate Interventions**: Test whether a lifestyle intervention program improves health outcomes
-- **Understand Relationships**: Explore how lifestyle factors relate to physiological measurements
-- **Develop Prevention Strategies**: Create targeted interventions based on identified risk factors
+## Syllabus Topics & Subtopics
 
-## Dataset Description
-
-The synthetic dataset contains 1,000 patients with demographics, lifestyle factors, and physiological measurements across 14 variables:
-
-- **Demographics**: `patient_id`, `age`, `bmi`
-- **Lifestyle Factors**: `exercise_hours_week`, `smoking_years`, `alcohol_units_week`, `stress_score`, `sleep_hours`
-- **Physiological Markers**: `systolic_bp`, `diastolic_bp`, `cholesterol`, `glucose`, `triglycerides`, `hdl`
-- **Outcomes**: `cvd_risk_high` (0/1), `treatment_group` (Control / Intervention)
+- **7.1** Logistic regression model
+- **7.2** Inferences for variances and covariances matrices
+- **7.3** Inferences for a vector of means
+- **7.4** MANOVA
+- **7.5** Canonical correlation analysis
+- **7.6** Analysis by factors and regression
+- **7.7** Programming and commercial systems
 
 ## Directory Structure
 
 ```text
 L07_Multivariate_Regression/
-├── data/                                         # Data files and generation scripts
-│   ├── fetch_health_data.py                      # Data generation script
-│   ├── health_data.csv                           # Generated patient dataset (1,000 × 14)
+├── data/                                         # Datasets and generation scripts
+│   ├── fetch_health_data.py                      # Clinical cardiovascular health generator
+│   ├── health_data.csv                           # Generated dataset (1,000 patients × 13 metrics)
 │   ├── HEALTH_DATA_DICTIONARY.md                 # Detailed variable descriptions
-│   └── HEALTH_DATA_DICTIONARY.pdf                 # Reference data dictionary PDF
-├── notes/                                        # Lecture notes and documentation
-│   ├── multivariate_regression_notes.tex         # LaTeX source for lecture notes
-│   └── multivariate_regression_notes.pdf         # Compiled lecture notes
-├── notebook/                                     # Analysis notebooks
-│   └── health_risk_analysis.ipynb                # Complete multivariate regression analysis
-├── presentation/                                 # Presentation materials
-│   ├── multivariate_regression_slides.tex        # LaTeX Beamer source for presentation
-│   └── multivariate_regression_slides.pdf        # Compiled presentation slides
+│   ├── HEALTH_DATA_DICTIONARY.pdf                # Formatted data dictionary PDF
+│   └── README.md                                 # Data documentation & regeneration guide
+├── notebook/                                     # Interactive Jupyter notebooks
+│   ├── health_risk_analysis.ipynb                # End-to-end clinical multivariate case study
+│   └── README.md                                 # Notebook walkthrough & cell progression
+├── notes/                                        # Lecture notes and study guides
+│   ├── multivariate_regression_notes.typ         # Comprehensive study guide (Typst)
+│   ├── multivariate_regression_notes.pdf         # Compiled lecture note PDF
+│   └── README.md                                 # Notes outline & compilation guide
+├── presentation/                                 # Presentation slides
+│   ├── multivariate_regression_slides.typ        # Typst presentation (Touying university theme)
+│   ├── multivariate_regression_slides.pdf        # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
 └── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
-python data/fetch_health_data.py
+uv run python lessons/L07_Multivariate_Regression/data/fetch_health_data.py
 ```
 
 ### 2. Run Interactive Notebook
 ```bash
-jupyter notebook notebook/health_risk_analysis.ipynb
+uv run jupyter notebook lessons/L07_Multivariate_Regression/notebook/health_risk_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (LaTeX)
+### 3. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
-cd presentation/
-pdflatex multivariate_regression_slides.tex
+cd lessons/L07_Multivariate_Regression/presentation/
+typst compile multivariate_regression_slides.typ
 
 # Lecture Notes
 cd ../notes/
-pdflatex multivariate_regression_notes.tex
+typst compile multivariate_regression_notes.typ
 ```
