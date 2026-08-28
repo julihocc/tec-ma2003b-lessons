@@ -17,21 +17,42 @@ Regression analysis explores functional and predictive relationships between exp
 - **1.7** Multiple linear regression
 - **1.8** Aberrant data and heteroskedasticity problems
 
-## Learning Objectives
-
-- Fit and interpret simple and multiple linear regression models.
-- Conduct ANOVA tests and construct confidence/prediction intervals.
-- Perform residual diagnostics to test normality and homoskedasticity assumptions.
-- Implement stepwise variable selection (forward selection and backward elimination).
-- Detect and treat outliers, leverage points, and non-linear associations.
-
 ## Directory Structure
 
 ```text
 L01_Regression_Analysis/
-├── data/           # Datasets and generation scripts
-├── docs/           # Lecture notes and study guides
-├── notebook/       # Interactive Jupyter notebooks
-├── presentation/   # Presentation slides (Typst + Touying)
-└── README.md       # Module documentation
+├── data/                                         # Datasets and generation scripts
+│   ├── fetch_housing_regression.py               # Synthetic property transaction generator
+│   ├── housing_regression.csv                    # Generated dataset (1,000 homes × 9 metrics)
+│   └── HOUSING_REGRESSION_DATA_DICTIONARY.md     # Detailed variable descriptions
+├── docs/                                         # Lecture notes and study guides
+│   └── regression_analysis_notes.typ             # Comprehensive study guide (Typst)
+├── notebook/                                     # Interactive Jupyter notebooks
+│   └── housing_regression_analysis.ipynb         # End-to-end residential valuation case study
+├── presentation/                                 # Presentation slides
+│   └── regression_analysis_slides.typ            # Typst presentation (Touying university theme)
+└── README.md                                     # Module documentation
+```
+
+## Usage & Execution
+
+### 1. Generate Dataset
+```bash
+uv run python lessons/L01_Regression_Analysis/data/fetch_housing_regression.py
+```
+
+### 2. Run Interactive Notebook
+```bash
+uv run jupyter notebook lessons/L01_Regression_Analysis/notebook/housing_regression_analysis.ipynb
+```
+
+### 3. Compile Slides & Documents (Typst)
+```bash
+# Presentation
+cd lessons/L01_Regression_Analysis/presentation/
+typst compile regression_analysis_slides.typ
+
+# Lecture Notes
+cd ../docs/
+typst compile regression_analysis_notes.typ
 ```
