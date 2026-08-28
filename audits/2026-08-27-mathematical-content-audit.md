@@ -50,7 +50,7 @@ The same synthetic sample is generated with three factors and analyzed with EFA,
 
 ### 6. L07 contains an incorrect Wilks' Lambda identity — High
 
-`docs/multivariate_regression_notes.typ`, line 402, states
+`notes/multivariate_regression_notes.typ`, line 402, states
 
 \[
 \Lambda=\frac{|W|}{|T|}=\frac{|W|}{|W|+|B|}.
@@ -70,7 +70,7 @@ The slides use the correct form. Wilks' Lambda is a ratio of generalized varianc
 
 ### L01 — Regression Analysis
 
-- `docs/regression_analysis_notes.typ`, line 226, treats \(100\beta_1\%\) as the exact effect in a log-linear model. The exact one-unit effect is \(100(e^{\beta_1}-1)\%\); \(100\beta_1\%\) is a small-coefficient approximation.
+- `notes/regression_analysis_notes.typ`, line 226, treats \(100\beta_1\%\) as the exact effect in a log-linear model. The exact one-unit effect is \(100(e^{\beta_1}-1)\%\); \(100\beta_1\%\) is a small-coefficient approximation.
 - The linear-log and log-log “1% change” interpretations should likewise be labelled local approximations for finite changes.
 - The main OLS, ANOVA, confidence/prediction interval, VIF, Cook's distance, and HC3 formulas are otherwise consistent.
 
@@ -78,7 +78,7 @@ The slides use the correct form. Wilks' Lambda is a ratio of generalized varianc
 
 ### L02 — Multivariate Foundations
 
-- `docs/multivariate_analysis_notes.typ`, line 161, calls \(D=\operatorname{diag}(\sigma_{11},\ldots,\sigma_{pp})\) a standard-deviation matrix. Those diagonal elements are variances. The following formula \(R=D^{-1/2}\Sigma D^{-1/2}\) is correct only when \(D\) is the variance diagonal.
+- `notes/multivariate_analysis_notes.typ`, line 161, calls \(D=\operatorname{diag}(\sigma_{11},\ldots,\sigma_{pp})\) a standard-deviation matrix. Those diagonal elements are variances. The following formula \(R=D^{-1/2}\Sigma D^{-1/2}\) is correct only when \(D\) is the variance diagonal.
 - The notebook applies single KNN imputation and then computes Fisher correlation confidence intervals using the full row count. This treats imputed values as observed and understates uncertainty.
 
 **Action:** rename \(D\) as the diagonal variance matrix. For inference after missing-data handling, use pairwise complete observations under a stated missingness assumption or propagate imputation uncertainty through multiple imputation or an appropriate bootstrap.
@@ -97,7 +97,7 @@ An independent 2,000-replicate check found that this correction does not change 
 
 In addition to the priority findings:
 
-- `docs/factor_analysis_notes.typ`, lines 183–190, presents \(n>p\), normal data, and no perfect multicollinearity as general PCA requirements. Descriptive PCA is defined for \(n<p\), rank-deficient, and non-normal data; these conditions matter for selected inferential interpretations or numerical goals, not PCA's existence.
+- `notes/factor_analysis_notes.typ`, lines 183–190, presents \(n>p\), normal data, and no perfect multicollinearity as general PCA requirements. Descriptive PCA is defined for \(n<p\), rank-deficient, and non-normal data; these conditions matter for selected inferential interpretations or numerical goals, not PCA's existence.
 - The Kaiser criterion is described as using eigenvalues of a reduced correlation matrix, but the implementation uses the original correlation matrix. The conventional \(\lambda>1\) rule is based on the original correlation matrix.
 - Eigenvectors are called loadings, conflicting with L03's definition of loadings as variable-component correlations \(v_j\sqrt{\lambda_j}\). Distinguish component coefficients from correlation loadings.
 - “86.7% of common variance” is misleading when calculated as the retained common-factor sum of squares divided by \(p\). With standardized variables, that quantity is the share of total observed variance attributed to the retained factors.
@@ -107,7 +107,7 @@ In addition to the priority findings:
 
 ### L05 — Discriminant Analysis
 
-- `docs/discriminant_analysis_notes.typ`, line 245, says equal-prior LDA boundaries are perpendicular bisectors of centroid-connecting lines. This is true in Euclidean coordinates only when the shared covariance is proportional to the identity. General LDA uses Mahalanobis geometry, with boundary normal \(\Sigma^{-1}(\mu_k-\mu_l)\).
+- `notes/discriminant_analysis_notes.typ`, line 245, says equal-prior LDA boundaries are perpendicular bisectors of centroid-connecting lines. This is true in Euclidean coordinates only when the shared covariance is proportional to the identity. General LDA uses Mahalanobis geometry, with boundary normal \(\Sigma^{-1}(\mu_k-\mu_l)\).
 - The notebook standardizes the full dataset before the train/test split and cross-validation. Preprocessing should be fitted within each training split using a pipeline. An independent rerun with fold-local scaling produced the same scores here—LDA `[1, 1, 1, 1, 0.9958]` and QDA `[1, 1, 1, 1, 1]`—but the current workflow teaches leakage and can bias results on other data.
 - A table labelled “Group Means on Original Features” displays `lda.means_`, which are means in standardized feature units.
 - Maximum posterior probability is Bayes-optimal only under the stated loss; the usual rule assumes equal misclassification costs (0–1 loss).
@@ -116,7 +116,7 @@ In addition to the priority findings:
 
 ### L06 — Cluster Analysis
 
-- `docs/cluster_analysis_notes.typ`, line 497, recommends the largest gap statistic. The standard one-standard-error rule chooses the smallest \(k\) satisfying \(\operatorname{Gap}(k)\geq\operatorname{Gap}(k+1)-s_{k+1}\).
+- `notes/cluster_analysis_notes.typ`, line 497, recommends the largest gap statistic. The standard one-standard-error rule chooses the smallest \(k\) satisfying \(\operatorname{Gap}(k)\geq\operatorname{Gap}(k+1)-s_{k+1}\).
 - Ward's minimum-variance/SSE interpretation requires squared Euclidean dissimilarity and should state that restriction.
 - Complete linkage should not be described generally as less sensitive to outliers; its maximum-pair distance can itself be driven by an outlier. K-medoids is more robust than k-means, not “unaffected” by extreme values.
 
@@ -128,7 +128,7 @@ The distance, linkage, WCSS, silhouette, Davies–Bouldin, and Dunn-index formul
 
 In addition to the three priority findings:
 
-- `docs/multivariate_regression_notes.typ`, line 158, calls \(p/(1-p)\) the “odds ratio.” It is the odds; a ratio compares two odds. \(e^{\beta_j}\) is the per-unit odds ratio.
+- `notes/multivariate_regression_notes.typ`, line 158, calls \(p/(1-p)\) the “odds ratio.” It is the odds; a ratio compares two odds. \(e^{\beta_j}\) is the per-unit odds ratio.
 - Follow-up univariate ANOVAs are reported with unadjusted p-values although the notes and slides instruct readers to correct for multiple testing. The present conclusions survive Bonferroni correction, but the code and reporting should implement it.
 - The claim that \(r_1^2=40.8\%\) is “shared variance between domains” overstates a first canonical correlation. It is shared variance between the first pair of canonical variates; domain-level interpretation requires variance-extracted and redundancy indices.
 - The statement that PCA is the special case of CCA with identical variable sets is false: identical sets yield canonical correlations of one and do not generally recover PCA directions.
