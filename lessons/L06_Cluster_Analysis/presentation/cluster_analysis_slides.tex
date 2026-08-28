@@ -1,0 +1,2450 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[aspectratio=169,ignorenonframetext]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usetheme{Madrid}
+\definecolor{TecBlue}{RGB}{0,51,102}
+\setbeamercolor{structure}{fg=TecBlue}
+\setbeamercolor{frametitle}{fg=TecBlue}
+\setbeamercolor{title}{fg=white}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Cluster Analysis},
+  pdfauthor={Juliho Castillo Colmenares},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\texorpdfstring{Cluster Analysis}{Cluster Analysis}}
+\author{\texorpdfstring{Juliho Castillo
+Colmenares}{Juliho Castillo Colmenares}}
+\subtitle{Theory, Methods, and Practical Application}
+\institute{Tec de Monterrey}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's Agenda}
+\textbf{Part 1: Theoretical Foundations}
+
+\begin{enumerate}
+\item
+  Introduction to Cluster Analysis
+\item
+  Distance and Similarity Measures
+\item
+  Hierarchical Clustering Methods
+\item
+  K-Means and Non-Hierarchical Methods
+\item
+  Determining Optimal Number of Clusters
+\item
+  Validation Techniques
+\item
+  Practical Considerations
+\item
+  Applications and Best Practices
+\end{enumerate}
+
+\textbf{Part 2: Practical Application}
+
+\begin{enumerate}
+\item
+  Customer Segmentation Case Study
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Companion Case Study}
+\textbf{E-Commerce Customer Segmentation}
+
+Throughout this presentation, we'll reference a real-world example
+\end{frame}
+
+\begin{frame}{Case Study: Business Context}
+\textbf{Scenario:} E-commerce company analyzing customer behavior
+
+\textbf{Challenge:} Discover natural customer segments without
+predefined categories
+
+\textbf{Goal:} Develop targeted marketing strategies for each segment
+\end{frame}
+
+\begin{frame}{Case Study: Dataset}
+\textbf{2,000 Customers} with 7 behavioral variables:
+
+\begin{itemize}
+\item
+  monthly\_purchases
+\item
+  avg\_basket\_size
+\item
+  total\_spend
+\item
+  session\_duration
+\item
+  email\_clicks
+\item
+  product\_views
+\item
+  return\_rate
+\end{itemize}
+
+\textbf{No predefined labels} - pure unsupervised learning
+\end{frame}
+
+\begin{frame}{What We'll Discover}
+\textbf{Spoiler Preview:}
+
+\begin{itemize}
+\item
+  4 distinct customer segments
+\item
+  Each with unique behavioral patterns
+\item
+  Actionable marketing strategies
+\end{itemize}
+
+\textbf{You'll see how theory connects to practice throughout}
+\end{frame}
+
+\begin{frame}{What is Cluster Analysis?}
+\textbf{Definition:} An exploratory technique to discover natural
+groupings in data \textbf{without predefined categories}
+\end{frame}
+
+\begin{frame}{What is Cluster Analysis?}
+\textbf{Key Characteristics:}
+
+\begin{itemize}
+\item
+  Unsupervised learning method
+\item
+  No training labels required
+\item
+  Discovers hidden structure in data
+\item
+  Groups similar observations together
+\end{itemize}
+
+\textbf{Goal:} Maximize within-cluster similarity and between-cluster
+dissimilarity
+\end{frame}
+
+\begin{frame}{Cluster Analysis vs. Discriminant Analysis}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Cluster Analysis} & \textbf{Discriminant Analysis} \\
+Unsupervised learning & Supervised learning \\
+Discovers unknown groups & Classifies into known groups \\
+No training labels & Requires training labels \\
+Exploratory & Predictive \\
+Groups observations & Creates decision boundaries \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Applications: Marketing \& Business}
+\textbf{Marketing}
+
+\begin{itemize}
+\item
+  Customer segmentation for targeted campaigns
+\item
+  Market basket analysis
+\end{itemize}
+
+\textbf{Business}
+
+\begin{itemize}
+\item
+  Fraud detection
+\item
+  Anomaly identification
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Applications: Science \& Healthcare}
+\textbf{Biology \& Medicine}
+
+\begin{itemize}
+\item
+  Disease subtype identification
+\item
+  Gene expression analysis
+\end{itemize}
+
+\textbf{Social Sciences}
+
+\begin{itemize}
+\item
+  Community detection in networks
+\item
+  Document clustering
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Distance and Similarity Measures}
+\textbf{Why Distance Matters}
+
+Clustering depends on measuring how ``close'' observations are to each
+other
+\end{frame}
+
+\begin{frame}{Common Distance Metrics}
+\begin{enumerate}
+\item
+  \textbf{Euclidean Distance} (L2 norm) - Most common
+\item
+  \textbf{Manhattan Distance} (L1 norm) - Robust to outliers
+\item
+  \textbf{Cosine Similarity} - For high-dimensional data
+\item
+  \textbf{Correlation Distance} - Pattern similarity
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Euclidean Distance}
+\textbf{Formula:}
+
+\[d(x,y) = \sqrt{\sum_{i = 1}^{p}\left( x_{i} - y_{i} \right)^{2}}\]
+\end{frame}
+
+\begin{frame}{Euclidean Distance}
+\textbf{Properties:}
+
+\begin{itemize}
+\item
+  Straight-line distance in n-dimensional space
+\item
+  Sensitive to scale differences
+\item
+  Assumes equal importance of all dimensions
+\end{itemize}
+
+\textbf{Warning:} Always standardize variables with different scales!
+\end{frame}
+
+\begin{frame}{Manhattan Distance}
+\textbf{Formula:}
+
+\[d(x,y) = \sum_{i = 1}^{p}|x_{i} - y_{i}|\]
+\end{frame}
+
+\begin{frame}{Manhattan Distance}
+\textbf{When to Use:}
+
+\begin{itemize}
+\item
+  Data contains outliers or extreme values
+\item
+  Variables represent counts
+\item
+  High-dimensional spaces
+\end{itemize}
+
+\textbf{Advantage:} More robust than Euclidean distance
+\end{frame}
+
+\begin{frame}{Why Standardization is Critical}
+\textbf{Problem:} Variables on different scales dominate distance
+calculations
+
+\textbf{Example:}
+
+\begin{itemize}
+\item
+  Age: 20-80 years
+\item
+  Income: 20,000-200,000 dollars
+\end{itemize}
+
+Without standardization, income dominates!
+\end{frame}
+
+\begin{frame}{Z-score Standardization}
+\textbf{Solution: Z-score Standardization}
+
+\[z_{i} = \frac{x_{i} - \mu}{\sigma}\]
+
+Transform to mean = 0, standard deviation = 1
+\end{frame}
+
+\begin{frame}{Case Study: Why Standardization Matters}
+\textbf{Customer Data Scale Problem:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5001}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2501}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2501}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Variable} & \textbf{Min} & \textbf{Max} \\
+monthly\_purchases & 0.2 & 17.0 \\
+total\_spend (dollars) & 58 & 7,892 \\
+return\_rate (proportion) & 0.0 & 0.5 \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+Without standardization, total\_spend would dominate clustering!
+\end{frame}
+
+\begin{frame}{Case Study: After Standardization}
+\textbf{All variables transformed to mean ≈ 0, std ≈ 1}
+
+Result: Each behavioral dimension contributes equally
+
+\begin{itemize}
+\item
+  Monthly purchases: now comparable to spending
+\item
+  Allows discovery of patterns beyond just ``who spends most''
+\item
+  Reveals behavioral segments not visible in raw data
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical Clustering}
+Builds a tree-like structure (dendrogram) showing nested clusters
+\end{frame}
+
+\begin{frame}{Two Approaches}
+\textbf{Agglomerative (Bottom-Up):} Most common
+
+\begin{itemize}
+\item
+  Start: Each observation is its own cluster
+\item
+  Process: Merge closest clusters iteratively
+\item
+  End: All observations in one cluster
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Two Approaches}
+\textbf{Divisive (Top-Down):} Less common
+
+\begin{itemize}
+\item
+  Start: All observations in one cluster
+\item
+  Process: Split most heterogeneous cluster
+\item
+  End: Each observation is its own cluster
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Linkage Methods}
+How to Measure Distance Between Clusters?
+\end{frame}
+
+\begin{frame}{Single Linkage (Nearest Neighbor)}
+\[d\left( C_{1},C_{2} \right) = \min\limits_{x \in C_{1},y \in C_{2}}d(x,y)\]
+
+Distance between closest points in the two clusters
+\end{frame}
+
+\begin{frame}{Complete Linkage (Farthest Neighbor)}
+\[d\left( C_{1},C_{2} \right) = \max\limits_{x \in C_{1},y \in C_{2}}d(x,y)\]
+
+Distance between farthest points in the two clusters
+\end{frame}
+
+\begin{frame}{Average Linkage}
+\[d\left( C_{1},C_{2} \right) = \frac{1}{n_{1}n_{2}}\sum_{x \in C_{1}}\sum_{y \in C_{2}}d(x,y)\]
+
+Average distance between all pairs of points
+\end{frame}
+
+\begin{frame}{Ward's Method}
+\textbf{Ward's Method}
+
+Minimizes within-cluster sum of squares
+
+Tends to produce compact, equal-sized clusters
+\end{frame}
+
+\begin{frame}{Linkage Methods Comparison}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3244}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2703}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4055}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Method} & \textbf{Outlier Sensitivity} & \textbf{Cluster
+Shape} \\
+Single Linkage & High & Elongated (chaining) \\
+Complete Linkage & Low & Compact, spherical \\
+Average Linkage & Medium & Balanced \\
+Ward's Method & Medium & Compact, equal-sized \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Linkage Methods Comparison}
+\textbf{Recommendation:} Ward's method often works best in practice
+\end{frame}
+
+\begin{frame}{Dendrograms}
+Visualizing Hierarchical Structure
+\end{frame}
+
+\begin{frame}{Reading a Dendrogram}
+\begin{itemize}
+\item
+  Horizontal axis: Observations or clusters
+\item
+  Vertical axis: Distance at which clusters merge
+\item
+  Height of branches: Dissimilarity between merged clusters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Determining Number of Clusters}
+\begin{itemize}
+\item
+  Look for large vertical gaps (jumps in fusion distance)
+\item
+  Cut dendrogram where there's substantial increase
+\item
+  Draw horizontal line: number of vertical lines crossed = k clusters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: Dendrogram Analysis}
+\textbf{Ward's Method Results:}
+
+\begin{itemize}
+\item
+  Clear hierarchical structure
+\item
+  Large vertical gap suggests 4 clusters
+\item
+  Cut at distance ≈ 50
+\end{itemize}
+
+\textbf{Cluster Sizes (Hierarchical):}
+
+\begin{itemize}
+\item
+  Cluster 0: 440 customers (22\%)
+\item
+  Cluster 1: 300 customers (15\%)
+\item
+  Cluster 2: 560 customers (28\%)
+\item
+  Cluster 3: 700 customers (35\%)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: Hierarchical Quality}
+\textbf{Silhouette Score: 0.458}
+
+\begin{itemize}
+\item
+  Above 0.4 is acceptable for customer segmentation
+\item
+  Behavioral boundaries are naturally fuzzy
+\item
+  Reasonably well-separated clusters
+\item
+  Balanced cluster sizes
+\end{itemize}
+
+Dendrogram suggests 4 is the natural number of segments
+\end{frame}
+
+\begin{frame}{The Chaining Effect}
+\textbf{Problem with Single Linkage:}
+
+Clusters form long, elongated chains rather than compact groups
+\end{frame}
+
+\begin{frame}{The Chaining Effect}
+\textbf{Why it Happens:}
+
+\begin{itemize}
+\item
+  Observations connect via intermediate points
+\item
+  A-B-C-D form chain where each is close to neighbor
+\item
+  But A and D are far apart
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Chaining Effect}
+\textbf{Solution:}
+
+\begin{itemize}
+\item
+  Use complete or average linkage instead
+\item
+  Or Ward's method for compact clusters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{K-Means Clustering}
+Most popular non-hierarchical method
+\end{frame}
+
+\begin{frame}{K-Means Algorithm}
+\begin{enumerate}
+\item
+  \textbf{Initialize:} Select k random observations as centroids
+\item
+  \textbf{Assignment:} Assign each point to nearest centroid
+\item
+  \textbf{Update:} Recalculate centroids as cluster means
+\item
+  \textbf{Repeat:} Steps 2-3 until convergence
+\end{enumerate}
+
+\textbf{Convergence:} When assignments no longer change between
+iterations
+\end{frame}
+
+\begin{frame}{K-Means Objective Function}
+\textbf{Goal:} Minimize within-cluster sum of squares (WCSS)
+
+\[\min\sum_{i = 1}^{k}\sum_{x \in C_{i}}\| x - \mu_{i}\|^{2}\]
+
+where \(\mu_{i}\) is the centroid of cluster \(C_{i}\)
+\end{frame}
+
+\begin{frame}{K-Means Properties}
+\begin{itemize}
+\item
+  Always converges (finite partitions, monotonically decreasing WCSS)
+\item
+  Typically converges in 10-30 iterations
+\item
+  Fast: O(n times k times p times iterations)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{K-Means: Advantages}
+\begin{itemize}
+\item
+  Fast and scalable to large datasets
+\item
+  Simple to understand and implement
+\item
+  Efficient for exploratory analysis
+\end{itemize}
+\end{frame}
+
+\begin{frame}{K-Means: Limitations}
+\begin{itemize}
+\item
+  Requires specifying k in advance
+\item
+  Sensitive to initialization (different starts → different results)
+\item
+  Assumes spherical clusters
+\item
+  Sensitive to outliers
+\item
+  Tends to create equal-sized clusters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{K-Means++ Initialization}
+\textbf{Problem:} Random initialization can lead to poor results
+\end{frame}
+
+\begin{frame}{K-Means++ Algorithm}
+\begin{enumerate}
+\item
+  Choose first centroid randomly
+\item
+  For each subsequent centroid:
+
+  \begin{itemize}
+  \item
+    Choose point with probability proportional to squared distance from
+    nearest existing centroid
+  \end{itemize}
+\item
+  Repeat until k centroids selected
+\end{enumerate}
+
+\textbf{Benefit:} Spreads out initial centroids, significantly improves
+results
+\end{frame}
+
+\begin{frame}{K-Medoids (PAM)}
+\textbf{Key Difference from K-Means:}
+
+\begin{itemize}
+\item
+  K-means: Centers are computed means (may not be actual points)
+\item
+  K-medoids: Centers are actual data points (medoids)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{K-Medoids (PAM)}
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  More robust to outliers
+\item
+  Works with any distance metric
+\item
+  Interpretable centers (actual observations)
+\end{itemize}
+
+\textbf{Disadvantage:} Slower than k-means (higher computational cost)
+\end{frame}
+
+\begin{frame}{How Many Clusters?}
+\textbf{The Fundamental Challenge:}
+
+No ``ground truth'' for correct number of clusters
+\end{frame}
+
+\begin{frame}{Multiple Approaches}
+\begin{enumerate}
+\item
+  \textbf{Elbow Method} - Look for bend in WCSS plot
+\item
+  \textbf{Silhouette Analysis} - Measure cluster quality
+\item
+  \textbf{Gap Statistic} - Compare to null reference
+\item
+  \textbf{Davies-Bouldin Index} - Ratio of compactness to separation
+\item
+  \textbf{Domain Knowledge} - Business requirements
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Elbow Method: Procedure}
+\begin{enumerate}
+\item
+  Run clustering for k = 1, 2, 3, \ldots, K\_max
+\item
+  Calculate WCSS for each k
+\item
+  Plot WCSS vs. k
+\item
+  Look for ``elbow'' - diminishing returns point
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Elbow Method: Interpretation}
+\begin{itemize}
+\item
+  WCSS always decreases as k increases
+\item
+  Elbow indicates where additional clusters don't help much
+\item
+  Choose k at the elbow point
+\end{itemize}
+
+\textbf{Limitation:} Elbow not always clear - may need other methods
+\end{frame}
+
+\begin{frame}{Case Study: Elbow Method Results}
+\textbf{Tested k = 2 to 10:}
+
+\begin{itemize}
+\item
+  Elbow curve shows diminishing returns after k=4
+\item
+  Silhouette scores peak at k=4
+\item
+  Both metrics converge on same answer
+\end{itemize}
+
+\textbf{K-Means with k=4:}
+
+\begin{itemize}
+\item
+  Silhouette Score: 0.458 (same as hierarchical!)
+\item
+  Convergence of two different methods
+\item
+  Strong evidence for 4 segments
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: K-Means Cluster Sizes}
+\textbf{Final K-Means Segmentation (k=4):}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Cluster} & \textbf{Size} & \textbf{Percentage} \\
+0 & 307 & 15.3\% \\
+1 & 707 & 35.4\% \\
+2 & 432 & 21.6\% \\
+3 & 554 & 27.7\% \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+Hierarchical and K-means produce similar cluster sizes
+\end{frame}
+
+\begin{frame}{Silhouette Analysis}
+Measures how well each point fits within its cluster
+\end{frame}
+
+\begin{frame}{Silhouette Coefficient}
+\textbf{Silhouette Coefficient for observation i:}
+
+\[s(i) = \frac{b(i) - a(i)}{\max(a(i),b(i))}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(a(i)\) = avg distance to points in same cluster
+\item
+  \(b(i)\) = avg distance to points in nearest neighboring cluster
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Silhouette Interpretation}
+\begin{itemize}
+\item
+  \(s(i) \approx + 1\): Well-matched to cluster
+\item
+  \(s(i) \approx 0\): On border between clusters
+\item
+  \(s(i) \approx - 1\): Likely in wrong cluster
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Using Silhouette for Optimal k}
+\textbf{Average Silhouette Width:}
+
+\[\overline{s} = \frac{1}{n}\sum_{i = 1}^{n}s(i)\]
+\end{frame}
+
+\begin{frame}{Silhouette Procedure}
+\begin{enumerate}
+\item
+  Run clustering for different k values
+\item
+  Calculate average silhouette width for each k
+\item
+  Choose k that maximizes \(\overline{s}\)
+\end{enumerate}
+
+\textbf{Advantage:} Provides both quality measure and optimal k
+\end{frame}
+
+\begin{frame}{Case Study: Silhouette Plot Insights}
+\textbf{Silhouette Plot Reveals:}
+
+\begin{itemize}
+\item
+  Most customers have positive coefficients (well-assigned)
+\item
+  All clusters extend beyond average (0.458)
+\item
+  Some variation in cluster quality
+\item
+  Few customers near zero (boundary cases)
+\item
+  Very few negative coefficients (rare misclassifications)
+\end{itemize}
+
+\textbf{Conclusion:} Generally good cluster quality across all 4
+segments
+\end{frame}
+
+\begin{frame}{Case Study: Cluster Profiling Results}
+\textbf{Four Distinct Customer Segments Identified:}
+
+\begin{enumerate}
+\item
+  \textbf{Engaged Selective (15.3\%)}: High basket, high returns, low
+  browsing
+\item
+  \textbf{Low-Value Browsers (35.4\%)}: Browse but don't buy much
+\item
+  \textbf{Premium High-Value (21.6\%)}: Highest spenders, frequent
+  purchases
+\item
+  \textbf{Frequent Small-Basket (27.7\%)}: Regular small orders
+\end{enumerate}
+
+Each differs by \textgreater10\% from average on multiple dimensions
+\end{frame}
+
+\begin{frame}{Cluster Validation}
+\textbf{Internal Validation} (using data only):
+
+\begin{itemize}
+\item
+  Within-Cluster Sum of Squares (WCSS) - lower is better
+\item
+  Silhouette Coefficient - higher is better
+\item
+  Davies-Bouldin Index - lower is better
+\item
+  Dunn Index - higher is better
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cluster Validation}
+\textbf{External Validation} (when true labels available):
+
+\begin{itemize}
+\item
+  Adjusted Rand Index (ARI)
+\item
+  Normalized Mutual Information (NMI)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Davies-Bouldin Index}
+Measures ratio of within-cluster dispersion to between-cluster
+separation
+
+\[\text{ DB } = \frac{1}{k}\sum_{i = 1}^{k}\max\limits_{j \neq i}\left( \frac{\sigma_{i} + \sigma_{j}}{d\left( c_{i},c_{j} \right)} \right)\]
+\end{frame}
+
+\begin{frame}{Davies-Bouldin Index}
+\textbf{Interpretation:}
+
+\begin{itemize}
+\item
+  Lower values indicate better clustering
+\item
+  Compact clusters that are far apart
+\item
+  Can compare different k values or methods
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Curse of Dimensionality}
+As dimensions (p) increase, problems arise
+\end{frame}
+
+\begin{frame}{Curse of Dimensionality: Problems}
+\begin{enumerate}
+\item
+  Distance becomes less meaningful (all points appear equidistant)
+\item
+  Data becomes sparse (observations spread out)
+\item
+  Computational cost increases dramatically
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Curse of Dimensionality: Solutions}
+\begin{itemize}
+\item
+  Use PCA or feature selection before clustering
+\item
+  Select only relevant variables
+\item
+  Use specialized high-dimensional algorithms
+\end{itemize}
+
+\textbf{Rule:} If p is large relative to n, reduce dimensions first
+\end{frame}
+
+\begin{frame}{Handling Outliers}
+\textbf{Impact by Method:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6000}}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4000}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Method} & \textbf{Sensitivity} \\
+K-means & High \\
+Ward's Method & High \\
+Single Linkage & Medium \\
+K-medoids & Low (Robust) \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Handling Outliers: Strategies}
+\begin{itemize}
+\item
+  Pre-processing: Detect and remove outliers
+\item
+  Use robust methods (k-medoids)
+\item
+  Accept outlier clusters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When to Use Hierarchical Clustering}
+\begin{itemize}
+\item
+  Small to medium datasets (n \textless{} 5,000)
+\item
+  Want to explore different k values
+\item
+  Need hierarchical structure
+\item
+  Don't know k in advance
+\end{itemize}
+\end{frame}
+
+\begin{frame}{When to Use K-Means}
+\begin{itemize}
+\item
+  Large datasets (n \textgreater{} 5,000)
+\item
+  Approximately know k
+\item
+  Need speed and efficiency
+\item
+  Clusters roughly spherical
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cluster Analysis Workflow}
+\begin{enumerate}
+\item
+  \textbf{Define objective} - What questions to answer?
+\item
+  \textbf{Select variables} - Domain knowledge
+\item
+  \textbf{Preprocess data} - Handle missing values, outliers
+\item
+  \textbf{Standardize} - If variables on different scales
+\item
+  \textbf{Choose method} - Based on data characteristics
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Cluster Analysis Workflow}
+\begin{enumerate}
+\setcounter{enumi}{5}
+\item
+  \textbf{Determine k} - Multiple criteria
+\item
+  \textbf{Run clustering} - Multiple times for k-means
+\item
+  \textbf{Validate results} - Internal and stability checks
+\item
+  \textbf{Interpret clusters} - Profile and name clusters
+\item
+  \textbf{Refine and iterate} - Based on insights
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Common Pitfalls to Avoid}
+\begin{enumerate}
+\item
+  \textbf{Not standardizing} when variables have different scales
+\item
+  \textbf{Using k-means} with non-spherical clusters
+\item
+  \textbf{Ignoring outliers} - can severely distort results
+\item
+  \textbf{Over-interpreting} - clustering always finds structure, even
+  in random data
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Common Pitfalls to Avoid}
+\begin{enumerate}
+\setcounter{enumi}{4}
+\item
+  \textbf{Using too many variables} - curse of dimensionality
+\item
+  \textbf{Running k-means once} - try multiple initializations
+\item
+  \textbf{Choosing k without validation} - use multiple methods
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Best Practices}
+\begin{enumerate}
+\item
+  \textbf{Try multiple methods} - Compare hierarchical, k-means, etc.
+\item
+  \textbf{Validate stability} - Bootstrap samples, different
+  initializations
+\item
+  \textbf{Visualize extensively} - Scatter plots, dendrograms, parallel
+  coordinates
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Best Practices}
+\begin{enumerate}
+\setcounter{enumi}{3}
+\item
+  \textbf{Use domain knowledge} - Statistical metrics + practical sense
+\item
+  \textbf{Document decisions} - Why certain methods, parameters chosen
+\item
+  \textbf{Check interpretability} - Can you explain and use clusters?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Key Takeaways: Fundamental Concepts}
+\begin{itemize}
+\item
+  Cluster analysis discovers natural groupings (unsupervised)
+\item
+  Distance measures are crucial (Euclidean, Manhattan)
+\item
+  Standardization essential for different scales
+\end{itemize}
+
+\textbf{Case Study:} Standardizing customer data (dollars, counts,
+proportions) ensured equal feature contribution
+\end{frame}
+
+\begin{frame}{Key Takeaways: Methods}
+\begin{itemize}
+\item
+  Hierarchical: Creates tree structure, multiple k values
+\item
+  K-means: Fast, scalable, requires specifying k
+\item
+  K-medoids: Robust alternative to k-means
+\end{itemize}
+
+\textbf{Case Study:} Both hierarchical and k-means identified 4 customer
+segments with identical silhouette scores (0.458)
+\end{frame}
+
+\begin{frame}{Key Takeaways: Validation}
+\begin{itemize}
+\item
+  Elbow method and silhouette analysis for optimal k
+\item
+  Multiple validation measures for quality assessment
+\end{itemize}
+
+\textbf{Case Study:} Convergence of dendrogram, elbow, and silhouette
+all suggested k=4 segments
+\end{frame}
+
+\begin{frame}{Summary: Method Selection Guide}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6667}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Situation} & \textbf{Recommended Method} \\
+Small dataset (n \textless{} 1,000) & Hierarchical (Ward's or
+Average) \\
+Large dataset (n \textgreater{} 10,000) & K-means with k-means++ \\
+Outliers present & K-medoids or preprocessing \\
+Non-spherical clusters & DBSCAN or hierarchical \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Summary: Method Selection Guide}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6667}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Situation} & \textbf{Recommended Method} \\
+Don't know k & Hierarchical, then elbow/silhouette \\
+High dimensions & PCA first, then k-means \\
+Mixed data types & Gower distance with hierarchical \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Advanced Topics (Beyond This Course)}
+\textbf{Density-Based Methods:}
+
+\begin{itemize}
+\item
+  DBSCAN - finds arbitrary shapes, identifies outliers
+\end{itemize}
+
+\textbf{Model-Based:}
+
+\begin{itemize}
+\item
+  Gaussian Mixture Models (GMM) - probabilistic approach
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Advanced Topics (Beyond This Course)}
+\textbf{Fuzzy Clustering:}
+
+\begin{itemize}
+\item
+  Soft assignment (membership degrees)
+\end{itemize}
+
+\textbf{Subspace Clustering:}
+
+\begin{itemize}
+\item
+  For high-dimensional data, different subspaces
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Real-World Applications: Business}
+\textbf{Marketing \& Business:}
+
+\begin{itemize}
+\item
+  Customer segmentation for targeted marketing
+\item
+  Product recommendation systems
+\item
+  Market basket analysis
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Real-World Applications: Healthcare}
+\textbf{Healthcare:}
+
+\begin{itemize}
+\item
+  Patient stratification for personalized medicine
+\item
+  Disease subtype identification
+\item
+  Medical image segmentation
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Real-World Applications: Finance}
+\textbf{Finance:}
+
+\begin{itemize}
+\item
+  Fraud detection and anomaly identification
+\item
+  Credit risk assessment
+\item
+  Portfolio diversification
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example: Customer Segmentation}
+\textbf{Scenario:} E-commerce company with 100,000 customers
+
+\textbf{Variables:}
+
+\begin{itemize}
+\item
+  Purchase frequency
+\item
+  Average order value
+\item
+  Product category preferences
+\item
+  Time since last purchase
+\item
+  Customer lifetime value
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example: Customer Segmentation Process}
+\begin{enumerate}
+\item
+  Standardize variables (different scales)
+\item
+  Try k-means for k = 2 to 10
+\item
+  Use elbow method and silhouette analysis
+\item
+  Identify k = 5 optimal clusters
+\item
+  Profile each segment
+\item
+  Develop targeted marketing strategies
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Books}
+\textbf{Textbooks:}
+
+\begin{itemize}
+\item
+  Everitt et al. (2011) - Cluster Analysis (5th ed.)
+\item
+  James et al. (2021) - Introduction to Statistical Learning
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Software}
+\textbf{Software:}
+
+\begin{itemize}
+\item
+  Python: scikit-learn (KMeans, AgglomerativeClustering)
+\item
+  R: stats package (kmeans, hclust)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Online Videos}
+\textbf{StatQuest YouTube Channel:}
+
+\begin{enumerate}
+\item
+  \textbf{K-Means Clustering:}\\
+  \url{https://www.youtube.com/watch?v=4b5d3muPQmA}
+\item
+  \textbf{Hierarchical Clustering:}\\
+  \url{https://www.youtube.com/watch?v=7xHsRkOdVwo}
+\item
+  \textbf{Validation Methods (Elbow \& Silhouette):}\\
+  \url{https://www.youtube.com/watch?v=DzrvLpxTxJw}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Additional Online}
+\textbf{Additional Online Resources:}
+
+\begin{itemize}
+\item
+  Scikit-learn documentation
+\item
+  Coursera/edX courses on unsupervised learning
+\item
+  Interactive clustering visualizations
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Part 2: Practical Application}
+\textbf{ Customer Segmentation Case Study }
+
+E-Commerce Cluster Analysis Using Hierarchical and K-Means Methods
+\end{frame}
+
+\begin{frame}{Business Context}
+\textbf{Business Problem:} An e-commerce company seeks to understand
+their customer base by discovering natural segments based on purchasing
+behavior, engagement patterns, and browsing habits.
+
+\textbf{Key Questions:}
+
+\begin{itemize}
+\item
+  How many distinct customer segments exist in our data?
+\item
+  What behavioral patterns characterize each segment?
+\item
+  How can we tailor marketing strategies to each discovered segment?
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Dataset Overview}
+\textbf{Dataset:} 2,000 customers with 7 behavioral features
+
+\textbf{Variables:}
+
+\begin{itemize}
+\item
+  monthly\_purchases
+\item
+  avg\_basket\_size
+\item
+  total\_spend
+\item
+  session\_duration
+\item
+  email\_clicks
+\item
+  product\_views
+\item
+  return\_rate
+\end{itemize}
+
+\textbf{Important:} No predefined labels (unsupervised learning)
+\end{frame}
+
+\begin{frame}{Exploratory Data Analysis}
+\begin{block}{Why EDA Matters}
+Before attempting to discover customer segments, we must first
+understand the characteristics and relationships within our data. Unlike
+supervised learning where we have predefined labels, cluster analysis is
+exploratory in nature, making this preliminary investigation even more
+critical.
+\end{block}
+\end{frame}
+
+\begin{frame}{EDA: Approach}
+\textbf{What We Do:}
+
+\begin{itemize}
+\item
+  Visualize distributions using histograms
+\item
+  Identify skewness, outliers, and typical value ranges
+\item
+  Compute correlation matrix to understand relationships
+\item
+  Assess variable redundancy
+\end{itemize}
+
+\textbf{Why:} Understanding data structure before algorithmic analysis
+helps anticipate which features might drive segmentation.
+\end{frame}
+
+\begin{frame}[fragile]{EDA: Distribution Analysis}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Load customer data}
+\NormalTok{df }\OperatorTok{=}\NormalTok{ pd.read\_csv(}\StringTok{"customer\_data.csv"}\NormalTok{)}
+
+\CommentTok{\# Summary statistics}
+\BuiltInTok{print}\NormalTok{(df.describe())}
+
+\CommentTok{\# Distribution plots for each variable}
+\NormalTok{fig, axes }\OperatorTok{=}\NormalTok{ plt.subplots(}\DecValTok{3}\NormalTok{, }\DecValTok{3}\NormalTok{, figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{15}\NormalTok{, }\DecValTok{12}\NormalTok{))}
+\ControlFlowTok{for}\NormalTok{ idx, col }\KeywordTok{in} \BuiltInTok{enumerate}\NormalTok{(df.columns):}
+\NormalTok{    axes[row, col\_idx].hist(df[col], bins}\OperatorTok{=}\DecValTok{30}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{EDA: Correlation Analysis}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Correlation matrix}
+\NormalTok{correlation\_matrix }\OperatorTok{=}\NormalTok{ df.corr()}
+\NormalTok{sns.heatmap(correlation\_matrix, annot}\OperatorTok{=}\VariableTok{True}\NormalTok{,}
+\NormalTok{            fmt}\OperatorTok{=}\StringTok{\textquotesingle{}.2f\textquotesingle{}}\NormalTok{, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}coolwarm\textquotesingle{}}\NormalTok{)}
+
+\CommentTok{\# Identify strongest correlations}
+\CommentTok{\# Example: monthly\_purchases \textless{}{-}\textgreater{} total\_spend: 0.94}
+\CommentTok{\#          avg\_basket\_size \textless{}{-}\textgreater{} total\_spend: 0.89}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{EDA: Key Findings}
+\textbf{Outcome:}
+
+\begin{itemize}
+\item
+  Balanced dataset with diverse customer behaviors
+\item
+  Right-skewed distributions (some extreme high spenders)
+\item
+  Strong positive correlations between purchase-related variables
+\item
+  Email clicks correlate moderately with purchase frequency
+\end{itemize}
+
+\textbf{Implication:} Multiple distinct behavioral patterns suggest
+natural customer segments exist.
+\end{frame}
+
+\begin{frame}{Data Standardization}
+\begin{block}{Why Standardization is Critical}
+Cluster analysis algorithms rely on distance metrics to measure
+similarity. However, our behavioral variables are measured in different
+units and scales:
+
+\begin{itemize}
+\item
+  Purchases (counts)
+\item
+  Spending (dollars: 58 to 7,891)
+\item
+  Return rate (proportions: 0.0 to 0.5)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{The Problem Without Standardization}
+\textbf{Without standardization:} Variables with larger numeric ranges
+dominate distance calculations.
+
+\textbf{Example:}
+
+\begin{itemize}
+\item
+  Customer A: 1 purchase, 100 dollars
+\item
+  Customer B: 2 purchases, 200 dollars
+\end{itemize}
+
+Distance dominated by dollar difference (100) rather than purchase
+difference (1).
+
+This leads to biased clustering that reflects scale differences, not
+true behavioral patterns.
+\end{frame}
+
+\begin{frame}{Standardization: Approach}
+\textbf{Z-score Standardization:}
+
+\[z_{i} = \frac{x_{i} - \mu}{\sigma}\]
+
+\textbf{Properties:}
+
+\begin{itemize}
+\item
+  Transforms to mean = 0, standard deviation = 1
+\item
+  Preserves distribution shape
+\item
+  Ensures equal contribution to distance calculations
+\item
+  Value of 2.0 means ``2 std deviations above mean''
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Standardization: Implementation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler}
+
+\CommentTok{\# Standardize features}
+\NormalTok{scaler }\OperatorTok{=}\NormalTok{ StandardScaler()}
+\NormalTok{X\_standardized }\OperatorTok{=}\NormalTok{ scaler.fit\_transform(df)}
+
+\CommentTok{\# Convert back to DataFrame}
+\NormalTok{df\_standardized }\OperatorTok{=}\NormalTok{ pd.DataFrame(}
+\NormalTok{    X\_standardized,}
+\NormalTok{    columns}\OperatorTok{=}\NormalTok{df.columns}
+\NormalTok{)}
+
+\BuiltInTok{print}\NormalTok{(df\_standardized.describe())}
+\CommentTok{\# All means approx 0, all std approx 1}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Standardization: Outcome}
+\textbf{Result:} All variables successfully transformed to mean
+approximately 0 and standard deviation approximately 1.
+
+\textbf{Impact:} Clustering algorithms now treat all behavioral
+dimensions equally when computing distances between customers.
+
+\textbf{Example:} Total spend (originally 58-7,891 dollars) and return
+rate (originally 0.0-0.5) now contribute equally to customer similarity.
+\end{frame}
+
+\begin{frame}{Hierarchical Clustering}
+\begin{block}{The Fundamental Question}
+\textbf{How many customer segments should we look for?}
+
+Unlike supervised classification where the number of classes is
+predetermined, clustering requires us to discover the appropriate number
+of groups.
+
+\textbf{Hierarchical clustering provides an elegant solution:} Build a
+complete hierarchy of nested clusters without specifying k in advance.
+\end{block}
+\end{frame}
+
+\begin{frame}{Hierarchical Clustering: Advantage}
+\textbf{Key Benefit:} Creates a tree-like structure (dendrogram) showing
+how customers progressively merge into larger groups.
+
+\textbf{Result:} We can identify the most natural number of segments
+based on where large jumps in distance occur.
+
+No need to predefine the number of clusters
+\end{frame}
+
+\begin{frame}{Hierarchical Clustering: Linkage Methods}
+\textbf{How do we measure distance between clusters?}
+
+\begin{itemize}
+\item
+  \textbf{Single Linkage:} Minimum distance between any two points
+\item
+  \textbf{Complete Linkage:} Maximum distance between any two points
+\item
+  \textbf{Average Linkage:} Mean distance between all pairs
+\item
+  \textbf{Ward's Method:} Minimizes within-cluster variance
+\end{itemize}
+
+\textbf{Recommendation:} Ward's method typically produces the most
+balanced clusters for customer segmentation.
+\end{frame}
+
+\begin{frame}[fragile]{Hierarchical Clustering: Implementation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ scipy.cluster.hierarchy }\ImportTok{import}\NormalTok{ linkage, dendrogram}
+
+\CommentTok{\# Compute linkage matrices for different methods}
+\NormalTok{linkage\_methods }\OperatorTok{=}\NormalTok{ [}\StringTok{\textquotesingle{}single\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}complete\textquotesingle{}}\NormalTok{,}
+                   \StringTok{\textquotesingle{}average\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}ward\textquotesingle{}}\NormalTok{]}
+\NormalTok{linkage\_matrices }\OperatorTok{=}\NormalTok{ \{\}}
+
+\ControlFlowTok{for}\NormalTok{ method }\KeywordTok{in}\NormalTok{ linkage\_methods:}
+\NormalTok{    linkage\_matrices[method] }\OperatorTok{=}\NormalTok{ linkage(}
+\NormalTok{        X\_standardized,}
+\NormalTok{        method}\OperatorTok{=}\NormalTok{method}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Dendrogram Interpretation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Create dendrogram for Ward\textquotesingle{}s method}
+\NormalTok{plt.figure(figsize}\OperatorTok{=}\NormalTok{(}\DecValTok{14}\NormalTok{, }\DecValTok{7}\NormalTok{))}
+\NormalTok{dendrogram(linkage\_matrices[}\StringTok{\textquotesingle{}ward\textquotesingle{}}\NormalTok{],}
+\NormalTok{           no\_labels}\OperatorTok{=}\VariableTok{True}\NormalTok{,}
+\NormalTok{           color\_threshold}\OperatorTok{=}\DecValTok{50}\NormalTok{)}
+\NormalTok{plt.axhline(y}\OperatorTok{=}\DecValTok{50}\NormalTok{, color}\OperatorTok{=}\StringTok{\textquotesingle{}r\textquotesingle{}}\NormalTok{, linestyle}\OperatorTok{=}\StringTok{\textquotesingle{}{-}{-}\textquotesingle{}}\NormalTok{,}
+\NormalTok{            label}\OperatorTok{=}\StringTok{\textquotesingle{}Potential cut (4 clusters)\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{How to Read:}
+
+\begin{itemize}
+\item
+  Horizontal axis: Customers
+\item
+  Vertical axis: Distance at which clusters merge
+\item
+  Large vertical gaps suggest natural cluster boundaries
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Hierarchical Clustering: Outcome}
+\textbf{Finding:} Four dendrograms reveal distinct clustering structures
+depending on linkage method.
+
+\textbf{Observations:}
+
+\begin{itemize}
+\item
+  Single linkage: Chaining effects with unbalanced clusters
+\item
+  Complete linkage: Too many small clusters
+\item
+  Average linkage: Compromise between extremes
+\item
+  Ward's method: Clear hierarchical structure, balanced sizes
+\end{itemize}
+
+\textbf{Decision:} Ward's dendrogram suggests 4 clusters as a natural
+choice.
+\end{frame}
+
+\begin{frame}[fragile]{Extracting Clusters from Dendrogram}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ scipy.cluster.hierarchy }\ImportTok{import}\NormalTok{ fcluster}
+
+\CommentTok{\# Extract 4 clusters using Ward\textquotesingle{}s method}
+\NormalTok{n\_clusters\_hier }\OperatorTok{=} \DecValTok{4}
+\NormalTok{hierarchical\_labels }\OperatorTok{=}\NormalTok{ fcluster(}
+\NormalTok{    linkage\_matrices[}\StringTok{\textquotesingle{}ward\textquotesingle{}}\NormalTok{],}
+\NormalTok{    n\_clusters\_hier,}
+\NormalTok{    criterion}\OperatorTok{=}\StringTok{\textquotesingle{}maxclust\textquotesingle{}}
+\NormalTok{)}
+
+\CommentTok{\# Calculate silhouette score}
+\NormalTok{silhouette\_hier }\OperatorTok{=}\NormalTok{ silhouette\_score(}
+\NormalTok{    X\_standardized,}
+\NormalTok{    hierarchical\_labels}
+\NormalTok{)}
+\CommentTok{\# Result: 0.458 (moderate cluster quality)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Hierarchical Clustering: Results}
+\textbf{Cluster Sizes:}
+
+\begin{itemize}
+\item
+  Cluster 0: 440 customers (22.0\%)
+\item
+  Cluster 1: 300 customers (15.0\%)
+\item
+  Cluster 2: 560 customers (28.0\%)
+\item
+  Cluster 3: 700 customers (35.0\%)
+\end{itemize}
+
+\textbf{Silhouette Score:} 0.458
+
+\textbf{Interpretation:} Customers reasonably well-separated into
+clusters with balanced sizes. Score above 0.4 is acceptable for customer
+segmentation where behavioral boundaries are often fuzzy.
+\end{frame}
+
+\begin{frame}{K-Means Clustering}
+\begin{block}{Why K-Means?}
+While hierarchical clustering provided valuable insights through
+dendrogram visualization, it has computational limitations:
+
+\begin{itemize}
+\item
+  Complexity: O(n squared) or worse
+\item
+  Impractical for very large datasets
+\end{itemize}
+
+\textbf{K-means offers a scalable alternative:}
+
+\begin{itemize}
+\item
+  Works well with larger customer bases
+\item
+  Computational complexity: O(n times k times p times iterations)
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{K-Means: The Challenge}
+\textbf{Requirement:} Must specify the number of clusters (k) in
+advance.
+
+\textbf{Solution:} Elbow method provides a data-driven approach.
+
+\textbf{Goal:} Identify the point where adding more clusters provides
+diminishing returns in terms of improved fit.
+\end{frame}
+
+\begin{frame}{Elbow Method: Approach}
+K-means minimizes within-cluster sum of squared distances (inertia):
+
+\[\text{ WCSS } = \sum_{i = 1}^{k}\sum_{x \in C_{i}}\| x - \mu_{i}\|^{2}\]
+
+\textbf{Procedure:}
+
+\begin{itemize}
+\item
+  Run clustering for k = 2 to 10
+\item
+  Calculate inertia for each k
+\item
+  Plot inertia vs. k
+\item
+  Look for the ``elbow'' point
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Elbow Method: Implementation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.cluster }\ImportTok{import}\NormalTok{ KMeans}
+
+\CommentTok{\# Test different k values}
+\NormalTok{inertias }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{silhouette\_scores }\OperatorTok{=}\NormalTok{ []}
+\NormalTok{K\_range }\OperatorTok{=} \BuiltInTok{range}\NormalTok{(}\DecValTok{2}\NormalTok{, }\DecValTok{11}\NormalTok{)}
+
+\ControlFlowTok{for}\NormalTok{ k }\KeywordTok{in}\NormalTok{ K\_range:}
+\NormalTok{    kmeans }\OperatorTok{=}\NormalTok{ KMeans(n\_clusters}\OperatorTok{=}\NormalTok{k, random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{)}
+\NormalTok{    kmeans.fit(X\_standardized)}
+\NormalTok{    inertias.append(kmeans.inertia\_)}
+\NormalTok{    silhouette\_scores.append(}
+\NormalTok{        silhouette\_score(X\_standardized, kmeans.labels\_)}
+\NormalTok{    )}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Elbow Method: Results}
+\textbf{Plot Analysis:}
+
+\begin{itemize}
+\item
+  Elbow curve shows diminishing returns after k=4
+\item
+  Silhouette scores peak at k=4
+\item
+  Both metrics converge on k=4
+\end{itemize}
+
+\textbf{Decision:} Both hierarchical and elbow analyses suggest k=4
+\end{frame}
+
+\begin{frame}[fragile]{K-Means: Final Clustering}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Apply k{-}means with optimal k}
+\NormalTok{optimal\_k }\OperatorTok{=} \DecValTok{4}
+\NormalTok{kmeans\_final }\OperatorTok{=}\NormalTok{ KMeans(}
+\NormalTok{    n\_clusters}\OperatorTok{=}\NormalTok{optimal\_k,}
+\NormalTok{    random\_state}\OperatorTok{=}\DecValTok{42}\NormalTok{,}
+\NormalTok{    n\_init}\OperatorTok{=}\DecValTok{10}
+\NormalTok{)}
+\NormalTok{kmeans\_labels }\OperatorTok{=}\NormalTok{ kmeans\_final.fit\_predict(}
+\NormalTok{    X\_standardized}
+\NormalTok{)}
+
+\CommentTok{\# Silhouette score: 0.458 (same as hierarchical)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{K-Means: Convergence Validation}
+\textbf{Key Finding:} K-means achieves identical silhouette score to
+hierarchical clustering (0.458).
+
+\textbf{Significance:} Convergence between two fundamentally different
+algorithms provides strong evidence that four customer segments
+represent genuine structure in the data.
+
+\textbf{Confidence:} Clusters reflect real behavioral patterns rather
+than algorithmic artifacts.
+
+\textbf{Recommendation:} Use k-means for production deployment due to
+computational efficiency.
+\end{frame}
+
+\begin{frame}{Cluster Interpretation and Profiling}
+\begin{block}{From Statistics to Business Value}
+Successfully identifying clusters is only the first step. The real
+business value comes from understanding what distinguishes each segment
+and translating these differences into actionable marketing strategies.
+
+\textbf{Goal:} Transform abstract cluster labels into concrete customer
+personas.
+\end{block}
+\end{frame}
+
+\begin{frame}[fragile]{Interpretation: Approach}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Add cluster labels to original data}
+\NormalTok{df\_with\_clusters }\OperatorTok{=}\NormalTok{ df.copy()}
+\NormalTok{df\_with\_clusters[}\StringTok{\textquotesingle{}Cluster\_KMeans\textquotesingle{}}\NormalTok{] }\OperatorTok{=}\NormalTok{ kmeans\_labels}
+
+\CommentTok{\# Calculate cluster means (original units)}
+\NormalTok{cluster\_profiles }\OperatorTok{=}\NormalTok{ df\_with\_clusters.groupby(}
+    \StringTok{\textquotesingle{}Cluster\_KMeans\textquotesingle{}}
+\NormalTok{)[df.columns].mean()}
+
+\CommentTok{\# Create heatmap}
+\NormalTok{sns.heatmap(cluster\_profiles.T, annot}\OperatorTok{=}\VariableTok{True}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Why original units?} Makes profiles interpretable to business
+stakeholders.
+\end{frame}
+
+\begin{frame}[fragile]{Cluster Characterization: Method}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Compare each cluster to overall means}
+\NormalTok{overall\_means }\OperatorTok{=}\NormalTok{ df.mean()}
+
+\ControlFlowTok{for}\NormalTok{ cluster\_id }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(optimal\_k):}
+\NormalTok{    cluster\_mean }\OperatorTok{=}\NormalTok{ cluster\_profiles.loc[cluster\_id]}
+
+    \CommentTok{\# Calculate percentage differences}
+\NormalTok{    differences }\OperatorTok{=}\NormalTok{ (}
+\NormalTok{        (cluster\_mean }\OperatorTok{{-}}\NormalTok{ overall\_means) }\OperatorTok{/}
+\NormalTok{        overall\_means }\OperatorTok{*} \DecValTok{100}
+\NormalTok{    )}
+
+    \CommentTok{\# Identify distinctive features (\textgreater{}10\% difference)}
+\NormalTok{    high\_features }\OperatorTok{=}\NormalTok{ differences.nlargest(}\DecValTok{3}\NormalTok{)}
+\NormalTok{    low\_features }\OperatorTok{=}\NormalTok{ differences.nsmallest(}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Cluster 0: Engaged but Selective Shoppers}
+\textbf{Size:} 307 customers (15.3\%)
+
+\textbf{Distinctive High Features:}
+
+\begin{itemize}
+\item
+  avg\_basket\_size: +72.0\% vs average
+\item
+  return\_rate: +56.2\% vs average
+\item
+  email\_clicks: +51.9\% vs average
+\end{itemize}
+
+\textbf{Distinctive Low Features:}
+
+\begin{itemize}
+\item
+  session\_duration: -69.6\% vs average
+\item
+  product\_views: -58.0\% vs average
+\item
+  monthly\_purchases: -42.1\% vs average
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Cluster 1: Low-Value Browsers}
+\textbf{Size:} 707 customers (35.4\%)
+
+\textbf{Distinctive High Features:}
+
+\begin{itemize}
+\item
+  session\_duration: +19.0\% vs average
+\item
+  return\_rate: +15.2\% vs average
+\end{itemize}
+
+\textbf{Distinctive Low Features:}
+
+\begin{itemize}
+\item
+  total\_spend: -83.8\% vs average
+\item
+  email\_clicks: -78.3\% vs average
+\item
+  monthly\_purchases: -76.2\% vs average
+\end{itemize}
+
+\textbf{Characterization:} Spend time browsing but make few purchases.
+\end{frame}
+
+\begin{frame}{Cluster 2: Premium High-Value Customers}
+\textbf{Size:} 432 customers (21.6\%)
+
+\textbf{Distinctive High Features:}
+
+\begin{itemize}
+\item
+  total\_spend: +168.3\% vs average
+\item
+  avg\_basket\_size: +127.5\% vs average
+\item
+  monthly\_purchases: +124.1\% vs average
+\end{itemize}
+
+\textbf{Distinctive Low Features:}
+
+\begin{itemize}
+\item
+  return\_rate: -24.1\% vs average
+\end{itemize}
+
+\textbf{Characterization:} The premium segment with highest spending and
+purchase frequency.
+\end{frame}
+
+\begin{frame}{Cluster 3: Frequent Small-Basket Shoppers}
+\textbf{Size:} 554 customers (27.7\%)
+
+\textbf{Distinctive High Features:}
+
+\begin{itemize}
+\item
+  monthly\_purchases: +23.8\% vs average
+\item
+  product\_views: +12.4\% vs average
+\end{itemize}
+
+\textbf{Distinctive Low Features:}
+
+\begin{itemize}
+\item
+  avg\_basket\_size: -48.8\% vs average
+\item
+  total\_spend: -45.1\% vs average
+\item
+  return\_rate: -31.8\% vs average
+\end{itemize}
+
+\textbf{Characterization:} Regular shoppers with lower average order
+values.
+\end{frame}
+
+\begin{frame}{Cluster Profiling: Outcome}
+\textbf{Four Distinct Segments Identified:}
+
+Each segment has distinctive characteristics differing by more than 10\%
+from overall average on multiple dimensions.
+
+\textbf{Confirmation:} These represent meaningfully different customer
+types requiring differentiated marketing strategies.
+
+\textbf{Next Step:} Develop targeted campaigns for each segment.
+\end{frame}
+
+\begin{frame}{Cluster Validation with Silhouette Analysis}
+\begin{block}{Beyond Average Scores}
+While we have identified interpretable customer segments, we should
+validate the quality of our clustering solution.
+
+\textbf{Questions:}
+
+\begin{itemize}
+\item
+  Are customers well-matched to their assigned clusters?
+\item
+  Are some clusters poorly defined?
+\item
+  Are there misclassifications?
+\end{itemize}
+\end{block}
+\end{frame}
+
+\begin{frame}{Silhouette Analysis: Approach}
+\textbf{Silhouette Coefficient for each customer:}
+
+\[s(i) = \frac{b(i) - a(i)}{\max(a(i),b(i))}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(a(i)\) = average distance to points in same cluster
+\item
+  \(b(i)\) = average distance to points in nearest neighboring cluster
+\end{itemize}
+
+\textbf{Range:} -1 to +1
+
+\begin{itemize}
+\item
+  Near +1: Well-matched to cluster
+\item
+  Near 0: On border between clusters
+\item
+  Negative: Possible misclassification
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Silhouette Plot: Implementation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.metrics }\ImportTok{import}\NormalTok{ silhouette\_samples}
+
+\CommentTok{\# Calculate silhouette values for each customer}
+\NormalTok{silhouette\_vals }\OperatorTok{=}\NormalTok{ silhouette\_samples(}
+\NormalTok{    X\_standardized,}
+\NormalTok{    kmeans\_labels}
+\NormalTok{)}
+
+\CommentTok{\# Create visualization}
+\ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(optimal\_k):}
+\NormalTok{    cluster\_vals }\OperatorTok{=}\NormalTok{ silhouette\_vals[kmeans\_labels }\OperatorTok{==}\NormalTok{ i]}
+\NormalTok{    cluster\_vals.sort()}
+
+\NormalTok{    plt.fill\_betweenx(y\_range, }\DecValTok{0}\NormalTok{, cluster\_vals)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Silhouette Analysis: Interpretation}
+\textbf{Key Observations:}
+
+\begin{itemize}
+\item
+  Width of each section represents cluster size
+\item
+  All clusters extend beyond average score (0.458)
+\item
+  Most customers have positive coefficients
+\item
+  Few customers near zero (boundary cases)
+\item
+  Very few negative coefficients (rare misclassifications)
+\end{itemize}
+
+\textbf{Conclusion:} Generally good cluster quality across all four
+segments. Segmentation is sound.
+\end{frame}
+
+\begin{frame}{Visualization in 2D Space}
+\begin{block}{The Challenge}
+We have worked with seven-dimensional customer data, which is impossible
+to visualize directly.
+
+\textbf{Problem:} Humans can only perceive 2-3 spatial dimensions
+effectively.
+
+\textbf{Solution:} Principal Component Analysis (PCA) projects the 7D
+space onto 2D while preserving as much information as possible.
+\end{block}
+\end{frame}
+
+\begin{frame}{PCA: Approach}
+\textbf{What PCA Does:}
+
+\begin{itemize}
+\item
+  Transforms 7 original variables into uncorrelated components
+\item
+  Orders components by variance explained
+\item
+  PC1 captures maximum variance
+\item
+  PC2 captures maximum remaining variance orthogonal to PC1
+\end{itemize}
+
+\textbf{Result:} 2D visualization retaining most important structure.
+\end{frame}
+
+\begin{frame}[fragile]{PCA Projection: Implementation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.decomposition }\ImportTok{import}\NormalTok{ PCA}
+
+\CommentTok{\# Apply PCA}
+\NormalTok{pca }\OperatorTok{=}\NormalTok{ PCA(n\_components}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{X\_pca }\OperatorTok{=}\NormalTok{ pca.fit\_transform(X\_standardized)}
+
+\CommentTok{\# Variance explained}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"PC1: }\SpecialCharTok{\{}\NormalTok{pca}\SpecialCharTok{.}\NormalTok{explained\_variance\_ratio\_[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{:.3f\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"PC2: }\SpecialCharTok{\{}\NormalTok{pca}\SpecialCharTok{.}\NormalTok{explained\_variance\_ratio\_[}\DecValTok{1}\NormalTok{]}\SpecialCharTok{:.3f\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# Create scatter plot}
+\NormalTok{plt.scatter(X\_pca[:, }\DecValTok{0}\NormalTok{], X\_pca[:, }\DecValTok{1}\NormalTok{],}
+\NormalTok{            c}\OperatorTok{=}\NormalTok{kmeans\_labels, cmap}\OperatorTok{=}\StringTok{\textquotesingle{}tab10\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{PCA Visualization: Outcome}
+\textbf{Results:}
+
+\begin{itemize}
+\item
+  2D projection captures moderate proportion of variance (40-60\%)
+\item
+  Reasonably good cluster separation visible
+\item
+  Some overlap consistent with silhouette analysis
+\item
+  K-means centroids clearly separated
+\item
+  Both methods show similar spatial patterns
+\end{itemize}
+
+\textbf{Interpretation:} While 2D view sacrifices some information, it
+confirms clusters are spatially distinct and well-positioned.
+\end{frame}
+
+\begin{frame}{Business Recommendations}
+\begin{block}{From Analysis to Action}
+Having completed technical analysis and validation, we now translate
+statistical findings into actionable business strategies.
+
+\textbf{Goal:} Create customer personas and design specific marketing
+tactics for each segment aligned with their behaviors and needs.
+\end{block}
+\end{frame}
+
+\begin{frame}{Segment 1: Engaged but Selective Shoppers}
+\textbf{Profile:} High basket sizes, high returns, engaged with emails
+but low browsing.
+
+\textbf{Marketing Strategy:}
+
+\begin{itemize}
+\item
+  Launch VIP loyalty program with exclusive perks
+\item
+  Offer early access to new products
+\item
+  Provide free expedited shipping
+\item
+  Personalized product recommendations
+\item
+  Improve product information to reduce returns
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Segment 2: Low-Value Browsers}
+\textbf{Profile:} High browsing time but low purchases and engagement.
+
+\textbf{Marketing Strategy:}
+
+\begin{itemize}
+\item
+  Implement abandoned cart recovery campaigns
+\item
+  Use retargeting ads to re-engage visitors
+\item
+  Offer limited-time discounts to incentivize first purchase
+\item
+  Improve product information and customer reviews
+\item
+  Create urgency with flash sales
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Segment 3: Premium High-Value Customers}
+\textbf{Profile:} Highest spending, purchase frequency, and basket
+sizes.
+
+\textbf{Marketing Strategy:}
+
+\begin{itemize}
+\item
+  Exclusive VIP treatment and recognition
+\item
+  Premium customer service channel
+\item
+  Early access to new collections
+\item
+  Referral program incentives
+\item
+  Maintain satisfaction to prevent churn
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Segment 4: Frequent Small-Basket Shoppers}
+\textbf{Profile:} Regular purchases with lower average order values.
+
+\textbf{Marketing Strategy:}
+
+\begin{itemize}
+\item
+  Send targeted discount codes and bundle offers
+\item
+  Promote free shipping thresholds to increase basket size
+\item
+  Highlight clearance and sale items
+\item
+  Create value packs and multi-buy promotions
+\item
+  Build purchase frequency through regular engagement
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Key Findings: Summary}
+\textbf{Methodology:}
+
+\begin{itemize}
+\item
+  Analyzed 2,000 customers across 7 behavioral variables
+\item
+  Standardized data to ensure equal feature weighting
+\item
+  Applied both hierarchical (Ward's) and k-means clustering
+\item
+  Used elbow method and silhouette analysis
+\end{itemize}
+
+\textbf{Result:} Both methods converged on 4 distinct customer segments
+with silhouette score of 0.458.
+\end{frame}
+
+\begin{frame}{Key Findings: Segments}
+\textbf{Four Distinct Customer Segments:}
+
+\begin{enumerate}
+\item
+  \textbf{Engaged Selective (15\%)}: High basket, high return
+\item
+  \textbf{Low-Value Browsers (35\%)}: Browse but don't buy
+\item
+  \textbf{Premium High-Value (22\%)}: Highest spenders
+\item
+  \textbf{Frequent Small-Basket (28\%)}: Regular small orders
+\end{enumerate}
+
+Each requires tailored marketing strategies.
+\end{frame}
+
+\begin{frame}{Methodological Learnings}
+\textbf{Hierarchical Clustering:}
+
+\begin{itemize}
+\item
+  Provides hierarchy view
+\item
+  No need to predefine k
+\item
+  Best for smaller datasets
+\end{itemize}
+
+\textbf{K-Means:}
+
+\begin{itemize}
+\item
+  More scalable and faster
+\item
+  Requires specifying k
+\item
+  Better for production deployment
+\end{itemize}
+
+\textbf{Both methods converged:} Strong evidence of genuine structure.
+\end{frame}
+
+\begin{frame}{Business Value}
+\textbf{Enables:}
+
+\begin{itemize}
+\item
+  Targeted marketing campaigns by segment
+\item
+  Optimized resource allocation to high-value customers
+\item
+  Opportunities for customer retention and growth
+\item
+  Data-driven customer understanding
+\end{itemize}
+
+\textbf{ROI:} Improved marketing efficiency and customer lifetime value.
+\end{frame}
+
+\begin{frame}{Next Steps}
+\textbf{Implementation:}
+
+\begin{enumerate}
+\item
+  Validate cluster assignments with domain experts
+\item
+  Implement targeted campaigns for each segment
+\item
+  Monitor segment-specific KPIs (conversion, AOV, retention)
+\item
+  Re-run clustering periodically to detect behavioral shifts
+\item
+  Consider additional features (geographic, demographic) for refinement
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Validation in Practice}
+\textbf{Important Note:} In real-world unsupervised learning, true
+labels do not exist.
+
+\textbf{Cluster validation relies on:}
+
+\begin{itemize}
+\item
+  Domain expertise
+\item
+  Business metrics
+\item
+  Silhouette analysis
+\item
+  Stability across different methods
+\end{itemize}
+
+This synthetic dataset included true labels only for educational
+validation purposes.
+\end{frame}
+
+\begin{frame}[fragile]{Python Code Resources}
+\textbf{Complete implementation available in:}
+
+\begin{itemize}
+\item
+  \texttt{customer\_clustering\_analysis.ipynb}
+\item
+  \texttt{fetch\_customer\_data.py} (data generation)
+\item
+  \texttt{CUSTOMER\_DATA\_DICTIONARY.md} (variable descriptions)
+\end{itemize}
+
+\textbf{Key Libraries:}
+
+\begin{itemize}
+\item
+  scikit-learn (KMeans, StandardScaler)
+\item
+  scipy (hierarchical clustering)
+\item
+  pandas, numpy (data manipulation)
+\item
+  matplotlib, seaborn (visualization)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Questions?}
+\textbf{ Thank you for your attention! }
+
+Juliho Castillo Colmenares\\
+julihocc@tec
+
+Office: Tec de Monterrey CCM Office 1540\\
+Office Hours: Monday-Friday, 9:00 AM - 5:00 PM
+\end{frame}
+
+\begin{frame}{Next Steps: This Week}
+\textbf{For This Week:}
+
+\begin{itemize}
+\item
+  Review lecture notes thoroughly
+\item
+  Practice with provided examples
+\item
+  Complete practice questions
+\item
+  Prepare for E06 quiz
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Next Steps: Preparation for Evaluation}
+\textbf{Preparation for Evaluation:}
+
+\begin{itemize}
+\item
+  Understand distance measures and when to use each
+\item
+  Know linkage methods and their properties
+\item
+  Practice interpreting dendrograms
+\item
+  Understand k-means algorithm and convergence
+\item
+  Be able to explain validation methods
+\end{itemize}
+\end{frame}
+
+\end{document}
+
+
+
+

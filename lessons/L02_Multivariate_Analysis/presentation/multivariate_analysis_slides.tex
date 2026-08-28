@@ -1,0 +1,274 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[aspectratio=169,ignorenonframetext]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Multivariate Analysis},
+  pdfauthor={Juliho Castillo Colmenares},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\texorpdfstring{Multivariate Analysis}{Multivariate Analysis}}
+\author{\texorpdfstring{Juliho Castillo
+Colmenares}{Juliho Castillo Colmenares}}
+\subtitle{Random Vectors, Joint Distributions, and Matrix Diagnostics}
+\institute{Tec de Monterrey}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's Agenda}
+\begin{enumerate}
+\item
+  Multivariate Random Vectors \& Probability Densities
+\item
+  Sample Statistics: Mean Vectors (\(\overline{\mathbf{x}}\)) \&
+  Covariances (\(\mathbf{S},\mathbf{R}\))
+\item
+  The Multivariate Normal Distribution (MVN)
+\item
+  Geometry of Contour Ellipsoids \& Mahalanobis Distance
+\item
+  Missing Data Diagnostics \& Modern Imputation (KNN, MICE)
+\item
+  Multivariate Outlier Detection: Classical vs. Robust MCD
+\item
+  Fisher \(z\)-Transformation \& Correlation Intervals
+\item
+  Case Study: Atmospheric Monitoring Network Analysis
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Random Vectors \& Population Parameters}
+Let
+\(\mathbf{X} = \left\lbrack X_{1},X_{2},\ldots,X_{p} \right\rbrack^{T} \in \mathbb{R}^{p}\)
+be a \(p\)-dimensional random vector.
+
+\textbf{Population Mean Vector:}
+\[\mathbf{\mu} = \mathbb{E}\left\lbrack \mathbf{X} \right\rbrack = \begin{bmatrix}
+\mathbb{E}\left\lbrack X_{1} \right\rbrack & \mathbb{E}\left\lbrack X_{2} \right\rbrack & \ldots & \mathbb{E}\left\lbrack X_{p} \right\rbrack
+\end{bmatrix}^{T}\]
+
+\textbf{Population Covariance Matrix:}
+\[\mathbf{\Sigma} = \operatorname{Cov}(\mathbf{X}) = \mathbb{E}\left\lbrack \left( \mathbf{X} - \mathbf{\mu} \right)\left( \mathbf{X} - \mathbf{\mu} \right)^{T} \right\rbrack \in \mathbb{R}^{p \times p}\]
+
+\textbf{Property:} \(\mathbf{\Sigma}\) is always symmetric and positive
+semi-definite (\(\mathbf{\Sigma} \succeq 0\)).
+\end{frame}
+
+\begin{frame}{Sample Statistics \& Geometric Interpretation}
+Given data matrix \(\mathbf{X} \in \mathbb{R}^{n \times p}\):
+
+\textbf{Sample Mean \& Covariance Matrix:}
+\[\overline{\mathbf{x}} = \frac{1}{n}\mathbf{X}^{T}\mathbf{1}_{n},\quad\quad\mathbf{S} = \frac{1}{n - 1}\sum_{i = 1}^{n}\left( \mathbf{x}_{i} - \overline{\mathbf{x}} \right)\left( \mathbf{x}_{i} - \overline{\mathbf{x}} \right)^{T}\]
+
+\textbf{Sample Correlation Matrix:}
+\[\mathbf{R} = \mathbf{D}_{\mathbf{S}}^{- \frac{1}{2}}\mathbf{S}\mathbf{D}_{\mathbf{S}}^{- \frac{1}{2}},\quad r_{jk} = \frac{s_{jk}}{s_{j}s_{k}} = \cos(\theta_{jk})\]
+
+The correlation \(r_{jk}\) is the cosine of the angle between
+mean-centered observation vectors in sample space \(\mathbb{R}^{n}\).
+\end{frame}
+
+\begin{frame}{The Multivariate Normal Distribution (MVN)}
+\(\mathbf{X} \sim \mathcal{N}_{p\left( \mathbf{\mu},\mathbf{\Sigma} \right)}\)
+has the joint probability density function:
+
+\[f\left( \mathbf{x} \right) = \frac{1}{(2\pi)^{\frac{p}{2}}|\mathbf{\Sigma}|^{\frac{1}{2}}}\exp( - \frac{1}{2}\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right))\]
+
+\textbf{Fundamental Properties:}
+
+\begin{itemize}
+\item
+  Any linear combination \(\mathbf{a}^{T}\mathbf{X}\) is univariate
+  normal
+  \(\mathcal{N}(\mathbf{a}^{T}\mathbf{\mu},\mathbf{a}^{T}\mathbf{\Sigma}\mathbf{a})\).
+\item
+  All marginals and conditionals are multivariate normal.
+\item
+  \(\operatorname{Cov}(X_{j},X_{k}) = 0 \Longleftrightarrow X_{j}\text{  and  }X_{k}\text{  are statistically independent}\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Geometry: Contour Ellipsoids \& Mahalanobis Distance}
+\textbf{Squared Mahalanobis Distance:}
+\[D^{2}\left( \mathbf{x},\mathbf{\mu} \right) = \left( \mathbf{x} - \mathbf{\mu} \right)^{T}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right)\]
+
+\textbf{Contour Surfaces:} Surfaces of constant probability density form
+hyper-ellipsoids:
+\[\{\mathbf{x}:\left( \mathbf{x} - \mathbf{\mu} \right)^{T}\mathbf{\Sigma}^{- 1}\left( \mathbf{x} - \mathbf{\mu} \right) = c^{2}\}\]
+
+\textbf{Chi-Square Distribution Property:}
+\[D^{2}\left( \mathbf{X},\mathbf{\mu} \right) \sim \chi_{p}^{2}\]
+Enables empirical testing of multivariate normality via
+\textbf{Chi-Square Q-Q Plots}.
+\end{frame}
+
+\begin{frame}{Missing Values \& Outlier Detection}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{1. Missing Data Imputation:}
+
+\begin{itemize}
+\item
+  \textbf{MCAR / MAR:} Probability of missingness depends on observed
+  features.
+\item
+  \textbf{KNN Imputation:} Fills missing coordinates using the
+  \(K\)-nearest complete neighbors.
+\item
+  \textbf{MICE:} Iterative chained equation modeling.
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{2. Multivariate Outliers:}
+
+\begin{itemize}
+\item
+  Data points may look normal marginally, but violate covariance
+  \(\mathbf{\Sigma}\).
+\item
+  \textbf{Classical Cutoff:} \(D_{i}^{2} > \chi_{p,1 - \alpha}^{2}\).
+\item
+  \textbf{Robust MCD:} Computes minimum covariance determinant to
+  prevent outlier masking.
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Fisher \(z\)-Transformation for Correlations}
+\textbf{Problem:} Sampling distribution of \(r\) is skewed when
+\(|\rho| > 0\).
+
+\textbf{Fisher's Transformation:}
+\[z = \operatorname{arctanh}(r) = \frac{1}{2}\ln(\frac{1 + r}{1 - r}) \sim^{\text{approx}}\mathcal{N}(\operatorname{arctanh}(\rho),\frac{1}{n - 3})\]
+
+\textbf{95\% Confidence Interval for \(\rho\):}
+\[\left\lbrack \rho_{L},\rho_{U} \right\rbrack = \left\lbrack \tanh(z - 1.96\frac{1}{\sqrt{n - 3}}),,\tanh(z + 1.96\frac{1}{\sqrt{n - 3}}) \right\rbrack\]
+\end{frame}
+
+\begin{frame}{Summary \& Key Takeaways}
+\begin{itemize}
+\item
+  Multivariate analysis accounts for \textbf{joint dependence
+  structures} that univariate methods miss.
+\item
+  The \textbf{Multivariate Normal (MVN)} distribution provides the
+  mathematical foundation for linear multivariate techniques.
+\item
+  Mahalanobis distance measures generalized distance accounting for
+  variance and correlation.
+\item
+  Modern data cleaning requires \textbf{multivariate imputation (KNN)}
+  and \textbf{robust outlier detection (MCD)}.
+\item
+  Andrews curves and correlation heatmaps enable exploratory
+  visualization of high-dimensional observations.
+\end{itemize}
+
+{ \textbf{Next Chapter: Chapter 3 --- Principal Component Analysis
+(PCA)} }
+\end{frame}
+
+\end{document}
+
+
+
+

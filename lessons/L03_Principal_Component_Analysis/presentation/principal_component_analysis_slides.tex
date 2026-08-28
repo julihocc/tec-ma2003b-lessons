@@ -1,0 +1,323 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[aspectratio=169,ignorenonframetext]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Principal Component Analysis (PCA)},
+  pdfauthor={Juliho Castillo Colmenares},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\texorpdfstring{Principal Component Analysis
+(PCA)}{Principal Component Analysis (PCA)}}
+\author{\texorpdfstring{Juliho Castillo
+Colmenares}{Juliho Castillo Colmenares}}
+\subtitle{Dimensionality Reduction, Spectral Decomposition, and Factor Modeling}
+\institute{Tec de Monterrey}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's Agenda}
+\begin{enumerate}
+\item
+  Motivations \& Use Cases for Principal Component Analysis
+\item
+  Geometric Foundations: Rotation \& Variance Maximization
+\item
+  Spectral Decomposition of Covariance (\(\mathbf{S}\)) and Correlation
+  (\(\mathbf{R}\))
+\item
+  Mathematical Derivation via Lagrange Multipliers
+\item
+  Component Retention Criteria (Kaiser, Scree, Parallel Analysis)
+\item
+  Loadings, Scores, and Communalities
+\item
+  High-Dimensional 2D/3D Biplots
+\item
+  Practical Case Study: Global Financial Asset Allocation
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{What is Principal Component Analysis?}
+\textbf{Core Objective:} Transform \(p\) correlated variables
+\(X_{1},\ldots,X_{p}\) into \(k \ll p\) uncorrelated variables
+\(Y_{1},\ldots,Y_{k}\) (\textbf{Principal Components}) that capture the
+maximum possible variance.
+
+\textbf{Key Applications:}
+
+\begin{itemize}
+\item
+  \textbf{Data Compression:} Compress feature space with minimal
+  information loss.
+\item
+  \textbf{Multicollinearity Cure:} Replace correlated regressors with
+  orthogonal components.
+\item
+  \textbf{Exploratory Visualization:} Project high dimensions onto 2D/3D
+  score planes.
+\item
+  \textbf{Risk Modeling:} Identify macroeconomic drivers across assets.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Geometry: Finding Axes of Maximum Variance}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5455}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4545}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{1. First Principal Component (\(Y_{1}\)):}
+\(Y_{1} = \mathbf{a}_{1}^{T}\mathbf{X} = a_{11}X_{1} + \ldots + a_{1p}X_{p}\)
+Direction of maximum data dispersion subject to
+\(|\mathbf{a}_{1}| = 1\).
+
+\textbf{2. Second Principal Component (\(Y_{2}\)):}
+\(Y_{2} = \mathbf{a}_{2}^{T}\mathbf{X}\quad\text{ with  }\mathbf{a}_{2}^{T}\mathbf{a}_{1} = 0\)
+Direction of maximum remaining variance, orthogonal to \(Y_{1}\). &
+\textbf{Principal Axes of Ellipsoid:} Eigenvectors specify the
+orientation of the constant-density ellipsoid axes. Half-lengths are
+proportional to \(\pm c\sqrt{\lambda_{j}}\). \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Mathematical Derivation (Lagrange Multipliers)}
+Maximize
+\(\operatorname{Var}(Y_{1}) = \mathbf{a}_{1}^{T}\mathbf{\Sigma}\mathbf{a}_{1}\)
+subject to \(\mathbf{a}_{1}^{T}\mathbf{a}_{1} = 1\).
+
+\textbf{Lagrangian Objective:}
+\[\mathcal{L}(\mathbf{a}_{1},\lambda_{1}) = \mathbf{a}_{1}^{T}\mathbf{\Sigma}\mathbf{a}_{1} - \lambda_{1}\left( \mathbf{a}_{1}^{T}\mathbf{a}_{1} - 1 \right)\]
+
+\textbf{First-Order Condition:}
+\[\frac{\partial\mathcal{L}}{\partial\mathbf{a}_{1}} = 2\mathbf{\Sigma}\mathbf{a}_{1} - 2\lambda_{1}\mathbf{a}_{1} = \mathbf{0} \Longrightarrow \mathbf{\Sigma}\mathbf{a}_{1} = \lambda_{1}\mathbf{a}_{1}\]
+
+\textbf{Result:} \(\lambda_{1}\) is the largest eigenvalue of
+\(\mathbf{\Sigma}\), and \(\mathbf{a}_{1}\) is the corresponding
+normalized eigenvector.
+\end{frame}
+
+\begin{frame}{Spectral Decomposition \& Variance Explained}
+\textbf{Spectral Decomposition:}
+\[\mathbf{S} = \mathbf{V}\mathbf{\Lambda}\mathbf{V}^{T} = \sum_{j = 1}^{p}\lambda_{j}\mathbf{v}_{j}\mathbf{v}_{j}^{T}\]
+
+where
+\(\mathbf{V} = \left\lbrack \mathbf{v}_{1},\ldots,\mathbf{v}_{p} \right\rbrack\)
+is the eigenvector matrix and
+\(\mathbf{\Lambda} = \operatorname{diag}(\lambda_{1},\ldots,\lambda_{p})\).
+
+\textbf{Total Variance Preservation:}
+\[\text{ Total Sample Variance } = \operatorname{tr}(\mathbf{S}) = \sum_{j = 1}^{p}s_{jj} = \sum_{j = 1}^{p}\lambda_{j}\]
+
+\textbf{Proportion of Explained Variance:}
+\[\text{ Prop}_{j} = \frac{\lambda_{j}}{\sum_{k = 1}^{p}\lambda_{k}}\]
+\end{frame}
+
+\begin{frame}{How Many Components to Retain?}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{1. Kaiser-Guttman Rule:}
+
+\begin{itemize}
+\item
+  Retain \(\lambda_{j} > 1.0\) (for correlation \(\mathbf{R}\)).
+\item
+  Retains components explaining more variance than a single standardized
+  variable.
+\end{itemize}
+
+\textbf{2. Cumulative Variance Threshold:}
+
+\begin{itemize}
+\item
+  Retain components until cumulative variance reaches \(70\% - 85\%\).
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{3. Cattell Scree Plot:}
+
+\begin{itemize}
+\item
+  Visually identify the ``elbow'' where eigenvalue decrease flattens
+  out.
+\end{itemize}
+
+\textbf{4. Horn's Parallel Analysis:}
+
+\begin{itemize}
+\item
+  Retain components whose eigenvalues exceed the 95th percentile of
+  simulated random noise.
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Loadings, Scores, and the PCA Biplot}
+\textbf{Component Loadings (Correlations with Variables):}
+\[L_{jk} = \operatorname{Corr}(X_{k},Y_{j}) = a_{jk}\sqrt{\lambda_{j}}\quad\left( \text{for standardized data} \right)\]
+
+\textbf{The Gabriel Biplot (1971):} Simultaneously displays:
+
+\begin{itemize}
+\item
+  \textbf{Observation Points:} \(Y_{i1},Y_{i2}\) mapped in component
+  score space.
+\item
+  \textbf{Variable Vectors:} Directed arrows showing loading magnitude
+  and pairwise cosine correlation.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Case Study: Multi-Asset Portfolio Decomposition}
+\textbf{Setting:} 10 global asset classes and industry sector returns
+(600 trading sessions).
+
+\textbf{3 Retained Macroeconomic Factors (\(76.8\%\) Variance):}
+
+\begin{enumerate}
+\item
+  \textbf{PC1 (Market Equity Beta - \(45.2\%\)):} Broad stock market
+  risk (high loadings across US, Global, Tech).
+\item
+  \textbf{PC2 (Duration / Interest Rate - \(19.4\%\)):} Positive for
+  Financials; negative for Treasuries \& REITs.
+\item
+  \textbf{PC3 (Commodity Inflation - \(12.2\%\)):} Driven by Gold \&
+  Energy sector returns.
+\end{enumerate}
+
+\textbf{Takeaway:} Compress 10 risk dimensions into 3 uncorrelated macro
+factors for hedging.
+\end{frame}
+
+\begin{frame}{Summary \& Key Takeaways}
+\begin{itemize}
+\item
+  PCA is the cornerstone of unsupervised multivariate feature
+  extraction.
+\item
+  Formulated via the \textbf{spectral decomposition} of \(\mathbf{S}\)
+  or \(\mathbf{R}\).
+\item
+  Always standardize data (\(z\)-scores) when variables have different
+  units or variances.
+\item
+  Validate component retention using multiple criteria (Kaiser, Scree,
+  Parallel Analysis).
+\item
+  Use \textbf{Biplots} for holistic interpretation of observations and
+  features.
+\end{itemize}
+
+{ \textbf{Next Chapter: Chapter 4 --- Factor Analysis (Latent Variable
+Models)} }
+\end{frame}
+
+\end{document}
+
+
+
+

@@ -1,0 +1,602 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[aspectratio=169,ignorenonframetext]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usetheme{Madrid}
+\definecolor{TecBlue}{RGB}{0,51,102}
+\setbeamercolor{structure}{fg=TecBlue}
+\setbeamercolor{frametitle}{fg=TecBlue}
+\setbeamercolor{title}{fg=white}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Factor Analysis \& PCA},
+  pdfauthor={Juliho Castillo Colmenares},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\texorpdfstring{Factor Analysis \& PCA}{Factor Analysis \& PCA}}
+\author{\texorpdfstring{Juliho Castillo
+Colmenares}{Juliho Castillo Colmenares}}
+\subtitle{Latent Variable Modeling and Dimensionality Reduction}
+\institute{Tec de Monterrey}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's Agenda}
+\begin{enumerate}
+\item
+  Introduction to Dimensionality Reduction
+\item
+  Principal Component Analysis (PCA) Review
+\item
+  The Common Factor Model (FA)
+\item
+  Factor Extraction \& Communalities
+\item
+  Factor Rotation (Orthogonal vs. Oblique)
+\item
+  PCA vs. Factor Analysis: Methodological Comparison
+\item
+  Suitability Testing (KMO \& Bartlett's)
+\item
+  Practical Python Implementation \& Educational Case Study
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Motivation: The Curse of Dimensionality}
+\textbf{Why reduce dimensions in multivariate data?}
+
+\begin{itemize}
+\item
+  \textbf{High Collinearity:} Redundant predictors destabilize
+  regression and inference.
+\item
+  \textbf{Interpretability:} Condense dozens of observed indicators into
+  underlying constructs.
+\item
+  \textbf{Visualization:} Project \(p\)-dimensional data onto 2D or 3D
+  coordinate planes.
+\item
+  \textbf{Noise Reduction:} Separate shared systematic signal from
+  item-specific measurement noise.
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{Principal Component Analysis (PCA)}
+
+\begin{itemize}
+\item
+  Data-driven / Variance maximization
+\item
+  Linear combinations of all variance
+\item
+  Orthogonal components by design
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{Exploratory Factor Analysis (EFA)}
+
+\begin{itemize}
+\item
+  Theory-driven / Latent construct modeling
+\item
+  Partitions \textbf{common} vs. \textbf{unique} variance
+\item
+  Rotatable for domain interpretability
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Principal Component Analysis (PCA)}
+\textbf{Objective:} Transform \(p\) correlated variables
+\(X_{1},\ldots,X_{p}\) into uncorrelated components
+\(Y_{1},\ldots,Y_{p}\) ordered by variance.
+
+\textbf{Mathematical Foundation:} Given covariance matrix \(\mathbf{S}\)
+or correlation matrix \(\mathbf{R}\):
+\[\mathbf{S} = \mathbf{V}\mathbf{\Lambda}\mathbf{V}^{T}\]
+
+where
+\(\mathbf{\Lambda} = \operatorname{diag}(\lambda_{1},\lambda_{2},\ldots,\lambda_{p})\)
+with
+\(\lambda_{1} \geq \lambda_{2} \geq \ldots \geq \lambda_{p} \geq 0\),
+and
+\(\mathbf{V} = \left\lbrack \mathbf{v}_{1},\ldots,\mathbf{v}_{p} \right\rbrack\)
+are orthonormal eigenvectors.
+
+\textbf{Principal Components:} \[\begin{array}{r}
+Y_{i} = \mathbf{v}_{i}^{T}\left( \mathbf{X} - \overline{\mathbf{x}} \right),\quad\operatorname{Var}(Y_{i}) = \lambda_{i},\quad\operatorname{Cov}(Y_{i},Y_{j}) = 0 \\
+(i \neq j)
+\end{array}\]
+\end{frame}
+
+\begin{frame}{Component Retention Criteria}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{1. Kaiser-Guttman Criterion:}
+
+\begin{itemize}
+\item
+  Retain components with eigenvalues \(\lambda_{i} > 1\) (for
+  standardized \(\mathbf{R}\)).
+\item
+  Explains more variance than a single original variable.
+\end{itemize}
+
+\textbf{2. Cumulative Variance Threshold:}
+
+\begin{itemize}
+\item
+  Retain enough components to explain \(70\% - 85\%\) of total variance:
+\end{itemize}
+
+\[\frac{\sum_{i = 1}^{k}\lambda_{i}}{\sum_{j = 1}^{p}\lambda_{j}} \geq \text{ threshold }\]
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{3. Scree Plot (Cattell):}
+
+\begin{itemize}
+\item
+  Plot \(\lambda_{i}\) vs. component index \(i\).
+\item
+  Identify the ``elbow'' where the curve levels off.
+\end{itemize}
+
+\textbf{4. Parallel Analysis:}
+
+\begin{itemize}
+\item
+  Compare empirical eigenvalues against eigenvalues simulated from
+  random data of identical dimensions.
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{The Common Factor Model}
+\textbf{Hypothesis:} Observed variables \(X_{1},\ldots,X_{p}\) are
+generated by \(k < p\) unobserved \textbf{latent factors}
+\(F_{1},\ldots,F_{k}\) plus unique errors.
+
+\textbf{Vector Formulation:}
+\[\mathbf{X} - \mathbf{\mu} = \mathbf{\Lambda}\mathbf{F} + \mathbf{\epsilon}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(\mathbf{X} = \left\lbrack X_{1},\ldots,X_{p} \right\rbrack^{T}\):
+  Observed variables vector.
+\item
+  \(\mathbf{\Lambda} \in \mathbb{R}^{p \times k}\): Factor loadings
+  matrix
+  (\(\lambda_{ji} = \text{ loading of  }X_{j}\text{  on  }F_{i}\)).
+\item
+  \(\mathbf{F} = \left\lbrack F_{1},\ldots,F_{k} \right\rbrack^{T}\):
+  Latent common factor scores
+  (\(\mathbb{E}\left\lbrack \mathbf{F} \right\rbrack = \mathbf{0},\operatorname{Cov}(\mathbf{F}) = \mathbf{I}_{k}\)).
+\item
+  \(\mathbf{\epsilon} = \left\lbrack \epsilon_{1},\ldots,\epsilon_{p} \right\rbrack^{T}\):
+  Specific / unique error vector
+  (\(\operatorname{Cov}(\mathbf{\epsilon}) = \mathbf{\Psi} = \operatorname{diag}(\psi_{1}^{2},\ldots,\psi_{p}^{2})\)).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variance Partitioning: Communality \& Uniqueness}
+For standardized variables, total variance of \(X_{j}\) equals 1:
+\[\operatorname{Var}(X_{j}) = \underset{h_{j}^{2}\text{  (Communality)}}{\underbrace{\sum_{i = 1}^{k}\lambda_{ji}^{2}}} + \underset{\text{ Uniqueness}}{\underbrace{\psi_{j}^{2}}} = 1\]
+
+\textbf{Key Metrics:}
+
+\begin{itemize}
+\item
+  \textbf{Communality (\(h_{j}^{2}\)):} Proportion of \(X_{j}\)`s
+  variance explained by the shared \(k\) common factors
+  (\(h_{j}^{2} \in \lbrack 0,1\rbrack\)).
+\item
+  \textbf{Uniqueness (\(\psi_{j}^{2} = 1 - h_{j}^{2}\)):} Variance
+  specific to variable \(X_{j}\) (specific factor + measurement error).
+\item
+  \textbf{Reproduced Correlation Matrix:}
+\end{itemize}
+
+\[\hat{\mathbf{R}} = \mathbf{\Lambda}\mathbf{\Lambda}^{T} + \mathbf{\Psi}\]
+\end{frame}
+
+\begin{frame}{Factor Extraction Methods}
+\textbf{1. Principal Axis Factoring (PAF):}
+
+\begin{itemize}
+\item
+  Iteratively estimates communalities along the diagonal of
+  \(\mathbf{R} - \hat{\mathbf{\Psi}}\).
+\item
+  Non-parametric; does not require multivariate normality.
+\end{itemize}
+
+\textbf{2. Maximum Likelihood (ML) Extraction:}
+
+\begin{itemize}
+\item
+  Assumes multivariate normal data:
+  \(\mathbf{X} \sim \mathcal{N}_{p\left( \mathbf{\mu},\mathbf{\Sigma} \right)}\).
+\item
+  Maximizes the log-likelihood of observing sample covariance
+  \(\mathbf{S}\).
+\item
+  Provides statistical hypothesis tests (\(\chi^{2}\) goodness-of-fit)
+  for the number of factors \(k\).
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Factor Rotation: Achieving Simple Structure}
+\textbf{The Rotation Problem:} Initial factor extraction is
+mathematically indeterminate up to an orthogonal matrix transformation
+\(\mathbf{T}\)
+(\(\mathbf{\Lambda}^{\ast} = \mathbf{\Lambda}\mathbf{T}\)).
+
+\textbf{Thurstone's Simple Structure:} Each variable should have large
+loadings on \textbf{only one} factor and near-zero loadings on others.
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2667}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2667}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Method}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Type}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Factor Correlation}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Best For}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+Varimax & Orthogonal & \(\operatorname{Cov}(F_{i},F_{j}) = 0\) &
+Distinct, independent concepts \\
+Quartimax & Orthogonal & \(\operatorname{Cov}(F_{i},F_{j}) = 0\) &
+Simplifying rows (variables) \\
+Promax & Oblique & \(\operatorname{Cov}(F_{i},F_{j}) \neq 0\) &
+Realistic correlated constructs \\
+Direct Oblimin & Oblique & \(\operatorname{Cov}(F_{i},F_{j}) \neq 0\) &
+Tunable correlation (\(\delta\)) \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Methodological Comparison: PCA vs. Factor Analysis}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2728}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3637}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3637}}@{}}
+\toprule\noalign{}
+\begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Dimension}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Principal Component Analysis (PCA)}
+\end{minipage} & \begin{minipage}[b]{\linewidth}\raggedright
+\textbf{Factor Analysis (FA)}
+\end{minipage} \\
+\midrule\noalign{}
+\endhead
+Objective & Maximize total variance explained & Model latent causal
+constructs \\
+Variance Analyzed & Total variance (\(1.0\) on diagonal) & Common
+variance (\(h_{j}^{2}\) on diagonal) \\
+Error Term & No explicit error modeling & Explicit uniqueness
+\(\mathbf{\epsilon} \sim \left( 0,\mathbf{\Psi} \right)\) \\
+Rotation & Uncommon (alters variance maximization) & Standard
+(Varimax/Promax) \\
+Assumptions & Minimal distribution assumptions & Multivariate normality
+for ML \\
+Best Used When & Data compression, multicollinearity fix & Construct
+validation, survey scales \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Pre-Analysis Suitability Checks}
+Before extracting factors, evaluate correlation matrix factorability:
+
+\textbf{1. Kaiser-Meyer-Olkin (KMO) Measure of Sampling Adequacy:}
+
+\begin{itemize}
+\item
+  Quantifies proportion of variance among variables that might be
+  common.
+\item
+  Scale: \(> 0.9\) (Marvelous), \(> 0.8\) (Meritorious), \(> 0.7\)
+  (Middling), \(< 0.5\) (Unacceptable).
+\end{itemize}
+
+\textbf{2. Bartlett's Test of Sphericity:}
+
+\begin{itemize}
+\item
+  \(H_{0}:\mathbf{R} = \mathbf{I}_{p}\) (Variables are completely
+  uncorrelated).
+\item
+  \(H_{1}:\mathbf{R} \neq \mathbf{I}_{p}\).
+\item
+  Requires \(p < 0.05\) to justify factor extraction.
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Python Implementation: End-to-End Workflow}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ factor\_analyzer }\ImportTok{import}\NormalTok{ FactorAnalyzer, calculate\_kmo, calculate\_bartlett\_sphericity}
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler}
+\ImportTok{import}\NormalTok{ pandas }\ImportTok{as}\NormalTok{ pd}
+
+\CommentTok{\# 1. Standardize indicators}
+\NormalTok{X\_scaled }\OperatorTok{=}\NormalTok{ StandardScaler().fit\_transform(df)}
+
+\CommentTok{\# 2. Check suitability}
+\NormalTok{kmo\_all, kmo\_model }\OperatorTok{=}\NormalTok{ calculate\_kmo(X\_scaled)}
+\NormalTok{chi2\_val, p\_val }\OperatorTok{=}\NormalTok{ calculate\_bartlett\_sphericity(X\_scaled)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"KMO: }\SpecialCharTok{\{}\NormalTok{kmo\_model}\SpecialCharTok{:.3f\}}\SpecialStringTok{ | Bartlett p{-}value: }\SpecialCharTok{\{}\NormalTok{p\_val}\SpecialCharTok{:.4e\}}\SpecialStringTok{"}\NormalTok{)}
+
+\CommentTok{\# 3. Fit Factor Analysis with Promax rotation (oblique {-}{-} the safer default}
+\CommentTok{\#    when latent traits could plausibly correlate)}
+\NormalTok{fa }\OperatorTok{=}\NormalTok{ FactorAnalyzer(n\_factors}\OperatorTok{=}\DecValTok{3}\NormalTok{, rotation}\OperatorTok{=}\StringTok{"promax"}\NormalTok{, method}\OperatorTok{=}\StringTok{"principal"}\NormalTok{)}
+\NormalTok{fa.fit(X\_scaled)}
+
+\CommentTok{\# 4. Inspect factor structure, including the factor correlation matrix Phi}
+\NormalTok{loadings }\OperatorTok{=}\NormalTok{ pd.DataFrame(fa.loadings\_, index}\OperatorTok{=}\NormalTok{df.columns, columns}\OperatorTok{=}\NormalTok{[}\StringTok{"F1"}\NormalTok{, }\StringTok{"F2"}\NormalTok{, }\StringTok{"F3"}\NormalTok{])}
+\NormalTok{communalities }\OperatorTok{=}\NormalTok{ pd.Series(fa.get\_communalities(), index}\OperatorTok{=}\NormalTok{df.columns)}
+\NormalTok{phi }\OperatorTok{=}\NormalTok{ pd.DataFrame(fa.phi\_, columns}\OperatorTok{=}\NormalTok{[}\StringTok{"F1"}\NormalTok{, }\StringTok{"F2"}\NormalTok{, }\StringTok{"F3"}\NormalTok{], index}\OperatorTok{=}\NormalTok{[}\StringTok{"F1"}\NormalTok{, }\StringTok{"F2"}\NormalTok{, }\StringTok{"F3"}\NormalTok{])}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Case Study: Educational Assessment (Chapter 4)}
+\textbf{Synthetic data:} 200 simulated students, generated from a known
+three-factor model with correlated factors (0.20-0.30). Results below
+demonstrate recovering that known structure -- not a real
+construct-validation finding.
+
+\textbf{Context:} 200 simulated students evaluated across 9 cognitive
+and social performance measures:
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{Quantitative Ability}
+
+\begin{itemize}
+\item
+  MathScore
+\item
+  AlgebraScore
+\item
+  GeometryScore
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{Verbal Ability}
+
+\begin{itemize}
+\item
+  ReadingComp
+\item
+  Vocabulary
+\item
+  Writing
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{Interpersonal Skills}
+
+\begin{itemize}
+\item
+  Collaboration
+\item
+  Leadership
+\item
+  Communication
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{Results (recovering the known simulated structure):}
+
+\begin{itemize}
+\item
+  KMO = \(0.799\) (Acceptable) and Bartlett's test \(p < 0.001\).
+\item
+  Scree plot \& Kaiser criterion retain 3 factors, matching the
+  simulation.
+\item
+  Promax (primary) rotation yields clean simple structure and recovers
+  factor correlations \(\Phi \approx 0.19 - 0.36\), consistent with the
+  0.20-0.30 correlations used to generate the data. Varimax (comparison)
+  gives similar loadings but forces \(\Phi = \mathbf{I}\),
+  misrepresenting the known structure.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Summary \& Best Practices}
+\begin{itemize}
+\item
+  \textbf{Use PCA} for data compression, image processing, and
+  pre-processing for machine learning pipelines.
+\item
+  \textbf{Use Factor Analysis} when discovering or confirming latent
+  psychological, educational, or financial traits.
+\item
+  Always report KMO (\(> 0.60\)) and Bartlett's test before interpreting
+  factor models.
+\item
+  Choose \textbf{Varimax} for independent factor scores and
+  \textbf{Promax} when latent traits are expected to interact.
+\item
+  Check communalities (\(h^{2} > 0.40\)) to ensure observed variables
+  are adequately represented.
+\end{itemize}
+
+{ \textbf{Next Chapter: Chapter 5 --- Discriminant Analysis (Supervised
+Classification)} }
+\end{frame}
+
+\end{document}
+
+
+
+

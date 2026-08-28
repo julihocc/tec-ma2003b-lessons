@@ -1,0 +1,662 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[
+]{article}
+\usepackage{xcolor}
+\usepackage[a4paper,margin=2cm]{geometry}
+\usepackage{amsmath,amssymb}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+% Correct order of tables after \paragraph or \subparagraph
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd\longtable{\par}{\if@noskipsec\mbox{}\fi\par}{}{}
+\makeatother
+% Allow footnotes in longtable head/foot
+\IfFileExists{footnotehyper.sty}{\usepackage{footnotehyper}}{\usepackage{footnote}}
+\makesavenoteenv{longtable}
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\author{}
+\date{}
+
+\begin{document}
+
+\textbf{Principal Component Analysis vs Factor Analysis}
+
+MA2003B - Application of Multivariate Methods in Data Science
+
+MA2003B Course Team
+
+Tecnológico de Monterrey
+
+13:59:05 2026-08-28
+
+\begin{center}\rule{0.5\linewidth}{0.5pt}\end{center}
+
+\section{Introduction to Principal Component Analysis and Factor
+Analysis}
+
+\subsection{Why Dimensionality Reduction?}
+
+Dimensionality reduction is a fundamental technique in multivariate
+analysis that seeks to:
+
+\begin{itemize}
+\item
+  Handle high-dimensional data effectively
+\item
+  Reduce computational complexity
+\item
+  Remove noise and redundancy
+\item
+  Improve model interpretability
+\item
+  Enable data visualization
+\end{itemize}
+
+\subsection{Two Main Approaches}
+
+\begin{itemize}
+\item
+  \textbf{Principal Component Analysis (PCA)}: Data-driven approach,
+  variance maximization
+\item
+  \textbf{Factor Analysis (FA)}: Model-based approach, identification of
+  latent constructs
+\end{itemize}
+
+\section{Principal Component Analysis (PCA)}
+
+\subsection{What is PCA?}
+
+PCA is a dimensionality reduction technique that transforms correlated
+variables into uncorrelated principal components, maximizing the
+variance along each new axis and ordering the components by explained
+variance.
+
+\subsection{Mathematical Foundation}
+
+Given a data matrix \(\mathbf{X}\) with \(n\) observations and \(p\)
+variables:
+
+\begin{enumerate}
+\item
+  Center the data:
+  \(\mathbf{X}_{\text{centered }} = \mathbf{X} - \overline{\mathbf{X}}\)
+\item
+  Calculate the covariance matrix:
+  \(\mathbf{S} = \left( \frac{1}{n - 1} \right)\mathbf{X}_{\text{centered}}^{T}\mathbf{X}_{\text{centered}}\)
+\item
+  Find eigenvalues \(\lambda_{i}\) and eigenvectors \(\mathbf{v}_{i}\)
+  of \(\mathbf{S}\)
+\item
+  Principal components:
+  \(\mathbf{\text{PC}}_{i} = \mathbf{X}_{\text{centered }}\mathbf{v}_{i}\)
+\end{enumerate}
+
+\subsection{PCA Example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ sklearn.decomposition }\ImportTok{import}\NormalTok{ PCA}
+
+\CommentTok{\# Simple 3x2 data matrix}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ np.array([[}\DecValTok{5}\NormalTok{, }\DecValTok{3}\NormalTok{],}
+\NormalTok{              [}\DecValTok{3}\NormalTok{, }\DecValTok{1}\NormalTok{],}
+\NormalTok{              [}\DecValTok{1}\NormalTok{, }\DecValTok{3}\NormalTok{]])}
+
+\CommentTok{\# Apply PCA}
+\NormalTok{pca }\OperatorTok{=}\NormalTok{ PCA()}
+\NormalTok{X\_transformed }\OperatorTok{=}\NormalTok{ pca.fit\_transform(X)}
+
+\CommentTok{\# Results}
+\NormalTok{eigenvalues }\OperatorTok{=}\NormalTok{ pca.explained\_variance\_}
+\NormalTok{variance\_ratio }\OperatorTok{=}\NormalTok{ pca.explained\_variance\_ratio\_}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Eigenvalues: }\SpecialCharTok{\{}\NormalTok{eigenvalues}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"PC1 explains }\SpecialCharTok{\{}\NormalTok{variance\_ratio[}\DecValTok{0}\NormalTok{]}\SpecialCharTok{:.1\%\}}\SpecialStringTok{ of variance"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Key Results}
+
+\begin{itemize}
+\item
+  PC1 explains the most variance (highest eigenvalue)
+\item
+  Components are uncorrelated by construction
+\item
+  Original data can be reconstructed from the components
+\end{itemize}
+
+\subsection{Component Retention Criteria}
+
+\begin{itemize}
+\item
+  \textbf{Kaiser Criterion}: Keep components with \(\lambda_{i} > 1\)
+\item
+  \textbf{Scree Plot}: Look for the ``elbow'' in the eigenvalue plot
+\item
+  \textbf{Cumulative Variance}: Retain enough components for the desired
+  variance (e.g., 80\%)
+\item
+  \textbf{Parallel Analysis}: Compare with eigenvalues of random data
+\end{itemize}
+
+\section{Factor Analysis}
+
+\subsection{What is Factor Analysis?}
+
+Factor analysis assumes that observed variables are linear combinations
+of common factors (shared latent constructs) and unique factors
+(variable-specific variance).
+
+\subsection{The Common Factor Model}
+
+For each observed variable \(x_{j}\):
+
+\(x_{j} = \mu_{j} + \sum_{i = 1}^{m}\lambda_{ji}f_{i} + \varepsilon_{j}\)
+
+Where:
+
+\begin{itemize}
+\item
+  \(\lambda_{ji}\): Factor loading (correlation between \(x_{j}\) and
+  \(f_{i}\))
+\item
+  \(f_{i}\): Common factor (latent variable)
+\item
+  \(\varepsilon_{j}\): Unique factor (error term)
+\end{itemize}
+
+\subsection{Factor Analysis Example}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ factor\_analyzer }\ImportTok{import}\NormalTok{ FactorAnalyzer}
+
+\CommentTok{\# Correlation matrix}
+\NormalTok{R }\OperatorTok{=}\NormalTok{ np.array([[}\FloatTok{1.00}\NormalTok{, }\FloatTok{0.60}\NormalTok{, }\FloatTok{0.48}\NormalTok{],}
+\NormalTok{              [}\FloatTok{0.60}\NormalTok{, }\FloatTok{1.00}\NormalTok{, }\FloatTok{0.72}\NormalTok{],}
+\NormalTok{              [}\FloatTok{0.48}\NormalTok{, }\FloatTok{0.72}\NormalTok{, }\FloatTok{1.00}\NormalTok{]])}
+
+\CommentTok{\# Perform Factor Analysis}
+\NormalTok{fa }\OperatorTok{=}\NormalTok{ FactorAnalyzer(n\_factors}\OperatorTok{=}\DecValTok{1}\NormalTok{, rotation}\OperatorTok{=}\VariableTok{None}\NormalTok{)}
+\NormalTok{fa.fit(R)}
+
+\CommentTok{\# Results}
+\NormalTok{loadings }\OperatorTok{=}\NormalTok{ fa.loadings\_}
+\NormalTok{communalities }\OperatorTok{=}\NormalTok{ fa.get\_communalities()}
+\NormalTok{uniqueness }\OperatorTok{=}\NormalTok{ fa.get\_uniquenesses()}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Factor loadings:}\CharTok{\textbackslash{}\textbackslash{}}\SpecialStringTok{n}\SpecialCharTok{\{}\NormalTok{loadings}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Communalities: }\SpecialCharTok{\{}\NormalTok{communalities}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Uniquenesses: }\SpecialCharTok{\{}\NormalTok{uniqueness}\SpecialCharTok{\}}\SpecialStringTok{"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\subsection{Key Concepts}
+
+\begin{itemize}
+\item
+  \textbf{Loadings}: Correlations between variables and factors
+\item
+  \textbf{Communalities}: Variance explained by common factors
+\item
+  \textbf{Uniquenesses}: Variable-specific variance
+\end{itemize}
+
+\subsection{Factor Rotation}
+
+Factor rotation is a technique applied after factor extraction to make
+factors easier to interpret. It ``rotates'' the factor axes to achieve
+\textbf{simple structure}: each variable should load highly on only one
+factor and low on others.
+
+\textbf{The problem:} Initial extraction often produces factors where
+many variables have moderate loadings on multiple factors, making
+interpretation difficult.
+
+\textbf{The solution:} Rotation redistributes variance among factors
+without changing the total variance explained.
+
+\textbf{Two main types:}
+
+\begin{itemize}
+\item
+  \textbf{Orthogonal rotation} (e.g., Varimax): Keeps factors
+  uncorrelated (independent)
+
+  \begin{itemize}
+  \item
+    Simpler interpretation, but may be unrealistic if constructs
+    actually correlate
+  \end{itemize}
+\item
+  \textbf{Oblique rotation} (e.g., Promax, Oblimin): Allows factors to
+  correlate
+
+  \begin{itemize}
+  \item
+    More realistic for real-world data, slightly more complex
+    interpretation
+  \end{itemize}
+\end{itemize}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}cccc@{}}
+\toprule\noalign{}
+\textbf{Method} & \textbf{Description} & \textbf{Assumption} &
+\textbf{Use Case} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Varimax & Orthogonal rotation & Uncorrelated factors & Simple
+structure \\
+Promax & Oblique rotation & Factors may correlate & Realistic models \\
+Quartimax & Simplify variables & Balance factors & General use \\
+Oblimin & Oblique rotation & Flexible correlation & Complex data \\
+\end{longtable}
+}
+
+\subsection{Why Rotate?}
+
+\begin{itemize}
+\item
+  Improve the interpretability of factor loadings
+\item
+  Achieve ``simple structure'' (variables that load highly on few
+  factors)
+\item
+  Different rotations can reveal different substantive interpretations
+\end{itemize}
+
+\section{Comparison: PCA vs Factor Analysis}
+
+\subsection{Key Differences}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}ccc@{}}
+\toprule\noalign{}
+\textbf{Aspect} & \textbf{PCA} & \textbf{Factor Analysis} \\
+\midrule\noalign{}
+\endhead
+\bottomrule\noalign{}
+\endlastfoot
+Objective & Variance maximization & Latent construct identification \\
+Model & Data-based & Theory-based \\
+Components/Factors & All variance & Only common variance \\
+Rotation & Not typically used & Essential for interpretation \\
+Assumptions & Minimal & Multivariate normality \\
+Estimation & Eigenvalue decomposition & Maximum likelihood/PAF \\
+Output & Principal components & Factor loadings \\
+\end{longtable}
+}
+
+\subsection{When to Use Each Method}
+
+\subsubsection{Use PCA when:}
+
+\begin{itemize}
+\item
+  Data reduction is the main goal
+\item
+  No theoretical model exists
+\item
+  All variance is of interest
+\item
+  Prediction is the objective
+\item
+  Data visualization is needed
+\end{itemize}
+
+\subsubsection{Use Factor Analysis when:}
+
+\begin{itemize}
+\item
+  Identifying latent constructs
+\item
+  The analysis is theory-driven
+\item
+  Developing a measurement model
+\item
+  Understanding relationships between variables
+\item
+  Performing scale validation/development
+\end{itemize}
+
+\section{Complete Analysis Workflow}
+
+Before performing Factor Analysis, we must verify that our data is
+suitable:
+
+\textbf{Kaiser-Meyer-Olkin (KMO) Test}
+
+\begin{itemize}
+\item
+  Measures if your variables have enough in common to group into factors
+\item
+  High KMO means variables cluster well together; low KMO means they are
+  too independent
+\item
+  Ranges from 0 to 1
+\item
+  Interpretation: \textgreater{} 0.9 excellent, \textgreater{} 0.8 good,
+  \textgreater{} 0.6 acceptable, \textless{} 0.5 unacceptable
+\item
+  \textbf{What it tests:} Are correlations strong enough for FA to be
+  useful?
+\end{itemize}
+
+\textbf{Bartlett's Test of Sphericity}
+
+\begin{itemize}
+\item
+  Tests if the correlation matrix is significantly different from an
+  identity matrix
+\item
+  Uses chi-square statistic
+\item
+  Interpretation: \(p < 0.05\) means variables are correlated (good for
+  FA)
+\item
+  \textbf{What it tests:} Are variables correlated at all?
+\end{itemize}
+
+\textbf{Key difference:} Bartlett tests if correlations exist, KMO tests
+if they are strong enough.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+\ImportTok{from}\NormalTok{ sklearn.decomposition }\ImportTok{import}\NormalTok{ PCA}
+\ImportTok{from}\NormalTok{ sklearn.preprocessing }\ImportTok{import}\NormalTok{ StandardScaler}
+\ImportTok{from}\NormalTok{ factor\_analyzer }\ImportTok{import}\NormalTok{ FactorAnalyzer}
+\ImportTok{from}\NormalTok{ factor\_analyzer.factor\_analyzer }\ImportTok{import}\NormalTok{ calculate\_kmo, calculate\_bartlett\_sphericity}
+
+\CommentTok{\# 1. Load and prepare data}
+\NormalTok{X }\OperatorTok{=}\NormalTok{ np.random.randn(}\DecValTok{100}\NormalTok{, }\DecValTok{5}\NormalTok{)  }\CommentTok{\# Your data here}
+
+\CommentTok{\# 2. Standardize}
+\NormalTok{scaler }\OperatorTok{=}\NormalTok{ StandardScaler()}
+\NormalTok{X\_scaled }\OperatorTok{=}\NormalTok{ scaler.fit\_transform(X)}
+
+\CommentTok{\# 3. Check suitability for FA}
+\NormalTok{kmo\_all, kmo\_model }\OperatorTok{=}\NormalTok{ calculate\_kmo(X\_scaled)}
+\NormalTok{chi\_square\_value, p\_value }\OperatorTok{=}\NormalTok{ calculate\_bartlett\_sphericity(X\_scaled)}
+
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"KMO: }\SpecialCharTok{\{}\NormalTok{kmo\_model}\SpecialCharTok{:.3f\}}\SpecialStringTok{ (\textgreater{}0.6 is good)"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(}\SpecialStringTok{f"Bartlett\textquotesingle{}s test p{-}value: }\SpecialCharTok{\{}\NormalTok{p\_value}\SpecialCharTok{:.3f\}}\SpecialStringTok{ (\textless{}0.05 is good)"}\NormalTok{)}
+
+\CommentTok{\# 4. Determine number of factors}
+\NormalTok{pca }\OperatorTok{=}\NormalTok{ PCA()}
+\NormalTok{pca.fit(X\_scaled)}
+\NormalTok{eigenvalues }\OperatorTok{=}\NormalTok{ pca.explained\_variance\_}
+\NormalTok{n\_factors }\OperatorTok{=} \BuiltInTok{sum}\NormalTok{(eigenvalues }\OperatorTok{\textgreater{}} \DecValTok{1}\NormalTok{)  }\CommentTok{\# Kaiser criterion}
+
+\CommentTok{\# 5. Perform Factor Analysis}
+\NormalTok{fa }\OperatorTok{=}\NormalTok{ FactorAnalyzer(n\_factors}\OperatorTok{=}\NormalTok{n\_factors, rotation}\OperatorTok{=}\StringTok{\textquotesingle{}varimax\textquotesingle{}}\NormalTok{)}
+\NormalTok{fa.fit(X\_scaled)}
+
+\CommentTok{\# 6. Compare results}
+\NormalTok{loadings }\OperatorTok{=}\NormalTok{ fa.loadings\_}
+\NormalTok{communalities }\OperatorTok{=}\NormalTok{ fa.get\_communalities()}
+\NormalTok{variance\_explained }\OperatorTok{=}\NormalTok{ fa.get\_factor\_variance()}
+\end{Highlighting}
+\end{Shaded}
+
+\section{Applications and Best Practices}
+
+\subsection{Real-World Applications}
+
+\subsubsection{Finance}
+
+\begin{itemize}
+\item
+  Risk factors in stock markets
+\item
+  Portfolio optimization
+\item
+  Credit scoring models
+\end{itemize}
+
+\subsubsection{Health}
+
+\begin{itemize}
+\item
+  Patient satisfaction surveys
+\item
+  Symptom clustering
+\item
+  Quality of life measures
+\end{itemize}
+
+\subsubsection{Marketing}
+
+\begin{itemize}
+\item
+  Customer segmentation
+\item
+  Brand perception studies
+\item
+  Product attribute analysis
+\end{itemize}
+
+\subsubsection{Social Sciences}
+
+\begin{itemize}
+\item
+  Personality assessment
+\item
+  Attitude measurement
+\item
+  Educational testing
+\end{itemize}
+
+\subsection{Best Practices}
+
+\subsubsection{Data Preparation}
+
+\begin{itemize}
+\item
+  Ensure adequate sample size (5-10 observations per variable)
+\item
+  Check for multivariate normality
+\item
+  Handle missing data appropriately
+\item
+  Consider variable standardization
+\end{itemize}
+
+\subsubsection{Model Selection}
+
+\begin{itemize}
+\item
+  Use KMO and Bartlett's tests for FA suitability
+\item
+  Compare multiple factor retention criteria
+\item
+  Consider both orthogonal and oblique rotations
+\item
+  Validate results with cross-validation
+\end{itemize}
+
+\subsubsection{Interpretation}
+
+\begin{itemize}
+\item
+  Focus on the substantive meaning of the factors
+\item
+  Use factor loadings \textgreater{} 0.3 for interpretation
+\item
+  Consider correlations between factors in oblique rotations
+\item
+  Validate with external criteria when possible
+\end{itemize}
+
+\section{Conclusion}
+
+\subsection{Key Takeaways}
+
+\begin{itemize}
+\item
+  \textbf{PCA} and \textbf{Factor Analysis} serve different but
+  complementary purposes
+\item
+  Choose the method based on research objectives and data
+  characteristics
+\item
+  Always validate assumptions and interpret results substantively
+\item
+  Modern software makes implementation straightforward
+\end{itemize}
+
+\subsection{Next Steps}
+
+\begin{itemize}
+\item
+  Practice with real datasets
+\item
+  Compare PCA and FA on the same data
+\item
+  Explore advanced techniques (confirmatory FA, structural equation
+  modeling)
+\item
+  Apply to your own research questions
+\end{itemize}
+
+\section{References}
+
+\subsection{Key References}
+
+\begin{itemize}
+\item
+  \textbf{Fabrigar, L. R., \& Wegener, D. T.} (2011). Exploratory Factor
+  Analysis. Oxford University Press.
+\item
+  \textbf{Hair, J. F., et al.} (2019). Multivariate Data Analysis.
+  Cengage Learning.
+\item
+  \textbf{Jolliffe, I. T.} (2002). Principal Component Analysis.
+  Springer.
+\item
+  \textbf{Tabachnick, B. G., \& Fidell, L. S.} (2013). Using
+  Multivariate Statistics. Pearson.
+\end{itemize}
+
+\subsection{Software Resources}
+
+\begin{itemize}
+\item
+  Python: \texttt{scikit-learn}, \texttt{factor-analyzer},
+  \texttt{statsmodels}
+\item
+  R: \texttt{psych}, \texttt{FactoMineR}, \texttt{lavaan}
+\item
+  SPSS: Factor Analysis Module
+\item
+  SAS: PROC FACTOR
+\end{itemize}
+
+\subsection{Online Resources}
+
+\begin{itemize}
+\item
+  UCLA Statistical Consulting Group
+\item
+  StatQuest YouTube channel
+\item
+  Towards Data Science articles
+\end{itemize}
+
+\end{document}
+

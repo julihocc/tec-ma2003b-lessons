@@ -1,0 +1,2200 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[aspectratio=169,ignorenonframetext]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usetheme{Madrid}
+\definecolor{TecBlue}{RGB}{0,51,102}
+\setbeamercolor{structure}{fg=TecBlue}
+\setbeamercolor{frametitle}{fg=TecBlue}
+\setbeamercolor{title}{fg=white}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Multivariate Regression},
+  pdfauthor={Juliho Castillo Colmenares},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\texorpdfstring{Multivariate
+Regression}{Multivariate Regression}}
+\author{\texorpdfstring{Juliho Castillo
+Colmenares}{Juliho Castillo Colmenares}}
+\subtitle{Advanced Methods for Multivariate Analysis}
+\institute{Tec de Monterrey}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's Agenda}
+\begin{enumerate}
+\item
+  Logistic Regression Model
+\item
+  Inferences for Variances and Covariance Matrices
+\item
+  Inferences for a Vector of Means
+\item
+  MANOVA (Multivariate Analysis of Variance)
+\item
+  Canonical Correlation Analysis
+\item
+  Factor Analysis with Regression
+\item
+  Programming and Commercial Systems
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Case Study: Healthcare Risk Assessment}
+\textbf{Companion Example Throughout This Presentation}
+
+\textbf{Synthetic data:} All patients and measurements below are
+simulated for teaching purposes. Results illustrate the statistical
+methods, not real clinical findings.
+
+A simulated hospital scenario analyzing cardiovascular disease (CVD)
+risk using multivariate methods to:
+
+\begin{itemize}
+\item
+  Predict high-risk patients from lifestyle and physiological factors
+\item
+  Compare health profiles between risk groups
+\item
+  Evaluate the effectiveness of lifestyle interventions
+\item
+  Understand complex relationships between multiple health variables
+\end{itemize}
+
+Synthetic dataset with 1,000 simulated patients demonstrating practical
+applications of each technique
+\end{frame}
+
+\begin{frame}{The Research Question}
+\textbf{Scenario (synthetic data):} Hospital evaluating cardiovascular
+disease (CVD) risk
+
+\textbf{Dataset:}
+
+\begin{itemize}
+\item
+  1,000 patients
+\item
+  13 predictor variables
+\item
+  Multiple health outcomes
+\item
+  Treatment intervention study
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Variables in Our Study}
+\textbf{Lifestyle Factors:}
+
+\begin{itemize}
+\item
+  \textbf{Age:} Years lived, affects baseline health risk
+\item
+  \textbf{BMI:} Body Mass Index, ratio of weight to height indicating
+  body composition
+\item
+  \textbf{Exercise hours/week:} Physical activity level, linked to
+  cardiovascular health
+\item
+  \textbf{Smoking years:} Duration of tobacco use, major risk factor for
+  multiple diseases
+\item
+  \textbf{Alcohol consumption:} Frequency/amount of alcohol intake,
+  impacts liver and heart health
+\item
+  \textbf{Stress score:} Quantified psychological stress level, affects
+  blood pressure and hormones
+\item
+  \textbf{Sleep hours:} Nightly sleep duration, influences metabolic and
+  cardiovascular function
+\end{itemize}
+
+\textbf{Physiological Measurements:}
+
+\begin{itemize}
+\item
+  \textbf{Blood pressure (systolic/diastolic):} Force of blood against
+  artery walls (peak/resting)
+\item
+  \textbf{Cholesterol:} Blood lipid levels, excess increases arterial
+  plaque buildup
+\item
+  \textbf{Glucose:} Blood sugar level, indicator of diabetes risk and
+  metabolic function
+\item
+  \textbf{Triglycerides:} Fat molecules in blood, high levels increase
+  heart disease risk
+\item
+  \textbf{HDL:} ``Good cholesterol'' that removes harmful lipids from
+  bloodstream
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Research Objectives}
+\begin{enumerate}
+\item
+  \textbf{Predict} CVD risk from patient characteristics
+\item
+  \textbf{Compare} health profiles between risk groups
+\item
+  \textbf{Evaluate} lifestyle intervention effectiveness
+\item
+  \textbf{Understand} relationships between lifestyle and physiology
+\item
+  \textbf{Validate} assumptions for multivariate tests
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Logistic Regression}
+Moving Beyond Linear Regression
+
+\textbf{What is Logistic Regression?}
+
+A statistical method for modeling binary outcomes (Yes/No,
+Success/Failure, 0/1) using predictor variables
+
+\textbf{Key Features:}
+
+\begin{itemize}
+\item
+  Predicts probabilities (0 to 1) rather than continuous values
+\item
+  Uses the logistic (sigmoid) function to model the probability of an
+  event
+\item
+  Estimates coefficients via maximum likelihood (not least squares)
+\item
+  Widely used in classification problems: medical diagnosis, credit
+  scoring, marketing
+\end{itemize}
+
+\textbf{When to Use:} When your outcome variable is categorical
+(especially binary)
+\end{frame}
+
+\begin{frame}{When Linear Regression Fails}
+\textbf{Problem:} Binary outcomes (Yes/No, Success/Failure, 0/1)
+
+Using ordinary least squares (OLS) for binary responses creates
+fundamental problems:
+
+\textbf{Prediction Issues:}
+
+\begin{itemize}
+\item
+  Predicted probabilities can be negative or exceed 1 (nonsensical
+  values)
+\item
+  No mechanism to constrain predictions to {[}0, 1{]}
+\end{itemize}
+
+\textbf{Assumption Violations:}
+
+\begin{itemize}
+\item
+  Response is not continuous (violates normality assumption)
+\item
+  Errors follow Bernoulli distribution, not Normal distribution
+\item
+  Heteroscedastic errors (variance depends on X:
+  \(\text{Var}\left( Y|X \right) = p(X)\left( 1 - p(X) \right)\))
+\item
+  Non-constant variance violates homoscedasticity assumption
+\end{itemize}
+
+Linear regression is mathematically possible but statistically
+inappropriate for binary data.
+\end{frame}
+
+\begin{frame}{Logistic Regression Solution}
+Our goal is to find a function that maps predictor values to
+probabilities while staying within {[}0, 1{]}. Linear regression fails
+here because predictions can fall outside this valid probability range.
+
+Given a binary outcome variable \(Y\) (taking values 0 or 1 for failure
+or success) and a vector of predictor variables
+\(X = \left( X_{1},X_{2},\ldots,X_{p} \right)\), we model the
+probability of success as:
+
+\[P\left( Y = 1~|~X \right) = p(X)\]
+
+where \(0 \leq p(X) \leq 1\) represents the probability that \(Y = 1\)
+given the values of \(X\). This approach ensures our predictions always
+remain valid probabilities.
+\end{frame}
+
+\begin{frame}{The Logit Transformation}
+To connect probabilities (bounded between 0 and 1) to a linear
+combination of predictors (unbounded), we use the \textbf{logit
+transformation}, also known as the \textbf{log-odds}.
+
+Recall that \(p(X) = P\left( Y = 1~|~X \right)\) is our probability of
+success. The odds of success are \(\frac{p(X)}{1 - p(X)}\), and taking
+the natural logarithm gives us:
+
+\[\text{ logit}\left( p(X) \right) = \log(\frac{p(X)}{1 - p(X)}) = \beta_{0} + \beta_{1}X_{1} + \ldots + \beta_{p}X_{p}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(p(X)\) is the same probability function defined in the previous
+  slide
+\item
+  \(\beta_{0},\beta_{1},\ldots,\beta_{p}\) are coefficients to be
+  estimated
+\item
+  The logit maps probabilities from {[}0, 1{]} to
+  \(( - \infty, + \infty)\)
+\item
+  This transformation makes the model linear in the parameters
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Logit Transformation}
+\textbf{Properties:}
+
+\begin{itemize}
+\item
+  Maps {[}0,1{]} to \(( - \infty, + \infty)\)
+\item
+  Linear in parameters
+\item
+  Interpretable as the log-odds (a coefficient's exponential is the odds
+  \textbf{ratio} per unit increase)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Logistic Function}
+\textbf{Inverse Logit:} Solving for \(p(X)\) from the logit equation
+gives the logistic function.
+
+\textbf{Notation:} \(X = \left( X_{1},X_{2},\ldots,X_{p} \right)\) is
+the vector of \(p\) predictor variables. We write \(p(X)\) to mean the
+probability depends on all predictors.
+
+Define the linear combination:
+\(\eta = \beta_{0} + \beta_{1}X_{1} + \beta_{2}X_{2} + \ldots + \beta_{p}X_{p}\)
+
+Then the logistic function is:
+
+\[p(X) = \frac{e^{\eta}}{1 + e^{\eta}} = \frac{1}{1 + e^{- \eta}}\]
+
+This is the \textbf{logistic} or \textbf{sigmoid} function, guaranteeing
+\(p(X) \in \lbrack 0,1\rbrack\) for any predictor values.
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation}
+Since we cannot use ordinary least squares, we estimate coefficients
+using \textbf{Maximum Likelihood Estimation (MLE)}.
+
+\textbf{Our Data:} We have collected \(n\) observations. Each
+observation consists of:
+
+\begin{itemize}
+\item
+  An outcome: \(y_{i} \in \left\{ 0,1 \right\}\) (e.g., \(y_{i} = 1\)
+  means ``has disease'', \(y_{i} = 0\) means ``no disease'')
+\item
+  Predictor values: \(x_{i1},x_{i2},\ldots,x_{ip}\) (the values of \(p\)
+  predictors for person \(i\))
+\end{itemize}
+
+\textbf{Unknown Parameters:} We need to estimate \((p + 1)\)
+coefficients
+
+\begin{itemize}
+\item
+  \(\beta_{0}\) = intercept coefficient
+\item
+  \(\beta_{1},\beta_{2},\ldots,\beta_{p}\) = coefficients for the \(p\)
+  predictors
+\end{itemize}
+
+We write
+\(\mathbf{\beta} = \left( \beta_{0},\beta_{1},\ldots,\beta_{p} \right)^{T}\)
+for the entire vector of unknown parameters.
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation}
+\textbf{The Probability Model:} For each observation \(i\), the
+probability of success depends on:
+
+\begin{enumerate}
+\item
+  The predictor values for that observation:
+  \(x_{i1},x_{i2},\ldots,x_{ip}\)
+\item
+  The unknown parameters: \(\beta_{0},\beta_{1},\ldots,\beta_{p}\)
+\end{enumerate}
+
+Define the linear combination:
+\(\eta_{i} = \beta_{0} + \beta_{1}x_{i1} + \beta_{2}x_{i2} + \ldots + \beta_{p}x_{ip}\)
+
+The probability is computed using the logistic function:
+
+\[P\left( Y_{i} = 1~|~x_{i1},\ldots,x_{ip};\beta_{0},\ldots,\beta_{p} \right) = \frac{1}{1 + e^{- \eta_{i}}}\]
+
+We write this as \(\pi_{i}\left( \mathbf{\beta} \right)\) for brevity,
+emphasizing it depends on the parameters \(\mathbf{\beta}\).
+
+\textbf{Important:} Each \(\pi_{i}\left( \mathbf{\beta} \right)\)
+depends on BOTH the observed predictors for observation \(i\) AND the
+unknown parameters \(\mathbf{\beta}\).
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation}
+\textbf{Probability of Observing Outcome \(y_{i}\):} Given parameters
+\(\mathbf{\beta}\), the probability of observing the actual outcome
+\(y_{i}\) for observation \(i\) is formally written as
+\(P\left( Y_{i} = y_{i}~|~\ldots \right)\), where \(Y_{i}\) is the
+random variable for the outcome. The following is a common shorthand:
+
+\[P\left( Y_{i} = y_{i}~|~\mathbf{x}_{i},\mathbf{\beta} \right) = \left\lbrack \pi_{i}\left( \mathbf{\beta} \right) \right\rbrack^{y_{i}}\left\lbrack 1 - \pi_{i}\left( \mathbf{\beta} \right) \right\rbrack^{1 - y_{i}}\]
+
+This formula evaluates to:
+
+\begin{itemize}
+\item
+  \(\pi_{i}\left( \mathbf{\beta} \right)\) when the observed outcome is
+  \(y_{i} = 1\) (success)
+\item
+  \(1 - \pi_{i}\left( \mathbf{\beta} \right)\) when the observed outcome
+  is \(y_{i} = 0\) (failure)
+\end{itemize}
+
+\textbf{Key Idea of MLE:} Find the parameter values \(\mathbf{\beta}\)
+that make the observed data \(\left( y_{1},y_{2},\ldots,y_{n} \right)\)
+most probable.
+\end{frame}
+
+\begin{frame}{Maximum Likelihood Estimation}
+\textbf{Likelihood Function:} Assuming observations are independent, the
+probability of observing ALL our data is:
+
+\[L\left( \mathbf{\beta} \right) = \prod_{i = 1}^{n}P\left( Y_{i} = y_{i}~|~\mathbf{x}_{i},\mathbf{\beta} \right) = \prod_{i = 1}^{n}\left\lbrack \pi_{i}\left( \mathbf{\beta} \right) \right\rbrack^{y_{i}}\left\lbrack 1 - \pi_{i}\left( \mathbf{\beta} \right) \right\rbrack^{1 - y_{i}}\]
+
+\textbf{Log-Likelihood Function:} Taking natural logarithm (easier to
+maximize):
+
+\[\ell(\mathbf{\beta}) = \sum_{i = 1}^{n}\left\lbrack y_{i}\log(\pi_{i}\left( \mathbf{\beta} \right)) + \left( 1 - y_{i} \right)\log(1 - \pi_{i}\left( \mathbf{\beta} \right)) \right\rbrack\]
+
+\textbf{Goal:} Find \(\mathbf{\beta}^{\ast}\) that maximizes
+\(\ell(\mathbf{\beta})\). This requires numerical optimization
+(Newton-Raphson, gradient descent, etc.) since no closed-form solution
+exists.
+\end{frame}
+
+\begin{frame}{Interpreting Coefficients: Log-Odds vs. Odds Ratios}
+Recall the logit equation:
+\[\log(\frac{p}{1 - p}) = \beta_{0} + \beta_{1}X_{1} + \ldots + \beta_{p}X_{p}\]
+
+\textbf{1. The Raw Coefficient (\(\beta_{j}\))}
+
+\begin{itemize}
+\item
+  A one-unit increase in \(X_{j}\) corresponds to a \(\beta_{j}\) change
+  in the \textbf{log-odds} of the outcome.
+\item
+  This is mathematically precise but not intuitive. A ``0.2 change in
+  log-odds'' is hard to grasp.
+\end{itemize}
+
+\textbf{2. The Odds Ratio (\(e^{\beta_{j}}\)) -- A Better Way}
+
+\begin{itemize}
+\item
+  By exponentiating the coefficient, we get the \textbf{Odds Ratio}
+  (OR).
+\item
+  The OR tells us the \textbf{multiplicative change} in the
+  \textbf{odds} of the outcome for a one-unit increase in \(X_{j}\).
+\end{itemize}
+
+\textbf{Example: Stress Score (\(\beta_{\text{stress }} = 0.223\))}\\
+The odds ratio is \(e^{0.223} \approx 1.25\).\\
+\textbf{Interpretation:} For each one-point increase in the stress
+score, the \textbf{odds} of having high CVD risk are multiplied by 1.25
+(i.e., increase by 25\%), holding other variables constant.
+\end{frame}
+
+\begin{frame}{Interpreting Coefficients: The Odds Ratio (cont.)}
+\textbf{Interpreting Different Odds Ratios:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2501}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2501}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.5001}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{If \(\beta_{j}\) is\ldots{}} & \textbf{Then \(e^{\beta_{j}}\)
+is\ldots{}} & \textbf{Meaning for a 1-unit increase in
+\(X_{j}\)\ldots{}} \\
+Positive (\(> 0\)) & Greater than 1 & The odds of the outcome
+\textbf{increase}. (e.g., OR=1.25 means 25\% increase in odds) \\
+Negative (\(< 0\)) & Less than 1 & The odds of the outcome
+\textbf{decrease}. (e.g., OR=0.80 means 20\% decrease in odds) \\
+Zero & Exactly 1 & There is no change in the odds of the outcome. \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{Example: Exercise (\(\beta_{\text{exercise }} = - 0.328\))}\\
+The odds ratio is \(e^{- 0.328} \approx 0.72\).\\
+\textbf{Interpretation:} For each additional hour of exercise per week,
+the \textbf{odds} of having high CVD risk are multiplied by 0.72 (i.e.,
+decrease by 28\%), holding other variables constant.
+\end{frame}
+
+\begin{frame}{Model Fit and Diagnostics}
+Assessing how well our logistic regression model explains the data is
+crucial. Unlike linear regression, we use different metrics.
+
+\textbf{Deviance:}
+
+\begin{itemize}
+\item
+  A key metric for models where ordinary least squares doesn't apply
+  (like logistic regression). It's a measure of how much your model's
+  predictions deviate from the actual data.
+\item
+  Think of it as the equivalent of the \textbf{Sum of Squared Errors}
+  you see in linear regression.
+\item
+  A lower deviance means your model fits the data more closely.
+\item
+  For a deeper dive into deviance, see this video:
+  \href{https://www.youtube.com/watch?v=JC56jS2gVUE}{Deviance Residuals
+  Explained}
+\end{itemize}
+
+\textbf{Pseudo R-squared:}
+
+\begin{itemize}
+\item
+  While linear regression has a standard R-squared to measure
+  goodness-of-fit, logistic and other generalized linear models use
+  ``Pseudo'' R-squared.
+\item
+  It tells you how much better your model is than a ``null'' model that
+  only includes an intercept (essentially, a model that just guesses the
+  average outcome).
+\item
+  \textbf{McFadden's \(R^{2}\)} is a popular version:
+  \[R_{\text{McF }}^{2} = 1 - \frac{\log(\mathcal{L}_{\text{model}})}{\log(\mathcal{L}_{\text{null}})}\].
+\item
+  A higher value (closer to 1) indicates a better fit, but the scale is
+  not directly comparable to the R-squared from linear regression.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Classification Performance}
+\textbf{Confusion Matrix:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\endhead
+& \textbf{Predicted 0} & \textbf{Predicted 1} \\
+\textbf{Actual 0} & True Negative (TN) & False Positive (FP) \\
+\textbf{Actual 1} & False Negative (FN) & True Positive (TP) \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Classification Metrics}
+\textbf{Accuracy:} \(\frac{\text{TP } + \text{ TN}}{n}\)
+
+\textbf{Sensitivity (Recall):}
+\(\frac{\text{TP }}{\text{TP } + \text{ FN}}\)
+
+\textbf{Specificity:} \(\frac{\text{TN }}{\text{TN } + \text{ FP}}\)
+
+\textbf{Precision:} \(\frac{\text{TP }}{\text{TP } + \text{ FP}}\)
+\end{frame}
+
+\begin{frame}{Case Study: Predicting CVD Risk}
+\textbf{Application of Logistic Regression}
+
+Objective: Predict high CVD risk (0/1) from 13 patient characteristics
+\end{frame}
+
+\begin{frame}{CVD Prediction: Model Setup}
+\textbf{Predictors (13 variables):}
+
+\begin{itemize}
+\item
+  Demographics: age, BMI
+\item
+  Lifestyle: exercise, smoking, alcohol, stress, sleep
+\item
+  Physiology: BP, cholesterol, glucose, triglycerides, HDL
+\end{itemize}
+
+\textbf{Outcome:} CVD risk high (binary: 0 = low risk, 1 = high risk)
+
+\textbf{Data split:} 70\% training (n=700), 30\% testing (n=300)
+\end{frame}
+
+\begin{frame}{Top Risk Factors: Odds Ratios}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4444}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2222}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Predictor} & \textbf{Odds Ratio} & \textbf{Interpretation} \\
+Exercise hours/week & 0.72 & 28\% lower odds per hour \\
+Stress score & 1.25 & 25\% higher odds per point \\
+Sleep hours & 0.80 & 20\% lower odds per hour \\
+BMI & 1.19 & 19\% higher odds per unit \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{All significant predictors contribute to risk assessment}
+\end{frame}
+
+\begin{frame}{CVD Prediction: Model Performance}
+\textbf{Confusion Matrix (Test Set):}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4288}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2859}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2859}}@{}}
+\toprule\noalign{}
+\endhead
+& \textbf{Pred Low} & \textbf{Pred High} \\
+\textbf{Actual Low} & 106 & 44 \\
+\textbf{Actual High} & 42 & 108 \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{Metrics:}
+
+\begin{itemize}
+\item
+  Accuracy: 71\%
+\item
+  AUC-ROC: 0.77
+\item
+  Balanced precision/recall
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Key Insights: CVD Prediction}
+\begin{enumerate}
+\item
+  Exercise has the strongest \textbf{standardized} association with risk
+  (OR = 0.72 per hour/week; strongest by per-SD effect size, not raw OR)
+\item
+  Stress also significantly increases risk (OR = 1.25 per point)
+\item
+  Raw odds ratios are not comparable across predictors on different
+  scales -- ranking requires standardized effects
+\item
+  Model achieves good discrimination (AUC = 0.77) on this simulated
+  dataset
+\end{enumerate}
+
+\textbf{Illustrative only:} This is a simulated dataset -- read as a
+demonstration of the method, not a clinical finding
+\end{frame}
+
+\begin{frame}{Inferences for Covariance Matrices}
+Testing Variability Structure
+\end{frame}
+
+\begin{frame}{Why Test Covariance Matrices?}
+\textbf{Applications:}
+
+\begin{itemize}
+\item
+  Homogeneity assumptions in MANOVA
+\item
+  Comparing variability between groups
+\item
+  Validating models
+\item
+  Quality control
+\end{itemize}
+\end{frame}
+
+\begin{frame}{The Wishart Distribution}
+\textbf{Multivariate Generalization of Chi-Square}
+
+If \(X_{1},\ldots,X_{n} \sim N_{p(\mu,\Sigma)}\), then:
+
+\[S \sim W_{p(n - 1,\Sigma)}\]
+
+where
+\(S = \sum_{i = 1}^{n}\left( X_{i} - \overline{X} \right)\left( X_{i} - \overline{X} \right)^{T}\)
+\end{frame}
+
+\begin{frame}{Testing Single Covariance Matrix}
+\textbf{Null Hypothesis:}
+
+\[H_{0}:\Sigma = \Sigma_{0}\]
+
+\textbf{Test Statistic:} Based on likelihood ratio
+
+\[\Lambda = |S\frac{|}{|}\Sigma_{0}|\]
+\end{frame}
+
+\begin{frame}{Box's M Test}
+\textbf{Testing Equality of Covariance Matrices}
+
+\[H_{0}:\Sigma_{1} = \Sigma_{2} = \ldots = \Sigma_{g}\]
+\end{frame}
+
+\begin{frame}{Box's M Test Statistic}
+\[M = (n - g)\log|S_{\text{pooled}}| - \sum_{i = 1}^{g}\left( n_{i} - 1 \right)\log|S_{i}|\]
+
+where:
+
+\begin{itemize}
+\item
+  \(S_{i}\) = covariance matrix for group \(i\)
+\item
+  \(S_{\text{pooled}}\) = pooled covariance matrix
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Box's M Test Properties}
+\textbf{Asymptotic Distribution:} The raw \(M\) must first be rescaled
+by a correction factor \(c_{1}\); only the corrected
+\(\chi^{2} = M\left( 1 - c_{1} \right)\) is chi-square distributed.
+There is no valid raw-\(M\) cutoff.
+
+\textbf{Limitation:} Very sensitive to normality violations
+
+\textbf{Alternatives:} Permutation tests, robust methods
+\end{frame}
+
+\begin{frame}{Bartlett's Test for Univariate Data}
+\textbf{Special Case:} Testing equality of variances (p=1)
+
+\[H_{0}:\sigma_{1}^{2} = \sigma_{2}^{2} = \ldots = \sigma_{g}^{2}\]
+
+\textbf{Test Statistic:} Chi-square distributed
+\end{frame}
+
+\begin{frame}{Case Study: Validating MANOVA Assumptions}
+\textbf{Application of Box's M Test}
+
+Question: Are covariance matrices equal between treatment groups (MANOVA
+assumption)?
+\end{frame}
+
+\begin{frame}{Box's M Test: Setup}
+\textbf{Testing Homogeneity of Covariances:}
+
+\[H_{0}:\mathbf{\Sigma}_{\text{Control }} = \mathbf{\Sigma}_{\text{Intervention }}\]
+
+\textbf{Variables (p = 4):}
+
+\begin{itemize}
+\item
+  Systolic BP, Diastolic BP
+\item
+  Cholesterol, Glucose
+\end{itemize}
+
+\textbf{Groups:}
+
+\begin{itemize}
+\item
+  Control: n = 479
+\item
+  Intervention: n = 521
+\end{itemize}
+
+\textbf{Why test?} MANOVA assumes equal covariance matrices across
+groups
+\end{frame}
+
+\begin{frame}{Box's M Test: Results}
+\textbf{Raw Statistic:} \(M = 8.49\) (not itself chi-square distributed)
+
+\textbf{Corrected:} \(\chi^{2} = 8.46\), \(\text{df } = 10\),
+\(p = 0.584\)
+
+\textbf{Conclusion:} Fail to reject \(H_{0}\) (\(p = 0.584\)). No
+evidence against equal covariance matrices.
+
+\textbf{Note:} A raw-statistic cutoff like ``\(M < 30\)'' is not a valid
+decision rule -- \(M\) must be corrected and compared to its chi-square
+distribution. Failing to reject does not \textbf{prove} equality.
+\end{frame}
+
+\begin{frame}{Key Insights: Assumption Testing}
+\begin{enumerate}
+\item
+  Box's M requires a correction factor before its chi-square
+  approximation is valid
+\item
+  Corrected test found no evidence against equal covariances
+  (\(p = 0.584\))
+\item
+  ``Fail to reject'' is not the same as ``proven equal''
+\item
+  Treatment groups show no detected difference in variability patterns
+\end{enumerate}
+
+\textbf{Methodological importance:} Always check assumptions using the
+correct test statistic, and report results as ``fail to reject,'' not
+``validated''
+\end{frame}
+
+\begin{frame}{Inferences for a Vector of Means}
+Multivariate Hypothesis Testing
+\end{frame}
+
+\begin{frame}{From t-test to Hotelling's T-squared}
+\textbf{Univariate:} t-test for single mean
+
+\[t = \frac{\overline{x} - \mu_{0}}{\frac{s}{\sqrt{n}}}\]
+
+\textbf{Multivariate:} Hotelling's \(T^{2}\) for mean vector
+\end{frame}
+
+\begin{frame}{Hotelling's T-squared Test}
+\textbf{One-Sample Test:}
+
+\[H_{0}:\mathbf{\mu} = \mathbf{\mu}_{0}\]
+
+\textbf{Test Statistic:}
+
+\[T^{2} = {n\left( \overline{\mathbf{X}} - \mathbf{\mu}_{0} \right)}^{T}S^{- 1}\left( \overline{\mathbf{X}} - \mathbf{\mu}_{0} \right)\]
+\end{frame}
+
+\begin{frame}{Distribution of T-squared}
+\textbf{Transform to F Distribution:}
+
+\[F = \frac{(n - p)T^{2}}{(n - 1)p} \sim F_{p,n - p}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(p\) = number of variables
+\item
+  \(n\) = sample size
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Two-Sample Hotelling's T-squared}
+\textbf{Testing Difference Between Groups:}
+
+\[H_{0}:\mathbf{\mu}_{1} = \mathbf{\mu}_{2}\]
+\end{frame}
+
+\begin{frame}{Two-Sample T-squared Statistic}
+\[T^{2} = \left( \frac{n_{1}n_{2}}{n_{1} + n_{2}} \right)\left( {\overline{\mathbf{X}}}_{1} - {\overline{\mathbf{X}}}_{2} \right)^{T}S_{\text{pooled}}^{- 1}\left( {\overline{\mathbf{X}}}_{1} - {\overline{\mathbf{X}}}_{2} \right)\]
+
+\textbf{F Transformation:}
+
+\[F = \frac{\left( n_{1} + n_{2} - p - 1 \right)T^{2}}{\left( n_{1} + n_{2} - 2 \right)p} \sim F_{p,n_{1} + n_{2} - p - 1}\]
+\end{frame}
+
+\begin{frame}{Confidence Region for Mean Vector}
+\textbf{Multivariate Confidence Region:}
+
+Ellipsoid centered at \(\overline{\mathbf{X}}\)
+
+\[{n\left( \mathbf{\mu} - \overline{\mathbf{X}} \right)}^{T}S^{- 1}\left( \mathbf{\mu} - \overline{\mathbf{X}} \right) \leq \frac{(n - 1)p}{n - p}F_{\alpha;p,n - p}\]
+\end{frame}
+
+\begin{frame}{Simultaneous Confidence Intervals}
+\textbf{Bonferroni Correction:}
+
+For \(p\) variables, use \(\frac{\alpha}{p}\) for each interval
+
+\textbf{T-squared Intervals:} More efficient but wider than individual
+intervals
+\end{frame}
+
+\begin{frame}{Case Study: Comparing Risk Groups}
+\textbf{Application of Hotelling's T-squared}
+
+Question: Do high-risk and low-risk CVD patients differ in their
+multivariate health profile?
+
+\textbf{Caveat:} The risk-group label is itself computed from a score
+containing systolic BP, cholesterol, and glucose -- three of the six
+variables tested below. A significant result here demonstrates the test
+recovering that construction rule, not an independently discovered
+relationship.
+\end{frame}
+
+\begin{frame}{Health Profile Comparison: Setup}
+\textbf{Two Groups:}
+
+\begin{itemize}
+\item
+  Low risk: n = 500
+\item
+  High risk: n = 500
+\end{itemize}
+
+\textbf{Variables (p = 6):}
+
+\begin{itemize}
+\item
+  Systolic BP, Diastolic BP
+\item
+  Cholesterol, Glucose
+\item
+  Triglycerides, HDL
+\end{itemize}
+
+\textbf{Goal:} Single omnibus test for all 6 variables simultaneously
+\end{frame}
+
+\begin{frame}{Mean Differences by Risk Group}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.4000}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2000}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Variable} & \textbf{Low Risk} & \textbf{High Risk} &
+\textbf{Difference} \\
+Systolic BP & 123.8 & 131.1 & +7.3 \\
+Diastolic BP & 78.1 & 82.9 & +4.7 \\
+Cholesterol & 184.1 & 196.4 & +12.3 \\
+Glucose & 110.0 & 116.8 & +6.9 \\
+Triglycerides & 133.6 & 145.5 & +11.9 \\
+HDL & 44.5 & 41.2 & -3.3 \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Hotelling's T-squared Results}
+\textbf{Test Statistic:} \[T^{2} = 228.65\]
+
+\textbf{F Transformation:} \[F = 37.92,\quad\text{ df } = (6,993)\]
+
+\textbf{P-value:} \textless{} 0.0001
+
+\textbf{Conclusion:} The test statistically confirms the health markers
+differ between groups -- as expected, since the grouping rule was built
+from three of them. This demonstrates the mechanics of Hotelling's
+\(T^{2}\), not an independent clinical finding.
+\end{frame}
+
+\begin{frame}{Key Insights: Risk Group Differences}
+\begin{enumerate}
+\item
+  High-risk patients show higher values across all adverse markers, by
+  construction
+\item
+  Largest differences: cholesterol (+12.3 mg/dL) and triglycerides
+  (+11.9 mg/dL)
+\item
+  HDL (protective) is lower in high-risk group (-3.3 mg/dL)
+\item
+  Multivariate test accounts for correlations among measurements
+\end{enumerate}
+
+\textbf{Reminder:} This recovers the simulated data-generating rule -- a
+real analysis needs a grouping variable independent of the tested
+variables
+\end{frame}
+
+\begin{frame}{MANOVA}
+Multivariate Analysis of Variance
+\end{frame}
+
+\begin{frame}{What is MANOVA?}
+\textbf{Extension of ANOVA to Multiple Dependent Variables}
+
+\begin{itemize}
+\item
+  ANOVA: One response variable
+\item
+  MANOVA: Multiple response variables simultaneously
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Why Use MANOVA?}
+\textbf{Instead of Multiple ANOVAs:}
+
+\begin{enumerate}
+\item
+  Controls Type I error rate
+\item
+  Accounts for correlations among responses
+\item
+  More powerful when responses related
+\item
+  Tests overall group effect
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{MANOVA Model}
+\textbf{One-Way MANOVA:}
+
+\[\mathbf{Y}_{ij} = \mathbf{\mu} + \mathbf{\alpha}_{i} + \mathbf{\varepsilon}_{ij}\]
+
+where:
+
+\begin{itemize}
+\item
+  \(\mathbf{Y}_{ij}\) = response vector for observation \(j\) in group
+  \(i\)
+\item
+  \(\mathbf{\mu}\) = overall mean vector
+\item
+  \(\mathbf{\alpha}_{i}\) = group effect vector
+\item
+  \(\mathbf{\varepsilon}_{ij}\) = error vector
+\end{itemize}
+\end{frame}
+
+\begin{frame}{MANOVA Assumptions}
+\begin{enumerate}
+\item
+  \textbf{Multivariate Normality:} Errors follow multivariate normal
+\item
+  \textbf{Independence:} Observations independent
+\item
+  \textbf{Homogeneity of Covariance:} Equal covariance matrices across
+  groups
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Testing Assumptions}
+\textbf{Multivariate Normality:}
+
+\begin{itemize}
+\item
+  Mardia's test
+\item
+  Q-Q plots for each variable
+\end{itemize}
+
+\textbf{Homogeneity:} Box's M test
+\end{frame}
+
+\begin{frame}{MANOVA Matrices}
+\textbf{Between-Groups Matrix (H):}
+
+\[\mathbf{H} = \sum_{i = 1}^{g}n_{i}\left( {\overline{\mathbf{Y}}}_{i} - \overline{\mathbf{Y}} \right)\left( {\overline{\mathbf{Y}}}_{i} - \overline{\mathbf{Y}} \right)^{T}\]
+
+\textbf{Within-Groups Matrix (E):}
+
+\[\mathbf{E} = \sum_{i = 1}^{g}\sum_{j = 1}^{n_{i}}\left( \mathbf{Y}_{ij} - {\overline{\mathbf{Y}}}_{i} \right)\left( \mathbf{Y}_{ij} - {\overline{\mathbf{Y}}}_{i} \right)^{T}\]
+\end{frame}
+
+\begin{frame}{Wilks' Lambda}
+\textbf{Most Common Test Statistic:}
+
+\[\Lambda = |\mathbf{E}\frac{|}{|}\mathbf{E} + \mathbf{H}|\]
+\end{frame}
+
+\begin{frame}{Wilks' Lambda Properties}
+\textbf{Interpretation:}
+
+\begin{itemize}
+\item
+  Range: {[}0, 1{]}
+\item
+  Small values: Strong group differences
+\item
+  Lambda = 1: No group differences
+\end{itemize}
+
+\textbf{Represents:} Proportion of total variance not explained by
+groups
+\end{frame}
+
+\begin{frame}{Other MANOVA Test Statistics}
+\textbf{Pillai's Trace:}
+
+\[V = \text{ tr}\left( {\mathbf{H}(\mathbf{H} + \mathbf{E})}^{- 1} \right)\]
+
+\textbf{Hotelling-Lawley Trace:}
+
+\[U = \text{ tr}\left( \mathbf{H}\mathbf{E}^{- 1} \right)\]
+
+\textbf{Roy's Largest Root:} Largest eigenvalue of
+\(\mathbf{H}\mathbf{E}^{- 1}\)
+\end{frame}
+
+\begin{frame}{Choosing Test Statistic}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4286}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5714}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Statistic} & \textbf{Best When} \\
+Wilks' Lambda & General use (most common) \\
+Pillai's Trace & Robust to violations \\
+Hotelling-Lawley & Equal group sizes \\
+Roy's Root & Group difference on one dimension \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Post-Hoc Tests in MANOVA}
+\textbf{After Significant MANOVA:}
+
+\begin{enumerate}
+\item
+  Univariate ANOVAs (with correction)
+\item
+  Discriminant analysis
+\item
+  Contrast tests for specific hypotheses
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Case Study: Treatment Intervention}
+\textbf{Application of MANOVA}
+
+Question: Does a lifestyle intervention improve multiple health outcomes
+simultaneously?
+\end{frame}
+
+\begin{frame}{Treatment Intervention Study: Setup}
+\textbf{Groups:}
+
+\begin{itemize}
+\item
+  Control: n = 479 (standard care)
+\item
+  Intervention: n = 521 (lifestyle program)
+\end{itemize}
+
+\textbf{Outcomes (p = 4):}
+
+\begin{itemize}
+\item
+  Systolic BP
+\item
+  Diastolic BP
+\item
+  Cholesterol
+\item
+  Glucose
+\end{itemize}
+
+\textbf{Why MANOVA?} Controls Type I error while testing all outcomes
+together
+\end{frame}
+
+\begin{frame}{MANOVA Results: Treatment Effect}
+\textbf{Wilks' Lambda:} \(\Lambda = 0.889\)
+
+\textbf{F Statistic:} \(F = 31.05\), df = (4, 995)
+
+\textbf{P-value:} \textless{} 0.0001
+
+\textbf{Conclusion:} The intervention significantly improves health
+outcomes across the multivariate profile
+
+\textbf{Also significant:} Pillai's trace, Hotelling-Lawley, Roy's root
+(all p \textless{} 0.0001)
+\end{frame}
+
+\begin{frame}{Mean Improvements by Treatment Group}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.3846}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1923}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.1923}}
+  >{\centering\arraybackslash}p{(\linewidth - 6\tabcolsep) * \real{0.2308}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Outcome} & \textbf{Control} & \textbf{Intervention} &
+\textbf{Difference} \\
+Systolic BP & 130.8 & 124.3 & -6.5\textsuperscript{***} \\
+Diastolic BP & 82.7 & 78.5 & -4.2\textsuperscript{***} \\
+Cholesterol & 194.4 & 186.5 & -7.9\textsuperscript{***} \\
+Glucose & 116.3 & 110.7 & -5.6\textsuperscript{***} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textsuperscript{***} All differences significant at p \textless{} 0.001
+in follow-up ANOVAs
+\end{frame}
+
+\begin{frame}{Key Insights: Intervention Effects}
+\begin{enumerate}
+\item
+  In this simulation, intervention reduces all cardiovascular risk
+  markers
+\item
+  Largest effect on blood pressure (-6.5 / -4.2 mmHg)
+\item
+  Differences also survive Bonferroni correction across the 4 follow-up
+  ANOVAs
+\item
+  MANOVA provides single omnibus test (no Type I error inflation)
+\end{enumerate}
+
+\textbf{Note:} Synthetic data illustrating the method -- not a real
+intervention-effectiveness finding
+\end{frame}
+
+\begin{frame}{Canonical Correlation Analysis}
+Relating Two Sets of Variables
+\end{frame}
+
+\begin{frame}{What is Canonical Correlation?}
+\textbf{Purpose:} Find maximum correlation between linear combinations
+of two sets of variables
+
+\begin{itemize}
+\item
+  Set 1: \(X_{1},X_{2},\ldots,X_{p}\)
+\item
+  Set 2: \(Y_{1},Y_{2},\ldots,Y_{q}\)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Canonical Correlation vs. Other Methods}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4288}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2859}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2859}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Method} & \textbf{Set 1} & \textbf{Set 2} \\
+Correlation & 1 variable & 1 variable \\
+Multiple Regression & Multiple & 1 variable \\
+Canonical Correlation & Multiple & Multiple \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Canonical Variates}
+\textbf{First Canonical Variate Pair:}
+
+\[U_{1} = a_{11}X_{1} + a_{12}X_{2} + \ldots + a_{1p}X_{p}\]
+\[V_{1} = b_{11}Y_{1} + b_{12}Y_{2} + \ldots + b_{1q}Y_{q}\]
+
+such that \(\text{cor}\left( U_{1},V_{1} \right)\) is maximized
+\end{frame}
+
+\begin{frame}{Number of Canonical Correlations}
+\textbf{How Many Pairs?}
+
+\[k = \min(p,q)\]
+
+Each subsequent pair:
+
+\begin{itemize}
+\item
+  Uncorrelated with previous pairs
+\item
+  Maximizes remaining correlation
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Canonical Correlation Coefficients}
+\textbf{Ordering:}
+
+\[\rho_{1} \geq \rho_{2} \geq \ldots \geq \rho_{k} \geq 0\]
+
+where \(\rho_{i}\) is the \(i\)-th canonical correlation
+\end{frame}
+
+\begin{frame}{Testing Significance}
+\textbf{Test All Correlations:}
+
+\[H_{0}:\rho_{1} = \rho_{2} = \ldots = \rho_{k} = 0\]
+
+\textbf{Test Remaining Correlations:}
+
+\[H_{0}:\rho_{m + 1} = \ldots = \rho_{k} = 0\]
+\end{frame}
+
+\begin{frame}{Wilks' Lambda for Canonical Correlation}
+\[\Lambda = \prod_{i = 1}^{k}\left( 1 - \rho_{i}^{2} \right)\]
+
+Approximate chi-square distribution for testing
+\end{frame}
+
+\begin{frame}{Canonical Loadings}
+\textbf{Structure Coefficients:}
+
+Correlation between original variables and canonical variates
+
+\begin{itemize}
+\item
+  Help interpret meaning of canonical variates
+\item
+  More stable than canonical weights
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Redundancy Analysis}
+\textbf{Proportion of Variance Explained:}
+
+How much variance in one set is explained by the other set through
+canonical variates
+
+\[\text{ Redundancy } = \left( \frac{1}{p} \right)\sum_{j = 1}^{p}R_{X_{j},V_{1}}^{2}\]
+\end{frame}
+
+\begin{frame}{Interpreting Canonical Correlations}
+\begin{enumerate}
+\item
+  \textbf{Examine significance:} Are correlations statistically
+  significant?
+\item
+  \textbf{Check magnitude:} Are correlations practically meaningful?
+\item
+  \textbf{Interpret loadings:} What do canonical variates represent?
+\item
+  \textbf{Assess redundancy:} How much variance explained?
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Case Study: Lifestyle vs. Physiology}
+\textbf{Application of Canonical Correlation}
+
+Question: How do lifestyle factors relate to physiological health
+markers?
+\end{frame}
+
+\begin{frame}{Lifestyle-Physiology Relationship: Setup}
+\textbf{Set 1 - Lifestyle Factors (p = 5):}
+
+\begin{itemize}
+\item
+  Exercise hours/week
+\item
+  Smoking years
+\item
+  Alcohol units/week
+\item
+  Stress score
+\item
+  Sleep hours
+\end{itemize}
+
+\textbf{Set 2 - Physiological Markers (q = 6):}
+
+\begin{itemize}
+\item
+  Systolic BP, Diastolic BP
+\item
+  Cholesterol, Glucose
+\item
+  Triglycerides, HDL
+\end{itemize}
+
+\textbf{Maximum pairs:} min(5, 6) = 5
+\end{frame}
+
+\begin{frame}{Canonical Correlations: Results}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3001}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3001}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4002}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Pair} & \textbf{Correlation} & \textbf{Interpretation} \\
+1 & 0.639 & Strong relationship \\
+2 & 0.244 & Moderate relationship \\
+3-5 & \textless{} 0.12 & Weak relationships \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{Focus on first canonical correlation (r = 0.639)}
+\end{frame}
+
+\begin{frame}{First Canonical Variate: Lifestyle}
+\textbf{Canonical Loadings (Structure Coefficients):}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6667}}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Variable} & \textbf{Loading} \\
+Exercise hours & +0.65 \\
+Stress score & -0.53 \\
+Alcohol units & -0.37 \\
+Sleep hours & +0.33 \\
+Smoking years & -0.27 \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{Interpretation:} Healthy lifestyle pattern (more exercise, less
+stress)
+\end{frame}
+
+\begin{frame}{First Canonical Variate: Physiology}
+\textbf{Canonical Loadings:}
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.6667}}
+  >{\centering\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.3333}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Variable} & \textbf{Loading} \\
+Diastolic BP & -0.70 \\
+Systolic BP & -0.68 \\
+Cholesterol & -0.65 \\
+HDL & +0.65 \\
+Glucose & -0.61 \\
+Triglycerides & -0.59 \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+
+\textbf{Interpretation:} Favorable health profile (lower BP, higher HDL)
+\end{frame}
+
+\begin{frame}{Key Insights: Lifestyle-Physiology Link}
+\begin{enumerate}
+\item
+  Strong first-pair canonical correlation (r = 0.639) between lifestyle
+  and health variates
+\item
+  Healthy lifestyle pattern → favorable physiological profile, in this
+  simulation
+\item
+  Exercise and low stress load most heavily on the first lifestyle
+  variate
+\item
+  Blood pressure and cholesterol load most heavily on the first
+  physiology variate
+\end{enumerate}
+
+\textbf{Note:} Association between canonical variates, not a domain-wide
+or causal claim
+\end{frame}
+
+\begin{frame}{Factor Analysis with Regression}
+Combining Dimension Reduction and Prediction
+\end{frame}
+
+\begin{frame}{The Multicollinearity Problem}
+\textbf{Issue:} Highly correlated predictors in regression
+
+\textbf{Consequences:}
+
+\begin{itemize}
+\item
+  Unstable coefficient estimates
+\item
+  Large standard errors
+\item
+  Difficult interpretation
+\item
+  Poor prediction in new samples
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Factor-Based Regression Solution}
+\textbf{Strategy:}
+
+\begin{enumerate}
+\item
+  Extract factors from correlated predictors
+\item
+  Use factor scores as predictors
+\item
+  Fit regression with orthogonal factors
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Factor-Based Regression Workflow}
+\begin{enumerate}
+\item
+  \textbf{Factor Analysis:} Extract factors from \(X\) variables
+\item
+  \textbf{Compute Factor Scores:} For each observation
+\item
+  \textbf{Regression:} Predict \(Y\) using factor scores
+\item
+  \textbf{Interpretation:} Results in terms of factors
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Benefits of Factor-Based Regression}
+\textbf{Advantages:}
+
+\begin{itemize}
+\item
+  Reduces multicollinearity (orthogonal factors)
+\item
+  Dimensionality reduction (fewer predictors)
+\item
+  Conceptual interpretation (latent constructs)
+\item
+  More stable estimates
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Comparing Approaches}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.4288}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2859}}
+  >{\centering\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2859}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Aspect} & \textbf{Direct Regression} & \textbf{Factor
+Regression} \\
+Multicollinearity & Problem & Eliminated \\
+Interpretation & Original variables & Latent factors \\
+Predictors & Many & Few \\
+Variance explained & Higher & May be lower \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Principal Components Regression}
+\textbf{Alternative Approach:}
+
+Use PCA instead of factor analysis
+
+\textbf{Difference:}
+
+\begin{itemize}
+\item
+  PCA: Explains total variance
+\item
+  FA: Explains common variance (removes unique variance)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Other Methods for Multicollinearity}
+\textbf{Ridge Regression:} Shrinks coefficients toward zero
+
+\textbf{Lasso:} Variable selection via L1 penalty
+
+\textbf{Partial Least Squares:} Finds components that predict Y well
+\end{frame}
+
+\begin{frame}{Cautions and Limitations}
+\textbf{Factor-Based Regression Limitations:}
+
+\begin{itemize}
+\item
+  Factor extraction somewhat subjective
+\item
+  Results depend on specific sample
+\item
+  Prediction requires computing factor scores with same loadings
+\item
+  May lose some predictive information
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Programming and Commercial Systems}
+Implementing Multivariate Methods
+\end{frame}
+
+\begin{frame}[fragile]{Python for Multivariate Analysis}
+\textbf{Key Libraries:}
+
+\begin{itemize}
+\item
+  \texttt{statsmodels}: Statistical models and tests
+\item
+  \texttt{scikit-learn}: Machine learning algorithms
+\item
+  \texttt{numpy} / \texttt{scipy}: Numerical computations
+\item
+  \texttt{pandas}: Data manipulation
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{Python: Logistic Regression}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.linear\_model }\ImportTok{import}\NormalTok{ LogisticRegression}
+
+\NormalTok{model }\OperatorTok{=}\NormalTok{ LogisticRegression()}
+\NormalTok{model.fit(X\_train, y\_train)}
+\NormalTok{predictions }\OperatorTok{=}\NormalTok{ model.predict(X\_test)}
+\NormalTok{probabilities }\OperatorTok{=}\NormalTok{ model.predict\_proba(X\_test)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Python: Hotelling's T-squared}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ scipy.stats }\ImportTok{import}\NormalTok{ chi2}
+\ImportTok{import}\NormalTok{ numpy }\ImportTok{as}\NormalTok{ np}
+
+\CommentTok{\# Compute T{-}squared statistic}
+\NormalTok{diff }\OperatorTok{=}\NormalTok{ mean1 }\OperatorTok{{-}}\NormalTok{ mean2}
+\NormalTok{S\_pooled\_inv }\OperatorTok{=}\NormalTok{ np.linalg.inv(S\_pooled)}
+\NormalTok{T2 }\OperatorTok{=}\NormalTok{ (n1 }\OperatorTok{*}\NormalTok{ n2) }\OperatorTok{/}\NormalTok{ (n1 }\OperatorTok{+}\NormalTok{ n2) }\OperatorTok{*}\NormalTok{ diff.T }\OperatorTok{@}\NormalTok{ S\_pooled\_inv }\OperatorTok{@}\NormalTok{ diff}
+
+\CommentTok{\# Transform to F}
+\NormalTok{p }\OperatorTok{=} \BuiltInTok{len}\NormalTok{(mean1)}
+\NormalTok{F\_stat }\OperatorTok{=}\NormalTok{ ((n1 }\OperatorTok{+}\NormalTok{ n2 }\OperatorTok{{-}}\NormalTok{ p }\OperatorTok{{-}} \DecValTok{1}\NormalTok{) }\OperatorTok{*}\NormalTok{ T2) }\OperatorTok{/}\NormalTok{ ((n1 }\OperatorTok{+}\NormalTok{ n2 }\OperatorTok{{-}} \DecValTok{2}\NormalTok{) }\OperatorTok{*}\NormalTok{ p)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Python: MANOVA}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ statsmodels.multivariate.manova }\ImportTok{import}\NormalTok{ MANOVA}
+
+\CommentTok{\# Fit MANOVA model}
+\NormalTok{manova }\OperatorTok{=}\NormalTok{ MANOVA.from\_formula(}
+    \StringTok{\textquotesingle{}Y1 + Y2 + Y3 \textasciitilde{} Group\textquotesingle{}}\NormalTok{,}
+\NormalTok{    data}\OperatorTok{=}\NormalTok{df}
+\NormalTok{)}
+
+\CommentTok{\# Test results}
+\BuiltInTok{print}\NormalTok{(manova.mv\_test())}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{Python: Canonical Correlation}
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{from}\NormalTok{ sklearn.cross\_decomposition }\ImportTok{import}\NormalTok{ CCA}
+
+\CommentTok{\# Canonical correlation analysis}
+\NormalTok{cca }\OperatorTok{=}\NormalTok{ CCA(n\_components}\OperatorTok{=}\DecValTok{2}\NormalTok{)}
+\NormalTok{cca.fit(X\_set, Y\_set)}
+
+\CommentTok{\# Transform to canonical variates}
+\NormalTok{X\_c, Y\_c }\OperatorTok{=}\NormalTok{ cca.transform(X\_set, Y\_set)}
+
+\CommentTok{\# Canonical correlations}
+\NormalTok{correlations }\OperatorTok{=}\NormalTok{ [np.corrcoef(X\_c[:, i], Y\_c[:, i])[}\DecValTok{0}\NormalTok{, }\DecValTok{1}\NormalTok{]}
+                \ControlFlowTok{for}\NormalTok{ i }\KeywordTok{in} \BuiltInTok{range}\NormalTok{(}\DecValTok{2}\NormalTok{)]}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}[fragile]{R for Multivariate Analysis}
+\textbf{Key Packages:}
+
+\begin{itemize}
+\item
+  \texttt{stats}: Base statistical functions
+\item
+  \texttt{MASS}: Advanced statistical methods
+\item
+  \texttt{car}: Companion to Applied Regression
+\item
+  \texttt{vegan}: Multivariate analysis
+\end{itemize}
+\end{frame}
+
+\begin{frame}[fragile]{R: MANOVA Example}
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{\# Fit MANOVA}
+\NormalTok{model }\OtherTok{\textless{}{-}} \FunctionTok{manova}\NormalTok{(}\FunctionTok{cbind}\NormalTok{(Y1, Y2, Y3) }\SpecialCharTok{\textasciitilde{}}\NormalTok{ Group, }\AttributeTok{data =}\NormalTok{ df)}
+
+\CommentTok{\# Test results}
+\FunctionTok{summary}\NormalTok{(model, }\AttributeTok{test =} \StringTok{"Wilks"}\NormalTok{)}
+\FunctionTok{summary}\NormalTok{(model, }\AttributeTok{test =} \StringTok{"Pillai"}\NormalTok{)}
+
+\CommentTok{\# Follow{-}up univariate tests}
+\FunctionTok{summary.aov}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+\end{frame}
+
+\begin{frame}{Commercial Software: SPSS}
+\textbf{GUI-Based Analysis:}
+
+\begin{itemize}
+\item
+  Analyze \textgreater{} General Linear Model \textgreater{}
+  Multivariate
+\item
+  Analyze \textgreater{} Regression \textgreater{} Binary Logistic
+\item
+  Analyze \textgreater{} Correlate \textgreater{} Canonical Correlation
+\end{itemize}
+
+\textbf{Syntax:} Also supports command syntax for reproducibility
+\end{frame}
+
+\begin{frame}[fragile]{Commercial Software: SAS}
+\textbf{Key Procedures:}
+
+\begin{itemize}
+\item
+  \texttt{PROC\ LOGISTIC}: Logistic regression
+\item
+  \texttt{PROC\ GLM}: General linear models (MANOVA)
+\item
+  \texttt{PROC\ CANCORR}: Canonical correlation
+\item
+  \texttt{PROC\ FACTOR}: Factor analysis
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Software Comparison}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.2501}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3751}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 4\tabcolsep) * \real{0.3751}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Software} & \textbf{Strengths} & \textbf{Limitations} \\
+Python & Free, flexible, ML integration & Statistical testing less
+developed \\
+R & Free, comprehensive stats & Steeper learning curve \\
+SPSS & GUI, easy to learn & Expensive, less flexible \\
+SAS & Enterprise, comprehensive & Very expensive, complex \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Choosing Software}
+\textbf{Considerations:}
+
+\begin{itemize}
+\item
+  Cost (free vs. commercial)
+\item
+  Learning curve
+\item
+  Specific methods needed
+\item
+  Integration with workflow
+\item
+  Reproducibility requirements
+\item
+  Team expertise
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Best Practices: Code Documentation}
+\textbf{Essential Elements:}
+
+\begin{itemize}
+\item
+  Comment your code clearly
+\item
+  Document data preprocessing steps
+\item
+  Record package versions
+\item
+  Save random seeds for reproducibility
+\item
+  Version control (Git)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Best Practices: Workflow}
+\begin{enumerate}
+\item
+  \textbf{Data Cleaning:} Handle missing values, outliers
+\item
+  \textbf{Exploratory Analysis:} Visualize distributions
+\item
+  \textbf{Check Assumptions:} Test before analysis
+\item
+  \textbf{Run Analysis:} Use appropriate methods
+\item
+  \textbf{Validate Results:} Cross-validation, diagnostics
+\item
+  \textbf{Document:} Clear reporting
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Case Study Summary}
+\textbf{Healthcare Risk Assessment: What We Learned}
+\end{frame}
+
+\begin{frame}{Key Findings: Prediction and Classification}
+\textbf{Logistic Regression Results:}
+
+\begin{itemize}
+\item
+  71\% accuracy predicting CVD risk (AUC = 0.77) on synthetic data
+\item
+  Exercise strongest by standardized effect size (not raw OR)
+\item
+  Stress increases risk 25\% per point (OR = 1.25)
+\item
+  Demonstrates how such a model could identify high-risk patients on
+  real data
+\end{itemize}
+
+\textbf{Note:} Simulated dataset -- illustrates the method, not a
+clinical recommendation
+\end{frame}
+
+\begin{frame}{Key Findings: Group Comparisons}
+\textbf{Hotelling's T-squared:}
+
+\begin{itemize}
+\item
+  Groups differ significantly across 6 health markers (T² = 228.65, p
+  \textless{} 0.0001)
+\item
+  Expected: 3 of these 6 variables define the grouping rule (circular by
+  construction)
+\item
+  Largest differences: cholesterol (+12.3) and triglycerides (+11.9)
+\end{itemize}
+
+\textbf{Box's M Test:}
+
+\begin{itemize}
+\item
+  Corrected test fails to reject equal covariances (\(\chi^{2} = 8.46\),
+  df = 10, p = 0.584)
+\item
+  No evidence against the MANOVA assumption -- not proof it holds
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Key Findings: Treatment Effectiveness}
+\textbf{MANOVA Results (synthetic data):}
+
+\begin{itemize}
+\item
+  Intervention improves all health outcomes (Λ = 0.889, p \textless{}
+  0.0001)
+\item
+  Blood pressure: -6.5 / -4.2 mmHg
+\item
+  Cholesterol: -7.9 mg/dL
+\item
+  Glucose: -5.6 mg/dL
+\end{itemize}
+
+\textbf{Note:} Illustrates MANOVA mechanics on simulated data, not a
+real treatment-effect finding
+\end{frame}
+
+\begin{frame}{Key Findings: Lifestyle-Health Relationships}
+\textbf{Canonical Correlation:}
+
+\begin{itemize}
+\item
+  Strong link between the first lifestyle and physiology variates (r =
+  0.639)
+\item
+  Healthy lifestyle pattern: ↑ exercise, ↓ stress
+\item
+  Favorable health profile: ↓ BP, ↑ HDL
+\item
+  40.8\% shared variance between the \textbf{first canonical variate
+  pair} -- not a domain-level ``lifestyle explains 41\% of health''
+  statement, which would need variance-extracted/redundancy indices
+\end{itemize}
+
+\textbf{Insight (illustrative):} In this simulation, lifestyle and
+health-marker patterns are linked as designed
+\end{frame}
+
+\begin{frame}{Methodological Insights}
+\begin{enumerate}
+\item
+  \textbf{Multivariate methods reveal patterns} missed by univariate
+  tests
+\item
+  \textbf{Type I error control} critical with multiple outcomes
+\item
+  \textbf{Assumption testing} (Box's M) validates results
+\item
+  \textbf{Effect sizes matter} beyond statistical significance
+\item
+  \textbf{Clinical context} guides interpretation
+\end{enumerate}
+
+All methods demonstrated with synthetic healthcare data generated for
+this course
+\end{frame}
+
+\begin{frame}{Key Takeaways: Models}
+\textbf{Logistic Regression:}
+
+\begin{itemize}
+\item
+  Use for binary outcomes
+\item
+  Maximum likelihood estimation
+\item
+  Interpret via odds ratios
+\item
+  \textbf{Case Study:} 71\% accuracy predicting CVD risk
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Key Takeaways: Inference}
+\textbf{Covariance Matrix Tests:}
+
+\begin{itemize}
+\item
+  Box's M test for equality
+\item
+  Wishart distribution foundation
+\item
+  \textbf{Case Study:} M = 8.49 (assumption satisfied)
+\end{itemize}
+
+\textbf{Mean Vector Tests:}
+
+\begin{itemize}
+\item
+  Hotelling's T-squared generalizes t-test
+\item
+  Confidence regions are ellipsoids
+\item
+  \textbf{Case Study:} T² = 228.65 (strong group differences)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Key Takeaways: Advanced Methods}
+\textbf{MANOVA:}
+
+\begin{itemize}
+\item
+  Multiple response variables simultaneously
+\item
+  Wilks' Lambda most common test
+\item
+  Controls Type I error
+\item
+  \textbf{Case Study:} Λ = 0.889 (intervention effective)
+\end{itemize}
+
+\textbf{Canonical Correlation:}
+
+\begin{itemize}
+\item
+  Relates two variable sets
+\item
+  Multiple correlation pairs
+\item
+  \textbf{Case Study:} r = 0.639 (lifestyle-health link)
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Key Takeaways: Applications}
+\textbf{Factor-Based Regression:}
+
+\begin{itemize}
+\item
+  Addresses multicollinearity
+\item
+  Dimension reduction
+\item
+  Interpretable factors
+\end{itemize}
+
+\textbf{Software:}
+
+\begin{itemize}
+\item
+  Python: scikit-learn, statsmodels
+\item
+  R: stats, MASS
+\item
+  Commercial: SPSS, SAS
+\item
+  \textbf{Case Study:} All analyses implemented in Python
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Common Pitfalls to Avoid}
+\begin{enumerate}
+\item
+  Using logistic regression without checking convergence
+\item
+  Ignoring multicollinearity in regression
+\item
+  Not checking MANOVA assumptions (Box's M)
+\item
+  Over-interpreting weak canonical correlations
+\item
+  Using too many factors in factor-based regression
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Method Selection Guide}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.4286}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5714}}@{}}
+\toprule\noalign{}
+\endhead
+\textbf{Situation} & \textbf{Method} \\
+Binary outcome & Logistic regression \\
+Multiple groups, multiple responses & MANOVA \\
+Relate two variable sets & Canonical correlation \\
+Multicollinear predictors & Factor/PCA regression \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Books}
+\textbf{Textbooks:}
+
+\begin{itemize}
+\item
+  Agresti (2018) - Introduction to Categorical Data Analysis
+\item
+  Johnson \& Wichern (2007) - Applied Multivariate Statistical Analysis
+\item
+  Rencher \& Christensen (2012) - Methods of Multivariate Analysis
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Online}
+\textbf{StatQuest YouTube Channel:}
+
+\begin{enumerate}
+\item
+  \textbf{Logistic Regression:}\\
+  \url{https://www.youtube.com/watch?v=yIYKR4sgzI8}
+\item
+  \textbf{MANOVA Concepts:} Search ``MANOVA StatQuest''
+\item
+  \textbf{PCA (for PCR):}\\
+  \url{https://www.youtube.com/watch?v=FgakZw6K1QQ}
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Recommended Resources: Software}
+\textbf{Documentation:}
+
+\begin{itemize}
+\item
+  Scikit-learn: \url{https://scikit-learn.org}
+\item
+  Statsmodels: \url{https://www.statsmodels.org}
+\item
+  R Documentation: \url{https://www.rdocumentation.org}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Questions?}
+\textbf{ Thank you for your attention! }
+
+Juliho Castillo Colmenares\\
+julihocc@tec
+
+Office: Tec de Monterrey CCM Office 1540\\
+Office Hours: Monday-Friday, 9:00 AM - 5:00 PM
+\end{frame}
+
+\begin{frame}{Next Steps: This Week}
+\textbf{For This Week:}
+
+\begin{itemize}
+\item
+  Review lecture notes thoroughly
+\item
+  Practice with provided examples
+\item
+  Complete practice questions
+\item
+  Prepare for E07 quiz
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Next Steps: Preparation for Evaluation}
+\textbf{Key Topics to Master:}
+
+\begin{itemize}
+\item
+  Logistic regression: logit transformation, MLE, interpretation
+\item
+  Hotelling's T-squared: computation and F transformation
+\item
+  MANOVA: assumptions, Wilks' Lambda, interpretation
+\item
+  Canonical correlation: number of pairs, loadings, significance
+\item
+  Factor-based regression: workflow, benefits, limitations
+\item
+  Software implementation: Python and R basics
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Integration with Previous Topics}
+\textbf{Building on Earlier Concepts:}
+
+\begin{itemize}
+\item
+  Factor Analysis (L04) → Factor-based regression
+\item
+  Discriminant Analysis (L05) → MANOVA post-hoc
+\item
+  PCA principles → Principal components regression
+\end{itemize}
+
+\textbf{Comprehensive Framework:} All methods part of the multivariate
+toolkit
+\end{frame}
+
+\end{document}
+
+
+
+

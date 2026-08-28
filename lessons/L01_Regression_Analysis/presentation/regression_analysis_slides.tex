@@ -1,0 +1,386 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+\documentclass[aspectratio=169,ignorenonframetext]{beamer}
+\newif\ifbibliography
+\usepackage{pgfpages}
+\setbeamertemplate{caption}[numbered]
+\setbeamertemplate{caption label separator}{: }
+\setbeamercolor{caption name}{fg=normal text.fg}
+\beamertemplatenavigationsymbolsempty
+% remove section numbering
+\setbeamertemplate{part page}{
+  \centering
+  \begin{beamercolorbox}[sep=16pt,center]{part title}
+    \usebeamerfont{part title}\insertpart\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{section page}{
+  \centering
+  \begin{beamercolorbox}[sep=12pt,center]{section title}
+    \usebeamerfont{section title}\insertsection\par
+  \end{beamercolorbox}
+}
+\setbeamertemplate{subsection page}{
+  \centering
+  \begin{beamercolorbox}[sep=8pt,center]{subsection title}
+    \usebeamerfont{subsection title}\insertsubsection\par
+  \end{beamercolorbox}
+}
+% Prevent slide breaks in the middle of a paragraph
+\widowpenalties 1 10000
+\raggedbottom
+\AtBeginPart{
+  \frame{\partpage}
+}
+\AtBeginSection{
+  \ifbibliography
+  \else
+    \frame{\sectionpage}
+  \fi
+}
+\AtBeginSubsection{
+  \frame{\subsectionpage}
+}
+\usepackage{iftex}
+\ifPDFTeX
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math} % this also loads fontspec
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+\usepackage{lmodern}
+\ifPDFTeX\else
+  % xetex/luatex font selection
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{color}
+\usetheme{Madrid}
+\definecolor{TecBlue}{RGB}{0,51,102}
+\setbeamercolor{structure}{fg=TecBlue}
+\setbeamercolor{frametitle}{fg=TecBlue}
+\setbeamercolor{title}{fg=white}
+\setbeamertemplate{navigation symbols}{}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\newenvironment{Shaded}{}{}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\BuiltInTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{#1}}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{#1}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{#1}}
+\newcommand{\ImportTok}[1]{\textcolor[rgb]{0.00,0.50,0.00}{\textbf{#1}}}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{#1}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{#1}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{#1}}}}
+\usepackage{longtable,booktabs,array}
+\usepackage{caption}
+\captionsetup[table]{skip=6pt}
+\newcounter{none} % for unnumbered tables
+\usepackage{calc} % for calculating minipage widths
+\usepackage{caption}
+% Make caption package work with longtable
+\makeatletter
+\def\fnum@table{\tablename~\thetable}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\usepackage{bookmark}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\urlstyle{same}
+% fallback for those not using the hyperref driver hyperxmp:
+\makeatletter
+\@ifundefined{xmpquote}{\newcommand{\xmpquote}[1]{#1}}{}
+\makeatother
+\hypersetup{
+  pdftitle={Regression Analysis},
+  pdfauthor={Juliho Castillo Colmenares},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+
+\title{\texorpdfstring{Regression Analysis}{Regression Analysis}}
+\author{\texorpdfstring{Juliho Castillo
+Colmenares}{Juliho Castillo Colmenares}}
+\subtitle{Linear, Multiple, and Diagnostic Modeling}
+\institute{Tec de Monterrey}
+\date{}
+
+\begin{document}
+\frame{\titlepage}
+
+\begin{frame}{Today's Agenda}
+\begin{enumerate}
+\item
+  Foundations of Simple Linear Regression (OLS)
+\item
+  ANOVA \& Intervals (Confidence vs. Prediction)
+\item
+  Residual Diagnostics \& Normality Assessment
+\item
+  Stepwise Variable Selection \& Information Criteria
+\item
+  Non-Linearity \& Polynomial Transformations
+\item
+  Multiple Linear Regression (Matrix Formulation \& VIF)
+\item
+  Aberrant Observations \& Heteroskedasticity (Cook's D, HC3)
+\item
+  Practical Case Study: Residential Property Valuation
+\end{enumerate}
+\end{frame}
+
+\begin{frame}{Simple Linear Regression: The OLS Model}
+\textbf{Population Equation:}
+\[y_{i} = \beta_{0} + \beta_{1}x_{i} + \epsilon_{i},\quad i = 1,\ldots,n\]
+
+where \(\mathbb{E}\left\lbrack \epsilon_{i} \right\rbrack = 0\),
+\(\operatorname{Var}(\epsilon_{i}) = \sigma^{2}\), and
+\(\operatorname{Cov}(\epsilon_{i},\epsilon_{j}) = 0\).
+
+\textbf{Ordinary Least Squares Estimators:}
+\[{\hat{\beta}}_{1} = \frac{\sum_{i = 1}^{n}\left( x_{i} - \overline{x} \right)\left( y_{i} - \overline{y} \right)}{\sum_{i = 1}^{n}\left( x_{i} - \overline{x} \right)^{2}} = \frac{S_{xy}}{S_{xx}},\quad\quad{\hat{\beta}}_{0} = \overline{y} - {\hat{\beta}}_{1}\overline{x}\]
+
+\textbf{Gauss-Markov Theorem:} Under the classical assumptions, OLS
+estimators are the \textbf{Best Linear Unbiased Estimators (BLUE)}.
+\end{frame}
+
+\begin{frame}{ANOVA \& Variation Decomposition}
+\textbf{Total Variation Partitioning:}
+\[\underset{\text{ SST}}{\underbrace{\sum\left( y_{i} - \overline{y} \right)^{2}}} = \underset{\text{ SSR (Explained)}}{\underbrace{\sum\left( {\hat{y}}_{i} - \overline{y} \right)^{2}}} + \underset{\text{ SSE (Residual)}}{\underbrace{\sum\left( y_{i} - {\hat{y}}_{i} \right)^{2}}}\]
+
+\textbf{Goodness of Fit (\(R^{2}\)):}
+\[R^{2} = \frac{\text{SSR}}{\text{ SST}} = 1 - \frac{\text{SSE}}{\text{ SST}}\]
+
+\textbf{Overall Model \(F\)-Test:}
+\[F = \frac{\text{MSR}}{\text{ MSE}} = \frac{\frac{\text{SSR}}{k}}{\frac{\text{ SSE}}{n - k - 1}} \sim F_{k,n - k - 1}\]
+\end{frame}
+
+\begin{frame}{Mean Response vs. Individual Prediction Intervals}
+For a new observation at \(x_{0}\):
+
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{1. Mean Response CI:}
+\[{\hat{y}}_{0} \pm t_{\text{crit}} \cdot s\sqrt{\frac{1}{n} + \frac{\left( x_{0} - \overline{x} \right)^{2}}{S_{xx}}}\]
+
+\begin{itemize}
+\item
+  Captures uncertainty in the \textbf{average response}
+  \(\mathbb{E}\left\lbrack Y~|~X = x_{0} \right\rbrack\).
+\item
+  Narrows as sample size \(n \rightarrow \infty\).
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{2. Individual Prediction PI:}
+\[{\hat{y}}_{0} \pm t_{\text{crit}} \cdot s\sqrt{1 + \frac{1}{n} + \frac{\left( x_{0} - \overline{x} \right)^{2}}{S_{xx}}}\]
+
+\begin{itemize}
+\item
+  Captures uncertainty in a \textbf{single new outcome}
+  \(Y_{\text{new}}\).
+\item
+  Always strictly wider due to \(+ 1\) term (\(\sigma^{2}\)).
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Multiple Linear Regression (Matrix Formulation)}
+\textbf{Vector Model:}
+\(\mathbf{y} = \mathbf{X}\mathbf{\beta} + \mathbf{\epsilon}\), with
+\(\mathbf{\epsilon} \sim \mathcal{N}_{n\left( \mathbf{0},\sigma^{2}\mathbf{I}_{n} \right)}\).
+
+\textbf{Normal Equations \& OLS Solution:}
+\[\mathbf{X}^{T}\mathbf{X}\hat{\mathbf{\beta}} = \mathbf{X}^{T}\mathbf{y} \Longrightarrow \hat{\mathbf{\beta}} = \left( \mathbf{X}^{T}\mathbf{X} \right)^{- 1}\mathbf{X}^{T}\mathbf{y}\]
+
+\textbf{Covariance of Estimates \& Hat Matrix:}
+\[\operatorname{Cov}(\hat{\mathbf{\beta}}) = \sigma^{2}\left( \mathbf{X}^{T}\mathbf{X} \right)^{- 1},\quad\quad\hat{\mathbf{y}} = \mathbf{H}\mathbf{y} = {\mathbf{X}(\mathbf{X}^{T}\mathbf{X})}^{- 1}\mathbf{X}^{T}\mathbf{y}\]
+
+The diagonal \(h_{ii}\) represents the \textbf{leverage} of observation
+\(i\).
+\end{frame}
+
+\begin{frame}{Multicollinearity: The VIF Diagnostic}
+\textbf{Problem:} High correlation between predictors inflates standard
+errors \(\operatorname{Var}({\hat{\beta}}_{j})\).
+
+\textbf{Variance Inflation Factor (VIF):}
+\[\text{ VIF}_{j} = \frac{1}{1 - R_{j}^{2}}\] where \(R_{j}^{2}\) is the
+\(R^{2}\) obtained from regressing \(X_{j}\) onto all other remaining
+predictors.
+
+\textbf{Interpretation Guidelines:}
+
+\begin{itemize}
+\item
+  \(\text{VIF } = 1\): Completely independent features.
+\item
+  \(1 < \text{ VIF } < 5\): Acceptable mild correlation.
+\item
+  \(\text{VIF } \geq 10\): Severe collinearity; requires feature pruning
+  or Ridge/PCA regularization.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Aberrant Data: Outliers \& Cook's Distance}
+{\def\LTcaptype{none} % do not increment counter
+\begin{longtable}[]{@{}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}
+  >{\raggedright\arraybackslash}p{(\linewidth - 2\tabcolsep) * \real{0.5000}}@{}}
+\toprule\noalign{}
+\endhead
+\begin{minipage}[t]{\linewidth}\raggedright
+\textbf{1. Studentized Residuals:}
+\[r_{i} = \frac{e_{i}}{s\sqrt{1 - h_{ii}}}\]
+
+\begin{itemize}
+\item
+  Identifies \(Y\)-space outliers (\(|r_{i}| > 3\)).
+\end{itemize}
+
+\textbf{2. Leverage (\(h_{ii}\)):}
+
+\begin{itemize}
+\item
+  Identifies \(X\)-space extreme points
+  (\(h_{ii} > \frac{2(k + 1)}{n}\)).
+\end{itemize}
+\end{minipage} & \begin{minipage}[t]{\linewidth}\raggedright
+\textbf{3. Cook's Distance (\(D_{i}\)):}
+\[D_{i} = \frac{r_{i}^{2}}{k + 1}\left( \frac{h_{ii}}{1 - h_{ii}} \right)\]
+
+\begin{itemize}
+\item
+  Measures the overall influence of point \(i\) on \textbf{all} fitted
+  values \(\hat{\mathbf{y}}\).
+\item
+  Threshold: \(D_{i} > \frac{4}{n}\) warrants detailed investigation.
+\end{itemize}
+\end{minipage} \\
+\bottomrule\noalign{}
+\end{longtable}
+}
+\end{frame}
+
+\begin{frame}{Heteroskedasticity: Breusch-Pagan \& Robust SE}
+\textbf{Violation:}
+\(\operatorname{Var}(\epsilon_{i}~|~\mathbf{X}) = \sigma_{i}^{2} \neq \text{ constant}\).
+
+\textbf{Breusch-Pagan Test:} Regress squared residuals
+\(\frac{e_{i}^{2}}{{\hat{\sigma}}^{2}}\) on \(\mathbf{X}\). Test
+statistic \(LM = \frac{1}{2}\text{SSR}_{\text{aux}} \sim \chi_{k}^{2}\).
+Reject \(H_{0}\) if \(p < 0.05\).
+
+\textbf{Remedies:}
+
+\begin{enumerate}
+\item
+  \textbf{Heteroskedasticity-Consistent (HC3) Robust SE:}
+  \[\operatorname{Cov}_{HC3}\left( \hat{\mathbf{\beta}} \right) = \left( \mathbf{X}^{T}\mathbf{X} \right)^{- 1}\left( \sum_{i = 1}^{n}\frac{e_{i}^{2}}{\left( 1 - h_{ii} \right)^{2}}\mathbf{x}_{i}\mathbf{x}_{i}^{T} \right)\left( \mathbf{X}^{T}\mathbf{X} \right)^{- 1}\]
+\item
+  \textbf{Weighted Least Squares (WLS):} Weight observations by
+  \(w_{i} = \frac{1}{\sigma_{i}^{2}}\).
+\end{enumerate}
+\end{frame}
+
+\begin{frame}[fragile]{Case Study: Housing Valuation Workflow}
+\textbf{Scenario:} 1,000 residential transactions with 7 structural \&
+geographic predictors.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\ImportTok{import}\NormalTok{ statsmodels.formula.api }\ImportTok{as}\NormalTok{ smf}
+
+\CommentTok{\# 1. Quadratic Polynomial Specification}
+\NormalTok{formula }\OperatorTok{=} \StringTok{"sale\_price \textasciitilde{} sqft\_living + bedrooms + bathrooms + "} \OperatorTok{\textbackslash{}}
+          \StringTok{"dist\_city\_center\_km + building\_grade + house\_age\_years + I(house\_age\_years**2)"}
+
+\CommentTok{\# 2. Fit with Robust HC3 Covariance}
+\NormalTok{model }\OperatorTok{=}\NormalTok{ smf.ols(formula, data}\OperatorTok{=}\NormalTok{df).fit()}
+\NormalTok{robust\_model }\OperatorTok{=}\NormalTok{ model.get\_robustcov\_results(cov\_type}\OperatorTok{=}\StringTok{"HC3"}\NormalTok{)}
+\BuiltInTok{print}\NormalTok{(robust\_model.summary())}
+\end{Highlighting}
+\end{Shaded}
+
+\textbf{Findings:} Model explains \(88.4\%\) of price variance with
+valid robust \(p\)-values.
+\end{frame}
+
+\begin{frame}{Summary \& Key Takeaways}
+\begin{itemize}
+\item
+  \textbf{Linear Regression} is the foundational tool for parametric
+  inference and prediction.
+\item
+  Always verify OLS assumptions: linearity, normality of residuals,
+  homoskedasticity, and no extreme collinearity (\(\text{VIF } < 5\)).
+\item
+  When non-linear patterns exist, incorporate polynomial terms or
+  logarithmic transforms.
+\item
+  Guard against influential outliers using Cook's distance.
+\item
+  When heteroskedasticity is present, employ \textbf{HC3 robust standard
+  errors} to protect inferential validity.
+\end{itemize}
+
+{ \textbf{Next Chapter: Chapter 2 --- Multivariate Analysis Foundations}
+}
+\end{frame}
+
+\end{document}
+
+
+
+
