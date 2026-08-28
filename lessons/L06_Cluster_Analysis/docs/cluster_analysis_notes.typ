@@ -283,13 +283,13 @@ Distance = *maximum* distance between any two points in the clusters
 $ d(C_1, C_2) = max_(x in C_1, y in C_2) d(x, y) $
 
 *Advantages:*
-- Less sensitive to outliers than single linkage
+- Avoids single linkage's chaining effect (does not merge clusters based on one close pair while ignoring the rest)
 - Tends to produce compact, spherical clusters
-- More robust to noise
 
 *Disadvantages:*
 - May break large clusters
 - Biased toward finding clusters of similar size
+- Its *maximum*-pairwise-distance criterion is itself driven by whichever two points are farthest apart, so a single outlier in either cluster can dominate the linkage distance -- complete linkage is not generally "robust to outliers," only less prone than single linkage to the specific failure mode of chaining
 
 === Average Linkage
 
@@ -304,11 +304,11 @@ $ d(C_1, C_2) = 1/(n_1 n_2) sum_(x in C_1) sum_(y in C_2) d(x, y) $
 
 === Ward's Method
 
-Minimizes the *total within-cluster sum of squares* (variance)
+Minimizes the *total within-cluster sum of squares* (variance), *provided the dissimilarity is squared Euclidean distance* -- this variance-minimizing interpretation does not hold for other distance metrics (e.g. Manhattan, cosine), even though Ward's linkage update rule can technically be run on any dissimilarity matrix.
 
 At each step, merge the two clusters that result in the smallest increase in total within-cluster variance.
 
-$ "ESS" = sum_(i=1)^k sum_(x in C_i) ||x - mu_i||^2 $
+$ "ESS" = sum_(i=1)^k sum_(x in C_i) ||x - mu_i||_2^2 $
 
 *Advantages:*
 - Tends to create compact, equal-sized clusters
@@ -413,7 +413,7 @@ Similar to k-means but uses actual data points as cluster centers (medoids) inst
 
 === Advantages
 
-- *More robust to outliers* - not affected by extreme values
+- *More robust to outliers than k-means* - an extreme point can still become (or shift) a medoid, but a medoid is constrained to be an actual observation, so it cannot be dragged arbitrarily far the way a computed mean can
 - *Works with any distance metric* - not limited to Euclidean distance
 - *Interpretable centers* - medoids are actual observations
 
@@ -492,9 +492,15 @@ $ macron(s) = 1/n sum_(i=1)^n s(i) $
 
 === Gap Statistic
 
-Compares WCSS to its expected value under a null reference distribution (random data).
+Compares WCSS to its expected value under a null reference distribution (random data):
 
-*Idea:* Choose k where the gap between observed and expected WCSS is largest.
+$ op("Gap")(k) = EE^*[log("WCSS"_k)] - log("WCSS"_k) $
+
+where the expectation is estimated by averaging over many reference datasets sampled uniformly over the observed data's range.
+
+*Selection rule:* Simply picking the $k$ with the largest $op("Gap")(k)$ ignores the Monte Carlo simulation error in estimating the expectation. The standard rule (Tibshirani, Walther & Hastie, 2001) instead uses the *one-standard-error* criterion: letting $s_k$ be the estimated standard error of $op("Gap")(k)$, choose the *smallest* $k$ such that
+$ op("Gap")(k) >= op("Gap")(k+1) - s_(k+1) $
+i.e. the smallest $k$ whose gap is not significantly exceeded by the next larger $k$.
 
 === Davies-Bouldin Index
 
@@ -660,7 +666,7 @@ Use specialized distance measures:
 - *K-means:* Highly sensitive - outliers pull centroids away from dense regions
 - *Hierarchical (Ward's):* Sensitive - outliers inflate variance
 - *Single linkage:* Moderately sensitive - may create singleton clusters
-- *K-medoids:* Most robust - medoids are actual points
+- *K-medoids:* More robust than k-means - medoids are constrained to be actual observations, but an outlier can still be selected as (or influence) a medoid
 
 === Strategies for Handling Outliers
 
