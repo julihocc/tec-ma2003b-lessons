@@ -193,7 +193,7 @@ where:
 \end{itemize}
 \end{frame}
 
-\begin{frame}{Variance Partitioning: Communality \& Uniqueness}
+\begin{frame}[shrink]{Variance Partitioning: Communality \& Uniqueness}
 For standardized variables, total variance of \(X_{j}\) equals 1:
 \[\operatorname{Var}(X_{j}) = \underset{h_{j}^{2}\text{  (Communality)}}{\underbrace{\sum_{i = 1}^{k}\lambda_{ji}^{2}}} + \underset{\text{ Uniqueness}}{\underbrace{\psi_{j}^{2}}} = 1\]
 
@@ -340,7 +340,7 @@ Before extracting factors, evaluate correlation matrix factorability:
 \end{itemize}
 \end{frame}
 
-\begin{frame}[fragile]{Python Implementation: End-to-End Workflow}
+\begin{frame}[fragile,shrink]{Python Implementation: End-to-End Workflow}
 \begin{Shaded}
 \begin{Highlighting}[]
 \ImportTok{from}\NormalTok{ factor\_analyzer }\ImportTok{import}\NormalTok{ FactorAnalyzer, calculate\_kmo, calculate\_bartlett\_sphericity}
@@ -368,7 +368,7 @@ Before extracting factors, evaluate correlation matrix factorability:
 \end{Shaded}
 \end{frame}
 
-\begin{frame}{Case Study: Educational Assessment (Chapter 4)}
+\begin{frame}[shrink]{Case Study: Educational Assessment (Chapter 4)}
 \textbf{Synthetic data:} 200 simulated students, generated from a known
 three-factor model with correlated factors (0.20-0.30). Results below
 demonstrate recovering that known structure -- not a real
