@@ -1,64 +1,62 @@
 # Chapter 5 — Discriminant Analysis
 
-This chapter covers Discriminant Analysis techniques for classification and group separation in multivariate data, focusing on Linear Discriminant Analysis (LDA), Quadratic Discriminant Analysis (QDA), and canonical discriminant functions.
+This chapter covers supervised statistical classification, Fisher's Linear Discriminant Analysis (LDA), Quadratic Discriminant Analysis (QDA), canonical discriminant functions, and Bayesian cost-optimal decision rules.
 
-## Chapter Overview
+## Chapter Overview (Syllabus Section 5)
 
-Discriminant Analysis is a supervised statistical method used to classify observations into predefined groups based on multiple predictor variables. The goal is to find linear combinations of predictors (discriminant functions) that best separate the groups while maximizing between-group differences and minimizing within-group variation.
+Discriminant Analysis seeks to separate and classify observations into distinct, known categorical groups based on a set of continuous predictor variables. This module establishes both the geometric variance-maximization perspective (Fisher) and the probabilistic likelihood perspective (Bayes), covering assumption testing, stepwise feature selection, and marketing segmentation case studies.
 
-Unlike purely black-box machine learning classifiers, discriminant analysis provides interpretable score functions and structural loadings that reveal which variables contribute most to group separation, making it valuable for understanding underlying population differences.
+## Syllabus Topics & Subtopics
 
-## Learning Objectives
-
-By the end of this chapter, students will be able to:
-
-- Distinguish between descriptive and predictive discriminant analysis
-- Apply Fisher's Linear Discriminant Analysis for two-group separation
-- Derive multi-group canonical discriminant functions ($k > 2$ classes)
-- Incorporate prior probabilities and misclassification cost matrices (Expected Cost of Misclassification - ECM)
-- Understand and test assumptions: multivariate normality, covariance homogeneity (Box's M test)
-- Compare LDA vs. Quadratic Discriminant Analysis (QDA)
-- Perform stepwise variable selection using Wilks' Lambda ($\Lambda$)
-- Implement discriminant classification workflows in Python (`scikit-learn`, `scipy`)
+- **5.1** Discrimination for two normal multivariate populations
+- **5.2** Function of costs and a priori probabilities
+- **5.3** Basic discrimination
+- **5.4** Stepwise selection
+- **5.5** Canonical discriminant functions
+- **5.6** Coding and commercial programs
 
 ## Directory Structure
 
 ```text
 L05_Discriminant_Analysis/
-├── data/                                   # Datasets and generation scripts
-│   ├── fetch_marketing.py                  # Synthetic customer behavior data generator
-│   ├── marketing.csv                       # Generated customer dataset (1,200 customers × 8 metrics)
-│   └── MARKETING_DATA_DICTIONARY.md        # Detailed variable descriptions
-├── notes/                                  # Lecture notes and study guides
-│   ├── discriminant_analysis_notes.tex     # Comprehensive study guide (LaTeX)
-│   └── discriminant_analysis_notes.pdf     # Reference compiled study guide PDF
-├── notebook/                               # Interactive Jupyter notebooks
-│   └── marketing_discriminant_analysis.ipynb # End-to-end customer segmentation case study
-├── presentation/                           # Presentation slides
-│   ├── discriminant_analysis_slides.tex    # LaTeX Beamer presentation
-│   └── discriminant_analysis_slides.pdf    # Reference compiled presentation PDF
-└── README.md                               # Module documentation
+├── data/                                         # Datasets and generation scripts
+│   ├── fetch_marketing.py                        # Customer behavioral segmentation generator
+│   ├── marketing.csv                             # Generated dataset (1,200 customers × 7 features)
+│   ├── MARKETING_DATA_DICTIONARY.md              # Detailed variable descriptions
+│   └── README.md                                 # Data documentation & regeneration guide
+├── notebook/                                     # Interactive Jupyter notebooks
+│   ├── marketing_discriminant_analysis.ipynb     # End-to-end customer classification case study
+│   └── README.md                                 # Notebook walkthrough & cell progression
+├── notes/                                        # Lecture notes and study guides
+│   ├── discriminant_analysis_notes.typ           # Comprehensive study guide (Typst)
+│   ├── discriminant_analysis_notes.pdf           # Compiled lecture note PDF
+│   └── README.md                                 # Notes outline & compilation guide
+├── presentation/                                 # Presentation slides
+│   ├── discriminant_analysis_slides.typ          # Typst presentation (Touying university theme)
+│   ├── discriminant_analysis_slides.pdf          # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
+└── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
-python data/fetch_marketing.py
+uv run python lessons/L05_Discriminant_Analysis/data/fetch_marketing.py
 ```
 
 ### 2. Run Interactive Notebook
 ```bash
-jupyter notebook notebook/marketing_discriminant_analysis.ipynb
+uv run jupyter notebook lessons/L05_Discriminant_Analysis/notebook/marketing_discriminant_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (LaTeX)
+### 3. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
-cd presentation/
-pdflatex discriminant_analysis_slides.tex
+cd lessons/L05_Discriminant_Analysis/presentation/
+typst compile discriminant_analysis_slides.typ
 
-# Study Guide Notes
+# Lecture Notes
 cd ../notes/
-pdflatex discriminant_analysis_notes.tex
+typst compile discriminant_analysis_notes.typ
 ```
