@@ -1,77 +1,77 @@
 # Chapter 4 — Factor Analysis
 
-This chapter covers Factor Analysis (FA) techniques for latent variable modeling, common variance decomposition, and dimensionality reduction, along with pedagogical comparisons to Principal Component Analysis (PCA).
+This chapter covers Exploratory Factor Analysis (EFA), the Common Factor Model, factor extraction algorithms, orthogonal and oblique rotations, and factor score estimation.
 
-## Chapter Overview
+## Chapter Overview (Syllabus Section 4)
 
-Factor Analysis is a statistical method used to identify underlying latent variables (factors) that explain the patterns of correlations within a set of observed variables. Unlike Principal Component Analysis (PCA), which focuses on explaining maximum total variance, Factor Analysis specifically models the common variance shared among variables while treating unique variance as measurement error or specific factors.
+Unlike Principal Component Analysis (which reduces total observed variance), Factor Analysis postulates that observed correlations are driven by a smaller set of unobservable *latent constructs*. This module covers the mathematical framework, rotation algorithms, communality estimation, and pedagogical student assessment case studies.
 
-The fundamental goal is to find a smaller number of latent factors that can adequately reproduce the observed correlation matrix, providing insights into the underlying structure of the data.
+## Syllabus Topics & Subtopics
 
-## Learning Objectives
-
-By the end of this chapter, students will be able to:
-
-- Distinguish between Factor Analysis and Principal Component Analysis
-- Understand the common factor model ($\mathbf{X} - \boldsymbol{\mu} = \mathbf{\Lambda F} + \boldsymbol{\varepsilon}$)
-- Apply different factor extraction methods (Principal Axis Factoring, Maximum Likelihood)
-- Determine the optimal number of factors using multiple criteria (Kaiser, Scree plot, Parallel Analysis)
-- Interpret factor loadings, communalities ($h^2$), and uniquenesses ($\psi^2$)
-- Apply orthogonal (Varimax) and oblique (Promax) rotation techniques for simple structure
-- Implement factor analysis workflows in Python (`factor_analyzer`, `scikit-learn`)
+- **4.1** Objectives of factor analysis
+- **4.2** Factor analysis equations
+- **4.3** Choice of the appropriate number of factors
+- **4.4** Factor rotation
+- **4.5** Oblique rotation method
+- **4.6** Coding and commercial programs
 
 ## Directory Structure
 
 ```text
 L04_Factor_Analysis/
 ├── data/                                         # Datasets and generation scripts
-│   ├── fetch_educational.py                      # Synthetic educational assessment data generator
-│   ├── educational.csv                           # Generated student dataset (200 students × 9 metrics)
-│   └── EDUCATIONAL_ASSESSMENT_DATA_DICTIONARY.md # Detailed variable descriptions
-├── notes/                                        # Lecture notes and reports
-│   ├── factor_analysis_notes.tex                 # Comprehensive study guide (LaTeX)
-│   └── executive_report.tex                      # Executive assessment report (LaTeX)
+│   ├── fetch_educational.py                      # Student performance score generator
+│   ├── educational.csv                           # Generated dataset (200 students × 9 metrics)
+│   ├── EDUCATIONAL_ASSESSMENT_DATA_DICTIONARY.md # Detailed variable descriptions
+│   └── README.md                                 # Data documentation & regeneration guide
 ├── notebook/                                     # Interactive Jupyter notebooks
-│   ├── educational_analysis.ipynb                # End-to-end educational assessment case study
-│   └── snippets/                                 # Hands-on tutorial notebook series
-│       ├── 01_pca_basic_example.ipynb            # Basic PCA concepts
-│       ├── 02_component_retention.ipynb          # Retention criteria (Kaiser, scree plot)
-│       ├── 03_factor_analysis_basic.ipynb        # Basic factor analysis
-│       ├── 04_factor_rotation.ipynb              # Rotation comparison (Varimax, Promax)
-│       ├── 05_complete_workflow.ipynb            # Complete end-to-end factor analysis workflow
-│       ├── README.md                             # Snippets guide
-│       ├── TESTING_RESULTS.md                    # Test execution results
-│       └── test_all_snippets.py                  # Automated test script
+│   ├── educational_analysis.ipynb                # Primary factor analysis case study
+│   ├── snippets/                                 # 5 modular concept snippets + test harness
+│   │   ├── 01_pca_basic_example.ipynb            # Snippet 1: Manual vs. sklearn PCA
+│   │   ├── 02_component_retention.ipynb          # Snippet 2: Kaiser rule & Scree plots
+│   │   ├── 03_factor_analysis_basic.ipynb        # Snippet 3: Single-factor model
+│   │   ├── 04_factor_rotation.ipynb              # Snippet 4: Varimax vs. Promax rotation
+│   │   ├── 05_complete_workflow.ipynb            # Snippet 5: End-to-end EFA workflow
+│   │   ├── test_all_snippets.py                  # Automated non-interactive test runner
+│   │   └── README.md                             # Snippets documentation
+│   └── README.md                                 # Notebooks documentation
+├── notes/                                        # Lecture notes and study guides
+│   ├── factor_analysis_notes.typ                 # Comprehensive study guide (Typst)
+│   ├── factor_analysis_notes.pdf                 # Compiled lecture note PDF
+│   ├── executive_report.typ                      # Executive stakeholder case report (Typst)
+│   ├── executive_report.pdf                      # Compiled executive report PDF
+│   └── README.md                                 # Notes outline & compilation guide
 ├── presentation/                                 # Presentation slides
-│   ├── factor_analysis_slides.tex                # LaTeX Beamer presentation
-│   └── fa_presentation.pdf                       # Reference compiled presentation
+│   ├── factor_analysis_slides.typ                # Touying university-theme presentation
+│   ├── factor_analysis_slides.pdf                # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
 └── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
-python data/fetch_educational.py
+uv run python lessons/L04_Factor_Analysis/data/fetch_educational.py
 ```
 
 ### 2. Run Interactive Notebook
 ```bash
-jupyter notebook notebook/educational_analysis.ipynb
+uv run jupyter notebook lessons/L04_Factor_Analysis/notebook/educational_analysis.ipynb
 ```
 
-### 3. Run Snippet Tutorial Test Suite
+### 3. Run Factor Analysis Snippet Test Suite
 ```bash
-python notebook/snippets/test_all_snippets.py
+uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py
 ```
 
-### 4. Compile Slides & Documents (LaTeX)
+### 4. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
-cd presentation/
-pdflatex factor_analysis_slides.tex
+cd lessons/L04_Factor_Analysis/presentation/
+typst compile factor_analysis_slides.typ
 
-# Study Guide Notes
+# Lecture Notes
 cd ../notes/
-pdflatex factor_analysis_notes.tex
+typst compile factor_analysis_notes.typ
 ```
