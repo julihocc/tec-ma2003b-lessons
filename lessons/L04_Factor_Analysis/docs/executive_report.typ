@@ -128,7 +128,7 @@ Three factors extracted with eigenvalues exceeding the Kaiser criterion (>1.0):
   [3], [1.635], [86.7%]
 )
 
-The three-factor solution explains *86.7% of common variance*, with remaining factors having eigenvalues <1.0, indicating they capture primarily noise.
+The three-factor solution explains *86.7% of common variance*, with remaining factors having eigenvalues \<1.0, indicating they capture primarily noise.
 
 == Communalities
 
@@ -224,10 +224,10 @@ PCA extracted nine components with the following eigenvalue structure:
   [1], [4.062], [44.9%],
   [2], [2.135], [68.5%],
   [3], [1.643], [86.7%],
-  [4-9], [<1.0], [13.3%]
+  [4-9], [\<1.0], [13.3%]
 )
 
-PCA eigenvalues closely match FA eigenvalues for the first three components, confirming three-dimensional structure. Components 4-9 have eigenvalues <1.0 (Kaiser criterion), indicating they capture mostly measurement noise.
+PCA eigenvalues closely match FA eigenvalues for the first three components, confirming three-dimensional structure. Components 4-9 have eigenvalues \<1.0 (Kaiser criterion), indicating they capture mostly measurement noise.
 
 == Component Loadings
 
