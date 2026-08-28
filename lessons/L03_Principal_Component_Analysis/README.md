@@ -14,21 +14,42 @@ Principal Component Analysis transforms a set of correlated variables into a sma
 - **3.4** Determination of the appropriate number of major components
 - **3.5** Coding and commercial programs
 
-## Learning Objectives
-
-- Formulate PCA via spectral decomposition of covariance ($\mathbf{S}$) and correlation ($\mathbf{R}$) matrices.
-- Geometrically interpret major components as orthogonal axes of maximum variance.
-- Estimate principal component loadings, scores, and variance explained proportions.
-- Determine component retention using the Kaiser criterion, Scree plots, and parallel analysis.
-- Implement PCA in Python (`scikit-learn`) and commercial software.
-
 ## Directory Structure
 
 ```text
 L03_Principal_Component_Analysis/
-├── data/           # Datasets and generation scripts
-├── docs/           # Lecture notes and study guides
-├── notebook/       # Interactive Jupyter notebooks
-├── presentation/   # Presentation slides (Typst + Touying)
-└── README.md       # Module documentation
+├── data/                                         # Datasets and generation scripts
+│   ├── fetch_financial_pca.py                    # Multi-asset returns market data generator
+│   ├── financial_market_data.csv                 # Generated dataset (600 trading days × 10 assets)
+│   └── FINANCIAL_MARKET_DATA_DICTIONARY.md       # Detailed variable descriptions
+├── docs/                                         # Lecture notes and study guides
+│   └── principal_component_analysis_notes.typ    # Comprehensive study guide (Typst)
+├── notebook/                                     # Interactive Jupyter notebooks
+│   └── financial_pca_analysis.ipynb              # Global market factor decomposition case study
+├── presentation/                                 # Presentation slides
+│   └── principal_component_analysis_slides.typ   # Typst presentation (Touying university theme)
+└── README.md                                     # Module documentation
+```
+
+## Usage & Execution
+
+### 1. Generate Dataset
+```bash
+uv run python lessons/L03_Principal_Component_Analysis/data/fetch_financial_pca.py
+```
+
+### 2. Run Interactive Notebook
+```bash
+uv run jupyter notebook lessons/L03_Principal_Component_Analysis/notebook/financial_pca_analysis.ipynb
+```
+
+### 3. Compile Slides & Documents (Typst)
+```bash
+# Presentation
+cd lessons/L03_Principal_Component_Analysis/presentation/
+typst compile principal_component_analysis_slides.typ
+
+# Lecture Notes
+cd ../docs/
+typst compile principal_component_analysis_notes.typ
 ```
