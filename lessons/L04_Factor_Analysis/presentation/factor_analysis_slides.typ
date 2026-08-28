@@ -257,20 +257,26 @@
   chi2_val, p_val = calculate_bartlett_sphericity(X_scaled)
   print(f"KMO: {kmo_model:.3f} | Bartlett p-value: {p_val:.4e}")
 
-  # 3. Fit Factor Analysis with Varimax rotation
-  fa = FactorAnalyzer(n_factors=3, rotation="varimax", method="principal")
+  # 3. Fit Factor Analysis with Promax rotation (oblique -- the safer default
+  #    when latent traits could plausibly correlate)
+  fa = FactorAnalyzer(n_factors=3, rotation="promax", method="principal")
   fa.fit(X_scaled)
 
-  # 4. Inspect factor structure
+  # 4. Inspect factor structure, including the factor correlation matrix Phi
   loadings = pd.DataFrame(fa.loadings_, index=df.columns, columns=["F1", "F2", "F3"])
   communalities = pd.Series(fa.get_communalities(), index=df.columns)
+  phi = pd.DataFrame(fa.phi_, columns=["F1", "F2", "F3"], index=["F1", "F2", "F3"])
   ```
 ]
 
 #slide[
   = Case Study: Educational Assessment (Chapter 4)
 
-  *Context:* 200 high-school students evaluated across 9 cognitive and social performance measures:
+  #alert[
+    *Synthetic data:* 200 simulated students, generated from a known three-factor model with correlated factors (0.20-0.30). Results below demonstrate recovering that known structure -- not a real construct-validation finding.
+  ]
+
+  *Context:* 200 simulated students evaluated across 9 cognitive and social performance measures:
 
   #grid(
     columns: (1fr, 1fr, 1fr),
@@ -296,10 +302,10 @@
   )
 
   #v(0.8em)
-  *Results:*
-  - KMO = $0.84$ (Good) and Bartlett's test $p < 0.0001$.
-  - Scree plot & Kaiser criterion confirm 3 distinct latent constructs.
-  - Varimax rotation yields clean simple structure ($| lambda | > 0.70$ on target factor, $< 0.20$ on others).
+  *Results (recovering the known simulated structure):*
+  - KMO = $0.799$ (Acceptable) and Bartlett's test $p < 0.001$.
+  - Scree plot & Kaiser criterion retain 3 factors, matching the simulation.
+  - Promax (primary) rotation yields clean simple structure and recovers factor correlations $Phi approx 0.19"-"0.36$, consistent with the 0.20-0.30 correlations used to generate the data. Varimax (comparison) gives similar loadings but forces $Phi = bold(I)$, misrepresenting the known structure.
 ]
 
 #slide[

@@ -166,7 +166,7 @@ The total variance is preserved: $sum_(j=1)^p lambda_j = sum_(j=1)^p "Var"(X_j)$
 
 === Component Loadings and Interpretation
 
-The eigenvectors $bold(v)_j$ are called *loadings* and show how each original variable contributes to each principal component.
+The eigenvectors $bold(v)_j$ are the *component coefficients* (or weights) used to build each component score from the standardized variables. *Loadings* are a distinct, rescaled quantity: $"loading"_(i j) = v_(i j) sqrt(lambda_j)$, the correlation between variable $i$ and component $j$ for standardized data (this matches the definition used in L03). Loadings, not raw eigenvector coefficients, are what should be interpreted and compared across components, since they are on a correlation-like scale ($[-1, 1]$) that eigenvector coefficients alone do not have.
 
 *Loading Interpretation:*
 - Large absolute loading: variable strongly influences the component
@@ -182,11 +182,11 @@ Unlike Factor Analysis, PCA typically does not use rotation because:
 
 === Key Assumptions and Limitations
 
-*Assumptions:*
+*Assumptions (for descriptive PCA):*
 1. *Linearity*: Relationships between variables are linear
-2. *Large Sample Size*: Generally need $n > p$ (more observations than variables)
-3. *Continuous Variables*: Works best with continuous, normally distributed variables
-4. *No Perfect Multicollinearity*: Variables should not be perfectly correlated
+2. *Continuous or ordinal-scale variables*: PCA is defined for any numeric data; it does not require normality or $n > p$
+
+_Note: Descriptive PCA (finding directions of maximum variance) is well-defined even when $n < p$, when the correlation matrix is rank-deficient, or when data are non-normal -- it is simply an eigendecomposition. $n > p$, normality, and no perfect multicollinearity matter for *specific* goals built on top of PCA (e.g. certain significance tests for eigenvalues, or a unique full-rank solution), not for PCA's existence._
 
 *Limitations:*
 1. *Interpretability*: Components may not have clear substantive meaning
@@ -216,8 +216,8 @@ Factor Analysis assumes that observed variables are *manifestations* of underlyi
 *Key Distinctions from PCA:*
 - *Purpose*: Models latent constructs rather than reducing dimensions
 - *Variance*: Separates common variance from unique variance
-- *Error Modeling*: Explicitly accounts for measurement error
-- *Theory Testing*: Designed to test specific theoretical factor structures
+- *Error Modeling*: Models unique variance, which combines measurement error and variable-specific true variance (it does not isolate error on its own)
+- *Exploratory vs. Confirmatory*: What this chapter covers is *exploratory* factor analysis (EFA) -- it discovers a plausible factor structure from the data without assuming a specific number or pattern of loadings in advance. Testing a specific, pre-specified theoretical structure against the data (and evaluating its fit) is *confirmatory* factor analysis (CFA), a distinct method covered later in this chapter.
 
 *Primary Applications:*
 1. *Psychological Testing*: Measuring intelligence, personality traits, attitudes
@@ -333,7 +333,7 @@ Several methods exist for estimating factor loadings:
 
 *1. Kaiser Criterion*
 - Retain factors with eigenvalues > 1.0
-- Applied to reduced correlation matrix
+- Applied to the eigenvalues of the *original* correlation matrix (diagonal of 1's), not the reduced/common-factor correlation matrix used for extraction -- this matches standard software implementations (including `factor_analyzer.get_eigenvalues()`, which returns both)
 - May overextract in some cases
 
 *2. Scree Test*

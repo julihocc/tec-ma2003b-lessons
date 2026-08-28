@@ -26,7 +26,7 @@
   #v(0.3em)
 
   #text(size: 14pt)[
-    Educational Assessment Construct Validation Study
+    Recovering a Simulated Construct Structure: A Worked Example
   ]
 
   #v(1em)
@@ -44,30 +44,35 @@
 
 = Executive Summary
 
-This report presents findings from a comprehensive statistical analysis examining whether nine educational assessment variables measure three distinct underlying constructs: Quantitative Reasoning, Verbal Ability, and Interpersonal Skills. The analysis employed both Factor Analysis (FA) with Varimax rotation and Principal Component Analysis (PCA) on data from 200 students.
+#block(fill: rgb("#FFF3E0"), inset: 10pt, radius: 4pt, width: 100%)[
+  *Synthetic data notice:* This report analyzes a single *simulated* sample (`fetch_educational.py`) generated from a known three-factor model with factor correlations of 0.20-0.30. The "students" and their scores are not real. The purpose of this report is to demonstrate whether Factor Analysis and PCA can *recover a structure we already know*, not to validate a real assessment instrument. Genuine construct validation requires independent real-world data, replication, and typically a confirmatory factor analysis (CFA).
+]
 
-*Key Finding:* Factor Analysis with rotation provides definitive evidence that the nine assessments measure three distinct constructs with exceptional clarity. Each assessment loads strongly (>0.87) on exactly one factor, achieving perfect simple structure.
+This report presents a worked example examining whether nine simulated educational assessment variables recover three distinct underlying constructs: Quantitative Reasoning, Verbal Ability, and Interpersonal Skills. The analysis employs Factor Analysis (FA) with *Promax* (oblique) rotation as the primary method -- because the data were simulated with correlated factors, an oblique rotation is the appropriate default -- with Varimax (orthogonal) rotation fit alongside it as a sensitivity comparison, plus Principal Component Analysis (PCA) on data from 200 simulated students.
 
-*Recommendation:* The assessment battery successfully captures three separate ability domains and can be used confidently for diagnostic purposes, intervention design, and student profiling.
+*Key Finding:* Factor Analysis with Promax rotation recovers the three simulated constructs with high clarity: each assessment loads strongly (>0.87) on exactly one factor, and the recovered factor correlations (Φ ≈ 0.19-0.36) are consistent with the 0.20-0.30 correlations used to generate the data.
+
+*Recommendation:* This worked example illustrates the mechanics of FA/PCA and rotation choice. It does not, by itself, validate any real assessment battery; that would require independent data and further evidence (e.g. CFA, reliability, criterion validity).
 
 = Research Question
 
-*Do the nine educational assessments measure three distinct underlying constructs (Quantitative, Verbal, Interpersonal), or do they reflect a different latent structure?*
+*Can Factor Analysis and PCA recover the three simulated underlying constructs (Quantitative, Verbal, Interpersonal) in this synthetic dataset, and how does the choice between oblique and orthogonal rotation affect the answer?*
 
-This question has significant practical implications:
-- Determining whether assessments capture separate abilities or redundant information
-- Enabling targeted intervention programs for specific skill deficits
-- Validating the theoretical framework underlying assessment design
-- Supporting subscale creation for diagnostic reporting
+This worked example illustrates:
+- How rotation choice (oblique vs. orthogonal) interacts with a data-generating process that has correlated factors
+- How to read loadings, communalities, and a factor-correlation matrix
+- The difference between a method *recovering a known structure* and *validating a real construct*
 
 = Dataset Description
 
-*Sample:* 200 students
+*Sample:* 200 simulated students (`fetch_educational.py`, synthetic data)
 
 *Variables:* Nine assessment scores across three theoretical domains:
 - *Quantitative Domain:* MathScore, AlgebraScore, GeometryScore
 - *Verbal Domain:* ReadingComp, Vocabulary, Writing
 - *Interpersonal Domain:* Collaboration, Leadership, Communication
+
+*Data-generating process:* The three latent factors were simulated as *correlated* (0.20-0.30), not independent -- this is the key fact that motivates using an oblique rotation as the primary analysis below.
 
 All variables were standardized (mean=0, std=1) prior to analysis to ensure equal contribution regardless of original measurement scales.
 
@@ -79,12 +84,12 @@ All variables were standardized (mean=0, std=1) prior to analysis to ensure equa
 
 Factor Analysis (FA) is a statistical technique that identifies latent constructs underlying observed variables. Unlike PCA, FA distinguishes between:
 - *Common variance:* Shared among variables, explained by factors
-- *Unique variance:* Specific to each variable plus measurement error
+- *Unique variance:* Specific to each variable, combining variable-specific true variance and measurement error (these two cannot be separated from uniqueness alone)
 
 *Key Parameters:*
 - Extraction method: Principal Axis Factoring (PAF)
 - Number of factors: 3 (theoretical expectation)
-- Rotation: Varimax (orthogonal rotation for simple structure)
+- Rotation: *Promax* (oblique, primary analysis -- allows correlated factors, matching the data-generating process), with *Varimax* (orthogonal) fit as a sensitivity comparison
 
 == Principal Component Analysis
 
@@ -128,7 +133,7 @@ Three factors extracted with eigenvalues exceeding the Kaiser criterion (>1.0):
   [3], [1.635], [86.7%]
 )
 
-The three-factor solution explains *86.7% of common variance*, with remaining factors having eigenvalues \<1.0, indicating they capture primarily noise.
+The three retained factors' communalities sum to 86.7% of the *total standardized variance* (sum of communalities / 9 variables) -- not "86.7% of common variance," which would be a different (and here, trivially 100%) quantity. Remaining factors have eigenvalues \<1.0, indicating they capture primarily noise.
 
 == Communalities
 
@@ -148,7 +153,7 @@ All variables showed high communalities (h²), indicating they are well-explaine
   [Communication], [0.880], [0.120]
 )
 
-*Average communality = 0.867*, confirming minimal unique variance and strong factor relationships.
+*Average communality = 0.867*: on average, 86.7% of each variable's variance is shared with the other variables through the three common factors, and 13.3% is unique to that variable (specific variance plus measurement error, not separable from communalities alone).
 
 #pagebreak()
 
@@ -181,9 +186,48 @@ The unrotated solution revealed three problematic patterns:
 
 #pagebreak()
 
-== Rotated Factor Solution (Varimax)
+== Rotated Factor Solution (Promax, Primary)
 
-Varimax rotation transformed factors to achieve simple structure while preserving orthogonality:
+Promax rotation transformed factors to achieve simple structure while allowing them to correlate:
+
+#table(
+  columns: (auto, auto, auto, auto),
+  align: center,
+  [*Variable*], [*Factor 1*], [*Factor 2*], [*Factor 3*],
+  [MathScore], [*0.931*], [-0.018], [0.027],
+  [AlgebraScore], [*0.984*], [0.036], [-0.134],
+  [GeometryScore], [*0.874*], [-0.018], [0.121],
+  [ReadingComp], [0.051], [-0.011], [*0.906*],
+  [Vocabulary], [-0.032], [-0.032], [*0.934*],
+  [Writing], [-0.023], [0.047], [*0.917*],
+  [Collaboration], [0.001], [*0.945*], [-0.041],
+  [Leadership], [-0.001], [*0.947*], [-0.052],
+  [Communication], [0.002], [*0.902*], [0.110]
+)
+
+*Bold values* indicate salient loadings (>0.4 threshold).
+
+*Factor Correlation Matrix (Φ):* Unlike Varimax, Promax does not force factors to be uncorrelated:
+
+#table(
+  columns: (auto, auto, auto, auto),
+  align: center,
+  [], [*Factor 1*], [*Factor 2*], [*Factor 3*],
+  [*Factor 1*], [1.000], [0.194], [0.357],
+  [*Factor 2*], [0.194], [1.000], [0.271],
+  [*Factor 3*], [0.357], [0.271], [1.000],
+)
+
+These recovered correlations (0.19-0.36) are close to the 0.20-0.30 correlations actually used to simulate the data -- evidence that Promax is recovering the true generating structure, whereas Varimax's assumption of zero factor correlation would misrepresent it.
+
+*Interpretation:*
+- *Factor 1 = Quantitative Reasoning:* Math, Algebra, Geometry (loadings >0.87)
+- *Factor 2 = Interpersonal Skills:* Collaboration, Leadership, Communication (loadings >0.90)
+- *Factor 3 = Verbal Ability:* Reading, Vocabulary, Writing (loadings >0.89)
+
+*Result:* Each variable loads strongly on exactly one factor, with small cross-loadings. In this synthetic sample, this recovers the theoretical three-construct model used to generate the data -- it demonstrates the method, and is not itself evidence that a *real* assessment battery would show the same pattern.
+
+== Sensitivity Comparison: Varimax (Orthogonal)
 
 #table(
   columns: (auto, auto, auto, auto),
@@ -200,14 +244,7 @@ Varimax rotation transformed factors to achieve simple structure while preservin
   [Communication], [0.099], [*0.906*], [0.223]
 )
 
-*Bold values* indicate salient loadings (>0.4 threshold).
-
-*Interpretation:*
-- *Factor 1 = Quantitative Reasoning:* Math, Algebra, Geometry (loadings >0.87)
-- *Factor 2 = Interpersonal Skills:* Collaboration, Leadership, Communication (loadings >0.90)
-- *Factor 3 = Verbal Ability:* Reading, Vocabulary, Writing (loadings >0.89)
-
-*Achievement:* Perfect simple structure. Each variable loads strongly on exactly ONE factor, with negligible cross-loadings. This confirms the theoretical three-construct model.
+Varimax gives similar loadings and the same variable groupings here, but by construction reports zero correlation between factors (Φ = I), which does not match how this dataset was actually generated. We report it only as a sensitivity check, not as the primary result.
 
 #pagebreak()
 
@@ -227,7 +264,7 @@ PCA extracted nine components with the following eigenvalue structure:
   [4-9], [\<1.0], [13.3%]
 )
 
-PCA eigenvalues closely match FA eigenvalues for the first three components, confirming three-dimensional structure. Components 4-9 have eigenvalues \<1.0 (Kaiser criterion), indicating they capture mostly measurement noise.
+PCA eigenvalues closely match FA eigenvalues for the first three components, confirming three-dimensional structure. Components 4-9 have eigenvalues \<1.0 (Kaiser criterion), indicating they capture mostly non-shared (unique + residual) variance -- not necessarily "measurement noise" specifically.
 
 == Component Loadings
 
@@ -239,7 +276,7 @@ Unlike FA's rotated solution, PCA loadings (unrotated) show more distributed pat
 
 *PC3 (18.2% variance):* Contrasts verbal (positive) vs. quantitative (negative)
 
-*Observation:* Without rotation, PCA components are harder to interpret as distinct constructs. This demonstrates why FA with rotation is preferred for construct validation.
+*Observation:* Without rotation, PCA components are harder to interpret as distinct constructs. This demonstrates why rotation is useful for interpretability -- it does not, by itself, demonstrate construct validity.
 
 #pagebreak()
 
@@ -248,15 +285,16 @@ Unlike FA's rotated solution, PCA loadings (unrotated) show more distributed pat
 #table(
   columns: (auto, auto, auto),
   [*Criterion*], [*Factor Analysis*], [*Principal Component Analysis*],
-  [Variance explained], [86.7% of common variance], [86.7% of total variance],
-  [Rotation applied], [Yes (Varimax)], [No],
-  [Simple structure], [Perfect (each variable loads on one factor)], [Absent (distributed loadings)],
-  [Interpretability], [Excellent (clear factor labels)], [Moderate (requires interpretation)],
-  [Construct validation], [Strongly supports three-construct model], [Confirms dimensionality, less clear constructs],
-  [Practical utility], [High (enables subscale creation)], [Moderate (less clear assignments)]
+  [Variance explained], [86.7% of total standardized variance, via common factors], [86.7% of total variance, via first 3 components],
+  [Rotation applied], [Yes (Promax primary, Varimax comparison)], [No],
+  [Factor/component correlation], [Nonzero (Φ ≈ 0.19-0.36, Promax)], [Zero by construction],
+  [Simple structure], [Clear (each variable loads mainly on one factor)], [Absent (distributed loadings)],
+  [Interpretability], [High (clear factor labels in this simulation)], [Moderate (requires interpretation)],
+  [Recovers known simulated structure], [Yes, closely], [Dimensionality yes; construct labels less clear],
+  [Practical utility], [High (enables subscale creation), pending real-data validation], [Moderate (less clear assignments)]
 )
 
-*Key Insight:* Both methods identify three-dimensional structure, but FA with rotation provides superior interpretability and construct validation. FA's ability to separate common from unique variance and achieve simple structure through rotation makes it the preferred method for this application.
+*Key Insight:* Both methods identify three-dimensional structure. FA with rotation provides better interpretability here, and Promax additionally recovers the known factor correlations that Varimax cannot represent. This shows FA is well-suited to this *kind* of problem (correlated latent constructs) -- it is not, on its own, "construct validation."
 
 = Visual Results
 
@@ -283,54 +321,59 @@ Three visualizations were generated to support findings:
 
 == Answer to Research Question
 
-*YES, the nine assessments measure three distinct constructs.*
+*YES, in this synthetic sample, Factor Analysis recovers the three simulated constructs.*
 
-Factor Analysis with Varimax rotation provides definitive evidence:
+Factor Analysis with Promax rotation (primary analysis):
 - Each assessment loads strongly (>0.87) on exactly one factor
-- Perfect simple structure achieved
-- Factors align precisely with theoretical expectations:
+- Clear simple structure achieved
+- Factors align precisely with the constructs used to generate the data:
   - Quantitative Reasoning (Math, Algebra, Geometry)
   - Interpersonal Skills (Collaboration, Leadership, Communication)
   - Verbal Ability (Reading, Vocabulary, Writing)
-- High communalities (average = 0.867) confirm minimal measurement error
-- 86.7% of common variance explained
+- Recovered factor correlations (Φ ≈ 0.19-0.36) are consistent with the 0.20-0.30 correlations used to generate the data
+- High communalities (average = 0.867) mean most of each variable's variance is shared through the common factors -- this is not the same as "minimal measurement error," since uniqueness bundles specific variance and error together
+- 86.7% of total standardized variance is attributed to the three common factors
 
-== Validation of Assessment Design
+This is a demonstration that the method works as expected on data with a known structure. It is *not*, by itself, evidence about any real assessment battery.
 
-The assessment battery successfully captures three separate ability domains with minimal redundancy. This validates:
-- The theoretical framework underlying assessment design
-- The selection of specific assessment variables
-- The assumption that these domains are separable and measurable
+== What This Does and Does Not Establish
+
+This worked example shows that FA with an appropriate (oblique) rotation can recover a known simulated structure, including its factor correlations. It does *not* establish:
+- That any real assessment battery has this structure
+- That the specific assessment items are valid measures of these constructs
+- That the constructs are "separable and measurable" in a real population
+
+Establishing those claims for a real instrument requires independent data, replication across samples, and typically a confirmatory factor analysis (CFA) that tests this specific three-factor model against the data rather than exploring for structure.
 
 == Methodological Lessons
 
-*Importance of Rotation*
+*Rotation choice is a modeling decision, not a default*
 - Unrotated factors maximized variance but lacked interpretability
-- Rotation transformed factors to achieve simple structure without changing communalities or total variance
-- Rotation is essential for construct validation applications
+- Both Promax and Varimax achieve interpretable simple structure here, but only Promax's nonzero Φ matches how the data was actually generated
+- When factors could plausibly correlate (the usual case for psychological/educational constructs), an oblique rotation should be the default choice, with an orthogonal rotation reported only as a comparison
 
 *FA vs PCA Selection*
 - Both methods identified three dimensions
-- FA with rotation provided superior construct interpretation
-- FA's separation of common and unique variance is advantageous for measurement validation
+- FA with rotation provided clearer factor interpretation and, via Promax, correctly represented factor correlation
+- FA's separation of common and unique variance is useful when a latent-variable model is the actual object of interest
 
 *Assumption Testing*
 - KMO and Bartlett's tests confirmed data suitability
 - All variables showed adequate sampling adequacy
-- Proper assumption testing prevents meaningless results
+- Proper assumption testing prevents meaningless results, but passing them does not by itself validate substantive conclusions
 
 #pagebreak()
 
 = Recommendations
 
-== Practical Applications
+== If This Structure Were Confirmed on Real Data
 
-The validated three-factor structure enables:
+These applications would follow *only after* independent, real-data confirmation (e.g. CFA, replication) of a three-factor structure -- they are not licensed by this synthetic-data demonstration alone:
 
 *1. Subscale Creation*
-- Create three subscale scores: Quantitative, Verbal, Interpersonal
-- Each subscale has three indicators with high loadings (>0.87)
-- Use factor scores or simple sum scores for student reporting
+- Three subscale scores: Quantitative, Verbal, Interpersonal
+- Each subscale with three indicators with high loadings
+- Factor scores or simple sum scores for student reporting
 
 *2. Diagnostic Assessment*
 - Identify student strengths and weaknesses across three domains
@@ -340,34 +383,32 @@ The validated three-factor structure enables:
 *3. Program Evaluation*
 - Assess effectiveness of interventions targeting specific constructs
 - Determine whether programs improve targeted abilities without affecting others
-- Validate construct-specific theories of change
 
 *4. Research Applications*
-- Establish construct validity for studies using these measures
-- Support theoretical claims about ability structure
-- Enable more precise hypothesis testing about domain-specific effects
+- Motivate further construct-validity studies using real measures
+- Motivate hypotheses about domain-specific effects, to be tested on independent data
 
 == Cautions and Limitations
 
-*Sample Specificity*
-- Results based on 200 students from one context
-- Replication with different samples recommended
+*This Is Synthetic Data*
+- All 200 "students" and their scores were simulated from a known three-factor model
+- Recovering the known structure demonstrates the method; it is not itself evidence about any real population
+- None of the conclusions above should be applied to real assessment data without independent verification
+
+*Sample Specificity (if applied to real data)*
+- A single sample from one context is never sufficient for validation
+- Replication with different, independent samples is required
 - Factor structure may vary across populations
 
-*Temporal Stability*
-- Analysis represents one time point
-- Longitudinal validation recommended
-- Factor structure should be confirmed across developmental stages
-
-*Measurement Error*
-- Despite high communalities (average = 0.867), 13.3% variance remains unexplained
-- Unique variance includes both measurement error and construct-specific variance
-- Consider reliability analysis for individual assessments
+*Unique Variance*
+- Despite high communalities (average = 0.867), 13.3% of variance is unique to each variable
+- Unique variance combines measurement error and variable-specific true variance -- these cannot be separated from communalities/uniqueness alone
+- Reliability analysis (e.g. Cronbach's alpha) is needed to estimate measurement error specifically
 
 == Future Directions
 
 *Confirmatory Factor Analysis*
-- Test the three-factor model using structural equation modeling
+- On real data, test this specific three-factor model using structural equation modeling
 - Evaluate model fit with chi-square, CFI, RMSEA indices
 - Compare alternative models (e.g., single-factor, hierarchical)
 
@@ -375,13 +416,12 @@ The validated three-factor structure enables:
 - Test whether factor structure holds across groups (gender, age, ethnicity)
 - Establish measurement equivalence before making group comparisons
 
-*Oblique Rotation*
-- Explore whether factors are truly uncorrelated
-- Consider Promax or other oblique rotations
-- Examine factor correlations if theoretically relevant
+*Rotation Sensitivity*
+- This report already uses Promax (oblique) as primary, given the correlated factor structure
+- On real data, also compare other oblique rotations (e.g. Oblimin) to check robustness of the recovered Φ matrix
 
 *Predictive Validity*
-- Examine whether subscales predict relevant outcomes (grades, career success)
+- On real data, examine whether subscales predict relevant outcomes (grades, career success)
 - Establish criterion-related validity
 - Test incremental validity of three separate scores vs. composite
 
@@ -393,8 +433,8 @@ The validated three-factor structure enables:
   #text(size: 9pt, style: "italic")[
     Report prepared from statistical analysis conducted using Python (factor_analyzer, scikit-learn)
 
-    Dataset: N=200 students, p=9 assessment variables
+    Dataset: Synthetic data, N=200 simulated students, p=9 assessment variables
 
-    Methods: Factor Analysis (Principal Axis Factoring, Varimax rotation), Principal Component Analysis
+    Methods: Factor Analysis (Principal Axis Factoring, Promax rotation primary, Varimax comparison), Principal Component Analysis
   ]
 ]
