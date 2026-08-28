@@ -158,7 +158,7 @@ Given a data matrix $bold(X) in bb(R)^(n times p)$ with $n$ observations:
 = 2.3 Correlations and Correlation Matrices
 
 == Population and Sample Correlation
-Let $bold(D) = op("diag")(sigma_(11), sigma_(22), dots.h, sigma_(p p))$ be the diagonal standard deviation matrix.
+Let $bold(D) = op("diag")(sigma_(11), sigma_(22), dots.h, sigma_(p p))$ be the diagonal *variance* matrix ($sigma_(j j) = op("Var")(X_j)$, not a standard deviation). Its inverse square root $bold(D)^(-1/2) = op("diag")(1/sigma_1, dots.h, 1/sigma_p)$ contains reciprocal standard deviations, which is what rescales $bold(Sigma)$ to a correlation matrix below.
 
 - *Population Correlation Matrix:*
   $ bold(P) = bold(D)^(-1/2) bold(Sigma) bold(D)^(-1/2) = mat(delim: "[", 1, rho_(12), dots.h, rho_(1p); rho_(21), 1, dots.h, rho_(2p); dots.v, dots.v, dots.down, dots.v; rho_(p 1), rho_(p 2), dots.h, 1), quad rho_(j k) = frac(sigma_(j k), sigma_j sigma_k) in [-1, 1] $
