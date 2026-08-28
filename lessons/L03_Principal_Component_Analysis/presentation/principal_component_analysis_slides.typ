@@ -32,7 +32,7 @@
 
   + Motivations & Use Cases for Principal Component Analysis
   + Geometric Foundations: Rotation & Variance Maximization
-  + Spectral Decomposition of Covariance ($\mathbf{S}$) and Correlation ($\mathbf{R}$)
+  + Spectral Decomposition of Covariance ($bold(S)$) and Correlation ($bold(R)$)
   + Mathematical Derivation via Lagrange Multipliers
   + Component Retention Criteria (Kaiser, Scree, Parallel Analysis)
   + Loadings, Scores, and Communalities
@@ -48,7 +48,7 @@
   = What is Principal Component Analysis?
 
   *Core Objective:*
-  Transform $p$ correlated variables $X_1, \dots, X_p$ into $k \ll p$ uncorrelated variables $Y_1, \dots, Y_k$ (*Principal Components*) that capture the maximum possible variance.
+  Transform $p$ correlated variables $X_1, dots.h, X_p$ into $k lt.double p$ uncorrelated variables $Y_1, dots.h, Y_k$ (*Principal Components*) that capture the maximum possible variance.
 
   #v(0.6em)
 
@@ -67,17 +67,17 @@
     gutter: 1.5em,
     [
       *1. First Principal Component ($Y_1$):*
-      $ Y_1 = \mathbf{a}_1^T \mathbf{X} = a_{11}X_1 + \dots + a_{1p}X_p $
-      Direction of maximum data dispersion subject to $\|\mathbf{a}_1\| = 1$.
+      $ Y_1 = bold(a)_1^T bold(X) = a_(11)X_1 + dots.h + a_(1p)X_p $
+      Direction of maximum data dispersion subject to $\|bold(a)_1\| = 1$.
 
       #v(0.5em)
       *2. Second Principal Component ($Y_2$):*
-      $ Y_2 = \mathbf{a}_2^T \mathbf{X} \quad \text{with } \mathbf{a}_2^T \mathbf{a}_1 = 0 $
+      $ Y_2 = bold(a)_2^T bold(X) quad "with " bold(a)_2^T bold(a)_1 = 0 $
       Direction of maximum remaining variance, orthogonal to $Y_1$.
     ],
     [
       *Principal Axes of Ellipsoid:*
-      Eigenvectors specify the orientation of the constant-density ellipsoid axes. Half-lengths are proportional to $\pm c \sqrt{\lambda_j}$.
+      Eigenvectors specify the orientation of the constant-density ellipsoid axes. Half-lengths are proportional to $plus.minus c sqrt(lambda_j)$.
     ]
   )
 ]
@@ -85,40 +85,40 @@
 #slide[
   = Mathematical Derivation (Lagrange Multipliers)
 
-  Maximize $\operatorname{Var}(Y_1) = \mathbf{a}_1^T \mathbf{\Sigma} \mathbf{a}_1$ subject to $\mathbf{a}_1^T \mathbf{a}_1 = 1$.
+  Maximize $op("Var")(Y_1) = bold(a)_1^T bold(Sigma) bold(a)_1$ subject to $bold(a)_1^T bold(a)_1 = 1$.
 
   #v(0.5em)
 
   *Lagrangian Objective:*
-  $ \mathcal{L}(\mathbf{a}_1, \lambda_1) = \mathbf{a}_1^T \mathbf{\Sigma} \mathbf{a}_1 - \lambda_1 (\mathbf{a}_1^T \mathbf{a}_1 - 1) $
+  $ cal(L)(bold(a)_1, lambda_1) = bold(a)_1^T bold(Sigma) bold(a)_1 - lambda_1 (bold(a)_1^T bold(a)_1 - 1) $
 
   #v(0.5em)
 
   *First-Order Condition:*
-  $ \frac{\partial \mathcal{L}}{\partial \mathbf{a}_1} = 2 \mathbf{\Sigma} \mathbf{a}_1 - 2 \lambda_1 \mathbf{a}_1 = \mathbf{0} \implies \mathbf{\Sigma} \mathbf{a}_1 = \lambda_1 \mathbf{a}_1 $
+  $ frac(partial cal(L), partial bold(a)_1) = 2 bold(Sigma) bold(a)_1 - 2 lambda_1 bold(a)_1 = bold(0) ==> bold(Sigma) bold(a)_1 = lambda_1 bold(a)_1 $
 
   #v(0.5em)
 
-  *Result:* $\lambda_1$ is the largest eigenvalue of $\mathbf{\Sigma}$, and $\mathbf{a}_1$ is the corresponding normalized eigenvector.
+  *Result:* $lambda_1$ is the largest eigenvalue of $bold(Sigma)$, and $bold(a)_1$ is the corresponding normalized eigenvector.
 ]
 
 #slide[
   = Spectral Decomposition & Variance Explained
 
   *Spectral Decomposition:*
-  $ \mathbf{S} = \mathbf{V} \mathbf{\Lambda} \mathbf{V}^T = \sum_{j=1}^p \lambda_j \mathbf{v}_j \mathbf{v}_j^T $
+  $ bold(S) = bold(V) bold(Lambda) bold(V)^T = sum_(j=1)^p lambda_j bold(v)_j bold(v)_j^T $
 
-  where $\mathbf{V} = [\mathbf{v}_1, \dots, \mathbf{v}_p]$ is the eigenvector matrix and $\mathbf{\Lambda} = \operatorname{diag}(\lambda_1, \dots, \lambda_p)$.
+  where $bold(V) = [bold(v)_1, dots.h, bold(v)_p]$ is the eigenvector matrix and $bold(Lambda) = op("diag")(lambda_1, dots.h, lambda_p)$.
 
   #v(0.6em)
 
   *Total Variance Preservation:*
-  $ \text{Total Sample Variance} = \operatorname{tr}(\mathbf{S}) = \sum_{j=1}^p s_{j j} = \sum_{j=1}^p \lambda_j $
+  $ "Total Sample Variance" = op("tr")(bold(S)) = sum_(j=1)^p s_(j j) = sum_(j=1)^p lambda_j $
 
   #v(0.6em)
 
   *Proportion of Explained Variance:*
-  $ \text{Prop}_j = \frac{\lambda_j}{\sum_{k=1}^p \lambda_k} $
+  $ "Prop"_j = frac(lambda_j, sum_(k=1)^p lambda_k) $
 ]
 
 // ============================================================================
@@ -133,12 +133,12 @@
     gutter: 1.5em,
     [
       *1. Kaiser-Guttman Rule:*
-      - Retain $\lambda_j > 1.0$ (for correlation $\mathbf{R}$).
+      - Retain $lambda_j > 1.0$ (for correlation $bold(R)$).
       - Retains components explaining more variance than a single standardized variable.
 
       #v(0.5em)
       *2. Cumulative Variance Threshold:*
-      - Retain components until cumulative variance reaches $70\% - 85\%$.
+      - Retain components until cumulative variance reaches $70% - 85%$.
     ],
     [
       *3. Cattell Scree Plot:*
@@ -155,13 +155,13 @@
   = Loadings, Scores, and the PCA Biplot
 
   *Component Loadings (Correlations with Variables):*
-  $ L_{j k} = \operatorname{Corr}(X_k, Y_j) = a_{j k} \sqrt{\lambda_j} \quad (\text{for standardized data}) $
+  $ L_(j k) = op("Corr")(X_k, Y_j) = a_(j k) sqrt(lambda_j) quad ("for standardized data") $
 
   #v(0.6em)
 
   *The Gabriel Biplot (1971):*
   Simultaneously displays:
-  - *Observation Points:* $Y_{i 1}, Y_{i 2}$ mapped in component score space.
+  - *Observation Points:* $Y_(i 1), Y_(i 2)$ mapped in component score space.
   - *Variable Vectors:* Directed arrows showing loading magnitude and pairwise cosine correlation.
 ]
 
@@ -176,10 +176,10 @@
 
   #v(0.4em)
 
-  *3 Retained Macroeconomic Factors ($76.8\%$ Variance):*
-  1. *PC1 (Market Equity Beta - $45.2\%$):* Broad stock market risk (high loadings across US, Global, Tech).
-  2. *PC2 (Duration / Interest Rate - $19.4\%$):* Positive for Financials; negative for Treasuries & REITs.
-  3. *PC3 (Commodity Inflation - $12.2\%$):* Driven by Gold & Energy sector returns.
+  *3 Retained Macroeconomic Factors ($76.8%$ Variance):*
+  1. *PC1 (Market Equity Beta - $45.2%$):* Broad stock market risk (high loadings across US, Global, Tech).
+  2. *PC2 (Duration / Interest Rate - $19.4%$):* Positive for Financials; negative for Treasuries & REITs.
+  3. *PC3 (Commodity Inflation - $12.2%$):* Driven by Gold & Energy sector returns.
 
   #v(0.4em)
 
@@ -190,7 +190,7 @@
   = Summary & Key Takeaways
 
   - PCA is the cornerstone of unsupervised multivariate feature extraction.
-  - Formulated via the *spectral decomposition* of $\mathbf{S}$ or $\mathbf{R}$.
+  - Formulated via the *spectral decomposition* of $bold(S)$ or $bold(R)$.
   - Always standardize data ($z$-scores) when variables have different units or variances.
   - Validate component retention using multiple criteria (Kaiser, Scree, Parallel Analysis).
   - Use *Biplots* for holistic interpretation of observations and features.
