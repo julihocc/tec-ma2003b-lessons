@@ -4,7 +4,7 @@
 **Instructor:** Dr. Juliho Castillo Colmenares  
 **Course Code:** MA2003B  
 **Academic Program:** 5 IDM19 (Ingeniería en Ciencia de Datos y Matemáticas)  
-**Syllabus Documentation:** [Plan Analítico (PDF)](docs/MA2003B%20-%20Anal%C3%ADtico.pdf) | [Syllabus Summary (Markdown)](docs/SYLLABUS.md)
+**Syllabus Documentation:** [Plan Analítico (PDF)](docs/MA2003B%20-%20Anal%C3%ADtico.pdf) | [Syllabus Summary (Markdown)](docs/SYLLABUS.md) | [Docs Folder Overview](docs/README.md)
 
 This repository contains teaching materials, lecture notes, slide presentations, synthetic datasets, and interactive Jupyter notebooks for the course *Application of Multivariate Methods in Data Science* (MA2003B).
 
@@ -14,11 +14,10 @@ This repository contains teaching materials, lecture notes, slide presentations,
 
 ```text
 tec-ma2003b-lessons/
-├── .gitattributes                                 # Git LFS tracking configuration (*.ipynb, *.csv, *.pdf)
-├── .python-version                                # Pinned Python runtime (3.11)
 ├── docs/                                          # Course-wide documentation & syllabus
-│   ├── SYLLABUS.md                                # Complete syllabus transcription
-│   └── MA2003B - Analítico.pdf                    # Official Plan Analítico PDF (LFS)
+│   ├── SYLLABUS.md                                # Complete syllabus markdown transcription
+│   ├── MA2003B - Analítico.pdf                    # Official Plan Analítico PDF (Git LFS)
+│   └── README.md                                  # Course documentation overview
 ├── lessons/                                       # Course lesson modules (Chapters 1 to 7)
 │   ├── L01_Regression_Analysis/                   # Section 1: Regression Analysis
 │   ├── L02_Multivariate_Analysis/                 # Section 2: Multivariate Analysis
@@ -26,18 +25,28 @@ tec-ma2003b-lessons/
 │   ├── L04_Factor_Analysis/                       # Section 4: Factor Analysis
 │   ├── L05_Discriminant_Analysis/                 # Section 5: Discriminant Analysis
 │   ├── L06_Cluster_Analysis/                      # Section 6: Analysis by Conglomerates
-│   └── L07_Multivariate_Regression/               # Section 7: Multivariate Regression
+│   ├── L07_Multivariate_Regression/               # Section 7: Multivariate Regression
+│   └── README.md                                  # Master curriculum index & module layout
+├── scripts/                                       # Automation & testing tools
+│   ├── run_notebooks.py                           # Non-interactive clean-kernel test runner
+│   └── README.md                                  # Automation scripts documentation
+├── audits/                                        # Mathematical & architectural audits
+│   ├── 2026-08-27-mathematical-content-audit.md   # Mathematical verification audit
+│   ├── 2026-08-27-repository-audit.md             # Baseline repository structure audit
+│   └── README.md                                  # Audits index & quality standards
 ├── pyproject.toml                                 # uv project configuration
 ├── uv.lock                                        # Deterministic dependency lockfile
+├── .gitattributes                                 # Git LFS tracking configuration (*.ipynb, *.csv, *.pdf)
+├── .python-version                                # Pinned Python runtime (3.11)
 ├── requirements.txt                               # Pip-compatible dependency export
-└── README.md                                      # Repository overview
+└── README.md                                      # Root repository documentation
 ```
 
-Every lesson module inside `lessons/` follows a standardized **4-folder layout**:
-- `data/`: Dataset files (`.csv`), synthetic data generators (`fetch_*.py`), and data dictionaries (`*.md`).
-- `notes/`: Module lecture notes and theoretical study guides (`<topic>_notes.tex` / `.pdf`).
-- `notebook/`: Hands-on case studies and interactive Jupyter notebooks (`.ipynb`).
-- `presentation/`: Slide presentations built with LaTeX Beamer (`<topic>_slides.tex` / `.pdf`).
+Every lesson module inside [`lessons/`](lessons/) strictly follows the standardized **4-folder architecture**:
+- `data/`: Datasets (`.csv`), synthetic data generators (`fetch_*.py`), data dictionaries (`*.md`), and [`README.md`](lessons/L01_Regression_Analysis/data/README.md).
+- `notebook/`: Interactive case studies (`.ipynb`), modular snippets, and [`README.md`](lessons/L01_Regression_Analysis/notebook/README.md).
+- `notes/`: Comprehensive study guides (`.typ`), compiled PDFs (`.pdf`), and [`README.md`](lessons/L01_Regression_Analysis/notes/README.md).
+- `presentation/`: Classroom slide decks built with [Typst](https://typst.app/) + [Touying](https://github.com/touying-typ/touying) (`.typ` / `.pdf`), and [`README.md`](lessons/L01_Regression_Analysis/presentation/README.md).
 
 ---
 
@@ -45,8 +54,8 @@ Every lesson module inside `lessons/` follows a standardized **4-folder layout**
 
 | Section | Module Folder | Official Topic Title | Primary Methods | Case Study Dataset |
 | :---: | :--- | :--- | :--- | :--- |
-| **1** | **[L01](lessons/L01_Regression_Analysis/)** | **Regression Analysis** | Simple/Multiple Linear, ANOVA, Residuals, Stepwise selection, Heteroskedasticity, HC3 | Residential Property Valuation (1,000 homes × 9 metrics) |
-| **2** | **[L02](lessons/L02_Multivariate_Analysis/)** | **Multivariate Analysis** | MVN distributions, Mean vectors, Covariance/Correlation, Robust MCD Outliers, Fisher $z$ | Environmental Air Quality Monitoring (800 stations × 8 metrics) |
+| **1** | **[L01](lessons/L01_Regression_Analysis/)** | **Regression Analysis** | Simple/Multiple Linear, ANOVA, Residuals, Stepwise selection, Heteroskedasticity, HC3 | Residential Property Valuation (1,000 homes × 9 features) |
+| **2** | **[L02](lessons/L02_Multivariate_Analysis/)** | **Multivariate Analysis** | MVN distributions, Mean vectors, Covariance/Correlation, Robust MCD Outliers, Fisher $z$ | Environmental Air Quality Monitoring (800 stations × 8 features) |
 | **3** | **[L03](lessons/L03_Principal_Component_Analysis/)** | **Principal Component Analysis (PCA)** | Spectral decomposition, Eigenvalues, Scree plots, Horn's Parallel Analysis, Biplots | Global Financial Asset Returns (600 trading days × 10 assets) |
 | **4** | **[L04](lessons/L04_Factor_Analysis/)** | **Factor Analysis** | Common Factor Model, Principal Axis, ML extraction, Varimax/Promax rotation | Educational Assessment (200 students × 9 metrics) |
 | **5** | **[L05](lessons/L05_Discriminant_Analysis/)** | **Discriminant Analysis** | Fisher's LDA, QDA, Canonical discriminant functions, Wilks' Lambda, ECM | Customer Marketing Segmentation (1,200 customers) |
@@ -105,33 +114,28 @@ uv run jupyter notebook
 
 Navigate to any lesson `notebook/` subfolder (e.g. `lessons/L01_Regression_Analysis/notebook/housing_regression_analysis.ipynb`) to run the interactive analyses.
 
-### 4. Running Snippet Tests
+### 4. Running Automated Test Suites
 
 ```bash
+# Run all 7 primary notebooks from clean kernels
+uv run python scripts/run_notebooks.py
+
+# Run factor analysis snippet validation suite
 uv run python lessons/L04_Factor_Analysis/notebook/snippets/test_all_snippets.py
 ```
 
-### 5. Compiling Slides & Documents (LaTeX)
+### 5. Compiling Slides & Documents (Typst)
 
-Presentations and lecture notes are typeset using LaTeX. Install a LaTeX distribution such as MiKTeX or TeX Live before compiling, and verify that `pdflatex` is available on your PATH.
-
-```bash
-# Windows (MiKTeX)
-winget install --id MiKTeX.MiKTeX
-
-# macOS / Linux: install TeX Live using your platform's package manager
-```
-
-Verify with `pdflatex --version`.
+Presentations and lecture notes are typeset using [Typst](https://typst.app/):
 
 ```bash
 # Compile slides (example for L01)
 cd lessons/L01_Regression_Analysis/presentation
-pdflatex regression_analysis_slides.tex
+typst compile regression_analysis_slides.typ
 
 # Compile lecture notes (example for L01)
 cd ../notes
-pdflatex regression_analysis_notes.tex
+typst compile regression_analysis_notes.typ
 ```
 
 ---
@@ -142,7 +146,7 @@ pdflatex regression_analysis_notes.tex
 - **Computing & Statistics:** `numpy`, `pandas`, `scipy`, `scikit-learn`, `statsmodels`, `factor_analyzer`
 - **Data Visualization:** `matplotlib`, `seaborn`
 - **Interactive Notebooks:** Jupyter / JupyterLab
-- **Typesetting & Slides:** LaTeX with the Beamer presentation class
+- **Typesetting & Slides:** [Typst](https://typst.app/) with `@preview/touying:0.5.3` (University Theme, Tec de Monterrey branding)
 - **Asset Storage:** Git LFS (`*.ipynb`, `*.csv`, `*.pdf`)
 
 ---
