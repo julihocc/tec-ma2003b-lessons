@@ -48,14 +48,14 @@
   = Simple Linear Regression: The OLS Model
 
   *Population Equation:*
-  $ y_i = \beta_0 + \beta_1 x_i + \varepsilon_i, \quad i = 1, \dots, n $
+  $ y_i = beta_0 + beta_1 x_i + epsilon.alt_i, quad i = 1, dots.h, n $
 
-  where $\mathbb{E}[\varepsilon_i] = 0$, $\operatorname{Var}(\varepsilon_i) = \sigma^2$, and $\operatorname{Cov}(\varepsilon_i, \varepsilon_j) = 0$.
+  where $bb(E)[epsilon.alt_i] = 0$, $op("Var")(epsilon.alt_i) = sigma^2$, and $op("Cov")(epsilon.alt_i, epsilon.alt_j) = 0$.
 
   #v(0.6em)
 
   *Ordinary Least Squares Estimators:*
-  $ \hat{\beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = \frac{S_{x y}}{S_{x x}}, \qquad \hat{\beta}_0 = \bar{y} - \hat{\beta}_1 \bar{x} $
+  $ hat(beta)_1 = frac(sum_(i=1)^n (x_i - overline(x))(y_i - overline(y)), sum_(i=1)^n (x_i - overline(x))^2) = frac(S_(x y), S_(x x)), quad quad hat(beta)_0 = overline(y) - hat(beta)_1 overline(x) $
 
   #v(0.6em)
 
@@ -67,17 +67,17 @@
   = ANOVA & Variation Decomposition
 
   *Total Variation Partitioning:*
-  $ \underbrace{\sum (y_i - \bar{y})^2}_{\text{SST}} = \underbrace{\sum (\hat{y}_i - \bar{y})^2}_{\text{SSR (Explained)}} + \underbrace{\sum (y_i - \hat{y}_i)^2}_{\text{SSE (Residual)}} $
+  $ underbrace(sum (y_i - overline(y))^2, "SST") = underbrace(sum (hat(y)_i - overline(y))^2, "SSR (Explained)") + underbrace(sum (y_i - hat(y)_i)^2, "SSE (Residual)") $
 
   #v(0.5em)
 
   *Goodness of Fit ($R^2$):*
-  $ R^2 = \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\text{SSE}}{\text{SST}} $
+  $ R^2 = frac("SSR", "SST") = 1 - frac("SSE", "SST") $
 
   #v(0.5em)
 
   *Overall Model $F$-Test:*
-  $ F = \frac{\text{MSR}}{\text{MSE}} = \frac{\text{SSR}/k}{\text{SSE}/(n - k - 1)} \sim F_{k, n - k - 1} $
+  $ F = frac("MSR", "MSE") = frac("SSR"/k, "SSE"/(n - k - 1)) tilde.op F_(k, n - k - 1) $
 ]
 
 #slide[
@@ -92,15 +92,15 @@
     gutter: 1.5em,
     [
       *1. Mean Response CI:*
-      $ \hat{y}_0 \pm t_{\text{crit}} \cdot s \sqrt{\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{x x}}} $
-      - Captures uncertainty in the *average response* $\mathbb{E}[Y | X = x_0]$.
-      - Narrows as sample size $n \to \infty$.
+      $ hat(y)_0 plus.minus t_("crit") dot.op s sqrt(frac(1, n) + frac((x_0 - overline(x))^2, S_(x x))) $
+      - Captures uncertainty in the *average response* $bb(E)[Y | X = x_0]$.
+      - Narrows as sample size $n arrow.r infinity$.
     ],
     [
       *2. Individual Prediction PI:*
-      $ \hat{y}_0 \pm t_{\text{crit}} \cdot s \sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{x x}}} $
-      - Captures uncertainty in a *single new outcome* $Y_{\text{new}}$.
-      - Always strictly wider due to $+1$ term ($\sigma^2$).
+      $ hat(y)_0 plus.minus t_("crit") dot.op s sqrt(1 + frac(1, n) + frac((x_0 - overline(x))^2, S_(x x))) $
+      - Captures uncertainty in a *single new outcome* $Y_("new")$.
+      - Always strictly wider due to $+1$ term ($sigma^2$).
     ]
   )
 ]
@@ -112,38 +112,38 @@
 #slide[
   = Multiple Linear Regression (Matrix Formulation)
 
-  *Vector Model:* $\mathbf{y} = \mathbf{X}\boldsymbol{\beta} + \boldsymbol{\varepsilon}$, with $\boldsymbol{\varepsilon} \sim \mathcal{N}_n(\mathbf{0}, \sigma^2 \mathbf{I}_n)$.
+  *Vector Model:* $bold(y) = bold(X) bold(beta) + bold(epsilon.alt)$, with $bold(epsilon.alt) tilde.op cal(N)_n(bold(0), sigma^2 bold(I)_n)$.
 
   #v(0.6em)
 
   *Normal Equations & OLS Solution:*
-  $ \mathbf{X}^T \mathbf{X} \hat{\boldsymbol{\beta}} = \mathbf{X}^T \mathbf{y} \implies \hat{\boldsymbol{\beta}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} $
+  $ bold(X)^T bold(X) hat(bold(beta)) = bold(X)^T bold(y) ==> hat(bold(beta)) = (bold(X)^T bold(X))^(-1) bold(X)^T bold(y) $
 
   #v(0.6em)
 
   *Covariance of Estimates & Hat Matrix:*
-  $ \operatorname{Cov}(\hat{\boldsymbol{\beta}}) = \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1}, \qquad \hat{\mathbf{y}} = \mathbf{H}\mathbf{y} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T \mathbf{y} $
+  $ op("Cov")(hat(bold(beta))) = sigma^2 (bold(X)^T bold(X))^(-1), quad quad hat(bold(y)) = bold(H) bold(y) = bold(X)(bold(X)^T bold(X))^(-1) bold(X)^T bold(y) $
 
-  The diagonal $h_{i i}$ represents the *leverage* of observation $i$.
+  The diagonal $h_(i i)$ represents the *leverage* of observation $i$.
 ]
 
 #slide[
   = Multicollinearity: The VIF Diagnostic
 
-  *Problem:* High correlation between predictors inflates standard errors $\operatorname{Var}(\hat{\beta}_j)$.
+  *Problem:* High correlation between predictors inflates standard errors $op("Var")(hat(beta)_j)$.
 
   #v(0.6em)
 
   *Variance Inflation Factor (VIF):*
-  $ \text{VIF}_j = \frac{1}{1 - R_j^2} $
+  $ "VIF"_j = frac(1, 1 - R_j^2) $
   where $R_j^2$ is the $R^2$ obtained from regressing $X_j$ onto all other remaining predictors.
 
   #v(0.6em)
 
   *Interpretation Guidelines:*
-  - $\text{VIF} = 1$: Completely independent features.
-  - $1 < \text{VIF} < 5$: Acceptable mild correlation.
-  - $\text{VIF} \ge 10$: Severe collinearity; requires feature pruning or Ridge/PCA regularization.
+  - $"VIF" = 1$: Completely independent features.
+  - $1 < "VIF" < 5$: Acceptable mild correlation.
+  - $"VIF" gt.eq 10$: Severe collinearity; requires feature pruning or Ridge/PCA regularization.
 ]
 
 #slide[
@@ -154,18 +154,18 @@
     gutter: 1.5em,
     [
       *1. Studentized Residuals:*
-      $ r_i = \frac{e_i}{s \sqrt{1 - h_{i i}}} $
+      $ r_i = frac(e_i, s sqrt(1 - h_(i i))) $
       - Identifies $Y$-space outliers ($|r_i| > 3$).
 
       #v(0.5em)
-      *2. Leverage ($h_{i i}$):*
-      - Identifies $X$-space extreme points ($h_{i i} > \frac{2(k+1)}{n}$).
+      *2. Leverage ($h_(i i)$):*
+      - Identifies $X$-space extreme points ($h_(i i) > frac(2(k+1), n)$).
     ],
     [
       *3. Cook's Distance ($D_i$):*
-      $ D_i = \frac{r_i^2}{k + 1} \left( \frac{h_{i i}}{1 - h_{i i}} \right) $
-      - Measures the overall influence of point $i$ on *all* fitted values $\hat{\mathbf{y}}$.
-      - Threshold: $D_i > \frac{4}{n}$ warrants detailed investigation.
+      $ D_i = frac(r_i^2, k + 1) ( frac(h_(i i), 1 - h_(i i)) ) $
+      - Measures the overall influence of point $i$ on *all* fitted values $hat(bold(y))$.
+      - Threshold: $D_i > frac(4, n)$ warrants detailed investigation.
     ]
   )
 ]
@@ -173,19 +173,19 @@
 #slide[
   = Heteroskedasticity: Breusch-Pagan & Robust SE
 
-  *Violation:* $\operatorname{Var}(\varepsilon_i | \mathbf{X}) = \sigma_i^2 \neq \text{constant}$.
+  *Violation:* $op("Var")(epsilon.alt_i | bold(X)) = sigma_i^2 eq.not "constant"$.
 
   #v(0.5em)
 
   *Breusch-Pagan Test:*
-  Regress squared residuals $e_i^2 / \hat{\sigma}^2$ on $\mathbf{X}$. Test statistic $L M = \frac{1}{2}\text{SSR}_{\text{aux}} \sim \chi_k^2$. Reject $H_0$ if $p < 0.05$.
+  Regress squared residuals $e_i^2 / hat(sigma)^2$ on $bold(X)$. Test statistic $L M = frac(1, 2)"SSR"_("aux") tilde.op chi_k^2$. Reject $H_0$ if $p < 0.05$.
 
   #v(0.5em)
 
   *Remedies:*
   1. *Heteroskedasticity-Consistent (HC3) Robust SE:*
-     $ \operatorname{Cov}_{\text{HC3}}(\hat{\boldsymbol{\beta}}) = (\mathbf{X}^T \mathbf{X})^{-1} \left( \sum_{i=1}^n \frac{e_i^2}{(1 - h_{i i})^2} \mathbf{x}_i \mathbf{x}_i^T \right) (\mathbf{X}^T \mathbf{X})^{-1} $
-  2. *Weighted Least Squares (WLS):* Weight observations by $w_i = 1/\sigma_i^2$.
+     $ op("Cov")_("HC3")(hat(bold(beta))) = (bold(X)^T bold(X))^(-1) ( sum_(i=1)^n frac(e_i^2, (1 - h_(i i))^2) bold(x)_i bold(x)_i^T ) (bold(X)^T bold(X))^(-1) $
+  2. *Weighted Least Squares (WLS):* Weight observations by $w_i = 1/sigma_i^2$.
 ]
 
 // ============================================================================
@@ -214,14 +214,14 @@
 
   #v(0.5em)
 
-  *Findings:* Model explains $88.4\%$ of price variance with valid robust $p$-values.
+  *Findings:* Model explains $88.4%$ of price variance with valid robust $p$-values.
 ]
 
 #slide[
   = Summary & Key Takeaways
 
   - *Linear Regression* is the foundational tool for parametric inference and prediction.
-  - Always verify OLS assumptions: linearity, normality of residuals, homoskedasticity, and no extreme collinearity ($\text{VIF} < 5$).
+  - Always verify OLS assumptions: linearity, normality of residuals, homoskedasticity, and no extreme collinearity ($"VIF" < 5$).
   - When non-linear patterns exist, incorporate polynomial terms or logarithmic transforms.
   - Guard against influential outliers using Cook's distance.
   - When heteroskedasticity is present, employ *HC3 robust standard errors* to protect inferential validity.

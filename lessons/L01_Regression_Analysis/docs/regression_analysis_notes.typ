@@ -117,27 +117,27 @@ By the end of this module, students will be able to:
 == Mathematical Formulation
 Simple Linear Regression models the linear association between a continuous scalar response variable $Y$ and a single explanatory predictor variable $X$:
 
-$ y_i = beta_0 + beta_1 x_i + epsilon_i, \quad i = 1, 2, \dots, n $
+$ y_i = beta_0 + beta_1 x_i + epsilon_i, quad i = 1, 2, dots.h, n $
 
 where:
-- $beta_0 \in \mathbb{R}$ is the population intercept parameter.
-- $beta_1 \in \mathbb{R}$ is the population slope coefficient (expected marginal change in $Y$ per unit change in $X$).
+- $beta_0 in bb(R)$ is the population intercept parameter.
+- $beta_1 in bb(R)$ is the population slope coefficient (expected marginal change in $Y$ per unit change in $X$).
 - $epsilon_i$ is the unobserved random error term satisfying the classical Gauss-Markov assumptions:
-  $ \mathbb{E}[epsilon_i] = 0, \quad \operatorname{Var}(epsilon_i) = sigma^2, \quad \operatorname{Cov}(epsilon_i, epsilon_j) = 0 \ (i \neq j) $
+  $ bb(E)[epsilon_i] = 0, quad op("Var")(epsilon_i) = sigma^2, quad op("Cov")(epsilon_i, epsilon_j) = 0 \ (i eq.not j) $
 
-Under the normality assumption, $epsilon_i \stackrel{\text{iid}}{\sim} \mathcal{N}(0, sigma^2)$.
+Under the normality assumption, $epsilon_i attach(tilde.op, t: "iid") cal(N)(0, sigma^2)$.
 
 == Ordinary Least Squares (OLS) Derivation
-The OLS estimators $(\hat{beta}_0, \hat{beta}_1)$ minimize the Residual Sum of Squares:
+The OLS estimators $(hat(beta)_0, hat(beta)_1)$ minimize the Residual Sum of Squares:
 
-$ S(beta_0, beta_1) = \sum_{i=1}^n (y_i - beta_0 - beta_1 x_i)^2 $
+$ S(beta_0, beta_1) = sum_(i=1)^n (y_i - beta_0 - beta_1 x_i)^2 $
 
 Setting partial derivatives to zero yields the normal equations:
-$ \frac{\partial S}{\partial beta_0} = -2 \sum_{i=1}^n (y_i - beta_0 - beta_1 x_i) = 0 \implies \hat{beta}_0 = \bar{y} - \hat{beta}_1 \bar{x} $
-$ \frac{\partial S}{\partial beta_1} = -2 \sum_{i=1}^n x_i (y_i - beta_0 - beta_1 x_i) = 0 \implies \hat{beta}_1 = \frac{\sum_{i=1}^n (x_i - \bar{x})(y_i - \bar{y})}{\sum_{i=1}^n (x_i - \bar{x})^2} = \frac{S_{x y}}{S_{x x}} $
+$ frac(partial S, partial beta_0) = -2 sum_(i=1)^n (y_i - beta_0 - beta_1 x_i) = 0 ==> hat(beta)_0 = overline(y) - hat(beta)_1 overline(x) $
+$ frac(partial S, partial beta_1) = -2 sum_(i=1)^n x_i (y_i - beta_0 - beta_1 x_i) = 0 ==> hat(beta)_1 = frac(sum_(i=1)^n (x_i - overline(x))(y_i - overline(y)), sum_(i=1)^n (x_i - overline(x))^2) = frac(S_(x y), S_(x x)) $
 
 #info[
-  *Gauss-Markov Theorem:* Under the assumptions of linearity, strict exogeneity, homoskedasticity, and no autocorrelation, the OLS estimator $\hat{\boldsymbol{\beta}}$ is the *Best Linear Unbiased Estimator (BLUE)*.
+  *Gauss-Markov Theorem:* Under the assumptions of linearity, strict exogeneity, homoskedasticity, and no autocorrelation, the OLS estimator $hat(bold(beta))$ is the *Best Linear Unbiased Estimator (BLUE)*.
 ]
 
 ---
@@ -147,33 +147,33 @@ $ \frac{\partial S}{\partial beta_1} = -2 \sum_{i=1}^n x_i (y_i - beta_0 - beta_
 == Sum of Squares Decomposition
 The total sample variation in $Y$ is partitioned into explained (regression) and unexplained (residual) components:
 
-$ \underbrace{\sum_{i=1}^n (y_i - \bar{y})^2}_{\text{SST (Total)}} = \underbrace{\sum_{i=1}^n (\hat{y}_i - \bar{y})^2}_{\text{SSR (Regression)}} + \underbrace{\sum_{i=1}^n (y_i - \hat{y}_i)^2}_{\text{SSE (Error)}} $
+$ underbrace(sum_(i=1)^n (y_i - overline(y))^2, "SST (Total)") = underbrace(sum_(i=1)^n (hat(y)_i - overline(y))^2, "SSR (Regression)") + underbrace(sum_(i=1)^n (y_i - hat(y)_i)^2, "SSE (Error)") $
 
-Degrees of freedom: $\text{df}_{\text{Total}} = n - 1$, $\text{df}_{\text{Regression}} = 1$ (or $k$ predictors), $\text{df}_{\text{Error}} = n - k - 1$.
+Degrees of freedom: $"df"_("Total") = n - 1$, $"df"_("Regression") = 1$ (or $k$ predictors), $"df"_("Error") = n - k - 1$.
 
 #table(
   columns: (2fr, 1.5fr, 1.5fr, 1.5fr, 1.5fr),
   align: center,
   table.header([*Source*], [*Sum of Squares*], [*Degrees of Freedom*], [*Mean Square (MS)*], [*$F$-Statistic*]),
-  [Regression], [SSR], [$k$], [$\text{MSR} = \text{SSR}/k$], [$F = \frac{\text{MSR}}{\text{MSE}}$],
-  [Residual (Error)], [SSE], [$n - k - 1$], [$\text{MSE} = \text{SSE}/(n - k - 1)$], [],
+  [Regression], [SSR], [$k$], [$"MSR" = "SSR"/k$], [$F = frac("MSR", "MSE")$],
+  [Residual (Error)], [SSE], [$n - k - 1$], [$"MSE" = "SSE"/(n - k - 1)$], [],
   [Total], [SST], [$n - 1$], [], []
 )
 
 Coefficient of determination:
-$ R^2 = \frac{\text{SSR}}{\text{SST}} = 1 - \frac{\text{SSE}}{\text{SST}} $
+$ R^2 = frac("SSR", "SST") = 1 - frac("SSE", "SST") $
 
 == Mean Response Confidence Interval vs. Individual Prediction Interval
 For a specified predictor value $x_0$:
 
-*1. Confidence Interval for the Expected Mean $\mathbb{E}[Y | X = x_0]$:*
-$ \hat{y}_0 \pm t_{n-2, 1 - \alpha/2} \cdot s \sqrt{\frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{x x}}} $
+*1. Confidence Interval for the Expected Mean $bb(E)[Y | X = x_0]$:*
+$ hat(y)_0 plus.minus t_(n-2, 1 - alpha/2) dot.op s sqrt(frac(1, n) + frac((x_0 - overline(x))^2, S_(x x))) $
 
-*2. Prediction Interval for a Single New Observation $Y_{\text{new}}$:*
-$ \hat{y}_0 \pm t_{n-2, 1 - \alpha/2} \cdot s \sqrt{1 + \frac{1}{n} + \frac{(x_0 - \bar{x})^2}{S_{x x}}} $
+*2. Prediction Interval for a Single New Observation $Y_("new")$:*
+$ hat(y)_0 plus.minus t_(n-2, 1 - alpha/2) dot.op s sqrt(1 + frac(1, n) + frac((x_0 - overline(x))^2, S_(x x))) $
 
 #tip[
-  Prediction intervals are always strictly wider than confidence intervals because they account for both model parameter uncertainty and individual observation variance $\sigma^2$.
+  Prediction intervals are always strictly wider than confidence intervals because they account for both model parameter uncertainty and individual observation variance $sigma^2$.
 ]
 
 ---
@@ -181,15 +181,15 @@ $ \hat{y}_0 \pm t_{n-2, 1 - \alpha/2} \cdot s \sqrt{1 + \frac{1}{n} + \frac{(x_0
 = 1.3 Residual Analysis & Condition of Normality
 
 == Residual Definitions
-- *Raw Residuals:* $e_i = y_i - \hat{y}_i$.
-- *Standardized Residuals:* $d_i = \frac{e_i}{s}$.
+- *Raw Residuals:* $e_i = y_i - hat(y)_i$.
+- *Standardized Residuals:* $d_i = frac(e_i, s)$.
 - *Studentized (Internally Studentized) Residuals:*
-  $ r_i = \frac{e_i}{s \sqrt{1 - h_{i i}}} $
-  where $h_{i i} = \mathbf{x}_i^T (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{x}_i$ is the $i$-th diagonal element of the hat matrix $\mathbf{H} = \mathbf{X}(\mathbf{X}^T\mathbf{X})^{-1}\mathbf{X}^T$.
+  $ r_i = frac(e_i, s sqrt(1 - h_(i i))) $
+  where $h_(i i) = bold(x)_i^T (bold(X)^T bold(X))^(-1) bold(x)_i$ is the $i$-th diagonal element of the hat matrix $bold(H) = bold(X)(bold(X)^T bold(X))^(-1) bold(X)^T$.
 
 == Diagnostic Tools
 - *Residuals vs. Fitted Values Plot:* Evaluates linearity (should show horizontal band around zero) and homoskedasticity (constant vertical spread).
-- *Normal Q-Q Plot:* Plots sample quantiles of studentized residuals against theoretical normal quantiles. Departures from the $45^\circ$ reference line indicate skewness or heavy tails.
+- *Normal Q-Q Plot:* Plots sample quantiles of studentized residuals against theoretical normal quantiles. Departures from the $45^compose$ reference line indicate skewness or heavy tails.
 - *Shapiro-Wilk Test:* Statistical hypothesis test with null hypothesis $H_0$: residuals are normally distributed.
 
 ---
@@ -197,20 +197,20 @@ $ \hat{y}_0 \pm t_{n-2, 1 - \alpha/2} \cdot s \sqrt{1 + \frac{1}{n} + \frac{(x_0
 = 1.4 & 1.5 Variable Selection Methods
 
 == Forward Selection
-1. Start with the intercept-only null model: $y = \beta_0$.
+1. Start with the intercept-only null model: $y = beta_0$.
 2. For each candidate predictor $X_j$, compute the $F$-to-enter statistic (or $p$-value) when added to the current model.
-3. Add the predictor with the lowest $p$-value if $p < \alpha_{\text{enter}}$ (typically $0.05$).
+3. Add the predictor with the lowest $p$-value if $p < alpha_("enter")$ (typically $0.05$).
 4. Repeat until no remaining predictor meets the entry criterion.
 
 == Backward Elimination
 1. Start with the full model containing all $p$ candidate predictors.
 2. For each predictor in the model, calculate the partial $F$-test or $t$-test $p$-value.
-3. Remove the variable with the highest $p$-value if $p > \alpha_{\text{remove}}$ (typically $0.10$).
+3. Remove the variable with the highest $p$-value if $p > alpha_("remove")$ (typically $0.10$).
 4. Re-fit and repeat until all remaining variables are statistically significant.
 
 == Information Criteria Comparison
-- *Akaike Information Criterion (AIC):* $\text{AIC} = 2k - 2\ln(\hat{L}) \approx n \ln(\text{SSE}/n) + 2k$. Penalizes model complexity.
-- *Bayesian Information Criterion (BIC):* $\text{BIC} = k \ln(n) - 2\ln(\hat{L}) \approx n \ln(\text{SSE}/n) + k \ln(n)$. Imposes a stronger penalty for large $n$, favoring more parsimonious models.
+- *Akaike Information Criterion (AIC):* $"AIC" = 2k - 2ln(hat(L)) approx n ln("SSE"/n) + 2k$. Penalizes model complexity.
+- *Bayesian Information Criterion (BIC):* $"BIC" = k ln(n) - 2ln(hat(L)) approx n ln("SSE"/n) + k ln(n)$. Imposes a stronger penalty for large $n$, favoring more parsimonious models.
 
 ---
 
@@ -219,53 +219,53 @@ $ \hat{y}_0 \pm t_{n-2, 1 - \alpha/2} \cdot s \sqrt{1 + \frac{1}{n} + \frac{(x_0
 When the true relationship between $Y$ and $X$ exhibits curvature:
 
 == Polynomial Models
-$ y_i = \beta_0 + \beta_1 x_i + \beta_2 x_i^2 + \dots + \beta_d x_i^d + \epsilon_i $
-Linear in parameters $\beta$, estimated using standard OLS.
+$ y_i = beta_0 + beta_1 x_i + beta_2 x_i^2 + dots.h + beta_d x_i^d + epsilon_i $
+Linear in parameters $beta$, estimated using standard OLS.
 
 == Logarithmic Transformations
-- *Log-Linear (Exponential growth):* $\ln(y_i) = \beta_0 + \beta_1 x_i + \epsilon_i \implies 100 \cdot \beta_1 \%$ percentage change in $Y$ per unit $X$.
-- *Linear-Log:* $y_i = \beta_0 + \beta_1 \ln(x_i) + \epsilon_i \implies \frac{\beta_1}{100}$ change in $Y$ per $1\%$ increase in $X$.
-- *Log-Log (Elasticity):* $\ln(y_i) = \beta_0 + \beta_1 \ln(x_i) + \epsilon_i \implies \beta_1\%$ change in $Y$ per $1\%$ increase in $X$.
+- *Log-Linear (Exponential growth):* $ln(y_i) = beta_0 + beta_1 x_i + epsilon_i ==> 100 dot.op beta_1 %$ percentage change in $Y$ per unit $X$.
+- *Linear-Log:* $y_i = beta_0 + beta_1 ln(x_i) + epsilon_i ==> frac(beta_1, 100)$ change in $Y$ per $1%$ increase in $X$.
+- *Log-Log (Elasticity):* $ln(y_i) = beta_0 + beta_1 ln(x_i) + epsilon_i ==> beta_1%$ change in $Y$ per $1%$ increase in $X$.
 
 ---
 
 = 1.7 Multiple Linear Regression
 
 == Matrix Formulation
-$ \mathbf{y} = \mathbf{X} \boldsymbol{\beta} + \boldsymbol{\varepsilon} $
+$ bold(y) = bold(X) bold(beta) + bold(epsilon.alt) $
 
-where $\mathbf{y} \in \mathbb{R}^{n \times 1}$, $\mathbf{X} \in \mathbb{R}^{n \times (k+1)}$, $\boldsymbol{\beta} \in \mathbb{R}^{(k+1) \times 1}$, $\boldsymbol{\varepsilon} \sim \mathcal{N}_n(\mathbf{0}, \sigma^2 \mathbf{I}_n)$.
+where $bold(y) in bb(R)^(n times 1)$, $bold(X) in bb(R)^(n times (k+1))$, $bold(beta) in bb(R)^((k+1) times 1)$, $bold(epsilon.alt) tilde.op cal(N)_n(bold(0), sigma^2 bold(I)_n)$.
 
 == Parameter Estimation & Covariance Matrix
-$ \hat{\boldsymbol{\beta}} = (\mathbf{X}^T \mathbf{X})^{-1} \mathbf{X}^T \mathbf{y} $
-$ \operatorname{Cov}(\hat{\boldsymbol{\beta}}) = \sigma^2 (\mathbf{X}^T \mathbf{X})^{-1} \quad \left(\text{Sample estimator: } s^2 (\mathbf{X}^T \mathbf{X})^{-1}\right) $
+$ hat(bold(beta)) = (bold(X)^T bold(X))^(-1) bold(X)^T bold(y) $
+$ op("Cov")(hat(bold(beta))) = sigma^2 (bold(X)^T bold(X))^(-1) quad ("Sample estimator: " s^2 (bold(X)^T bold(X))^(-1)) $
 
 == Multicollinearity & Variance Inflation Factor (VIF)
-Multicollinearity occurs when two or more predictor variables in $\mathbf{X}$ are highly linearly correlated.
+Multicollinearity occurs when two or more predictor variables in $bold(X)$ are highly linearly correlated.
 For predictor $X_j$:
-$ \text{VIF}_j = \frac{1}{1 - R_j^2} $
+$ "VIF"_j = frac(1, 1 - R_j^2) $
 where $R_j^2$ is the coefficient of determination from regressing $X_j$ on all other remaining predictors.
-- $\text{VIF} = 1$: No collinearity.
-- $\text{VIF} > 5$: Moderate collinearity requiring attention.
-- $\text{VIF} > 10$: Severe collinearity causing unstable coefficient estimates and inflated standard errors.
+- $"VIF" = 1$: No collinearity.
+- $"VIF" > 5$: Moderate collinearity requiring attention.
+- $"VIF" > 10$: Severe collinearity causing unstable coefficient estimates and inflated standard errors.
 
 ---
 
 = 1.8 Aberrant Data & Heteroskedasticity Problems
 
 == Leverage and Influence Diagnostics
-- *Hat Matrix Leverage ($h_{i i}$):* Measures how far observation $i$'s predictors are from the multivariate centroid:
-  $ \bar{h} = \frac{k + 1}{n} \quad (\text{High leverage if } h_{i i} > 2\bar{h}) $
+- *Hat Matrix Leverage ($h_(i i)$):* Measures how far observation $i$'s predictors are from the multivariate centroid:
+  $ overline(h) = frac(k + 1, n) quad ("High leverage if " h_(i i) > 2 overline(h)) $
 - *Cook's Distance ($D_i$):* Measures the aggregate shift in fitted values when observation $i$ is deleted:
-  $ D_i = \frac{\sum_{j=1}^n (\hat{y}_j - \hat{y}_{j(i)})^2}{(k + 1) s^2} = \frac{r_i^2}{k + 1} \left( \frac{h_{i i}}{1 - h_{i i}} \right) $
-  Values of $D_i > 1.0$ (or $> \frac{4}{n}$) indicate highly influential points.
+  $ D_i = frac(sum_(j=1)^n (hat(y)_j - hat(y)_(j(i)))^2, (k + 1) s^2) = frac(r_i^2, k + 1) ( frac(h_(i i), 1 - h_(i i)) ) $
+  Values of $D_i > 1.0$ (or $> frac(4, n)$) indicate highly influential points.
 
 == Heteroskedasticity Detection & Remedies
-- *Breusch-Pagan Test:* Regresses squared standardized residuals $e_i^2 / \hat{\sigma}^2$ on predictors $\mathbf{X}$. Under $H_0$ (homoskedasticity), the test statistic follows $\chi_k^2$.
-- *Weighted Least Squares (WLS):* When $\operatorname{Var}(\epsilon_i) = \sigma^2 w_i^{-1}$, minimize $\sum w_i (y_i - \mathbf{x}_i^T\boldsymbol{\beta})^2$:
-  $ \hat{\boldsymbol{\beta}}_{\text{WLS}} = (\mathbf{X}^T \mathbf{W} \mathbf{X})^{-1} \mathbf{X}^T \mathbf{W} \mathbf{y}, \quad \mathbf{W} = \operatorname{diag}(w_1, \dots, w_n) $
+- *Breusch-Pagan Test:* Regresses squared standardized residuals $e_i^2 / hat(sigma)^2$ on predictors $bold(X)$. Under $H_0$ (homoskedasticity), the test statistic follows $chi_k^2$.
+- *Weighted Least Squares (WLS):* When $op("Var")(epsilon_i) = sigma^2 w_i^(-1)$, minimize $sum w_i (y_i - bold(x)_i^T bold(beta))^2$:
+  $ hat(bold(beta))_("WLS") = (bold(X)^T bold(W) bold(X))^(-1) bold(X)^T bold(W) bold(y), quad bold(W) = op("diag")(w_1, dots.h, w_n) $
 - *Heteroskedasticity-Consistent Covariance (White / HC3):*
-  $ \operatorname{Cov}_{\text{HC3}}(\hat{\boldsymbol{\beta}}) = (\mathbf{X}^T \mathbf{X})^{-1} \left( \sum_{i=1}^n \frac{e_i^2}{(1 - h_{i i})^2} \mathbf{x}_i \mathbf{x}_i^T \right) (\mathbf{X}^T \mathbf{X})^{-1} $
+  $ op("Cov")_("HC3")(hat(bold(beta))) = (bold(X)^T bold(X))^(-1) ( sum_(i=1)^n frac(e_i^2, (1 - h_(i i))^2) bold(x)_i bold(x)_i^T ) (bold(X)^T bold(X))^(-1) $
 
 ---
 
