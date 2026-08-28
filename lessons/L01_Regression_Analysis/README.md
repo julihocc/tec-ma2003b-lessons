@@ -24,17 +24,23 @@ L01_Regression_Analysis/
 ├── data/                                         # Datasets and generation scripts
 │   ├── fetch_housing_regression.py               # Synthetic property transaction generator
 │   ├── housing_regression.csv                    # Generated dataset (1,000 homes × 9 metrics)
-│   └── HOUSING_REGRESSION_DATA_DICTIONARY.md     # Detailed variable descriptions
-├── notes/                                        # Lecture notes and study guides
-│   └── regression_analysis_notes.tex             # Comprehensive study guide (LaTeX)
+│   ├── HOUSING_REGRESSION_DATA_DICTIONARY.md     # Detailed variable descriptions
+│   └── README.md                                 # Data documentation & regeneration guide
 ├── notebook/                                     # Interactive Jupyter notebooks
-│   └── housing_regression_analysis.ipynb         # End-to-end residential valuation case study
+│   ├── housing_regression_analysis.ipynb         # End-to-end residential valuation case study
+│   └── README.md                                 # Notebook walkthrough & cell progression
+├── notes/                                        # Lecture notes and study guides
+│   ├── regression_analysis_notes.typ             # Comprehensive study guide (Typst)
+│   ├── regression_analysis_notes.pdf             # Compiled lecture note PDF
+│   └── README.md                                 # Notes outline & compilation guide
 ├── presentation/                                 # Presentation slides
-│   └── regression_analysis_slides.tex            # LaTeX Beamer presentation
+│   ├── regression_analysis_slides.typ            # Typst presentation (Touying university theme)
+│   ├── regression_analysis_slides.pdf            # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
 └── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
@@ -46,13 +52,13 @@ uv run python lessons/L01_Regression_Analysis/data/fetch_housing_regression.py
 uv run jupyter notebook lessons/L01_Regression_Analysis/notebook/housing_regression_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (LaTeX)
+### 3. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
 cd lessons/L01_Regression_Analysis/presentation/
-pdflatex regression_analysis_slides.tex
+typst compile regression_analysis_slides.typ
 
 # Lecture Notes
 cd ../notes/
-pdflatex regression_analysis_notes.tex
+typst compile regression_analysis_notes.typ
 ```
