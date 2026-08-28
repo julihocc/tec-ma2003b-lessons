@@ -17,22 +17,42 @@ Multivariate analysis involves the simultaneous observation and statistical trea
 - **2.7** Sample correlations, Fisher and Ruben intervals
 - **2.8** Multivariate descriptive analytics and visualization
 
-## Learning Objectives
-
-- Calculate and interpret sample mean vectors ($\bar{\mathbf{x}}$), covariance matrices ($\mathbf{S}$), and correlation matrices ($\mathbf{R}$).
-- Understand and evaluate the Multivariate Normal (MVN) probability density function.
-- Detect missing, null, or discrepant values in multivariate records.
-- Identify multivariate outliers and influential observations using Mahalanobis distance.
-- Construct Fisher and Ruben confidence intervals for sample correlation coefficients.
-- Apply multidimensional visualization methods (scatter matrices, heatmap projections, Andrews curves).
-
 ## Directory Structure
 
 ```text
 L02_Multivariate_Analysis/
-├── data/           # Datasets and generation scripts
-├── docs/           # Lecture notes and study guides
-├── notebook/       # Interactive Jupyter notebooks
-├── presentation/   # Presentation slides (Typst + Touying)
-└── README.md       # Module documentation
+├── data/                                         # Datasets and generation scripts
+│   ├── fetch_environmental_data.py               # Atmospheric sensor monitoring generator
+│   ├── environmental_data.csv                    # Generated dataset (800 stations × 8 metrics)
+│   └── ENVIRONMENTAL_DATA_DICTIONARY.md          # Detailed variable descriptions
+├── docs/                                         # Lecture notes and study guides
+│   └── multivariate_analysis_notes.typ           # Comprehensive study guide (Typst)
+├── notebook/                                     # Interactive Jupyter notebooks
+│   └── environmental_multivariate_analysis.ipynb # Air quality multivariate case study
+├── presentation/                                 # Presentation slides
+│   └── multivariate_analysis_slides.typ          # Typst presentation (Touying university theme)
+└── README.md                                     # Module documentation
+```
+
+## Usage & Execution
+
+### 1. Generate Dataset
+```bash
+uv run python lessons/L02_Multivariate_Analysis/data/fetch_environmental_data.py
+```
+
+### 2. Run Interactive Notebook
+```bash
+uv run jupyter notebook lessons/L02_Multivariate_Analysis/notebook/environmental_multivariate_analysis.ipynb
+```
+
+### 3. Compile Slides & Documents (Typst)
+```bash
+# Presentation
+cd lessons/L02_Multivariate_Analysis/presentation/
+typst compile multivariate_analysis_slides.typ
+
+# Lecture Notes
+cd ../docs/
+typst compile multivariate_analysis_notes.typ
 ```
