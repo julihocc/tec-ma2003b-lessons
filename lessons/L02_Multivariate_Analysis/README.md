@@ -24,17 +24,23 @@ L02_Multivariate_Analysis/
 ├── data/                                         # Datasets and generation scripts
 │   ├── fetch_environmental_data.py               # Atmospheric sensor monitoring generator
 │   ├── environmental_data.csv                    # Generated dataset (800 stations × 8 metrics)
-│   └── ENVIRONMENTAL_DATA_DICTIONARY.md          # Detailed variable descriptions
-├── notes/                                        # Lecture notes and study guides
-│   └── multivariate_analysis_notes.tex           # Comprehensive study guide (LaTeX)
+│   ├── ENVIRONMENTAL_DATA_DICTIONARY.md          # Detailed variable descriptions
+│   └── README.md                                 # Data documentation & regeneration guide
 ├── notebook/                                     # Interactive Jupyter notebooks
-│   └── environmental_multivariate_analysis.ipynb # Air quality multivariate case study
+│   ├── environmental_multivariate_analysis.ipynb # Air quality multivariate case study
+│   └── README.md                                 # Notebook walkthrough & cell progression
+├── notes/                                        # Lecture notes and study guides
+│   ├── multivariate_analysis_notes.typ           # Comprehensive study guide (Typst)
+│   ├── multivariate_analysis_notes.pdf           # Compiled lecture note PDF
+│   └── README.md                                 # Notes outline & compilation guide
 ├── presentation/                                 # Presentation slides
-│   └── multivariate_analysis_slides.tex          # LaTeX Beamer presentation
+│   ├── multivariate_analysis_slides.typ          # Typst presentation (Touying university theme)
+│   ├── multivariate_analysis_slides.pdf          # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
 └── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
@@ -46,13 +52,13 @@ uv run python lessons/L02_Multivariate_Analysis/data/fetch_environmental_data.py
 uv run jupyter notebook lessons/L02_Multivariate_Analysis/notebook/environmental_multivariate_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (LaTeX)
+### 3. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
 cd lessons/L02_Multivariate_Analysis/presentation/
-pdflatex multivariate_analysis_slides.tex
+typst compile multivariate_analysis_slides.typ
 
 # Lecture Notes
 cd ../notes/
-pdflatex multivariate_analysis_notes.tex
+typst compile multivariate_analysis_notes.typ
 ```
