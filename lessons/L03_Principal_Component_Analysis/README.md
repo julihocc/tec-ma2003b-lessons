@@ -21,17 +21,23 @@ L03_Principal_Component_Analysis/
 ├── data/                                         # Datasets and generation scripts
 │   ├── fetch_financial_pca.py                    # Multi-asset returns market data generator
 │   ├── financial_market_data.csv                 # Generated dataset (600 trading days × 10 assets)
-│   └── FINANCIAL_MARKET_DATA_DICTIONARY.md       # Detailed variable descriptions
-├── notes/                                        # Lecture notes and study guides
-│   └── principal_component_analysis_notes.tex    # Comprehensive study guide (LaTeX)
+│   ├── FINANCIAL_MARKET_DATA_DICTIONARY.md       # Detailed variable descriptions
+│   └── README.md                                 # Data documentation & regeneration guide
 ├── notebook/                                     # Interactive Jupyter notebooks
-│   └── financial_pca_analysis.ipynb              # Global market factor decomposition case study
+│   ├── financial_pca_analysis.ipynb              # Global market factor decomposition case study
+│   └── README.md                                 # Notebook walkthrough & cell progression
+├── notes/                                        # Lecture notes and study guides
+│   ├── principal_component_analysis_notes.typ    # Comprehensive study guide (Typst)
+│   ├── principal_component_analysis_notes.pdf    # Compiled lecture note PDF
+│   └── README.md                                 # Notes outline & compilation guide
 ├── presentation/                                 # Presentation slides
-│   └── principal_component_analysis_slides.tex   # LaTeX Beamer presentation
+│   ├── principal_component_analysis_slides.typ   # Typst presentation (Touying university theme)
+│   ├── principal_component_analysis_slides.pdf   # Compiled presentation PDF
+│   └── README.md                                 # Presentation agenda & compilation guide
 └── README.md                                     # Module documentation
 ```
 
-## Usage & Execution
+## Usage & Quickstart
 
 ### 1. Generate Dataset
 ```bash
@@ -43,13 +49,13 @@ uv run python lessons/L03_Principal_Component_Analysis/data/fetch_financial_pca.
 uv run jupyter notebook lessons/L03_Principal_Component_Analysis/notebook/financial_pca_analysis.ipynb
 ```
 
-### 3. Compile Slides & Documents (LaTeX)
+### 3. Compile Slides & Documents (Typst)
 ```bash
 # Presentation
 cd lessons/L03_Principal_Component_Analysis/presentation/
-pdflatex principal_component_analysis_slides.tex
+typst compile principal_component_analysis_slides.typ
 
 # Lecture Notes
 cd ../notes/
-pdflatex principal_component_analysis_notes.tex
+typst compile principal_component_analysis_notes.typ
 ```
