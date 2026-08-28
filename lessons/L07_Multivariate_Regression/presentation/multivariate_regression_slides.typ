@@ -42,19 +42,23 @@
 
   *Companion Example Throughout This Presentation*
 
-  A hospital study analyzing cardiovascular disease (CVD) risk using multivariate methods to:
+  #alert[
+    *Synthetic data:* All patients and measurements below are simulated for teaching purposes. Results illustrate the statistical methods, not real clinical findings.
+  ]
+
+  A simulated hospital scenario analyzing cardiovascular disease (CVD) risk using multivariate methods to:
   - Predict high-risk patients from lifestyle and physiological factors
   - Compare health profiles between risk groups
   - Evaluate the effectiveness of lifestyle interventions
   - Understand complex relationships between multiple health variables
 
-  Real dataset with 1,000 patients demonstrating practical applications of each technique
+  Synthetic dataset with 1,000 simulated patients demonstrating practical applications of each technique
 ]
 
 #slide[
   = The Research Question
 
-  *Scenario:* Hospital evaluating cardiovascular disease (CVD) risk
+  *Scenario (synthetic data):* Hospital evaluating cardiovascular disease (CVD) risk
 
   *Dataset:*
   - 1,000 patients
@@ -168,7 +172,7 @@
   *Properties:*
   - Maps [0,1] to $(-infinity, +infinity)$
   - Linear in parameters
-  - Interpretable as log-odds ratio
+  - Interpretable as the log-odds (a coefficient's exponential is the odds *ratio* per unit increase)
 ]
 
 #slide[
@@ -411,13 +415,13 @@
 #slide[
   = Key Insights: CVD Prediction
 
-  + Exercise is the strongest protective factor (OR = 0.72)
-  + Stress significantly increases risk (OR = 1.25)
-  + Model achieves good discrimination (AUC = 0.77)
-  + Can identify high-risk patients for intervention
+  + Exercise has the strongest *standardized* association with risk (OR = 0.72 per hour/week; strongest by per-SD effect size, not raw OR)
+  + Stress also significantly increases risk (OR = 1.25 per point)
+  + Raw odds ratios are not comparable across predictors on different scales -- ranking requires standardized effects
+  + Model achieves good discrimination (AUC = 0.77) on this simulated dataset
 
   #alert[
-    *Clinical Value:* Early identification enables preventive care
+    *Illustrative only:* This is a simulated dataset -- read as a demonstration of the method, not a clinical finding
   ]
 ]
 
@@ -483,7 +487,7 @@
 #slide[
   = Box's M Test Properties
 
-  *Asymptotic Distribution:* Chi-square for large samples
+  *Asymptotic Distribution:* The raw $M$ must first be rescaled by a correction factor $c_1$; only the corrected $chi^2 = M(1-c_1)$ is chi-square distributed. There is no valid raw-$M$ cutoff.
 
   #alert[
     *Limitation:* Very sensitive to normality violations
@@ -532,29 +536,26 @@
 #slide[
   = Box's M Test: Results
 
-  *Test Statistic:*
-  $ M = 8.49 $
+  *Raw Statistic:* $M = 8.49$ (not itself chi-square distributed)
 
-  *Degrees of Freedom:* 10
-
-  *Interpretation:* $M < 30$ (rule of thumb)
+  *Corrected:* $chi^2 = 8.46$, $"df" = 10$, $p = 0.584$
 
   #alert[
-    *Conclusion:* Covariance matrices are approximately equal. MANOVA assumption satisfied.
+    *Conclusion:* Fail to reject $H_0$ ($p = 0.584$). No evidence against equal covariance matrices.
   ]
 
-  *Implication:* Our MANOVA results are valid and trustworthy
+  *Note:* A raw-statistic cutoff like "$M < 30$" is not a valid decision rule -- $M$ must be corrected and compared to its chi-square distribution. Failing to reject does not *prove* equality.
 ]
 
 #slide[
   = Key Insights: Assumption Testing
 
-  + Box's M test validates MANOVA assumptions
-  + Equal covariances ensure valid inference
-  + Small M statistic (8.49) indicates homogeneity
-  + Treatment groups have similar variability patterns
+  + Box's M requires a correction factor before its chi-square approximation is valid
+  + Corrected test found no evidence against equal covariances ($p = 0.584$)
+  + "Fail to reject" is not the same as "proven equal"
+  + Treatment groups show no detected difference in variability patterns
 
-  *Methodological importance:* Always check assumptions before interpreting results
+  *Methodological importance:* Always check assumptions using the correct test statistic, and report results as "fail to reject," not "validated"
 ]
 
 // Section 3: Inferences for Mean Vectors
@@ -643,6 +644,10 @@
   *Application of Hotelling's T-squared*
 
   Question: Do high-risk and low-risk CVD patients differ in their multivariate health profile?
+
+  #alert[
+    *Caveat:* The risk-group label is itself computed from a score containing systolic BP, cholesterol, and glucose -- three of the six variables tested below. A significant result here demonstrates the test recovering that construction rule, not an independently discovered relationship.
+  ]
 ]
 
 #slide[
@@ -690,19 +695,19 @@
   *P-value:* < 0.0001
 
   #alert[
-    *Conclusion:* Strong evidence that high-risk and low-risk patients have significantly different health profiles
+    *Conclusion:* The test statistically confirms the health markers differ between groups -- as expected, since the grouping rule was built from three of them. This demonstrates the mechanics of Hotelling's $T^2$, not an independent clinical finding.
   ]
 ]
 
 #slide[
   = Key Insights: Risk Group Differences
 
-  + High-risk patients show higher values across all adverse markers
+  + High-risk patients show higher values across all adverse markers, by construction
   + Largest differences: cholesterol (+12.3 mg/dL) and triglycerides (+11.9 mg/dL)
   + HDL (protective) is lower in high-risk group (-3.3 mg/dL)
   + Multivariate test accounts for correlations among measurements
 
-  *Clinical significance:* Pattern of differences suggests metabolic syndrome
+  *Reminder:* This recovers the simulated data-generating rule -- a real analysis needs a grouping variable independent of the tested variables
 ]
 
 // Section 4: MANOVA
@@ -897,12 +902,12 @@
 #slide[
   = Key Insights: Intervention Effects
 
-  + Intervention reduces all cardiovascular risk markers
+  + In this simulation, intervention reduces all cardiovascular risk markers
   + Largest effect on blood pressure (-6.5 / -4.2 mmHg)
-  + Clinically meaningful reductions in cholesterol and glucose
+  + Differences also survive Bonferroni correction across the 4 follow-up ANOVAs
   + MANOVA provides single omnibus test (no Type I error inflation)
 
-  *Clinical significance:* Comprehensive lifestyle changes yield broad health benefits
+  *Note:* Synthetic data illustrating the method -- not a real intervention-effectiveness finding
 ]
 
 // Section 5: Canonical Correlation
@@ -1109,12 +1114,12 @@
 #slide[
   = Key Insights: Lifestyle-Physiology Link
 
-  + Strong canonical correlation (r = 0.639) between lifestyle and health
-  + Healthy lifestyle pattern → Favorable physiological profile
-  + Exercise and low stress most important lifestyle factors
-  + Blood pressure and cholesterol most related physiological markers
+  + Strong first-pair canonical correlation (r = 0.639) between lifestyle and health variates
+  + Healthy lifestyle pattern → favorable physiological profile, in this simulation
+  + Exercise and low stress load most heavily on the first lifestyle variate
+  + Blood pressure and cholesterol load most heavily on the first physiology variate
 
-  *Clinical significance:* Lifestyle interventions can meaningfully improve multiple health markers
+  *Note:* Association between canonical variates, not a domain-wide or causal claim
 ]
 
 // Section 6: Factor Analysis with Regression
@@ -1405,49 +1410,49 @@
   = Key Findings: Prediction and Classification
 
   *Logistic Regression Results:*
-  - 71% accuracy predicting CVD risk (AUC = 0.77)
-  - Exercise strongest protective factor (OR = 0.72)
+  - 71% accuracy predicting CVD risk (AUC = 0.77) on synthetic data
+  - Exercise strongest by standardized effect size (not raw OR)
   - Stress increases risk 25% per point (OR = 1.25)
-  - Model identifies high-risk patients for early intervention
+  - Demonstrates how such a model could identify high-risk patients on real data
 
-  *Clinical Value:* Enables targeted prevention strategies
+  *Note:* Simulated dataset -- illustrates the method, not a clinical recommendation
 ]
 
 #slide[
   = Key Findings: Group Comparisons
 
   *Hotelling's T-squared:*
-  - High-risk patients differ significantly across 6 health markers (T² = 228.65, p < 0.0001)
+  - Groups differ significantly across 6 health markers (T² = 228.65, p < 0.0001)
+  - Expected: 3 of these 6 variables define the grouping rule (circular by construction)
   - Largest differences: cholesterol (+12.3) and triglycerides (+11.9)
-  - Pattern suggests metabolic syndrome
 
   *Box's M Test:*
-  - Covariance matrices equal between groups (M = 8.49)
-  - MANOVA assumptions validated
+  - Corrected test fails to reject equal covariances ($chi^2 = 8.46$, df = 10, p = 0.584)
+  - No evidence against the MANOVA assumption -- not proof it holds
 ]
 
 #slide[
   = Key Findings: Treatment Effectiveness
 
-  *MANOVA Results:*
+  *MANOVA Results (synthetic data):*
   - Intervention improves all health outcomes (Λ = 0.889, p < 0.0001)
   - Blood pressure: -6.5 / -4.2 mmHg
   - Cholesterol: -7.9 mg/dL
   - Glucose: -5.6 mg/dL
 
-  *Clinical Impact:* Comprehensive lifestyle changes yield broad benefits
+  *Note:* Illustrates MANOVA mechanics on simulated data, not a real treatment-effect finding
 ]
 
 #slide[
   = Key Findings: Lifestyle-Health Relationships
 
   *Canonical Correlation:*
-  - Strong link between lifestyle and physiology (r = 0.639)
+  - Strong link between the first lifestyle and physiology variates (r = 0.639)
   - Healthy lifestyle pattern: ↑ exercise, ↓ stress
   - Favorable health profile: ↓ BP, ↑ HDL
-  - 40.8% shared variance between domains
+  - 40.8% shared variance between the *first canonical variate pair* -- not a domain-level "lifestyle explains 41% of health" statement, which would need variance-extracted/redundancy indices
 
-  *Clinical Insight:* Lifestyle interventions affect multiple health markers simultaneously
+  *Insight (illustrative):* In this simulation, lifestyle and health-marker patterns are linked as designed
 ]
 
 #slide[
@@ -1459,7 +1464,7 @@
   + *Effect sizes matter* beyond statistical significance
   + *Clinical context* guides interpretation
 
-  All methods demonstrated with real healthcare data
+  All methods demonstrated with synthetic healthcare data generated for this course
 ]
 
 #slide[

@@ -155,7 +155,7 @@ $ "logit"(p) = log(p / (1 - p)) = beta_0 + beta_1 x_1 + ... + beta_k x_k $
 
 Where:
 - $p$ is the probability of the event occurring
-- $p / (1 - p)$ is the odds ratio
+- $p / (1 - p)$ is the *odds* of the event (a ratio compares two odds, e.g. $e^(beta_j)$ below is the odds *ratio* per unit increase in $x_j$)
 - $beta_0, beta_1, ..., beta_k$ are regression coefficients
 
 The inverse transformation gives us the predicted probability:
@@ -260,7 +260,13 @@ Where:
 - $bold(S)_i$ is the covariance matrix for group $i$
 - $n_i$ is the sample size for group $i$
 
-Under $H_0$, $M$ follows approximately a chi-square distribution for large samples.
+The raw statistic $M$ is *not* itself chi-square distributed and has no universal cutoff (e.g. "$M < 30$" is not a valid decision rule). It must first be rescaled by a correction factor $c_1$ (Box, 1949):
+
+$ c_1 = (sum_(i=1)^g 1/(n_i - 1) - 1/(n - g)) dot (2 p^2 + 3p - 1) / (6(p+1)(g-1)) $
+
+$ chi^2 = M(1 - c_1), quad "df" = (g-1)p(p+1)/2 $
+
+Only this corrected $chi^2$ statistic is compared against the chi-square distribution to obtain a p-value. A non-significant result means the test *fails to reject* equal covariance matrices -- it does not prove equality.
 
 #warning[
 Box's M test is sensitive to departures from multivariate normality. Use with caution and verify normality assumptions first.
@@ -376,7 +382,7 @@ Conducting separate ANOVAs for each dependent variable increases Type I error th
 Advantages of MANOVA:
 1. *Controls Type I error* by testing all variables simultaneously
 2. *Accounts for correlations* between dependent variables
-3. *Increases statistical power* by combining information across variables
+3. *Can increase statistical power* by combining information across correlated variables -- the gain depends on the effect pattern, covariance structure, sample size, and multiplicity strategy; it is not guaranteed
 4. *Detects patterns* that univariate tests might miss
 
 == MANOVA Model
@@ -399,15 +405,15 @@ The null hypothesis is $H_0: bold(mu)_1 = bold(mu)_2 = ... = bold(mu)_g$ for all
 
 The most commonly used MANOVA test statistic is *Wilks' Lambda*:
 
-$ Lambda = |bold(W)| / |bold(T)| = |bold(W)| / (|bold(W)| + |bold(B)|) $
+$ Lambda = |bold(W)| / |bold(T)| = |bold(W)| / |bold(W) + bold(B)| $
 
 Where:
 - $bold(W)$ is the within-groups sum of squares and cross-products matrix
 - $bold(B)$ is the between-groups sum of squares and cross-products matrix
-- $bold(T) = bold(W) + bold(B)$ is the total sum of squares and cross-products matrix
+- $bold(T) = bold(W) + bold(B)$ is the total sum of squares and cross-products matrix (matrix addition -- note that $|bold(W) + bold(B)| eq.not |bold(W)| + |bold(B)|$, since determinants are not additive)
 
 #info[
-Wilks' Lambda represents the proportion of total variance not explained by group differences. Values range from 0 to 1, with smaller values indicating greater group separation.
+Wilks' Lambda is a ratio of generalized variances (determinants), not a literal scalar "proportion of variance." Values range from 0 to 1; smaller values indicate greater separation between group mean vectors relative to within-group scatter.
 ]
 
 === Other Test Statistics
@@ -556,7 +562,10 @@ Canonical correlation requires large sample sizes for stable results. A general 
 Canonical correlation generalizes several statistical techniques:
 - Multiple regression: Special case where Set 2 has one variable
 - Discriminant analysis: When Set 2 is group membership
-- Principal components: When Set 1 and Set 2 are the same
+
+#warning[
+CCA is *not* a generalization of PCA. Setting Set 1 and Set 2 to the same variables makes every canonical correlation equal to 1 (each variate is trivially perfectly correlated with itself) and does not recover the principal component directions, which come from decomposing a single set's own covariance/correlation matrix rather than the association between two sets.
+]
 
 #example[
 Examining the relationship between socioeconomic factors (income, education, housing quality) and health outcomes (life expectancy, disease prevalence, healthcare access). CCA identifies which combinations of socioeconomic factors most strongly relate to which patterns of health outcomes.
@@ -615,12 +624,21 @@ $ Y = beta_0 + beta_1 F_1 + beta_2 F_2 + ... + beta_m F_m + epsilon $
 
 == Methods for Computing Factor Scores
 
-=== Regression Method
-$ hat(bold(F)) = (bold(L)' bold(Sigma)^(-1) bold(L))^(-1) bold(L)' bold(Sigma)^(-1) bold(X) $
+=== Regression Method (Thomson)
+
+For orthogonal factors:
+
+$ hat(bold(F)) = bold(L)' bold(Sigma)^(-1) bold(X) $
+
+For oblique (correlated) factors with factor correlation matrix $bold(Phi)$:
+
+$ hat(bold(F)) = bold(Phi) bold(L)' bold(Sigma)^(-1) bold(X) $
 
 Advantages:
-- Minimizes least squares error
+- Maximizes the correlation between true and estimated factor scores
 - Most commonly used
+
+Note: this is *not* the same expression as $(bold(L)' bold(Sigma)^(-1) bold(L))^(-1) bold(L)' bold(Sigma)^(-1) bold(X)$, which is a generalized-least-squares coefficient estimator, not the regression factor score.
 
 === Bartlett Method
 $ hat(bold(F)) = (bold(L)' bold(Psi)^(-1) bold(L))^(-1) bold(L)' bold(Psi)^(-1) bold(X) $
